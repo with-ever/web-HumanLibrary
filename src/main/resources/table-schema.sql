@@ -1,0 +1,15 @@
+CREATE TABLE IF NOT EXISTS `humanlib`.`USERS` (
+  `user_id` INT NOT NULL,
+  `login_id` VARCHAR(45) NULL,
+  `name` VARCHAR(45) NOT NULL,
+  `email` VARCHAR(255) NULL,
+  `password` VARCHAR(255) NOT NULL,
+  `zip_code` VARCHAR(255) NULL,
+  `phone_no` VARCHAR(255) NULL,
+  `create_time` INT(10) NULL,
+  `update_time` INT(10) NULL,
+  `address` VARCHAR(255) NULL,
+  `detail_address` VARCHAR(255) NULL,
+  `m_phone_no` VARCHAR(255) NULL,
+  `birth` VARCHAR(255) NULL,
+  PRIMARY KEY (`user_id`));

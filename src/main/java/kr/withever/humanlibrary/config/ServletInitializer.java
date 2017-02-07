@@ -26,19 +26,19 @@ import org.springframework.web.servlet.support.AbstractDispatcherServletInitiali
 public class ServletInitializer extends AbstractDispatcherServletInitializer {
 
 	@Override
+	protected WebApplicationContext createRootApplicationContext() {
+		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
+		context.register(AppConfig.class);
+		return context;
+	}
+
+	@Override
 	protected WebApplicationContext createServletApplicationContext() {
 		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
 		context.register(WebMvcConfig.class);
 		context.register(SwaggerConfig.class);
 		return context;
 	}
-
-	@Override
-	protected WebApplicationContext createRootApplicationContext() {
-		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
-		return context;
-	}
-
 
 	@Override
 	protected String[] getServletMappings() {
