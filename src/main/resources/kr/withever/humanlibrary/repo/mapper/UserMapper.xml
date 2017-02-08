@@ -5,5 +5,40 @@
 
 
 <mapper namespace="kr.withever.humanlibrary.repo.mapper.UserMapper">
+    <resultMap id="userResultMap" type="User">
+        <id property="userId" column="USER_ID"/>
+        <result property="loginId" column="LOGIN_ID"/>
+        <result property="name" column="NAME"/>
+        <result property="email" column="EMAIL"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="phoneNo" column="PHONE_NO"/>
+        <result property="mPhoneNo" column="M_PHONE_NO"/>
+        <result property="birth" column="BIRTH"/>
+        <result property="zipCode" column="ZIP_CODE"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="detailAddress" column="DETAIL_ADDRESS"/>
+        <!--<result 	property="roles"	  			column="USER_TYPE"/>-->
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
+    </resultMap>
+
+    <select id="selectUser" parameterType="Long" resultMap="userResultMap">
+        SELECT
+            USER_ID,
+            LOGIN_ID,
+            NAME,
+            EMAIL,
+            PASSWORD,
+            PHONE_NO,
+            M_PHONE_NO,
+            BIRTH,
+            ZIP_CODE,
+            ADDRESS,
+            DETAIL_ADDRESS,
+            CREATE_TIME,
+            UPDATE_TIME
+        FROM USERS
+        WHERE USER_ID = #{userId}
+    </select>
 
 </mapper>

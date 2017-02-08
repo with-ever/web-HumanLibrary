@@ -1,13 +1,14 @@
 package kr.withever.humanlibrary.domain;
 
 import java.io.Serializable;
+import java.util.Set;
 
 /**
  * Created by youngjinkim on 2017. 2. 6..
  */
-public class User implements Serializable{
+public class User implements Serializable {
 
-    private Integer userId;
+    private Long userId;
 
     private String loginId;
 
@@ -29,6 +30,8 @@ public class User implements Serializable{
 
     private String detailAddress;
 
+    private Set<Role> roles;
+
     private Long createTime;
 
     private Long updateTime;
@@ -45,11 +48,11 @@ public class User implements Serializable{
         this.updateTime = System.currentTimeMillis() / 1000;
     }
 
-    public Integer getUserId() {
+    public Long getUserId() {
         return userId;
     }
 
-    public void setUserId(Integer userId) {
+    public void setUserId(Long userId) {
         this.userId = userId;
     }
 
@@ -131,6 +134,14 @@ public class User implements Serializable{
 
     public void setDetailAddress(String detailAddress) {
         this.detailAddress = detailAddress;
+    }
+
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
     }
 
     public Long getCreateTime() {
