@@ -6,7 +6,7 @@ package kr.withever.humanlibrary.domain;
 public enum RoleType {
 
     SUBSCRIBER("SUBSCRIBER"),
-    HUMAN_LIBRARY("HUMAN_LIBRARY");
+    HUMAN_BOOK("HUMAN_BOOK");
 
     private String name;
 

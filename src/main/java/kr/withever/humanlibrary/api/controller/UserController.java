@@ -2,8 +2,12 @@ package kr.withever.humanlibrary.api.controller;
 
 import kr.withever.humanlibrary.domain.User;
 import kr.withever.humanlibrary.repo.mapper.UserMapper;
+import kr.withever.humanlibrary.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +21,7 @@ import java.util.List;
 public class UserController {
 
     @Autowired
-    private UserMapper userMapper;
+    private UserService userService;
 
 
     @RequestMapping(method = RequestMethod.GET)
@@ -29,12 +33,9 @@ public class UserController {
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     public User retrieveUser(
-            @PathVariable(value = "userId") String userId
+            @PathVariable(value = "userId") Long userId
     ) {
-//        User user = new User("jinkim", "jin", "jin@gmail.com", "1234");
-        User user;
-        user = this.userMapper.selectUser(Long.parseLong(userId));
-        return user;
+        return this.userService.retrieveUser(userId);
     }
 
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <USERS
+            USER_ID = "1"
+            LOGIN_ID = "jin"
+            NAME = "youngjinkim"
+            EMAIL = "youngjinguy@gmail.com"
+            PASSWORD = "1234"
+            PHONE_NO = "1234"
+            M_PHONE_NO = "1234"
+            BIRTH = "1234"
+            ZIP_CODE = "1234"
+            ADDRESS = "1234"
+            DETAIL_ADDRESS = "aaa"
+            CREATE_TIME = "111111"
+            UPDATE_TIME = "222222"
+    />
+</dataset>
