@@ -9,6 +9,15 @@
         <result property="roleId" column="ROLE"/>
     </resultMap>
 
+    <insert id="insertUserRole" >
+        INSERT INTO USERS_ROLES_REL (
+          USER_ID
+          ,ROLE
+        ) VALUES (
+          #{userId},
+          #{roleId}
+        )
+    </insert>
 
     <select id="selectUserRoleList" parameterType="Long" resultType="String">
         SELECT
@@ -16,5 +25,11 @@
         FROM USERS_ROLES_REL
         WHERE USER_ID = #{userId}
     </select>
+
+    <delete id="deleteUserRole">
+        DELETE
+        FROM USERS_ROLES_REL
+        WHERE USER_ID = #{userId} AND ROLE = #{roleId}
+    </delete>
 
 </mapper>
