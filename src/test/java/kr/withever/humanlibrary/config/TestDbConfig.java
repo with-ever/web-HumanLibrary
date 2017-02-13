@@ -21,8 +21,8 @@ import javax.sql.DataSource;
  * Created by youngjinkim on 2017. 2. 7..
  */
 @Configuration
-@MapperScan(basePackages = {"kr.withever.humanlibrary.repo.mapper"})
 @ComponentScan(basePackages = {"kr.withever.humanlibrary"}, excludeFilters = @ComponentScan.Filter(value = Controller.class, type = FilterType.ANNOTATION))
+@MapperScan(basePackages = {"kr.withever.humanlibrary.repo.mapper"})
 @EnableTransactionManagement
 public class TestDbConfig {
 

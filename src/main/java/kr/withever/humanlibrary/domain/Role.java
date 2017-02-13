@@ -1,5 +1,7 @@
 package kr.withever.humanlibrary.domain;
 
+import kr.withever.humanlibrary.domain.common.user.RoleType;
+
 /**
  * Created by youngjinkim on 2017. 2. 7..
  */
@@ -10,8 +12,8 @@ public class Role {
     public Role() {
     }
 
-    public Role(String roleId) {
-        this.roleId = roleId;
+    public Role(RoleType roleType) {
+        this.roleId = roleType.getName();
     }
 
     public String getRoleId() {

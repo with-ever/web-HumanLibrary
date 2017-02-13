@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <USERS_ROLES_REL
+        USER_ID = "1"
+        ROLE = "ADMIN"
+    />
+    <USERS_ROLES_REL
+        USER_ID = "1"
+        ROLE = "HUMAN_BOOK"
+    />
+    <USERS_ROLES_REL
+        USER_ID = "1"
+        ROLE = "SUBSCRIBER"
+    />
+</dataset>

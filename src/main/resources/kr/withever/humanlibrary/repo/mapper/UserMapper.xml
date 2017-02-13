@@ -17,28 +17,82 @@
         <result property="zipCode" column="ZIP_CODE"/>
         <result property="address" column="ADDRESS"/>
         <result property="detailAddress" column="DETAIL_ADDRESS"/>
-        <!--<result 	property="roles"	  			column="USER_TYPE"/>-->
         <result property="createTime" column="CREATE_TIME"/>
         <result property="updateTime" column="UPDATE_TIME"/>
     </resultMap>
 
+    <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="userId" keyColumn="USER_ID">
+        INSERT INTO USER (
+        LOGIN_ID
+        ,NAME
+        ,EMAIL
+        ,PASSWORD
+        ,PHONE_NO
+        ,M_PHONE_NO,
+        ,BIRTH
+        ,ZIP_CODE
+        ,ADDRESS
+        ,DETAIL_ADDRESS
+        ,CREATE_TIME
+        ,UPDATE_TIME
+        )
+        VALUES (
+        #{loginId}
+        ,#{name}
+        ,#{email}
+        ,#{password}
+        ,#{phoneNo}
+        ,#{mPhoneNo}
+        ,#{birth}
+        ,#{zipCode}
+        ,#{address}
+        ,#{detailAddress}
+        ,#{createTime}
+        ,#{updateTime}
+        )
+    </insert>
+
+
     <select id="selectUser" parameterType="Long" resultMap="userResultMap">
         SELECT
-            USER_ID,
-            LOGIN_ID,
-            NAME,
-            EMAIL,
-            PASSWORD,
-            PHONE_NO,
-            M_PHONE_NO,
-            BIRTH,
-            ZIP_CODE,
-            ADDRESS,
-            DETAIL_ADDRESS,
-            CREATE_TIME,
-            UPDATE_TIME
+        USER_ID,
+        LOGIN_ID,
+        NAME,
+        EMAIL,
+        PASSWORD,
+        PHONE_NO,
+        M_PHONE_NO,
+        BIRTH,
+        ZIP_CODE,
+        ADDRESS,
+        DETAIL_ADDRESS,
+        CREATE_TIME,
+        UPDATE_TIME
         FROM USERS
         WHERE USER_ID = #{userId}
     </select>
+
+    <update id="updateUser" parameterType="User">
+        UPDATE USER
+        SET
+        NAME = #{name}
+        ,EMAIL = #{email}
+        ,PASSWORD = #{password}
+        ,PHONE_NO = #{phoneNo}
+        ,M_PHONE_NO = #{mPhoneNo}
+        ,BIRTH = #{birth}
+        ,ZIP_CODE = #{zipCode}
+        ,ADDRESS = #{address}
+        ,DETAIL_ADDRESS = #{detailAddress}
+        ,UPDATE_TIME = #{updateTime}
+        WHERE USER_ID = #{userId}
+    </update>
+
+    <delete id="deleteUser" parameterType="Long">
+        DELETE
+        FROM USER
+        WHERE USER_ID = #{userId}
+    </delete>
+
 
 </mapper>

@@ -1,4 +1,4 @@
-package kr.withever.humanlibrary.domain;
+package kr.withever.humanlibrary.domain.common.user;
 
 /**
  * Created by youngjinkim on 2017. 2. 7..
@@ -6,7 +6,8 @@ package kr.withever.humanlibrary.domain;
 public enum RoleType {
 
     SUBSCRIBER("SUBSCRIBER"),
-    HUMAN_BOOK("HUMAN_BOOK");
+    HUMAN_BOOK("HUMAN_BOOK"),
+    ADMIN("ADMIN");
 
     private String name;
 
@@ -16,9 +17,5 @@ public enum RoleType {
 
     public String getName() {
         return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
     }
 }

@@ -7,5 +7,12 @@ import org.apache.ibatis.annotations.Param;
  * Created by youngjinkim on 2017. 2. 7..
  */
 public interface UserMapper {
-    User selectUser(@Param("userId") Long userId);
+
+    int insertUser(User user);
+
+    User selectUser(Long userId);
+
+    int updateUser(User user);
+
+    int deleteUser(Long userId);
 }
