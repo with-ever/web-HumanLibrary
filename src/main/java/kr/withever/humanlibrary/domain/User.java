@@ -1,6 +1,7 @@
 package kr.withever.humanlibrary.domain;
 
 import java.io.Serializable;
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -30,7 +31,7 @@ public class User implements Serializable {
 
     private String detailAddress;
 
-    private Set<Role> roles;
+    private Set<String> roles;
 
     private Long createTime;
 
@@ -136,11 +137,11 @@ public class User implements Serializable {
         this.detailAddress = detailAddress;
     }
 
-    public Set<Role> getRoles() {
+    public Set<String> getRoles() {
         return roles;
     }
 
-    public void setRoles(Set<Role> roles) {
+    public void setRoles(Set<String> roles) {
         this.roles = roles;
     }
 

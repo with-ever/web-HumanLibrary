@@ -1,13 +1,11 @@
 package kr.withever.humanlibrary.repo.mapper;
 
-import kr.withever.humanlibrary.domain.Role;
-
-import java.util.List;
+import java.util.Set;
 
 /**
  * Created by youngjinkim on 2017. 2. 13..
  */
 public interface UserRoleMapper {
 
-    List<Role> selectUserRoleList(Long userId);
+    Set<String> selectUserRoleList(Long userId);
 }

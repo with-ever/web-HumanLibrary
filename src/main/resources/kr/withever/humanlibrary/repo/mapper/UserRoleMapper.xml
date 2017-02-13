@@ -10,7 +10,7 @@
     </resultMap>
 
 
-    <select id="selectUserRoleList" parameterType="Long" resultMap="roleResultMap">
+    <select id="selectUserRoleList" parameterType="Long" resultType="String">
         SELECT
           ROLE
         FROM USERS_ROLES_REL

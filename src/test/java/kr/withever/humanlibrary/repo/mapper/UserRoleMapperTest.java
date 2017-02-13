@@ -9,6 +9,7 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.Assert.*;
 
@@ -25,7 +26,7 @@ public class UserRoleMapperTest extends WitheverDbUnitTestConfig {
 
     @Test
     public void selectUserRoleList() throws Exception {
-        List<Role> roleList = this.userRoleMapper.selectUserRoleList(1L);
+        Set<String> roleList = this.userRoleMapper.selectUserRoleList(1L);
         assertEquals(3, roleList.size());
     }
 
