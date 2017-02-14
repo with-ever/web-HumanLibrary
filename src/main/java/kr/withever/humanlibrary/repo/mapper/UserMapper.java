@@ -15,4 +15,6 @@ public interface UserMapper {
     int updateUser(User user);
 
     int deleteUser(Long userId);
+
+    User selectUserByLoginId(String loginId);
 }
