@@ -13,12 +13,14 @@
 
 package kr.withever.humanlibrary.config;
 
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
+import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.support.AbstractDispatcherServletInitializer;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletException;
 
 /**
  * @author Dave Syer
@@ -36,6 +38,7 @@ public class ServletInitializer extends AbstractDispatcherServletInitializer {
 	protected WebApplicationContext createServletApplicationContext() {
 		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
 		context.register(WebMvcConfig.class);
+		context.register(WebSecurityConfig.class);
 		context.register(SwaggerConfig.class);
 		return context;
 	}
@@ -45,10 +48,19 @@ public class ServletInitializer extends AbstractDispatcherServletInitializer {
 		return new String[] { "/" };
 	}
 
-
 	@Override
 	public void onStartup(ServletContext servletContext) throws ServletException {
 		super.onStartup(servletContext);
+
+		// Encoding Filter
+		CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
+		characterEncodingFilter.setEncoding("UTF-8");
+		servletContext.addFilter("characterEncodingFilter", characterEncodingFilter).addMappingForUrlPatterns(null, false, "/*");
+
+		// Security Filter
+
+		DelegatingFilterProxy delegatingFilterProxy = new DelegatingFilterProxy("springSecurityFilterChain");
+		servletContext.addFilter("springSecurityFilterChain", delegatingFilterProxy).addMappingForUrlPatterns(null, false, "/*");
 	}
 
 }
