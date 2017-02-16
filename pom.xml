@@ -13,6 +13,7 @@
         <servlet.api>3.1.0</servlet.api>
         <springfox-swagger.version>2.6.1</springfox-swagger.version>
         <junit.version>4.12</junit.version>
+        <slf4j.version>1.7.22</slf4j.version>
     </properties>
 
     <dependencies>
@@ -38,7 +39,6 @@
         </dependency>
 
         <!-- memory db -->
-
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
@@ -189,6 +189,23 @@
                     <artifactId>spring-web</artifactId>
                 </exclusion>
             </exclusions>
+        </dependency>
+
+        <!-- log -->
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>1.1.10</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>log4j-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>jcl-over-slf4j</artifactId>
+            <version>${slf4j.version}</version>
         </dependency>
 
     </dependencies>
