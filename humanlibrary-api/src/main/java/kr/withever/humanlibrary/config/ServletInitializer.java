@@ -38,7 +38,7 @@ public class ServletInitializer extends AbstractDispatcherServletInitializer {
 	protected WebApplicationContext createServletApplicationContext() {
 		AnnotationConfigWebApplicationContext context = new AnnotationConfigWebApplicationContext();
 		context.register(WebMvcConfig.class);
-//		context.register(WebSecurityConfig.class);
+		context.register(WebSecurityConfig.class);
 		context.register(SwaggerConfig.class);
 		return context;
 	}
@@ -58,9 +58,8 @@ public class ServletInitializer extends AbstractDispatcherServletInitializer {
 		servletContext.addFilter("characterEncodingFilter", characterEncodingFilter).addMappingForUrlPatterns(null, false, "/*");
 
 		// Security Filter
-
-//		DelegatingFilterProxy delegatingFilterProxy = new DelegatingFilterProxy("springSecurityFilterChain");
-//		servletContext.addFilter("springSecurityFilterChain", delegatingFilterProxy).addMappingForUrlPatterns(null, false, "/*");
+		DelegatingFilterProxy delegatingFilterProxy = new DelegatingFilterProxy("springSecurityFilterChain");
+		servletContext.addFilter("springSecurityFilterChain", delegatingFilterProxy).addMappingForUrlPatterns(null, false, "/*");
 	}
 
 }
