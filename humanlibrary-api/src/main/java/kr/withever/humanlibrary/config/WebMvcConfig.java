@@ -1,8 +1,12 @@
 package kr.withever.humanlibrary.config;
 
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.core.io.ClassPathResource;
+import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
 import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.ContentNegotiationConfigurer;
@@ -15,7 +19,14 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @EnableWebMvc
 @ComponentScan(basePackages = { "kr.withever.humanlibrary.api.controller" })
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
-	
+
+	@Bean
+	public static PropertyPlaceholderConfigurer propertyPlaceholderConfigurer() {
+		PropertyPlaceholderConfigurer configurer = new PropertyPlaceholderConfigurer();
+		configurer.setLocations(new Resource[]{new ClassPathResource("application.properties")});
+		return configurer;
+	}
+
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		super.addResourceHandlers(registry);

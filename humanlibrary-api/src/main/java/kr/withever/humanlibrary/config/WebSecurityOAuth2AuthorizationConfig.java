@@ -9,7 +9,6 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
-import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
@@ -43,8 +42,8 @@ public class WebSecurityOAuth2AuthorizationConfig extends AuthorizationServerCon
         clients.inMemory()
                 .withClient("clientapp")
                     .secret("123456")
-                    .authorizedGrantTypes("client_credentials")
-                    .authorities("ROLE_CLIENT")
+                    .authorizedGrantTypes("client_credentials", "password", "refresh_token")
+                    .authorities("CLIENT")
                     .scopes("read")
                     .resourceIds("restservice");
 

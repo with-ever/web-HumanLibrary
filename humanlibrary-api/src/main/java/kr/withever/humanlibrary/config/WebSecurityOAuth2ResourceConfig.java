@@ -16,6 +16,7 @@ public class WebSecurityOAuth2ResourceConfig extends ResourceServerConfigurerAda
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {
+
         resources
                 .resourceId("restservice");
     }
@@ -24,9 +25,9 @@ public class WebSecurityOAuth2ResourceConfig extends ResourceServerConfigurerAda
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-                .antMatchers("/api/users/**").hasRole("USER")
-                .antMatchers("/api/**").hasRole("CLIENT");
+                .antMatchers("/api/users/**").hasAnyAuthority("ADMIN", "SUBSCRIBER", "HUMAN_BOOK")
+//                .antMatchers("/api/test/**").hasAuthority("CLIENT")
+                .antMatchers("/api/**").hasAuthority("CLIENT");
     }
-
 
 }
