@@ -8,7 +8,7 @@
     <modules>
         <module>humanlibrary-core</module>
         <module>humanlibrary-api</module>
-         <module>humanlibrary-admin</module>
+        <module>humanlibrary-admin</module>
     </modules>
     <name>Withever Humanlibrary Project</name>
 
