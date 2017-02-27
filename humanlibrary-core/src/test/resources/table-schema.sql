@@ -26,3 +26,18 @@ CREATE TABLE IF NOT EXISTS `USERS_ROLES_REL` (
   `ROLE` VARCHAR(45) NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET=UTF8;
 
+--Add Humanbook Table
+CREATE TABLE `HUMANBOOK` (
+  `hb_id` int(11) NOT NULL,
+  `hb_title` varchar(45) DEFAULT NULL,
+  `hb_main_career` varchar(45) DEFAULT NULL,
+  `hb_status` varchar(45) DEFAULT NULL,
+  `hb_create_time` int(11) DEFAULT NULL,
+  `hb_update_time` int(11) DEFAULT NULL,
+  `login_id` varchar(45) NOT NULL,
+  `service_time` varchar(45) DEFAULT NULL,
+  `sub_category` varchar(45) NOT NULL,
+  `upper_category` varchar(45) NOT NULL,
+  PRIMARY KEY (`hb_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
