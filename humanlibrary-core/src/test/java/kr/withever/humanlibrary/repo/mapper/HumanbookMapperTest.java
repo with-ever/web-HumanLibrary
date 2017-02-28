@@ -22,53 +22,55 @@ public class HumanbookMapperTest extends WitheverDbUnitTestConfig{
 	@Test
 	public void selectHumanbook() throws Exception{
 		Humanbook humanbook = this.humanbookMapper.selectHumanbook(1L);
-		assertEquals("SEUNG1107", humanbook.getLoginId());
+		assertEquals("SEUNG1107", humanbook.getUserId());
 	}
 	
 	@Test
 	public void selectHumanbookById() throws Exception{
-		Humanbook humanbook = this.humanbookMapper.selectHumanbookByLoginId("SEUNG1107");
-		assertEquals(new Long(1L), humanbook.getHbId());
+		Humanbook humanbook = this.humanbookMapper.selectHumanbookByUserId("SEUNG1107");
+		assertEquals(new Long(1L), humanbook.getId());
 	}
 	
 	@Test
 	public void insertHumanbook() throws Exception{
 		Humanbook humanbook = new Humanbook();
-		humanbook.setHbId(3L);
-		humanbook.setHbMainCareer("aa");
-		humanbook.setHbStatus("aa");
-		humanbook.setHbTitle("aa");
-		humanbook.setLoginId("aa");
+		humanbook.setId(3L);
+		humanbook.setMainCareer("aa");
+		humanbook.setStatus("aa");
+		humanbook.setTitle("aa");
+		humanbook.setUserId("aa");
 		humanbook.setServiceTime("aa");
 		humanbook.setUpperCategory("aa");
 		humanbook.setSubCategory("aa");
-		humanbook.setHbCreateTime(123L);
-		humanbook.setHbUpdateTime(123L);
+		humanbook.setCreateTime(123L);
+		humanbook.setUpdateTime(123L);
 		this.humanbookMapper.insertHumanbook(humanbook);
-		assertEquals(new Long(3L),humanbook.getHbId());
+		assertEquals(new Long(3L),humanbook.getId());
 	}
 	
 	@Test
 	public void deleteHumanbook() throws Exception{
 		this.humanbookMapper.deleteHumanbook(1L);
 		Humanbook humanbook = this.humanbookMapper.selectHumanbook(1L);
-		assertEquals("DELETED",humanbook.getHbStatus());
+		assertEquals("DELETED",humanbook.getStatus());
 	}
 	
 	@Test
 	public void updateHumanbook() throws Exception{
 		Humanbook humanbook = new Humanbook();
-		humanbook.setHbId(1L);
-		humanbook.setHbMainCareer("aa");
-		humanbook.setHbStatus("aa");
-		humanbook.setHbTitle("aa");
-		humanbook.setLoginId("aa");
+		humanbook.setId(1L);
+		humanbook.setMainCareer("aa");
+		humanbook.setStatus("aa");
+		humanbook.setTitle("aa");
+		humanbook.setUserId("aa");
+		humanbook.setServiceDay("aa");
 		humanbook.setServiceTime("aa");
 		humanbook.setUpperCategory("aa");
 		humanbook.setSubCategory("aa");
-		humanbook.setHbUpdateTime(123L);
+		humanbook.setUpdateTime(123L);
 		this.humanbookMapper.updateHumanbook(humanbook);
 		
-		assertEquals("aa",humanbook.getLoginId());
+		Humanbook updatedHumanbook = this.humanbookMapper.selectHumanbook(1L);
+		assertEquals("aa",updatedHumanbook.getUserId());
 	}
 }

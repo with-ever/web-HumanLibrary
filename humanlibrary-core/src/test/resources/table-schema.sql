@@ -28,16 +28,28 @@ CREATE TABLE IF NOT EXISTS `USERS_ROLES_REL` (
 
 --Add Humanbook Table
 CREATE TABLE `HUMANBOOK` (
-  `hb_id` int(11) NOT NULL,
-  `hb_title` varchar(45) DEFAULT NULL,
-  `hb_main_career` varchar(45) DEFAULT NULL,
-  `hb_status` varchar(45) DEFAULT NULL,
-  `hb_create_time` int(11) DEFAULT NULL,
-  `hb_update_time` int(11) DEFAULT NULL,
-  `login_id` varchar(45) NOT NULL,
+  `id` int(11) NOT NULL,
+  `user_id` varchar(45) NOT NULL,
+  `title` varchar(45) DEFAULT NULL,
+  `main_career` varchar(45) DEFAULT NULL,
+  `service_day` varchar(45) DEFAULT NULL,
   `service_time` varchar(45) DEFAULT NULL,
-  `sub_category` varchar(45) NOT NULL,
   `upper_category` varchar(45) NOT NULL,
-  PRIMARY KEY (`hb_id`)
+  `sub_category` varchar(45) NOT NULL,
+  `create_time` int(11) DEFAULT NULL,
+  `update_time` int(11) DEFAULT NULL,
+  `status` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+--Add ServiceDay Table
+CREATE TABLE IF NOT EXISTS `SERVICE_DAY` (
+  `id` int(11) NOT NULL,
+  `day` varchar(45) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
+--Add Category Table
+--Add Sub Category Table
+
 

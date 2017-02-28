@@ -12,13 +12,13 @@ public class HumanbookRepository {
 	@Autowired
 	private HumanbookMapper humanbookMapper;
 	
-	public Humanbook retrieveHumanbook(Long hbId){
-		Humanbook humanbook = this.humanbookMapper.selectHumanbook(hbId);
+	public Humanbook retrieveHumanbook(Long id){
+		Humanbook humanbook = this.humanbookMapper.selectHumanbook(id);
 		return humanbook;
 	}
 	
-	public Humanbook retrieveHumanbookById(String loginId){
-		Humanbook humanbook = this.humanbookMapper.selectHumanbookByLoginId(loginId);
+	public Humanbook retrieveHumanbookByUserId(String userId){
+		Humanbook humanbook = this.humanbookMapper.selectHumanbookByUserId(userId);
 		return humanbook;
 	}
 	
@@ -31,9 +31,9 @@ public class HumanbookRepository {
 		}
 	}
 	
-	public int deleteHumanbook(Long hbId){
+	public int deleteHumanbook(Long id){
 		try{
-			this.humanbookMapper.deleteHumanbook(hbId);
+			this.humanbookMapper.deleteHumanbook(id);
 			return 1;
 		}catch(Exception e){
 			return 0;

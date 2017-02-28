@@ -4,14 +4,14 @@ import kr.withever.humanlibrary.domain.humanbook.Humanbook;
 
 public interface HumanbookMapper {
 	
-	Humanbook selectHumanbook(Long hbId);
+	Humanbook selectHumanbook(Long id);
 	
-	Humanbook selectHumanbookByLoginId(String loginId);
+	Humanbook selectHumanbookByUserId(String userId);
 	
 	int insertHumanbook(Humanbook humanbook);
 	
 	int updateHumanbook(Humanbook humanbook);
 	
-	int deleteHumanbook(Long hbId);
+	int deleteHumanbook(Long id);
 	
 }

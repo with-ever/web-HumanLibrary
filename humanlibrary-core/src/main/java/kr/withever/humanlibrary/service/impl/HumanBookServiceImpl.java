@@ -14,13 +14,13 @@ public class HumanBookServiceImpl implements HumanBookService {
 	private HumanbookRepository humanbookRepository;
 	
 	@Override
-	public Humanbook retrieveHumanbookByLoginId(String loginId) {
-		return this.humanbookRepository.retrieveHumanbookById(loginId);
+	public Humanbook retrieveHumanbookByUserId(String userId) {
+		return this.humanbookRepository.retrieveHumanbookByUserId(userId);
 	}
 	
 	@Override
-	public Humanbook retrieveHumanbook(Long hbId){
-		return this.humanbookRepository.retrieveHumanbook(hbId);
+	public Humanbook retrieveHumanbook(Long id){
+		return this.humanbookRepository.retrieveHumanbook(id);
 	}
 	
 	@Override
@@ -29,8 +29,8 @@ public class HumanBookServiceImpl implements HumanBookService {
 	}
 	
 	@Override
-	public int deleteHumanbook(Long hbId){
-		return this.humanbookRepository.deleteHumanbook(hbId);
+	public int deleteHumanbook(Long id){
+		return this.humanbookRepository.deleteHumanbook(id);
 	}
 	
 	@Override

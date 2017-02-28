@@ -1,15 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
     <HUMANBOOK
-    	HB_ID = "1"
-    	LOGIN_ID = "SEUNG1107"
-    	HB_TITLE = "HELLO"
-    	HB_MAIN_CAREER = 'WITH EVER'
-    	HB_STATUS = "ACTIVE"
+    	ID = "1"
+    	USER_ID = "SEUNG1107"
+    	TITLE = "HELLO"
+    	MAIN_CAREER = 'WITH EVER'
+    	STATUS = "ACTIVE"
     	SERVICE_TIME = "ALWAYS"
+    	SERVICE_DAY = "SUN"
     	UPPER_CATEGORY = "IT"
     	SUB_CATEGORY = "SOFTWARE DEVELOP"
-    	HB_CREATE_TIME = "901107"
-    	HB_UPDATE_TIME = "170224"
+    	CREATE_TIME = "901107"
+    	UPDATE_TIME = "170224"
     />
 </dataset>

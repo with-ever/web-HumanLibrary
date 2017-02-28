@@ -4,43 +4,46 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.withever.humanlibrary.repo.mapper.HumanbookMapper">
-	<resultMap id="hbResultMap" type="Humanbook">
-        <id property="hbId" column="HB_ID"/>
-        <result property="loginId" column="LOGIN_ID"/>
-        <result property="hbTitle" column="HB_TITLE"/>
-        <result property="hbMainCareer" column="HB_MAIN_CAREER"/>
-        <result property="hbStatus" column="HB_STATUS"/>
+	<resultMap id="humanbookResultMap" type="Humanbook">
+        <id property="id" column="ID"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="title" column="TITLE"/>
+        <result property="mainCareer" column="MAIN_CAREER"/>
+        <result property="status" column="STATUS"/>
+        <result property="serviceDay" column="SERVICE_DAY"/>
         <result property="serviceTime" column="SERVICE_TIME"/>
         <result property="upperCategory" column="UPPER_CATEGORY"/>
         <result property="subCategory" column="SUB_CATEGORY"/>
-        <result property="hbCreateTime" column="HB_CREATE_TIME"/>
-        <result property="hbUpdateTime" column="HB_UPDATE_TIME"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
     </resultMap>
     
-    <insert id="insertHumanbook" parameterType="Humanbook" useGeneratedKeys="true" keyProperty="hbId" keyColumn="HB_ID">
+    <insert id="insertHumanbook" parameterType="Humanbook" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
     	INSERT INTO Humanbook(
-    		 HB_ID
-    		,LOGIN_ID
-			,HB_TITLE
-			,HB_MAIN_CAREER
-			,HB_STATUS
+    		 ID
+    		,USER_ID
+			,TITLE
+			,MAIN_CAREER
+			,SERVICE_DAY
 			,SERVICE_TIME
 			,UPPER_CATEGORY
 			,SUB_CATEGORY
-			,HB_CREATE_TIME
-			,HB_UPDATE_TIME
+			,CREATE_TIME
+			,UPDATE_TIME
+			,STATUS
     	)
     	VALUES(
-    		#{hbId}
-    		,#{loginId}
-    		,#{hbTitle}
-    		,#{hbMainCareer}
-    		,#{hbStatus}
+    		#{id}
+    		,#{userId}
+    		,#{title}
+    		,#{mainCareer}
     		,#{serviceTime}
+    		,#{serviceDay}
     		,#{upperCategory}
     		,#{subCategory}
-    		,#{hbCreateTime}
-    		,#{hbUpdateTime}
+    		,#{createTime}
+    		,#{updateTime}
+    		,#{status}
     	)
     </insert>
     
@@ -48,61 +51,62 @@
     	UPDATE 
     		HUMANBOOK
     	SET
-    		HB_STATUS = 'DELETED'
+    		STATUS = 'DELETED'
     	WHERE
-    		HB_ID = #{hbId}
+    		ID = #{id}
     </update>
     
     <update id="updateHumanbook" parameterType="Humanbook">
     	UPDATE
     		HUMANBOOK
     	SET 
-    		LOGIN_ID = #{loginId}
-			,HB_TITLE = #{hbTitle}
-			,HB_MAIN_CAREER = #{hbMainCareer}
-			,HB_STATUS = #{hbStatus}
+    		USER_ID = #{userId}
+			,TITLE = #{title}
+			,MAIN_CAREER = #{mainCareer}
+			,SERVICE_DAY = #{serviceDay}
 			,SERVICE_TIME = #{serviceTime}
 			,UPPER_CATEGORY = #{upperCategory}
 			,SUB_CATEGORY = #{subCategory}
-			,HB_UPDATE_TIME = #{hbUpdateTime}
+			,UPDATE_TIME = #{updateTime}
+			,STATUS = #{status}
 		WHERE
-			HB_ID = #{hbId}
+			ID = #{id}
     </update>
     
-	<select id="selectHumanbook" parameterType="Long" resultMap="hbResultMap">
+	<select id="selectHumanbook" parameterType="Long" resultMap="humanbookResultMap">
 		SELECT
-			 HB_ID
-			,LOGIN_ID
-			,HB_TITLE
-			,HB_MAIN_CAREER
-			,HB_STATUS
+			 ID
+			,USER_ID
+			,TITLE
+			,MAIN_CAREER
+			,STATUS
 			,SERVICE_TIME
 			,UPPER_CATEGORY
 			,SUB_CATEGORY
-			,HB_CREATE_TIME
-			,HB_UPDATE_TIME
+			,CREATE_TIME
+			,UPDATE_TIME
 		FROM
 			HUMANBOOK
 		WHERE
-			HB_ID = #{hbId}
+			ID = #{id}
 	</select>
 	
-	<select id="selectHumanbookByLoginId" parameterType="String" resultMap="hbResultMap">
+	<select id="selectHumanbookByUserId" parameterType="String" resultMap="humanbookResultMap">
 		SELECT
-			 HB_ID
-			,LOGIN_ID
-			,HB_TITLE
-			,HB_MAIN_CAREER
-			,HB_STATUS
+			 ID
+			,USER_ID
+			,TITLE
+			,MAIN_CAREER
+			,STATUS
 			,SERVICE_TIME
 			,UPPER_CATEGORY
 			,SUB_CATEGORY
-			,HB_CREATE_TIME
-			,HB_UPDATE_TIME
+			,CREATE_TIME
+			,UPDATE_TIME
 		FROM
 			HUMANBOOK
 		WHERE
-			LOGIN_ID = #{loginId}
+			USER_ID = #{userId}
 	</select>
 
 </mapper>

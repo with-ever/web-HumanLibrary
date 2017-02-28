@@ -5,90 +5,91 @@ import java.io.Serializable;
 import kr.withever.humanlibrary.domain.User;
 
 public class Humanbook implements Serializable{
-	private Long hbId; // humanbook primary key
-	private String loginId; // login id
-	private String hbTitle;
-	private String hbMainCareer;
-	private String hbStatus;
+	private Long id; // humanbook primary key
+	private String userId; // login id
+	private String title;
+	private String mainCareer;
+	private String serviceDay;
 	private String serviceTime;
 	private String upperCategory;
 	private String subCategory;
-	private Long hbCreateTime;
-	private Long hbUpdateTime;
+	private Long createTime;
+	private Long updateTime;
+	private String status;
 	
 	public Humanbook(){
 	}
 	
-	public Humanbook(String userId, Long hbId, String hbTitle){
-		this.loginId = userId;
-		this.hbId = hbId;
-		this.hbTitle = hbTitle;
-		this.hbCreateTime = System.currentTimeMillis() / 1000;
-		this.hbUpdateTime = System.currentTimeMillis() / 1000;
+	public Humanbook(String userId, Long id, String title){
+		this.userId = userId;
+		this.id = id;
+		this.title = title;
+		this.createTime = System.currentTimeMillis() / 1000;
+		this.updateTime = System.currentTimeMillis() / 1000;
 	}
 
-	public String getLoginId() {
-		return loginId;
+	public String getUserId() {
+		return userId;
 	}
 
-	public void setLoginId(String userId) {
-		this.loginId = userId;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
-	public Long getHbId() {
-		return hbId;
+	public Long getId() {
+		return id;
 	}
 
-	public void setHbId(Long hbId) {
-		this.hbId = hbId;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
-	public String getHbTitle() {
-		return hbTitle;
+	public String getTitle() {
+		return title;
 	}
 
-	public void setHbTitle(String hbTitle) {
-		this.hbTitle = hbTitle;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
-	public String getHbMainCareer() {
-		return hbMainCareer;
+	public String getMainCareer() {
+		return mainCareer;
 	}
 
-	public void setHbMainCareer(String hbMainCareer) {
-		this.hbMainCareer = hbMainCareer;
+	public void setMainCareer(String mainCareer) {
+		this.mainCareer = mainCareer;
 	}
 
-	public String getHbStatus() {
-		return hbStatus;
+	public String getStatus() {
+		return status;
 	}
 
-	public void setHbStatus(String hbStatus) {
-		this.hbStatus = hbStatus;
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
-	public Long getHbCreateTime() {
-		return hbCreateTime;
+	public Long getCreateTime() {
+		return createTime;
 	}
 
-	public void setHbCreateTime(Long hbCreateTime) {
-		this.hbCreateTime = hbCreateTime;
+	public void setCreateTime(Long createTime) {
+		this.createTime = createTime;
 	}
 
-	public Long getHbUpdateTime() {
-		return hbUpdateTime;
+	public Long getUpdateTime() {
+		return updateTime;
 	}
 
-	public void setHbUpdateTime(Long hbUpdateTime) {
-		this.hbUpdateTime = hbUpdateTime;
+	public void setUpdateTime(Long updateTime) {
+		this.updateTime = updateTime;
 	}
 
 	public String getServiceTime() {
 		return serviceTime;
 	}
 
-	public void setServiceTime(String hbServiceTime) {
-		this.serviceTime = hbServiceTime;
+	public void setServiceTime(String serviceTime) {
+		this.serviceTime = serviceTime;
 	}
 
 	public String getUpperCategory() {
@@ -105,6 +106,14 @@ public class Humanbook implements Serializable{
 
 	public void setSubCategory(String subCategory) {
 		this.subCategory = subCategory;
+	}
+
+	public String getServiceDay() {
+		return serviceDay;
+	}
+
+	public void setServiceDay(String serviceDay) {
+		this.serviceDay = serviceDay;
 	}
 	
 }
