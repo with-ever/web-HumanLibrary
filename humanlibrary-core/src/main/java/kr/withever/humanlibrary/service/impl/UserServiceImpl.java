@@ -1,6 +1,8 @@
 package kr.withever.humanlibrary.service.impl;
 
 import kr.withever.humanlibrary.domain.User;
+import kr.withever.humanlibrary.domain.common.exception.ExceptionType;
+import kr.withever.humanlibrary.exception.HumanLibraryException;
 import kr.withever.humanlibrary.repo.UserRepository;
 import kr.withever.humanlibrary.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,8 @@ public class UserServiceImpl implements UserService{
     private UserRepository userRepository;
 
     public User retrieveUser(Long userId) {
-        return this.userRepository.retrieveUser(userId);
+        User user = this.userRepository.retrieveUser(userId);
+        if (user == null) throw new HumanLibraryException(ExceptionType.US10002, String.valueOf(userId), "success");
+        return user;
     }
 }

@@ -24,8 +24,10 @@ public class UserRepository {
 
     public User retrieveUser(Long userId) {
         User user = this.userMapper.selectUser(userId);
-        Set<String> roleList = this.userRoleMapper.selectUserRoleList(userId);
-        user.setRoles(roleList);
+        if (user != null) {
+            Set<String> roleList = this.userRoleMapper.selectUserRoleList(userId);
+            user.setRoles(roleList);
+        }
         return user;
     }
 
