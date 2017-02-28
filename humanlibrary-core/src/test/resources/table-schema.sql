@@ -93,6 +93,12 @@ CREATE TABLE IF NOT EXISTS `SERVICE_DAY` (
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 --Add Category Table
+CREATE TABLE `CATEGORY` (
+  `id` int(11) NOT NULL,
+  `category_name` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+
 --Add Sub Category Table
 
 
