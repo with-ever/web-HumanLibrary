@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <Notice
+            ID = "1"
+            TYPE = "NT"
+            CREATE_TIME = "111111"
+            UPDATE_TIME = "222222"
+            SUBJECT = "TEST SUBJECT"
+            CONTENTS = "TEST CONTENTS"
+            VIEWS = "15"
+            USER_ID = "1"
+    />
+</dataset>

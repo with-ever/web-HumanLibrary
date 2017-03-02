@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="kr.withever.humanlibrary.repo.mapper.NoticeFileMapper">
+    <resultMap id="noticeFileResultMap" type="NoticeFile">
+        <id property="id" column="ID"/>
+        <result property="fileName" column="FILE_NAME"/>
+        <result property="relativePath" column="RELATIVE_PATH"/>
+        <result property="suffix" column="SUFFIX"/>
+        <result property="noticeId" column="NOTICE_ID"/>
+    </resultMap>
+
+    <insert id="insertNoticeFile" parameterType="NoticeFile" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+        INSERT INTO NOTICE_FILE (
+		 FILE_NAME
+        ,RELATIVE_PATH
+        ,SUFFIX
+        ,NOTICE_ID
+        )
+        VALUES (
+         #{fileName}
+        ,#{relativePath}
+        ,#{suffix}
+        ,#{noticeId}
+        )
+    </insert>
+
+
+    <select id="selectNoticeFile" parameterType="Long" resultMap="noticeFileResultMap">
+        SELECT
+         ID
+        ,FILE_NAME
+        ,RELATIVE_PATH
+        ,SUFFIX
+        ,NOTICE_ID
+        FROM NOTICE_FILE
+        WHERE ID = #{id}
+    </select>
+
+    <update id="updateNoticeFile" parameterType="NoticeFile">
+        UPDATE NOTICE_FILE
+        <set>
+        <if test='fileName != null and fileName != ""'>
+		FILE_NAME = #{fileName},
+		</if>
+		<if test='relativePath != null and relativePath != ""'>
+        RELATIVE_PATH = #{relativePath},
+        </if>
+        <if test='suffix != null and suffix != ""'>
+        SUFFIX = #{suffix},
+        </if>
+        <if test='noticeId != null and noticeId != ""'>
+        NOTICE_ID = #{noticeId},
+        </if>
+        </set>
+     	WHERE ID = #{id}
+    </update>
+
+    <delete id="deleteNoticeFile" parameterType="Long">
+        DELETE
+        FROM NOTICE_FILE
+        WHERE ID = #{id}
+    </delete>
+
+
+
+</mapper>

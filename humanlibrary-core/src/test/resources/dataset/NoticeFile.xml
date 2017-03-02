@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <NOTICE_FILE
+            ID = "1"
+            FILE_NAME = "test_name"
+            RELATIVE_PATH = "test/test/"
+            SUFFIX = ".test"
+            NOTICE_ID = "1"
+    />
+</dataset>
