@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.withever.humanlibrary.repo.mapper.HumanbookMapper">
+	<resultMap id="humanbookResultMap" type="Humanbook">
+        <id property="id" column="ID"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="title" column="TITLE"/>
+        <result property="mainCareer" column="MAIN_CAREER"/>
+        <result property="status" column="STATUS"/>
+        <result property="serviceDay" column="SERVICE_DAY"/>
+        <result property="serviceTime" column="SERVICE_TIME"/>
+        <result property="upperCategory" column="UPPER_CATEGORY"/>
+        <result property="subCategory" column="SUB_CATEGORY"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
+    </resultMap>
+    
+    <insert id="insertHumanbook" parameterType="Humanbook" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+    	INSERT INTO Humanbook(
+    		 ID
+    		,USER_ID
+			,TITLE
+			,MAIN_CAREER
+			,SERVICE_DAY
+			,SERVICE_TIME
+			,UPPER_CATEGORY
+			,SUB_CATEGORY
+			,CREATE_TIME
+			,UPDATE_TIME
+			,STATUS
+    	)
+    	VALUES(
+    		#{id}
+    		,#{userId}
+    		,#{title}
+    		,#{mainCareer}
+    		,#{serviceTime}
+    		,#{serviceDay}
+    		,#{upperCategory}
+    		,#{subCategory}
+    		,#{createTime}
+    		,#{updateTime}
+    		,#{status}
+    	)
+    </insert>
+    
+    <update id="deleteHumanbook" parameterType="Long">
+    	UPDATE 
+    		HUMANBOOK
+    	SET
+    		STATUS = 'DELETED'
+    	WHERE
+    		ID = #{id}
+    </update>
+    
+    <update id="updateHumanbook" parameterType="Humanbook">
+    	UPDATE
+    		HUMANBOOK
+    	SET 
+    		USER_ID = #{userId}
+			,TITLE = #{title}
+			,MAIN_CAREER = #{mainCareer}
+			,SERVICE_DAY = #{serviceDay}
+			,SERVICE_TIME = #{serviceTime}
+			,UPPER_CATEGORY = #{upperCategory}
+			,SUB_CATEGORY = #{subCategory}
+			,UPDATE_TIME = #{updateTime}
+			,STATUS = #{status}
+		WHERE
+			ID = #{id}
+    </update>
+    
+	<select id="selectHumanbook" parameterType="Long" resultMap="humanbookResultMap">
+		SELECT
+			 ID
+			,USER_ID
+			,TITLE
+			,MAIN_CAREER
+			,STATUS
+			,SERVICE_TIME
+			,UPPER_CATEGORY
+			,SUB_CATEGORY
+			,CREATE_TIME
+			,UPDATE_TIME
+		FROM
+			HUMANBOOK
+		WHERE
+			ID = #{id}
+	</select>
+	
+	<select id="selectHumanbookByUserId" parameterType="String" resultMap="humanbookResultMap">
+		SELECT
+			 ID
+			,USER_ID
+			,TITLE
+			,MAIN_CAREER
+			,STATUS
+			,SERVICE_TIME
+			,UPPER_CATEGORY
+			,SUB_CATEGORY
+			,CREATE_TIME
+			,UPDATE_TIME
+		FROM
+			HUMANBOOK
+		WHERE
+			USER_ID = #{userId}
+	</select>
+
+</mapper>

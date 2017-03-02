@@ -1,10 +1,12 @@
 package kr.withever.humanlibrary.config;
 
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
+import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
+import org.springframework.context.support.ResourceBundleMessageSource;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.MediaType;
@@ -25,6 +27,14 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		PropertyPlaceholderConfigurer configurer = new PropertyPlaceholderConfigurer();
 		configurer.setLocations(new Resource[]{new ClassPathResource("application.properties")});
 		return configurer;
+	}
+
+	@Bean
+	public MessageSource messageSource() {
+		ResourceBundleMessageSource messageSource = new ResourceBundleMessageSource();
+		messageSource.setBasename("error_messages");
+		messageSource.setDefaultEncoding("UTF-8");
+		return messageSource;
 	}
 
 	@Override
