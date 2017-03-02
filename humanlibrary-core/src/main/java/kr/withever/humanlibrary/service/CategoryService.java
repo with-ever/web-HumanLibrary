@@ -4,9 +4,9 @@ import kr.withever.humanlibrary.domain.humanbook.Category;
 
 public interface CategoryService {
 	
-	Category selectCategory(Long id);
+	Category retrieveCategory(Long id);
 	
-	Category selectCategoryByCategoryName(String categoryName);
+	Category retrieveCategoryByCategoryName(String categoryName);
 	
 	int insertCategory(Category category);
 	
