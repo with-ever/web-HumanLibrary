@@ -1,6 +1,6 @@
 package kr.withever.humanlibrary.security;
 
-import kr.withever.humanlibrary.domain.User;
+import kr.withever.humanlibrary.domain.user.User;
 import kr.withever.humanlibrary.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;

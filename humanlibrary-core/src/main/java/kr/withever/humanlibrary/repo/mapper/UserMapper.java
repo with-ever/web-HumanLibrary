@@ -1,7 +1,6 @@
 package kr.withever.humanlibrary.repo.mapper;
 
-import kr.withever.humanlibrary.domain.User;
-import org.apache.ibatis.annotations.Param;
+import kr.withever.humanlibrary.domain.user.User;
 
 /**
  * Created by youngjinkim on 2017. 2. 7..

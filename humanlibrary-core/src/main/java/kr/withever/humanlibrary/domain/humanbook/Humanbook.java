@@ -2,8 +2,6 @@ package kr.withever.humanlibrary.domain.humanbook;
 
 import java.io.Serializable;
 
-import kr.withever.humanlibrary.domain.User;
-
 public class Humanbook implements Serializable{
 	private Long id; // humanbook primary key
 	private String userId; // login id
@@ -19,7 +17,11 @@ public class Humanbook implements Serializable{
 	
 	public Humanbook(){
 	}
-	
+
+	public Humanbook(Long id) {
+		this.id = id;
+	}
+
 	public Humanbook(String userId, Long id, String title){
 		this.userId = userId;
 		this.id = id;

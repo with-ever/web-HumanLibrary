@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <CONTRACTS
+            ID = "1"
+            USER_ID = "1"
+            HB_ID = "1"
+            STATE = "WAITING"
+            CONTRACT_TIME_ID = "2"
+            CREATE_TIME = "111111"
+            UPDATE_TIME = "222222"
+    />
+</dataset>

@@ -4,13 +4,10 @@ import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import kr.withever.humanlibrary.config.WitheverDbUnitTestConfig;
-import kr.withever.humanlibrary.domain.Role;
 import kr.withever.humanlibrary.domain.common.user.RoleType;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Iterator;
-import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.*;

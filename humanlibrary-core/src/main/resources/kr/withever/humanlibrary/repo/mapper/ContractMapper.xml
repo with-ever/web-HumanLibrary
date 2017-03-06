@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.withever.humanlibrary.repo.mapper.ContractMapper">
+    <resultMap id="contractResultMap" type="Contract">
+        <id property="id" column="ID"/>
+        <result property="state" column="STATE"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
+        <association property="user" resultMap="userResultMap"/>
+        <association property="humanbook" resultMap="humanbookResultMap"/>
+        <association property="contractTime" resultMap="contractTimeResultMap"/>
+    </resultMap>
+
+    <resultMap type="User" id="userResultMap">
+        <id		property="userId"		column="USER_ID"/>
+    </resultMap>
+
+    <resultMap type="Humanbook" id="humanbookResultMap" >
+        <id		property="id"		column="HB_ID"/>
+    </resultMap>
+
+    <resultMap type="ContractTime" id="contractTimeResultMap" >
+        <id		property="id"		column="CONTRACT_TIME_ID"/>
+    </resultMap>
+
+    <insert id="insertContract" parameterType="Contract" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+        INSERT INTO CONTRACTS (
+        USER_ID
+        ,HB_ID
+        ,STATE
+        ,CONTRACT_TIME_ID
+        ,CREATE_TIME
+        ,UPDATE_TIME
+        )
+        VALUES (
+        #{user.userId}
+        ,#{humanbook.id}
+        ,#{state}
+        ,#{contractTime.id}
+        ,#{createTime}
+        ,#{updateTime}
+        )
+    </insert>
+
+
+    <select id="selectContract" parameterType="Long" resultMap="contractResultMap">
+        SELECT
+        ID
+        ,USER_ID
+        ,HB_ID
+        ,STATE
+        ,CONTRACT_TIME_ID
+        ,CREATE_TIME
+        ,UPDATE_TIME
+        FROM CONTRACTS
+        WHERE ID = #{contractId}
+    </select>
+
+    <update id="updateContract" parameterType="Contract">
+        UPDATE CONTRACTS
+        SET
+        STATE = #{state}
+        ,CONTRACT_TIME_ID = #{contractTime.id}
+        ,UPDATE_TIME = #{updateTime}
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="deleteContract" parameterType="Long">
+        DELETE
+        FROM Contracts
+        WHERE ID = #{contractId}
+    </delete>
+
+</mapper>

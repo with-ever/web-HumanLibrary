@@ -1,6 +1,5 @@
 package kr.withever.humanlibrary.repo.mapper;
 
-import kr.withever.humanlibrary.domain.Role;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.Set;

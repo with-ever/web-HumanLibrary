@@ -1,4 +1,4 @@
-package kr.withever.humanlibrary.domain;
+package kr.withever.humanlibrary.domain.user;
 
 import kr.withever.humanlibrary.domain.common.user.RoleType;
 

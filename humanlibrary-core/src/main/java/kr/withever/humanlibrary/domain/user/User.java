@@ -1,4 +1,4 @@
-package kr.withever.humanlibrary.domain;
+package kr.withever.humanlibrary.domain.user;
 
 import java.io.Serializable;
 import java.util.List;
@@ -38,6 +38,10 @@ public class User implements Serializable {
     private Long updateTime;
 
     public User() {
+    }
+
+    public User(Long userId) {
+        this.userId = userId;
     }
 
     public User(String loginId, String name, String email, String password) {

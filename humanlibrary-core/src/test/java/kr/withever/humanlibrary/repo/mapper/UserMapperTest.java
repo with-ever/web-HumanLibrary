@@ -4,7 +4,7 @@ import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import kr.withever.humanlibrary.config.WitheverDbUnitTestConfig;
-import kr.withever.humanlibrary.domain.User;
+import kr.withever.humanlibrary.domain.user.User;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 

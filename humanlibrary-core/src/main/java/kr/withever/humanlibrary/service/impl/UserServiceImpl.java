@@ -1,6 +1,6 @@
 package kr.withever.humanlibrary.service.impl;
 
-import kr.withever.humanlibrary.domain.User;
+import kr.withever.humanlibrary.domain.user.User;
 import kr.withever.humanlibrary.domain.common.exception.ExceptionType;
 import kr.withever.humanlibrary.exception.HumanLibraryException;
 import kr.withever.humanlibrary.repo.UserRepository;

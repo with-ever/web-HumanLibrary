@@ -1,6 +1,6 @@
 package kr.withever.humanlibrary.service;
 
-import kr.withever.humanlibrary.domain.User;
+import kr.withever.humanlibrary.domain.user.User;
 
 /**
  * Created by youngjinkim on 2017. 2. 7..

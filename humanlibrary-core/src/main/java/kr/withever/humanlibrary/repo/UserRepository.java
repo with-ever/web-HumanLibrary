@@ -1,13 +1,11 @@
 package kr.withever.humanlibrary.repo;
 
-import kr.withever.humanlibrary.domain.Role;
-import kr.withever.humanlibrary.domain.User;
+import kr.withever.humanlibrary.domain.user.User;
 import kr.withever.humanlibrary.repo.mapper.UserMapper;
 import kr.withever.humanlibrary.repo.mapper.UserRoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Set;
 
 /**
