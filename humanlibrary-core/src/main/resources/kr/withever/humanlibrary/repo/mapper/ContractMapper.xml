@@ -70,7 +70,7 @@
 
     <delete id="deleteContract" parameterType="Long">
         DELETE
-        FROM Contracts
+        FROM CONTRACTS
         WHERE ID = #{contractId}
     </delete>
 

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <CONTRACT_TIMES
+            ID = "1"
+            CONTRACT_ID = "1"
+            DATE = "20170306"
+            TIME = "17"
+    />
+    <CONTRACT_TIMES
+            ID = "2"
+            CONTRACT_ID = "1"
+            DATE = "20170306"
+            TIME = "19"
+    />
+    <CONTRACT_TIMES
+            ID = "3"
+            CONTRACT_ID = "1"
+            DATE = "20170306"
+            TIME = "21"
+    />
+</dataset>

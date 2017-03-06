@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.withever.humanlibrary.repo.mapper.ContractTimeMapper">
+    <resultMap id="contractTimeResultMap" type="ContractTime">
+        <id property="id" column="ID"/>
+        <result property="contractId" column="CONTRACT_ID"/>
+        <result property="date" column="DATE"/>
+        <result property="time" column="TIME"/>
+
+    </resultMap>
+
+    <insert id="insertContractTime" parameterType="ContractTime" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+        INSERT INTO CONTRACT_TIMES (
+        CONTRACT_ID
+        ,DATE
+        ,TIME
+        )
+        VALUES (
+        #{contractId}
+        ,#{date}
+        ,#{time}
+        )
+    </insert>
+
+
+    <select id="selectContractTime" parameterType="Long" resultMap="contractTimeResultMap">
+        SELECT
+        ID
+        ,CONTRACT_ID
+        ,DATE
+        ,TIME
+        FROM CONTRACT_TIMES
+        WHERE ID = #{id}
+    </select>
+
+    <select id="selectContractTimes" parameterType="Long" resultMap="contractTimeResultMap">
+        SELECT
+        ID
+        ,CONTRACT_ID
+        ,DATE
+        ,TIME
+        FROM CONTRACT_TIMES
+        WHERE CONTRACT_ID = #{contractId}
+    </select>
+
+    <update id="updateContractTime" parameterType="ContractTime">
+        UPDATE CONTRACT_TIMES
+        SET
+        DATE = #{date}
+        ,TIME = #{time}
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="deleteContractTime" parameterType="Long">
+        DELETE
+        FROM CONTRACT_TIMES
+        WHERE ID = #{id}
+    </delete>
+
+</mapper>
