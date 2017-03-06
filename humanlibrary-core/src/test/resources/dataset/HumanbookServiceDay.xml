@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataset>
 	<HUMANBOOK_SERVICE_DAY_REL
-		ID = "1"
-		DAY = "SUNDAY"
+		HUMANBOOK_ID = "1"
+		DAY_ID = "SUNDAY"
 	/>
 	<HUMANBOOK_SERVICE_DAY_REL
-		ID = "1"
-		DAY = "MONDAY"
+		HUMANBOOK_ID = "1"
+		DAY_ID = "MONDAY"
 	/>
 	<HUMANBOOK_SERVICE_DAY_REL
-		ID = "1"
-		DAY = "TUESDAY"
+		HUMANBOOK_ID = "1"
+		DAY_ID = "TUESDAY"
 	/>
 </dataset>
