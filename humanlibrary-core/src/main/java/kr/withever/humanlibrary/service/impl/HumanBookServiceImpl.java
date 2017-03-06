@@ -30,17 +30,17 @@ public class HumanBookServiceImpl implements HumanBookService {
 	}
 	
 	@Override
-	public int insertHumanbook(Humanbook humanbook){
-		return this.humanbookRepository.insertHumanbook(humanbook);
+	public int createHumanbook(Humanbook humanbook){
+		return this.humanbookRepository.createHumanbook(humanbook);
 	}
 	
 	@Override
-	public int deleteHumanbook(Long id){
-		return this.humanbookRepository.deleteHumanbook(id);
+	public int removeHumanbook(Long id){
+		return this.humanbookRepository.removeHumanbook(id);
 	}
 	
 	@Override
-	public int updateHumanbook(Humanbook humanbook){
-		return this.humanbookRepository.updateHumanbook(humanbook);
+	public int modifyHumanbook(Humanbook humanbook){
+		return this.humanbookRepository.modifyHumanbook(humanbook);
 	}
 }

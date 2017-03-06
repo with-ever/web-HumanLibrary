@@ -75,7 +75,6 @@ CREATE TABLE `HUMANBOOK` (
   `user_id` varchar(45) NOT NULL,
   `title` varchar(45) DEFAULT NULL,
   `main_career` varchar(45) DEFAULT NULL,
-  `service_day` varchar(45) DEFAULT NULL,
   `service_time` varchar(45) DEFAULT NULL,
   `upper_category` varchar(45) NOT NULL,
   `sub_category` varchar(45) NOT NULL,
@@ -85,12 +84,17 @@ CREATE TABLE `HUMANBOOK` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
---Add ServiceDay Table
-CREATE TABLE IF NOT EXISTS `SERVICE_DAY` (
-  `id` int(11) NOT NULL,
-  `day` varchar(45) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
+--SERVICE DAY TABLE
+CREATE TABLE `SERVICE_DAY` (
+	`DAY` VARCHAR(45) NOT NULL,
+	`DESC` VARCHAR(255) NULL,
+	PRIMARY KEY (`DAY`)
+) ENGINE = InnoDB DEFAULT CHARSET=UTF8;
+
+CREATE TABLE IF NOT EXISTS `HUMANBOOK_SERVICE_DAY_REL` (
+  `ID` INT NOT NULL,
+  `DAY` VARCHAR(45) NOT NULL
+) ENGINE = InnoDB DEFAULT CHARSET=UTF8;
 
 --Add Category Table
 CREATE TABLE `CATEGORY` (

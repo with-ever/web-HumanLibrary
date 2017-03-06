@@ -1,19 +1,23 @@
 package kr.withever.humanlibrary.domain.humanbook;
 
+import kr.withever.humanlibrary.domain.common.DayOfWeek;
+
 public class ServiceDay {
-	private Long id;
-	private String day; //Mon, Tue, Weds, Thur, Fri, Sat, Sun
 	
-	public Long getId() {
-		return id;
+	private String dayId;
+
+	public ServiceDay(){
 	}
-	public void setId(Long id) {
-		this.id = id;
+
+	public ServiceDay(DayOfWeek day){
+		this.setDayId(day.getName());
 	}
-	public String getDay() {
-		return day;
+
+	public String getDayId() {
+		return dayId;
 	}
-	public void setDay(String day) {
-		this.day = day;
+
+	public void setDayId(String dayId) {
+		this.dayId = dayId;
 	}
 }

@@ -22,7 +22,7 @@ public class HumanbookRepository {
 		return humanbook;
 	}
 	
-	public int insertHumanbook(Humanbook humanbook){
+	public int createHumanbook(Humanbook humanbook){
 		try{
 			this.humanbookMapper.insertHumanbook(humanbook);
 			return 1;
@@ -31,7 +31,16 @@ public class HumanbookRepository {
 		}
 	}
 	
-	public int deleteHumanbook(Long id){
+	public int modifyHumanbook(Humanbook humanbook){
+		try {
+			this.humanbookMapper.updateHumanbook(humanbook);
+			return 1;
+		} catch (Exception e) {
+			return 0;
+		}
+	}
+
+	public int removeHumanbook(Long id){
 		try{
 			this.humanbookMapper.deleteHumanbook(id);
 			return 1;
@@ -40,12 +49,4 @@ public class HumanbookRepository {
 		}
 	}
 	
-	public int updateHumanbook(Humanbook humanbook){
-		try {
-			this.humanbookMapper.updateHumanbook(humanbook);
-			return 1;
-		} catch (Exception e) {
-			return 0;
-		}
-	}
 }

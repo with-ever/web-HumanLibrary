@@ -30,18 +30,18 @@ public class ServiceDayServiceImpl implements ServiceDayService {
 	}
 
 	@Override
-	public int insertServiceDay(ServiceDay serviceDay) {
-		return this.serviceDayRepository.insertServiceDay(serviceDay);
+	public int createServiceDay(ServiceDay serviceDay) {
+		return this.serviceDayRepository.createServiceDay(serviceDay);
 	}
 
 	@Override
-	public int updateServiceDay(ServiceDay serviceDay) {
-		return this.serviceDayRepository.updateServiceDay(serviceDay);
+	public int modifyServiceDay(ServiceDay serviceDay) {
+		return this.serviceDayRepository.modifyServiceDay(serviceDay);
 	}
 
 	@Override
-	public int deleteServiceDay(Long id) {
-		return this.serviceDayRepository.deleteServiceDay(id);
+	public int removeServiceDay(Long id) {
+		return this.serviceDayRepository.removeServiceDay(id);
 	}
 
 }

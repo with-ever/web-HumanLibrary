@@ -1,15 +1,14 @@
 package kr.withever.humanlibrary.domain.humanbook;
 
 import java.io.Serializable;
-
-import kr.withever.humanlibrary.domain.User;
+import java.util.Set;
 
 public class Humanbook implements Serializable{
 	private Long id; // humanbook primary key
 	private String userId; // login id
 	private String title;
 	private String mainCareer;
-	private String serviceDay;
+	private Set<String> serviceDay;
 	private String serviceTime;
 	private String upperCategory;
 	private String subCategory;
@@ -108,12 +107,12 @@ public class Humanbook implements Serializable{
 		this.subCategory = subCategory;
 	}
 
-	public String getServiceDay() {
+	public Set<String> getServiceDay() {
 		return serviceDay;
 	}
 
-	public void setServiceDay(String serviceDay) {
+	public void setServiceDay(Set<String> serviceDay) {
 		this.serviceDay = serviceDay;
 	}
-	
+
 }

@@ -22,7 +22,7 @@ public class ServiceDayRepository {
 		return serviceDay;
 	}
 	
-	public int insertServiceDay(ServiceDay serviceDay){
+	public int createServiceDay(ServiceDay serviceDay){
 		try{
 			this.serviceDayMapper.insertServiceDay(serviceDay);
 			return 1;
@@ -31,7 +31,7 @@ public class ServiceDayRepository {
 		}
 	}
 
-	public int updateServiceDay(ServiceDay serviceDay){
+	public int modifyServiceDay(ServiceDay serviceDay){
 		try {
 			this.serviceDayMapper.updateServiceDay(serviceDay);
 			return 1;
@@ -40,7 +40,7 @@ public class ServiceDayRepository {
 		}
 	}
 	
-	public int deleteServiceDay(Long id){
+	public int removeServiceDay(Long id){
 		try {
 			this.serviceDayMapper.deleteServiceDay(id);
 			return 1;
