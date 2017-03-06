@@ -8,9 +8,9 @@ public interface ServiceDayService {
 	
 	ServiceDay retrieveServiceDayByDay(String day);
 	
-	int insertServiceDay(ServiceDay serviceDay);
+	int createServiceDay(ServiceDay serviceDay);
 	
-	int updateServiceDay(ServiceDay serviceDay);
+	int modifyServiceDay(ServiceDay serviceDay);
 	
-	int deleteServiceDay(Long id);
+	int removeServiceDay(Long id);
 }

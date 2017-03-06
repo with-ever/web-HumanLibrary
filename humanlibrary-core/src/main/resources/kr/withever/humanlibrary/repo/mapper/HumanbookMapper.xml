@@ -10,7 +10,6 @@
         <result property="title" column="TITLE"/>
         <result property="mainCareer" column="MAIN_CAREER"/>
         <result property="status" column="STATUS"/>
-        <result property="serviceDay" column="SERVICE_DAY"/>
         <result property="serviceTime" column="SERVICE_TIME"/>
         <result property="upperCategory" column="UPPER_CATEGORY"/>
         <result property="subCategory" column="SUB_CATEGORY"/>
@@ -24,7 +23,6 @@
     		,USER_ID
 			,TITLE
 			,MAIN_CAREER
-			,SERVICE_DAY
 			,SERVICE_TIME
 			,UPPER_CATEGORY
 			,SUB_CATEGORY
@@ -38,7 +36,6 @@
     		,#{title}
     		,#{mainCareer}
     		,#{serviceTime}
-    		,#{serviceDay}
     		,#{upperCategory}
     		,#{subCategory}
     		,#{createTime}
@@ -63,7 +60,6 @@
     		USER_ID = #{userId}
 			,TITLE = #{title}
 			,MAIN_CAREER = #{mainCareer}
-			,SERVICE_DAY = #{serviceDay}
 			,SERVICE_TIME = #{serviceTime}
 			,UPPER_CATEGORY = #{upperCategory}
 			,SUB_CATEGORY = #{subCategory}

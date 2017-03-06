@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="kr.withever.humanlibrary.repo.mapper.BoardFileMapper">
+    <resultMap id="boardFileResultMap" type="BoardFile">
+        <id property="id" column="ID"/>
+        <result property="fileName" column="FILE_NAME"/>
+        <result property="relativePath" column="RELATIVE_PATH"/>
+        <result property="suffix" column="SUFFIX"/>
+        <result property="boardId" column="BOARD_ID"/>
+    </resultMap>
+
+    <insert id="insertBoardFile" parameterType="BoardFile" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+        INSERT INTO BOARD_FILE (
+		 FILE_NAME
+        ,RELATIVE_PATH
+        ,SUFFIX
+        ,BOARD_ID
+        )
+        VALUES (
+         #{fileName}
+        ,#{relativePath}
+        ,#{suffix}
+        ,#{boardId}
+        )
+    </insert>
+
+
+    <select id="selectBoardFile" parameterType="Long" resultMap="boardFileResultMap">
+        SELECT
+         ID
+        ,FILE_NAME
+        ,RELATIVE_PATH
+        ,SUFFIX
+        ,BOARD_ID
+        FROM BOARD_FILE
+        WHERE ID = #{id}
+    </select>
+
+    <update id="updateBoardFile" parameterType="BoardFile">
+        UPDATE BOARD_FILE
+        <set>
+        <if test='fileName != null and fileName != ""'>
+		FILE_NAME = #{fileName},
+		</if>
+		<if test='relativePath != null and relativePath != ""'>
+        RELATIVE_PATH = #{relativePath},
+        </if>
+        <if test='suffix != null and suffix != ""'>
+        SUFFIX = #{suffix},
+        </if>
+        <if test='boardId != null and boardId != ""'>
+        BOARD_ID = #{boardId},
+        </if>
+        </set>
+     	WHERE ID = #{id}
+    </update>
+
+    <delete id="deleteBoardFile" parameterType="Long">
+        DELETE
+        FROM BOARD_FILE
+        WHERE ID = #{id}
+    </delete>
+
+
+
+</mapper>

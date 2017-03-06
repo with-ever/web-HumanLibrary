@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="kr.withever.humanlibrary.repo.mapper.HumanbookServiceDayMapper">
+    <resultMap id="serviceDayResultMap" type="ServiceDay">
+        <result property="dayId" column="DAY"/>
+    </resultMap>
+    
+    <select id="selectHumanbookServiceDayList" parameterType="Long" resultType="String">
+    	SELECT
+    		DAY
+    	FROM
+    		HUMANBOOK_SERVICE_DAY_REL
+    	WHERE
+    		ID = #{id}
+    </select>
+    
+    <insert id="insertHumanbookServiceDay">
+    	INSERT INTO HUMANBOOK_SERVICE_DAY_REL (
+    		ID
+    		,DAY
+    	) 
+    	VALUES(
+    		#{id}
+    		,#{dayId}
+    	)
+    </insert>
+    
+    <delete id="deleteHumanbookServiceDay">
+    	DELETE 
+    	FROM
+    		HUMANBOOK_SERVICE_DAY_REL
+    	WHERE
+    		ID = #{id}
+    	AND
+    		DAY = #{dayId}
+    </delete>
+</mapper>

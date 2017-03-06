@@ -8,9 +8,9 @@ public interface HumanBookService {
 	
 	Humanbook retrieveHumanbook(Long id);
 	
-	int insertHumanbook(Humanbook humanBook);
+	int createHumanbook(Humanbook humanBook);
 	
-	int updateHumanbook(Humanbook humanbook);
+	int modifyHumanbook(Humanbook humanbook);
 	
-	int deleteHumanbook(Long id);
+	int removeHumanbook(Long id);
 }
