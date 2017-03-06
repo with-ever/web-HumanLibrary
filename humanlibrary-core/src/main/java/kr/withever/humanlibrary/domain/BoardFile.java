@@ -4,7 +4,7 @@ package kr.withever.humanlibrary.domain;
 /**
  * Created by hyunSeungLee on 2017. 2. 28..
  */
-public class NoticeFile  {
+public class BoardFile  {
 
     private Long id;
 
@@ -14,10 +14,10 @@ public class NoticeFile  {
 
     private String suffix;
 
-    private Long noticeId;
+    private Long boardId;
 
   
-    public NoticeFile() {
+    public BoardFile() {
     }
 
 
@@ -61,13 +61,13 @@ public class NoticeFile  {
 	}
 
 
-	public Long getNoticeId() {
-		return noticeId;
+	public Long getBoardId() {
+		return boardId;
 	}
 
 
-	public void setNoticeId(Long noticeId) {
-		this.noticeId = noticeId;
+	public void setBoardId(Long boardId) {
+		this.boardId = boardId;
 	}
 
 

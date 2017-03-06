@@ -4,7 +4,7 @@ import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import kr.withever.humanlibrary.config.WitheverDbUnitTestConfig;
-import kr.withever.humanlibrary.domain.Notice;
+import kr.withever.humanlibrary.domain.Board;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -14,47 +14,47 @@ import static org.junit.Assert.assertEquals;
  * Created by hyunseunglee on 2017. 2. 28..
  */
 
-@DatabaseSetup(value = { "/dataset/Notice.xml" }, type = DatabaseOperation.INSERT)
-@DatabaseTearDown(value = { "/dataset/Notice.xml" }, type = DatabaseOperation.DELETE_ALL)
-public class NoticeMapperTest extends WitheverDbUnitTestConfig {
+@DatabaseSetup(value = { "/dataset/Board.xml" }, type = DatabaseOperation.INSERT)
+@DatabaseTearDown(value = { "/dataset/Board.xml" }, type = DatabaseOperation.DELETE_ALL)
+public class BoardMapperTest extends WitheverDbUnitTestConfig {
 
 	@Autowired
-	private NoticeMapper noticeMapper;
+	private BoardMapper boardMapper;
 
 	@Test
-	public void selectNotice() throws Exception {
-		Notice notice = this.noticeMapper.selectNotice(1L);
+	public void selectBoard() throws Exception {
+		Board notice = this.boardMapper.selectBoard(1L);
 		assertEquals("NT", notice.getType());
 	}
 
 	@Test
-	public void updateNotice() throws Exception {
-		Notice notice = new Notice();
+	public void updateBoard() throws Exception {
+		Board notice = new Board();
 		notice.setId(1L);
 		notice.setViews(16);
 		notice.setType("NN");
-		int update = this.noticeMapper.updateNotice(notice);
+		int update = this.boardMapper.updateBoard(notice);
 		assertEquals(1, update);
 	}
 
 	@Test
-	public void deleteNotice() throws Exception {
-		int delete = this.noticeMapper.deleteNotice(1L);
+	public void deleteBoard() throws Exception {
+		int delete = this.boardMapper.deleteBoard(1L);
 		assertEquals(1, delete);
 	}
 
 	@Test
-	public void insertNotice() throws Exception {
-		Notice notice = new Notice();
+	public void insertBoard() throws Exception {
+		Board notice = new Board();
 		notice.setType("NN");
 		notice.setViews(1);
 		notice.setUserId(1L);
 		notice.setContents("test");
 		notice.setSubject("test sub");
 		notice.setCreateTime(11111L);
-		int insert = this.noticeMapper.insertNotice(notice);
+		int insert = this.boardMapper.insertBoard(notice);
 		assertEquals(1, insert);
-		notice = this.noticeMapper.selectNotice(2L);
+		notice = this.boardMapper.selectBoard(2L);
 		assertEquals("NN", notice.getType());
 	}
 }

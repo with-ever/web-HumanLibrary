@@ -4,8 +4,8 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="kr.withever.humanlibrary.repo.mapper.NoticeMapper">
-    <resultMap id="noticeResultMap" type="Notice">
+<mapper namespace="kr.withever.humanlibrary.repo.mapper.BoardMapper">
+    <resultMap id="boardResultMap" type="Board">
         <id property="id" column="ID"/>
         <result property="type" column="TYPE"/>
         <result property="createTime" column="CREATE_TIME"/>
@@ -16,8 +16,8 @@
         <result property="userId" column="USER_ID"/>
     </resultMap>
 
-    <insert id="insertNotice" parameterType="Notice" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
-        INSERT INTO NOTICE (
+    <insert id="insertBoard" parameterType="Board" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+        INSERT INTO BOARD (
         TYPE
         ,CREATE_TIME
         ,SUBJECT
@@ -36,7 +36,7 @@
     </insert>
 
 
-    <select id="selectNotice" parameterType="Long" resultMap="noticeResultMap">
+    <select id="selectBoard" parameterType="Long" resultMap="boardResultMap">
         SELECT
          ID
         ,TYPE
@@ -46,12 +46,12 @@
         ,CONTENTS
         ,VIEWS
         ,USER_ID
-        FROM NOTICE
+        FROM BOARD
         WHERE ID = #{id}
     </select>
 
-    <update id="updateNotice" parameterType="Notice">
-        UPDATE NOTICE
+    <update id="updateBoard" parameterType="Board">
+        UPDATE BOARD
         <set>
         <if test='type != null and type != ""'>
         TYPE = #{type},
@@ -75,9 +75,9 @@
         WHERE ID = #{id}
     </update>
 
-    <delete id="deleteNotice" parameterType="Long">
+    <delete id="deleteBoard" parameterType="Long">
         DELETE
-        FROM NOTICE
+        FROM BOARD
         WHERE ID = #{id}
     </delete>
 

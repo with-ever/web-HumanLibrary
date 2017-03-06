@@ -4,7 +4,7 @@ package kr.withever.humanlibrary.domain;
 /**
  * Created by hyunSeungLee on 2017. 2. 28..
  */
-public class Notice {
+public class Board {
 
     private Long id;
 
@@ -23,7 +23,7 @@ public class Notice {
     private Long userId;
 
  
-    public Notice() {
+    public Board() {
     }
 
 
