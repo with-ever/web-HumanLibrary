@@ -2,7 +2,9 @@ package kr.withever.humanlibrary.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import kr.withever.humanlibrary.domain.common.exception.ExceptionType;
 import kr.withever.humanlibrary.domain.humanbook.Category;
+import kr.withever.humanlibrary.exception.HumanLibraryException;
 import kr.withever.humanlibrary.repo.CategoryRepository;
 import kr.withever.humanlibrary.service.CategoryService;
 
@@ -12,43 +14,32 @@ public class CategoryServiceImpl implements CategoryService {
 	private CategoryRepository categoryRepository;
 
 	@Override
-	public Category selectCategory(Long id) {
-		return this.categoryRepository.selectCategory(id);
+	public Category retrieveCategory(Long id) {
+		Category category = this.categoryRepository.retrieveCategory(id);
+		if(category == null) throw new HumanLibraryException(ExceptionType.US10002, String.valueOf(id), "success");
+		return category;
 	}
 
 	@Override
-	public Category selectCategoryByCategoryName(String categoryName) {
-		return this.categoryRepository.selectCategoryByCategoryName(categoryName);
+	public Category retrieveCategoryByCategoryName(String categoryName) {
+		Category category = this.categoryRepository.retrieveCategoryByCategoryName(categoryName);
+		if(category == null) throw new HumanLibraryException(ExceptionType.US10002, String.valueOf(categoryName), "success");
+		return category;
 	}
 
 	@Override
 	public int insertCategory(Category category) {
-		try {
-			this.categoryRepository.insertCategory(category);
-			return 1;
-		} catch (Exception e) {
-			return 0;
-		}
+		return this.categoryRepository.insertCategory(category);
 	}
 
 	@Override
 	public int updateCategory(Category category) {
-		try {
-			this.categoryRepository.updateCategory(category);
-			return 1;
-		} catch (Exception e) {
-			return 0;
-		}
+		return this.categoryRepository.updateCategory(category);
 	}
 
 	@Override
 	public int deleteCategory(Long id) {
-		try {
-			this.categoryRepository.deleteCategory(id);
-			return 1;
-		} catch (Exception e) {
-			return 0;
-		}
+		return this.categoryRepository.deleteCategory(id);
 	}
 
 	@Override

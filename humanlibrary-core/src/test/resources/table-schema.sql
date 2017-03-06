@@ -123,6 +123,12 @@ CREATE TABLE `CATEGORY` (
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 --Add Sub Category Table
+CREATE TABLE `SUB_CATEGORY` (
+  `id` int(11) NOT NULL,
+  `category_name` varchar(45) DEFAULT NULL,
+  `upper_category_id` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
 
 

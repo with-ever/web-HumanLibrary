@@ -12,11 +12,11 @@ public class CategoryRepository {
 	@Autowired
 	private CategoryMapper categoryMapper;
 	
-	public Category selectCategory(Long id){
+	public Category retrieveCategory(Long id){
 		return this.categoryMapper.selectCategory(id);
 	}
 	
-	public Category selectCategoryByCategoryName(String categoryName){
+	public Category retrieveCategoryByCategoryName(String categoryName){
 		return this.categoryMapper.selectCategoryByCategoryName(categoryName);
 	}
 	

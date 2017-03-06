@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="kr.withever.humanlibrary.repo.mapper.SubCategoryMapper">
+	<resultMap id="subCategoryResultMap" type="SubCategory">
+		<id property="id" column="ID"/>
+		<result property="categoryName" column="CATEGORY_NAME"/>
+		<result property="upperCategoryId" column="UPPER_CATEGORY_ID"/>
+	</resultMap>
+	
+	<insert id="insertSubCategory" parameterType="SubCategory" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+		INSERT INTO SUB_CATEGORY(
+			ID
+			,CATEGORY_NAME
+			,UPPER_CATEGORY_ID
+		)
+		VALUES(
+			#{id}
+			,#{categoryName}
+			,#{upperCategoryId}
+		)
+	</insert>
+	
+	<update id="updateSubCategory" parameterType="SubCategory">
+		UPDATE
+			SUB_CATEGORY
+		SET
+			CATEGORY_NAME = #{categoryName}
+			,UPPER_CATEGORY_ID = #{upperCategoryId}
+		WHERE
+			ID = #{id}
+	</update>
+	
+	<delete id="deleteSubCategory" parameterType="Long">
+		DELETE
+		FROM
+			SUB_CATEGORY
+		WHERE
+			ID = #{id}
+	</delete>
+	
+	<select id="selectSubCategory" parameterType="Long" resultMap="subCategoryResultMap">
+		SELECT 
+			ID
+			,CATEGORY_NAME
+			,UPPER_CATEGORY_ID
+		FROM
+			SUB_CATEGORY
+		WHERE
+			ID = #{id}
+	</select>
+	
+	<select id="selectSubCategoryByCategoryName" parameterType="String" resultMap="subCategoryResultMap">
+		SELECT 
+			ID
+			,CATEGORY_NAME
+			,UPPER_CATEGORY_ID
+		FROM
+			SUB_CATEGORY
+		WHERE
+			CATEGORY_NAME = #{categoryName}
+	</select>
+	
+	<select id="countSubCategory" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			SUB_CATEGORY
+	</select>
+	
+</mapper>
