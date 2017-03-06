@@ -8,7 +8,7 @@ public interface HumanbookServiceDayMapper {
 	
 	Set<String> selectHumanbookServiceDayList(Long id);
 	
-	int insertHumanbookServiceDay(@Param("id") Long id, @Param("dayId") String day);
+	int insertHumanbookServiceDay(@Param("humanbookId") Long humanbookId, @Param("dayId") String dayId);
 	
-	int deleteHumanbookServiceDay(@Param("id") Long id, @Param("dayId") String day);
+	int deleteHumanbookServiceDay(@Param("humanbookId") Long humanbookId, @Param("dayId") String dayId);
 }
