@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="kr.withever.humanlibrary.repo.mapper.BoardMapper">
+    <resultMap id="boardResultMap" type="Board">
+        <id property="id" column="ID"/>
+        <result property="type" column="TYPE"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
+        <result property="subject" column="SUBJECT"/>
+        <result property="contents" column="CONTENTS"/>
+        <result property="views" column="VIEWS"/>
+        <result property="userId" column="USER_ID"/>
+    </resultMap>
+
+    <insert id="insertBoard" parameterType="Board" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+        INSERT INTO BOARD (
+        TYPE
+        ,CREATE_TIME
+        ,SUBJECT
+        ,CONTENTS
+        ,VIEWS
+        ,USER_ID
+        )
+        VALUES (
+         #{type}
+        ,#{createTime}
+        ,#{subject}
+        ,#{contents}
+        ,#{views}
+        ,#{userId}
+        )
+    </insert>
+
+
+    <select id="selectBoard" parameterType="Long" resultMap="boardResultMap">
+        SELECT
+         ID
+        ,TYPE
+        ,CREATE_TIME
+        ,UPDATE_TIME
+        ,SUBJECT
+        ,CONTENTS
+        ,VIEWS
+        ,USER_ID
+        FROM BOARD
+        WHERE ID = #{id}
+    </select>
+
+    <update id="updateBoard" parameterType="Board">
+        UPDATE BOARD
+        <set>
+        <if test='type != null and type != ""'>
+        TYPE = #{type},
+        </if>
+        <if test='updateTime != null and updateTime != ""'>
+        UPDATE_TIME = #{updateTime},
+        </if>
+        <if test='subject != null and subject != ""'>
+        SUBJECT = #{subject},
+        </if>
+        <if test='contents != null and contents != ""'>
+        CONTENTS = #{contents},
+        </if>
+        <if test='views != null and views != ""'>
+        VIEWS = #{views},
+        </if>
+        <if test='userId != null and userId != ""'>
+        USER_ID = #{userId},
+        </if>
+        </set>
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="deleteBoard" parameterType="Long">
+        DELETE
+        FROM BOARD
+        WHERE ID = #{id}
+    </delete>
+
+
+
+</mapper>
