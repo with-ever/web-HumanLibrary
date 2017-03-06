@@ -22,7 +22,7 @@ public class ServiceDayMapperTest extends WitheverDbUnitTestConfig {
 	@Test
 	public void selectServiceDay() throws Exception{
 		ServiceDay serviceDay = this.serviceDayMapper.selectServiceDay(1L);
-		assertEquals("MON",ㅋserviceDay.getDay());
+		assertEquals("MON",serviceDay.getDay());
 	}
 
 	@Test
