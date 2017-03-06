@@ -101,9 +101,9 @@ CREATE TABLE `HUMANBOOK` (
   `service_time` varchar(45) DEFAULT NULL,
   `upper_category` varchar(45) NOT NULL,
   `sub_category` varchar(45) NOT NULL,
+  `state` varchar(45) DEFAULT NULL,
   `create_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
-  `status` varchar(45) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 

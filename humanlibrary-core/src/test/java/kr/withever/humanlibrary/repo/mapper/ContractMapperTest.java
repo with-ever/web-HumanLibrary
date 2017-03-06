@@ -30,7 +30,7 @@ public class ContractMapperTest extends WitheverDbUnitTestConfig{
         Contract contract = new Contract();
         contract.setUser(new User(2L));
         contract.setHumanbook(new Humanbook(2L));
-        contract.setState(ContractState.WAITING);
+        contract.setState(ContractState.WAITING.name());
         this.contractMapper.insertContract(contract);
 
         Contract insertedContract = this.contractMapper.selectContract(2L);
@@ -47,7 +47,7 @@ public class ContractMapperTest extends WitheverDbUnitTestConfig{
     @Test
     public void updateContract() throws Exception {
         Contract contract = this.contractMapper.selectContract(1L);
-        contract.setState(ContractState.ACCEPT);
+        contract.setState(ContractState.ACCEPT.name());
         contract.setContractTime(new ContractTime(3L));
 
         this.contractMapper.updateContract(contract);

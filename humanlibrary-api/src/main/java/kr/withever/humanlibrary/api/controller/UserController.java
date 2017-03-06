@@ -22,13 +22,11 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-
     @RequestMapping(method = RequestMethod.GET)
     public List<User> retrieveUserList() {
         List<User> userList = new ArrayList<User>();
         return userList;
     }
-
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     public User retrieveUser(

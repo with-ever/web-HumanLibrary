@@ -21,12 +21,9 @@ public class GlobalControllerExceptionHandler {
     @Autowired
     private MessageSource messageSource;
 
-    @ExceptionHandler ({ HumanLibraryException.class })
+    @ExceptionHandler({HumanLibraryException.class})
     public ResponseEntity<HumanLibraryErrorMessage> makeApiException(HumanLibraryException exception) {
-        // @TODO Using MessageResource and set message
-
         String message = messageSource.getMessage(exception.getCode().name(), exception.getMessages().toArray(), Locale.KOREA);
-
         HumanLibraryErrorMessage errorMessage = new HumanLibraryErrorMessage(exception.getCode(), message);
         ResponseEntity<HumanLibraryErrorMessage> responseEntity = new ResponseEntity<HumanLibraryErrorMessage>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
         return responseEntity;

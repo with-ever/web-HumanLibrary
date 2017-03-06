@@ -17,7 +17,7 @@ public class Contract {
 
     private Humanbook humanbook;
 
-    private ContractState state;
+    private String state;
 
     private ContractTime contractTime;
 
@@ -32,7 +32,7 @@ public class Contract {
         this.updateTime = System.currentTimeMillis() / 1000;
     }
 
-    public Contract(User user, Humanbook humanbook, ContractState state, Long createTime, Long updateTime) {
+    public Contract(User user, Humanbook humanbook, String state, Long createTime, Long updateTime) {
         this.user = user;
         this.humanbook = humanbook;
         this.state = state;
@@ -64,11 +64,11 @@ public class Contract {
         this.humanbook = humanbook;
     }
 
-    public ContractState getState() {
+    public String getState() {
         return state;
     }
 
-    public void setState(ContractState state) {
+    public void setState(String state) {
         this.state = state;
     }
 

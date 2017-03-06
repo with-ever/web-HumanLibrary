@@ -1,20 +1,26 @@
 package kr.withever.humanlibrary.domain.humanbook;
 
+import kr.withever.humanlibrary.domain.common.humanbook.HumanbookState;
+import kr.withever.humanlibrary.domain.common.humanbook.HumanbookTime;
+
 import java.io.Serializable;
 import java.util.Set;
 
 public class Humanbook implements Serializable{
+
+	private static final long serialVersionUID = -5705360965002860670L;
+
 	private Long id; // humanbook primary key
 	private String userId; // login id
 	private String title;
 	private String mainCareer;
 	private Set<String> serviceDay;
 	private String serviceTime;
-	private String upperCategory;
-	private String subCategory;
+	private Category upperCategory;
+	private SubCategory subCategory;
+	private String state;
 	private Long createTime;
 	private Long updateTime;
-	private String status;
 	
 	public Humanbook(){
 	}
@@ -31,20 +37,20 @@ public class Humanbook implements Serializable{
 		this.updateTime = System.currentTimeMillis() / 1000;
 	}
 
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
 	public Long getId() {
 		return id;
 	}
 
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
 
 	public String getTitle() {
@@ -63,12 +69,44 @@ public class Humanbook implements Serializable{
 		this.mainCareer = mainCareer;
 	}
 
-	public String getStatus() {
-		return status;
+	public Set<String> getServiceDay() {
+		return serviceDay;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setServiceDay(Set<String> serviceDay) {
+		this.serviceDay = serviceDay;
+	}
+
+	public String getServiceTime() {
+		return serviceTime;
+	}
+
+	public void setServiceTime(String serviceTime) {
+		this.serviceTime = serviceTime;
+	}
+
+	public Category getUpperCategory() {
+		return upperCategory;
+	}
+
+	public void setUpperCategory(Category upperCategory) {
+		this.upperCategory = upperCategory;
+	}
+
+	public SubCategory getSubCategory() {
+		return subCategory;
+	}
+
+	public void setSubCategory(SubCategory subCategory) {
+		this.subCategory = subCategory;
+	}
+
+	public String getState() {
+		return state;
+	}
+
+	public void setState(String state) {
+		this.state = state;
 	}
 
 	public Long getCreateTime() {
@@ -86,37 +124,4 @@ public class Humanbook implements Serializable{
 	public void setUpdateTime(Long updateTime) {
 		this.updateTime = updateTime;
 	}
-
-	public String getServiceTime() {
-		return serviceTime;
-	}
-
-	public void setServiceTime(String serviceTime) {
-		this.serviceTime = serviceTime;
-	}
-
-	public String getUpperCategory() {
-		return upperCategory;
-	}
-
-	public void setUpperCategory(String upperCategory) {
-		this.upperCategory = upperCategory;
-	}
-
-	public String getSubCategory() {
-		return subCategory;
-	}
-
-	public void setSubCategory(String subCategory) {
-		this.subCategory = subCategory;
-	}
-
-	public Set<String> getServiceDay() {
-		return serviceDay;
-	}
-
-	public void setServiceDay(Set<String> serviceDay) {
-		this.serviceDay = serviceDay;
-	}
-
 }
