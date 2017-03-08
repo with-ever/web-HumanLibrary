@@ -14,6 +14,11 @@ public class HumanLibraryException extends RuntimeException {
 
     private List<String> messages;
 
+    public HumanLibraryException(Exception e, ExceptionType type) {
+        super(e);
+        this.code = type;
+    }
+
     public HumanLibraryException(ExceptionType type) {
         this.code = type;
     }

@@ -170,4 +170,9 @@ public class User implements Serializable {
     public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
     }
+
+    public void setTimeInfo() {
+        this.createTime = System.currentTimeMillis() / 1000;
+        this.updateTime = System.currentTimeMillis() / 1000;
+    }
 }
