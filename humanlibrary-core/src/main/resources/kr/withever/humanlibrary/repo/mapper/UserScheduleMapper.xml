@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="kr.withever.humanlibrary.repo.mapper.UserScheduleMapper">
+    <resultMap id="userScheduleResultMap" type="UserSchedule">
+        <id property="id" column="ID"/>
+        <result property="date" column="DATE"/>
+        <result property="time" column="TIME"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
+        <association property="user" resultMap="userResultMap"/>
+        <association property="contract" resultMap="contractResultMap"/>
+    </resultMap>
+
+    <resultMap id="userResultMap" type="User">
+        <id property="userId" column="USER_ID"/>
+    </resultMap>
+
+    <resultMap id="contractResultMap" type="Contract">
+        <id property="id" column="CONTRACT_ID"/>
+    </resultMap>
+
+    <insert id="insertUserSchedule" parameterType="UserSchedule" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+        INSERT INTO USER_SCHEDULES (
+            USER_ID
+            ,CONTRACT_ID
+            ,DATE
+            ,TIME
+            ,CREATE_TIME
+            ,UPDATE_TIME
+        )
+        VALUES (
+            #{user.userId}
+            ,#{contract.id}
+            ,#{date}
+            ,#{time}
+            ,#{createTime}
+            ,#{updateTime}
+        )
+    </insert>
+
+
+    <select id="selectUserSchedule" parameterType="Long" resultMap="userScheduleResultMap">
+        SELECT
+            ID
+            ,USER_ID
+            ,CONTRACT_ID
+            ,DATE
+            ,TIME
+            ,CREATE_TIME
+            ,UPDATE_TIME
+        FROM USER_SCHEDULES
+        WHERE ID = #{id}
+    </select>
+
+    <select id="selectUserSchedules" parameterType="Long" resultMap="userScheduleResultMap">
+        SELECT
+            ID
+            ,USER_ID
+            ,CONTRACT_ID
+            ,DATE
+            ,TIME
+            ,CREATE_TIME
+            ,UPDATE_TIME
+        FROM USER_SCHEDULES
+        WHERE USER_ID = #{userId}
+    </select>
+
+    <update id="updateUserSchedule" parameterType="UserSchedule">
+        UPDATE USER_SCHEDULES
+        SET
+            DATE = #{date}
+            ,TIME = #{time}
+            ,UPDATE_TIME = #{updateTime}
+        WHERE ID = #{id}
+    </update>
+
+    <delete id="deleteUserSchedule" parameterType="Long">
+        DELETE
+        FROM USER_SCHEDULES
+        WHERE ID = #{id}
+    </delete>
+
+</mapper>

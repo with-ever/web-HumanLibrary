@@ -40,10 +40,14 @@ public class User implements Serializable {
     private Long updateTime;
 
     public User() {
+        this.createTime = System.currentTimeMillis() / 1000;
+        this.updateTime = System.currentTimeMillis() / 1000;
     }
 
     public User(Long userId) {
         this.userId = userId;
+        this.createTime = System.currentTimeMillis() / 1000;
+        this.updateTime = System.currentTimeMillis() / 1000;
     }
 
     public User(String loginId, String name, String email, String password) {

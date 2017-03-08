@@ -32,6 +32,12 @@ public class Contract {
         this.updateTime = System.currentTimeMillis() / 1000;
     }
 
+    public Contract(Long contractId) {
+        this.id = contractId;
+        this.createTime = System.currentTimeMillis() / 1000;
+        this.updateTime = System.currentTimeMillis() / 1000;
+    }
+
     public Contract(User user, Humanbook humanbook, String state, Long createTime, Long updateTime) {
         this.user = user;
         this.humanbook = humanbook;

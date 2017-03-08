@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <USER_SCHEDULES
+            ID = "1"
+            USER_ID = "2"
+            CONTRACT_ID = "2"
+            DATE = "20170308"
+            TIME = "12"
+            CREATE_TIME = "1234567890"
+            UPDATE_TIME = "1234567890"
+    />
+    <USER_SCHEDULES
+            ID = "2"
+            USER_ID = "2"
+            CONTRACT_ID = "3"
+            DATE = "20170308"
+            TIME = "14"
+            CREATE_TIME = "1234567890"
+            UPDATE_TIME = "1234567890"
+    />
+    <USER_SCHEDULES
+            ID = "3"
+            USER_ID = "2"
+            CONTRACT_ID = "4"
+            DATE = "20170308"
+            TIME = "20"
+            CREATE_TIME = "1234567890"
+            UPDATE_TIME = "1234567890"
+    />
+</dataset>
