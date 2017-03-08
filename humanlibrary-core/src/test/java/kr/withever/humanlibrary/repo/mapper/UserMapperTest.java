@@ -5,8 +5,11 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import kr.withever.humanlibrary.config.WitheverDbUnitTestConfig;
 import kr.withever.humanlibrary.domain.user.User;
+import kr.withever.humanlibrary.domain.user.UserSearch;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
@@ -27,7 +30,7 @@ public class UserMapperTest extends WitheverDbUnitTestConfig {
         User user = new User("yjkim", "김영진", "jin@gmail.com", "123456");
         this.userMapper.insertUser(user);
 
-        User insertedUser = this.userMapper.selectUser(2L);
+        User insertedUser = this.userMapper.selectUser(3L);
         assertEquals(user.getLoginId(), insertedUser.getLoginId());
         assertEquals(user.getName(), insertedUser.getName());
         assertEquals(user.getEmail(), insertedUser.getEmail());
@@ -63,6 +66,26 @@ public class UserMapperTest extends WitheverDbUnitTestConfig {
     public void selectUserByLoginId() throws Exception {
         User user = this.userMapper.selectUserByLoginId("jin");
         assertEquals("jin", user.getLoginId());
+    }
+
+    @Test
+    public void selectUsersBySearch() throws Exception {
+        UserSearch search = new UserSearch();
+        search.setName("youngjin");
+        search.setEmail("youngjin");
+        List<User> users = this.userMapper.selectUsersBySearch(search);
+
+        assertEquals(1, users.size());
+    }
+
+    @Test
+    public void selectUsersTotalCountBySearch() throws Exception {
+        UserSearch search = new UserSearch();
+        search.setName("youngjin");
+        search.setEmail("youngjin");
+        int count = this.userMapper.selectUsersTotalCountBySearch(search);
+
+        assertEquals(1, count);
     }
 
 }

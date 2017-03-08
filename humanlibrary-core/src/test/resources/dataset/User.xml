@@ -15,4 +15,19 @@
             CREATE_TIME = "111111"
             UPDATE_TIME = "222222"
     />
+    <USERS
+            USER_ID = "2"
+            LOGIN_ID = "jin2"
+            NAME = "youngjinkim"
+            EMAIL = "jin@gmail.com"
+            PASSWORD = "1234"
+            PHONE_NO = "1234"
+            M_PHONE_NO = "1234"
+            BIRTH = "1234"
+            ZIP_CODE = "1234"
+            ADDRESS = "1234"
+            DETAIL_ADDRESS = "aaa"
+            CREATE_TIME = "111111"
+            UPDATE_TIME = "222222"
+    />
 </dataset>
