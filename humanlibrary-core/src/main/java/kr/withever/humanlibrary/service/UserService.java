@@ -2,6 +2,7 @@ package kr.withever.humanlibrary.service;
 
 import kr.withever.humanlibrary.domain.common.exception.ExceptionType;
 import kr.withever.humanlibrary.domain.user.User;
+import kr.withever.humanlibrary.domain.user.UserSearch;
 import kr.withever.humanlibrary.exception.HumanLibraryException;
 
 /**
@@ -17,5 +18,7 @@ public interface UserService {
     void removeUser(Long userId);
 
     User retrieveUserByLoginId(String loginId);
+
+    UserSearch retrieveUserBySearch(UserSearch search);
 
 }

@@ -2,6 +2,7 @@ package kr.withever.humanlibrary.api.controller;
 
 import io.swagger.annotations.ApiParam;
 import kr.withever.humanlibrary.domain.user.User;
+import kr.withever.humanlibrary.domain.user.UserSearch;
 import kr.withever.humanlibrary.service.UserService;
 import kr.withever.humanlibrary.util.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,21 +33,18 @@ public class UserController {
         return this.userService.createUser(user);
     }
 
-    @RequestMapping(method = RequestMethod.GET)
-    public List<User> retrieveUserList() {
-        List<User> userList = new ArrayList<User>();
-        return userList;
-    }
-
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     public User retrieveUser(
             @PathVariable(value = "userId") Long userId
     ) {
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        System.out.println(encoder.encode("1234"));
         return this.userService.retrieveUser(userId);
     }
 
-
+    @RequestMapping(method = RequestMethod.GET)
+    public UserSearch retrieveUserList(
+            UserSearch search
+    ) {
+        return this.userService.retrieveUserBySearch(search);
+    }
 
 }

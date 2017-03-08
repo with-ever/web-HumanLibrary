@@ -2,12 +2,14 @@ package kr.withever.humanlibrary.repo;
 
 import kr.withever.humanlibrary.domain.common.exception.ExceptionType;
 import kr.withever.humanlibrary.domain.user.User;
+import kr.withever.humanlibrary.domain.user.UserSearch;
 import kr.withever.humanlibrary.exception.HumanLibraryException;
 import kr.withever.humanlibrary.repo.mapper.UserMapper;
 import kr.withever.humanlibrary.repo.mapper.UserRoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -64,6 +66,16 @@ public class UserRepository {
             user.setRoles(roleList);
         }
         return user;
+    }
+
+    public UserSearch retrieveUserBySearch(UserSearch search) {
+        List<User> users = this.userMapper.selectUsersBySearch(search);
+        search.setResults(users);
+        if (users.size() != 0) {
+            int totalCount = this.userMapper.selectUsersTotalCountBySearch(search);
+            search.setTotalCount(totalCount);
+        }
+        return search;
     }
 
 }
