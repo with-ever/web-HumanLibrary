@@ -27,9 +27,8 @@
         ,#{boardId}
         )
     </insert>
-
-
-    <select id="selectBoardFile" parameterType="Long" resultMap="boardFileResultMap">
+    
+      <select id="selectBoardFile" parameterType="Long" resultMap="boardFileResultMap">
         SELECT
          ID
         ,FILE_NAME
@@ -37,7 +36,7 @@
         ,SUFFIX
         ,BOARD_ID
         FROM BOARD_FILE
-        WHERE ID = #{id}
+        WHERE BOARD_ID = #{boardId}
     </select>
 
     <update id="updateBoardFile" parameterType="BoardFile">
@@ -56,13 +55,13 @@
         BOARD_ID = #{boardId},
         </if>
         </set>
-     	WHERE ID = #{id}
+     	WHERE BOARD_ID = #{boardId}
     </update>
 
     <delete id="deleteBoardFile" parameterType="Long">
         DELETE
         FROM BOARD_FILE
-        WHERE ID = #{id}
+        WHERE BOARD_ID = #{boardId}
     </delete>
 
 

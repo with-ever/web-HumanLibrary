@@ -1,6 +1,10 @@
 package kr.withever.humanlibrary.repo.mapper;
 
-import kr.withever.humanlibrary.domain.Board;
+import kr.withever.humanlibrary.domain.board.Board;
+import kr.withever.humanlibrary.domain.board.BoardSearch;
+
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 
 /**
@@ -15,5 +19,9 @@ public interface BoardMapper {
     int updateBoard(Board board);
 
     int deleteBoard(Long id);
+    
+    List<Board> selectBoardBySearch(BoardSearch search);
+    
+    int selectBoardTotalCountBySearch(BoardSearch search);
 
 }

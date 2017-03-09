@@ -1,10 +1,8 @@
-package kr.withever.humanlibrary.domain;
+package kr.withever.humanlibrary.domain.board;
 
-
-import java.util.List;
 
 /**
- * Created by hyunSeungLee on 2017. 2. 28..
+ * Created by hyunseunglee on 2017. 2. 28..
  */
 public class Board {
 
@@ -20,11 +18,13 @@ public class Board {
     
     private int views;
 
-    private List<BoardFile> files;
-
 	private Long createTime;
 
 	private Long updateTime;
+	
+	private BoardFile boardFile;
+	
+	private String name;
 
  
     public Board() {
@@ -78,14 +78,6 @@ public class Board {
 		this.views = views;
 	}
 
-	public List<BoardFile> getFiles() {
-		return files;
-	}
-
-	public void setFiles(List<BoardFile> files) {
-		this.files = files;
-	}
-
 	public Long getCreateTime() {
 		return createTime;
 	}
@@ -101,4 +93,21 @@ public class Board {
 	public void setUpdateTime(Long updateTime) {
 		this.updateTime = updateTime;
 	}
+
+	public BoardFile getBoardFile() {
+		return boardFile;
+	}
+
+	public void setBoardFile(BoardFile boardFile) {
+		this.boardFile = boardFile;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+	
 }

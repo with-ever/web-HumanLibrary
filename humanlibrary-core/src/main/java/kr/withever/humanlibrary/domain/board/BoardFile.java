@@ -1,8 +1,8 @@
-package kr.withever.humanlibrary.domain;
+package kr.withever.humanlibrary.domain.board;
 
 
 /**
- * Created by hyunSeungLee on 2017. 2. 28..
+ * Created by hyunseunglee on 2017. 2. 28..
  */
 public class BoardFile  {
 

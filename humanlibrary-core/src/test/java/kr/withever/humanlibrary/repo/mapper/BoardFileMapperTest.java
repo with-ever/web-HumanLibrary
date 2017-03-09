@@ -4,7 +4,7 @@ import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import kr.withever.humanlibrary.config.WitheverDbUnitTestConfig;
-import kr.withever.humanlibrary.domain.BoardFile;
+import kr.withever.humanlibrary.domain.board.BoardFile;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -30,7 +30,7 @@ public class BoardFileMapperTest extends WitheverDbUnitTestConfig {
 	@Test
 	public void updateBoardFile() throws Exception {
 		BoardFile boardFile = new BoardFile();
-		boardFile.setId(1L);
+		boardFile.setBoardId(1L);;
 		boardFile.setFileName("update_name");;
 		int update = this.boardFileMapper.updateBoardFile(boardFile);
 		assertEquals(1, update);

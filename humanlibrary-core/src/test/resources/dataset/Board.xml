@@ -10,4 +10,14 @@
             VIEWS = "15"
             USER_ID = "1"
     />
+    <BOARD
+            ID = "2"
+            TYPE = "NT"
+            CREATE_TIME = "111111"
+            UPDATE_TIME = "222222"
+            SUBJECT = "TEST SUBJECT2"
+            CONTENTS = "TEST CONTENTS2"
+            VIEWS = "16"
+            USER_ID = "1"
+    />
 </dataset>

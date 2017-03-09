@@ -14,6 +14,7 @@
         <result property="contents" column="CONTENTS"/>
         <result property="views" column="VIEWS"/>
         <result property="userId" column="USER_ID"/>
+        <result property="name" column="NAME"/>
     </resultMap>
 
     <insert id="insertBoard" parameterType="Board" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
@@ -38,16 +39,18 @@
 
     <select id="selectBoard" parameterType="Long" resultMap="boardResultMap">
         SELECT
-         ID
-        ,TYPE
-        ,CREATE_TIME
-        ,UPDATE_TIME
-        ,SUBJECT
-        ,CONTENTS
-        ,VIEWS
-        ,USER_ID
-        FROM BOARD
-        WHERE ID = #{id}
+         B.ID
+        ,B.TYPE
+        ,B.CREATE_TIME
+        ,B.UPDATE_TIME
+        ,B.SUBJECT
+        ,B.CONTENTS
+        ,B.VIEWS
+        ,B.USER_ID
+        ,U.NAME
+        FROM BOARD B,USERS U
+        WHERE B.USER_ID = U.USER_ID
+          AND ID = #{id}
     </select>
 
     <update id="updateBoard" parameterType="Board">
@@ -81,6 +84,51 @@
         WHERE ID = #{id}
     </delete>
 
+<select id="selectBoardBySearch" parameterType="BoardSearch" resultMap="boardResultMap">
+        SELECT
+         B.ID
+        ,B.TYPE
+        ,B.CREATE_TIME
+        ,B.UPDATE_TIME
+        ,B.SUBJECT
+        ,B.CONTENTS
+        ,B.VIEWS
+        ,B.USER_ID
+        ,U.NAME
+        FROM BOARD B,USERS U
+        WHERE B.USER_ID = U.USER_ID
+            <if test="name != null and name != ''">
+                AND U.NAME LIKE CONCAT('%', #{name}, '%')
+            </if>
+            <if test="type != null and type != ''">
+                AND B.TYPE LIKE CONCAT('%', #{type}, '%')
+            </if>
+            <if test="subject != null and subject != ''">
+                AND B.SUBJECT LIKE CONCAT('%', #{subject}, '%')
+            </if>
+            <if test="contents != null and contents != ''">
+                AND B.CONTENTS LIKE CONCAT('%', #{contents}, '%')
+            </if>
+        LIMIT #{offset}, #{limit}
+    </select>
 
+    <select id="selectBoardTotalCountBySearch" parameterType="BoardSearch" resultType="int">
+        SELECT
+            COUNT(1)
+        FROM BOARD B,USERS U
+        WHERE B.USER_ID = U.USER_ID
+       	    <if test="name != null and name != ''">
+                AND U.NAME LIKE CONCAT('%', #{name}, '%')
+            </if>
+            <if test="type != null and type != ''">
+                AND B.TYPE LIKE CONCAT('%', #{type}, '%')
+            </if>
+            <if test="subject != null and subject != ''">
+                AND B.SUBJECT LIKE CONCAT('%', #{subject}, '%')
+            </if>
+            <if test="contents != null and contents != ''">
+                AND B.CONTENTS LIKE CONCAT('%', #{contents}, '%')
+            </if>
+    </select>
 
 </mapper>
