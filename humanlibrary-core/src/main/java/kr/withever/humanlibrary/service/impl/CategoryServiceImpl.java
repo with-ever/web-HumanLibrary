@@ -1,5 +1,6 @@
 package kr.withever.humanlibrary.service.impl;
 
+import kr.withever.humanlibrary.exception.HumanLibraryNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import kr.withever.humanlibrary.domain.common.exception.ExceptionType;
@@ -16,14 +17,14 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public Category retrieveCategory(Long id) {
 		Category category = this.categoryRepository.retrieveCategory(id);
-		if(category == null) throw new HumanLibraryException(ExceptionType.US10002, String.valueOf(id), "success");
+		if(category == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(id), "success");
 		return category;
 	}
 
 	@Override
 	public Category retrieveCategoryByCategoryName(String categoryName) {
 		Category category = this.categoryRepository.retrieveCategoryByCategoryName(categoryName);
-		if(category == null) throw new HumanLibraryException(ExceptionType.US10002, String.valueOf(categoryName), "success");
+		if(category == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(categoryName), "success");
 		return category;
 	}
 

@@ -26,6 +26,7 @@ public class BoardServiceImpl implements BoardService{
     public Board retrieveBoard(Long id) {
        return this.boardRepository.retrieveBoard(id);
     }
+
     @Override
     public void createBoard(Board board) {
     	this.boardRepository.createBoard(board);

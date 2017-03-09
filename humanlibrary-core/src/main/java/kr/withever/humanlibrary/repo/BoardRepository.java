@@ -2,6 +2,7 @@ package kr.withever.humanlibrary.repo;
 
 import java.util.List;
 
+import kr.withever.humanlibrary.exception.HumanLibraryRuntimeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import kr.withever.humanlibrary.domain.board.Board;
@@ -45,7 +46,7 @@ public class BoardRepository {
 			}
 		}catch (Exception e) {
             // @TODO exception 코드 정리 필요.
-            throw new HumanLibraryException(e, ExceptionType.US10000);
+			throw new HumanLibraryRuntimeException(e, ExceptionType.US10000);
         }
 	}
 	
@@ -58,7 +59,7 @@ public class BoardRepository {
 			}
 		} catch (Exception e) {
             // @TODO exception 코드 정리 필요.
-            throw new HumanLibraryException(e, ExceptionType.US10000);
+			throw new HumanLibraryRuntimeException(e, ExceptionType.US10000);
         }
 	}
 
@@ -68,7 +69,7 @@ public class BoardRepository {
 			this.boardFileMapper.deleteBoardFile(id);
 		}catch (Exception e) {
             // @TODO exception 코드 정리 필요.
-            throw new HumanLibraryException(e, ExceptionType.US10000);
+			throw new HumanLibraryRuntimeException(e, ExceptionType.US10000);
         }
 	}
 	

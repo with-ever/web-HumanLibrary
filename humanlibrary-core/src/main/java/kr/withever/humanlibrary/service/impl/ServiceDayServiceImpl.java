@@ -1,5 +1,6 @@
 package kr.withever.humanlibrary.service.impl;
 
+import kr.withever.humanlibrary.exception.HumanLibraryNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,14 +19,14 @@ public class ServiceDayServiceImpl implements ServiceDayService {
 	@Override
 	public ServiceDay retrieveServiceDay(Long id) {
 		ServiceDay serviceDay = this.serviceDayRepository.retrieveServiceDay(id);
-		if(serviceDay == null) throw new HumanLibraryException(ExceptionType.US10002, String.valueOf(id), "success");
+		if(serviceDay == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(id), "success");
 		return serviceDay;
 	}
 
 	@Override
 	public ServiceDay retrieveServiceDayByDay(String day) {
 		ServiceDay serviceDay = this.serviceDayRepository.retrieveServiceDayByDay(day);
-		if(serviceDay == null) throw new HumanLibraryException(ExceptionType.US10002, String.valueOf(day), "success");
+		if(serviceDay == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(day), "success");
 		return serviceDay;
 	}
 

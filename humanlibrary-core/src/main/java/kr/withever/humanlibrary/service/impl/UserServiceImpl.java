@@ -6,6 +6,7 @@ import kr.withever.humanlibrary.domain.user.User;
 import kr.withever.humanlibrary.domain.common.exception.ExceptionType;
 import kr.withever.humanlibrary.domain.user.UserSearch;
 import kr.withever.humanlibrary.exception.HumanLibraryException;
+import kr.withever.humanlibrary.exception.HumanLibraryNotFoundException;
 import kr.withever.humanlibrary.repo.UserRepository;
 import kr.withever.humanlibrary.repo.UserRoleRepository;
 import kr.withever.humanlibrary.service.UserService;
@@ -40,7 +41,7 @@ public class UserServiceImpl implements UserService{
     public User retrieveUser(Long userId) {
         User user = this.userRepository.retrieveUser(userId);
         // @TODO exception 코드 정리 필요.
-        if (user == null) throw new HumanLibraryException(ExceptionType.US10002, String.valueOf(userId), "success");
+        if (user == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(userId), "success");
         return user;
     }
 
@@ -58,7 +59,7 @@ public class UserServiceImpl implements UserService{
     public User retrieveUserByLoginId(String loginId) {
         User user = this.userRepository.retrieveUserByLoginId(loginId);
         // @TODO exception 코드 정리 필요.
-        if (user == null) throw new HumanLibraryException(ExceptionType.US10002, String.valueOf(loginId), "success");
+        if (user == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(loginId), "success");
         return user;
     }
 
