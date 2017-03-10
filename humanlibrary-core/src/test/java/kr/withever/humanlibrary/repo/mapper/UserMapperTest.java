@@ -13,6 +13,7 @@ import java.util.List;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * Created by youngjinkim on 2017. 2. 10..
@@ -86,6 +87,19 @@ public class UserMapperTest extends WitheverDbUnitTestConfig {
         int count = this.userMapper.selectUsersTotalCountBySearch(search);
 
         assertEquals(1, count);
+    }
+
+    @Test
+    public void selectUserByIdWithPassword() throws Exception {
+        boolean isExsited = this.userMapper.selectUserByIdWithPassword(2L, "1234");
+        assertTrue(isExsited);
+    }
+
+    @Test
+    public void updateUserPassword() throws Exception {
+        this.userMapper.updateUserPassword(2L, "0000");
+        boolean isExsited = this.userMapper.selectUserByIdWithPassword(2L, "0000");
+        assertTrue(isExsited);
     }
 
 }

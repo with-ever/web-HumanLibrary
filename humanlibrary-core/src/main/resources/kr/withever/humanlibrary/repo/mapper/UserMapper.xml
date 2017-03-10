@@ -151,4 +151,18 @@
         </if>
     </select>
 
+    <select id="selectUserByIdWithPassword" resultType="boolean">
+        SELECT
+          COUNT(1)
+        FROM USERS
+        WHERE USER_ID = #{userId} AND PASSWORD = #{password}
+    </select>
+
+    <update id="updateUserPassword">
+        UPDATE USERS
+        SET
+          PASSWORD = #{password}
+        WHERE USER_ID = #{userId}
+    </update>
+
 </mapper>

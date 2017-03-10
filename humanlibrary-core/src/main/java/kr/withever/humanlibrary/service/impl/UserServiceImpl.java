@@ -7,6 +7,7 @@ import kr.withever.humanlibrary.domain.common.exception.ExceptionType;
 import kr.withever.humanlibrary.domain.user.UserSearch;
 import kr.withever.humanlibrary.exception.HumanLibraryException;
 import kr.withever.humanlibrary.exception.HumanLibraryNotFoundException;
+import kr.withever.humanlibrary.exception.HumanLibraryRuntimeException;
 import kr.withever.humanlibrary.repo.UserRepository;
 import kr.withever.humanlibrary.repo.UserRoleRepository;
 import kr.withever.humanlibrary.service.UserService;
@@ -68,4 +69,9 @@ public class UserServiceImpl implements UserService{
         return this.userRepository.retrieveUserBySearch(search);
     }
 
+    @Override
+    public void modifyUserPassword(Long userId, String password, String newPassword) {
+        if (!this.userRepository.verifyUserByIdWithPassword(userId, password)) throw new HumanLibraryRuntimeException(ExceptionType.US_500_003);
+        this.userRepository.modifyUserPassword(userId, newPassword);
+    }
 }

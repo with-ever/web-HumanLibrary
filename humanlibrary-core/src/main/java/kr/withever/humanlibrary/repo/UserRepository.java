@@ -80,4 +80,11 @@ public class UserRepository {
         return search;
     }
 
+    public boolean verifyUserByIdWithPassword(Long userId, String password) {
+        return this.userMapper.selectUserByIdWithPassword(userId, password);
+    }
+
+    public int modifyUserPassword(Long userId, String newPassword) {
+        return this.userMapper.updateUserPassword(userId, newPassword);
+    }
 }

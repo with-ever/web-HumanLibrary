@@ -43,8 +43,10 @@ public class UserController {
         return this.userService.retrieveUserBySearch(search);
     }
 
-    @RequestMapping(method = RequestMethod.PUT)
+    // need test. 20170310 by youngjin.
+    @RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
     public void modifyUser(
+            @PathVariable(value = "userId") Long userId,
             @RequestBody User user
     ) {
         this.userService.modifyUser(user);
@@ -56,7 +58,21 @@ public class UserController {
     ) {
         Map<String, Boolean> result = new HashMap<String, Boolean>();
         User user = this.userService.retrieveUserByLoginId(loginId);
-        if (user != null) result.put("result", true);
+        if (user != null) result.put("isExsited", true);
+        return result;
+    }
+
+    @RequestMapping(value = "/password/{userId}", method = RequestMethod.PUT)
+    public Map<String, String> changePassword(
+            @PathVariable Long userId,
+            @RequestBody Map<String, Object> requestParam
+    ) {
+        Map<String, String> result = new HashMap<String, String>();
+        String password = (String) requestParam.get("password");
+        String newPassword = (String) requestParam.get("newPassword");
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        this.userService.modifyUserPassword(userId, encoder.encode(password), encoder.encode(newPassword));
+        result.put("result", "success");
         return result;
     }
 

@@ -11,5 +11,6 @@ public enum ExceptionType {
     US_404_002,
     US_404_003,
     US_500_001,
-    US_500_002
+    US_500_002,
+    US_500_003
 }
