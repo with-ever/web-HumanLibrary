@@ -19,14 +19,16 @@ public class ServiceDayServiceImpl implements ServiceDayService {
 	@Override
 	public ServiceDay retrieveServiceDay(Long id) {
 		ServiceDay serviceDay = this.serviceDayRepository.retrieveServiceDay(id);
-		if(serviceDay == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(id), "success");
+		// @TODO error code update
+		// if(serviceDay == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(id), "success");
 		return serviceDay;
 	}
 
 	@Override
 	public ServiceDay retrieveServiceDayByDay(String day) {
 		ServiceDay serviceDay = this.serviceDayRepository.retrieveServiceDayByDay(day);
-		if(serviceDay == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(day), "success");
+		// @TODO error code update
+		// if(serviceDay == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(day), "success");
 		return serviceDay;
 	}
 

@@ -17,14 +17,16 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public Category retrieveCategory(Long id) {
 		Category category = this.categoryRepository.retrieveCategory(id);
-		if(category == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(id), "success");
+		// @TODO error code update
+		// if(category == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(id), "success");
 		return category;
 	}
 
 	@Override
 	public Category retrieveCategoryByCategoryName(String categoryName) {
 		Category category = this.categoryRepository.retrieveCategoryByCategoryName(categoryName);
-		if(category == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(categoryName), "success");
+		// @TODO error code update
+		// if(category == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(categoryName), "success");
 		return category;
 	}
 

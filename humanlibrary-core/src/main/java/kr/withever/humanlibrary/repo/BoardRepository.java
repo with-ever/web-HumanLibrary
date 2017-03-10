@@ -45,8 +45,8 @@ public class BoardRepository {
 				this.boardFileMapper.insertBoardFile(boardFile);
 			}
 		}catch (Exception e) {
-            // @TODO exception 코드 정리 필요.
-			throw new HumanLibraryRuntimeException(e, ExceptionType.US10000);
+			// @TODO error code update
+			// throw new HumanLibraryRuntimeException(e, ExceptionType.US10000);
         }
 	}
 	
@@ -58,8 +58,8 @@ public class BoardRepository {
 				this.boardFileMapper.updateBoardFile(boardFile);
 			}
 		} catch (Exception e) {
-            // @TODO exception 코드 정리 필요.
-			throw new HumanLibraryRuntimeException(e, ExceptionType.US10000);
+			// @TODO error code update
+			// throw new HumanLibraryRuntimeException(e, ExceptionType.US10000);
         }
 	}
 
@@ -68,8 +68,8 @@ public class BoardRepository {
 			this.boardMapper.deleteBoard(id);
 			this.boardFileMapper.deleteBoardFile(id);
 		}catch (Exception e) {
-            // @TODO exception 코드 정리 필요.
-			throw new HumanLibraryRuntimeException(e, ExceptionType.US10000);
+			// @TODO error code update
+			// throw new HumanLibraryRuntimeException(e, ExceptionType.US10000);
         }
 	}
 	

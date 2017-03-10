@@ -40,13 +40,14 @@ public class UserServiceImpl implements UserService{
     @Override
     public User retrieveUser(Long userId) {
         User user = this.userRepository.retrieveUser(userId);
-        // @TODO exception 코드 정리 필요.
-        if (user == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(userId), "success");
+        if (user == null) throw new HumanLibraryNotFoundException(ExceptionType.US_404_001, String.valueOf(userId));
         return user;
     }
 
     @Override
     public void modifyUser(User user) {
+        User previousUser = this.userRepository.retrieveUser(user.getUserId());
+        previousUser.setUpdatedUser(user);
         this.userRepository.modifyUser(user);
     }
 
@@ -58,8 +59,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public User retrieveUserByLoginId(String loginId) {
         User user = this.userRepository.retrieveUserByLoginId(loginId);
-        // @TODO exception 코드 정리 필요.
-        if (user == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(loginId), "success");
+        if (user == null) throw new HumanLibraryNotFoundException(ExceptionType.US_404_002, String.valueOf(loginId));
         return user;
     }
 

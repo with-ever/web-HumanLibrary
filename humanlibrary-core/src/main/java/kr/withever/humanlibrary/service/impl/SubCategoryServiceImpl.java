@@ -19,14 +19,16 @@ public class SubCategoryServiceImpl implements SubCategoryService{
 	@Override
 	public SubCategory retrieveSubCategory(Long id) {
 		SubCategory subCategory =  this.subCategoryRepository.retrieveSubCategory(id);
-		if (subCategory == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(id), "success");
+		// @TODO error code update
+		// if (subCategory == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(id), "success");
 		return subCategory;
 	}
 
 	@Override
 	public SubCategory retrieveSubCategoryByCategoryName(String categoryName) {
 		SubCategory subCategory =  this.subCategoryRepository.retrieveSubCategoryByCategoryName(categoryName);
-		if (subCategory == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(categoryName), "success");
+		// @TODO error code update
+		// if (subCategory == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(categoryName), "success");
 		return subCategory;
 	}
 

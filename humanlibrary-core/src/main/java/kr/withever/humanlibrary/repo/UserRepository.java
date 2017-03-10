@@ -45,7 +45,8 @@ public class UserRepository {
             this.userMapper.updateUser(user);
         } catch (Exception e) {
             // @TODO exception 코드 정리 필요.
-            throw new HumanLibraryRuntimeException(e, ExceptionType.US10000);
+            throw new HumanLibraryRuntimeException(e, ExceptionType.US_500_001
+            );
         }
 
     }
@@ -55,7 +56,7 @@ public class UserRepository {
             this.userMapper.deleteUser(userId);
         } catch (Exception e) {
             // @TODO exception 코드 정리 필요.
-            throw new HumanLibraryRuntimeException(e, ExceptionType.US10000);
+            throw new HumanLibraryRuntimeException(e, ExceptionType.US_500_002);
         }
 
     }

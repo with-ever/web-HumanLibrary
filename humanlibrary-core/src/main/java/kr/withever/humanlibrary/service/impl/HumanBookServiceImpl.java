@@ -19,14 +19,16 @@ public class HumanBookServiceImpl implements HumanBookService {
 	@Override
 	public Humanbook retrieveHumanbook(Long id){
 		Humanbook humanbook = this.humanbookRepository.retrieveHumanbook(id);
-		if(humanbook == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(id), "success");
+		// @TODO error code update
+		// if(humanbook == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(id), "success");
 		return humanbook;
 	}
 
 	@Override
 	public Humanbook retrieveHumanbookByUserId(String userId) {
 		Humanbook humanbook = this.humanbookRepository.retrieveHumanbookByUserId(userId);
-		if(humanbook == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(userId), "success");
+		// @TODO error code update
+		// if(humanbook == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(userId), "success");
 		return humanbook;
 	}
 	

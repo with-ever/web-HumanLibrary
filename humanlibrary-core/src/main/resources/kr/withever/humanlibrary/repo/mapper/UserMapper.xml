@@ -77,7 +77,6 @@
         SET
             NAME = #{name}
             ,EMAIL = #{email}
-            ,PASSWORD = #{password}
             ,PHONE_NO = #{phoneNo}
             ,M_PHONE_NO = #{mPhoneNo}
             ,BIRTH = #{birth}

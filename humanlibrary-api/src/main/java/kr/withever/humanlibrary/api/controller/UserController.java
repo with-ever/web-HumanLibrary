@@ -1,17 +1,13 @@
 package kr.withever.humanlibrary.api.controller;
 
-import io.swagger.annotations.ApiParam;
 import kr.withever.humanlibrary.domain.user.User;
 import kr.withever.humanlibrary.domain.user.UserSearch;
 import kr.withever.humanlibrary.service.UserService;
-import kr.withever.humanlibrary.util.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -45,6 +41,23 @@ public class UserController {
             UserSearch search
     ) {
         return this.userService.retrieveUserBySearch(search);
+    }
+
+    @RequestMapping(method = RequestMethod.PUT)
+    public void modifyUser(
+            @RequestBody User user
+    ) {
+        this.userService.modifyUser(user);
+    }
+
+    @RequestMapping(value="/verification/{loginId}", method = RequestMethod.GET)
+    public Map<String, Boolean> verifyLoginId(
+            @PathVariable(value="loginId") String loginId
+    ) {
+        Map<String, Boolean> result = new HashMap<String, Boolean>();
+        User user = this.userService.retrieveUserByLoginId(loginId);
+        if (user != null) result.put("result", true);
+        return result;
     }
 
 }

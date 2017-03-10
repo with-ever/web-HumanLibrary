@@ -33,7 +33,7 @@ public class GlobalControllerExceptionHandler {
     }
 
     // @TODO Not Found Exception을 따로 두는데 추가되어야 할 코드라는것이 필요할까?
-    @ExceptionHandler ( { HumanLibraryNotFoundException.class })
+    @ExceptionHandler({HumanLibraryNotFoundException.class})
     public ResponseEntity<HumanLibraryErrorMessage> makeNotFoundApiException(HumanLibraryNotFoundException exception) {
         String message = messageSource.getMessage(exception.getCode().name(), exception.getMessages().toArray(), Locale.KOREA);
         HumanLibraryErrorMessage errorMessage = new HumanLibraryErrorMessage(exception.getCode(), message);
