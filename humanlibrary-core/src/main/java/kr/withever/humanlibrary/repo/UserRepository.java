@@ -4,6 +4,7 @@ import kr.withever.humanlibrary.domain.common.exception.ExceptionType;
 import kr.withever.humanlibrary.domain.user.User;
 import kr.withever.humanlibrary.domain.user.UserSearch;
 import kr.withever.humanlibrary.exception.HumanLibraryException;
+import kr.withever.humanlibrary.exception.HumanLibraryRuntimeException;
 import kr.withever.humanlibrary.repo.mapper.UserMapper;
 import kr.withever.humanlibrary.repo.mapper.UserRoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,7 +45,8 @@ public class UserRepository {
             this.userMapper.updateUser(user);
         } catch (Exception e) {
             // @TODO exception 코드 정리 필요.
-            throw new HumanLibraryException(e, ExceptionType.US10000);
+            throw new HumanLibraryRuntimeException(e, ExceptionType.US_500_001
+            );
         }
 
     }
@@ -54,7 +56,7 @@ public class UserRepository {
             this.userMapper.deleteUser(userId);
         } catch (Exception e) {
             // @TODO exception 코드 정리 필요.
-            throw new HumanLibraryException(e, ExceptionType.US10000);
+            throw new HumanLibraryRuntimeException(e, ExceptionType.US_500_002);
         }
 
     }
@@ -78,4 +80,11 @@ public class UserRepository {
         return search;
     }
 
+    public boolean verifyUserByIdWithPassword(Long userId, String password) {
+        return this.userMapper.selectUserByIdWithPassword(userId, password);
+    }
+
+    public int modifyUserPassword(Long userId, String newPassword) {
+        return this.userMapper.updateUserPassword(userId, newPassword);
+    }
 }
