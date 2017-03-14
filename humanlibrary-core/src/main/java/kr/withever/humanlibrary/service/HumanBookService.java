@@ -1,16 +1,23 @@
 package kr.withever.humanlibrary.service;
 
+import kr.withever.humanlibrary.domain.common.humanbook.HumanbookState;
 import kr.withever.humanlibrary.domain.humanbook.Humanbook;
+import kr.withever.humanlibrary.domain.humanbook.HumanbookSearch;
 
-public interface HumanBookService {
+public interface HumanbookService {
 	
 	Humanbook retrieveHumanbookByUserId(String userId);
 	
 	Humanbook retrieveHumanbook(Long id);
 	
-	int createHumanbook(Humanbook humanBook);
+	Long createHumanbook(Humanbook humanBook);
 	
-	int modifyHumanbook(Humanbook humanbook);
+	void modifyHumanbook(Humanbook humanbook);
 	
-	int removeHumanbook(Long id);
+	void removeHumanbook(Long id);
+	
+	void modifyHumanbookState(Long id, HumanbookState state);
+	
+	HumanbookSearch retrieveHumanbooksBySearch(HumanbookSearch search);
+	
 }

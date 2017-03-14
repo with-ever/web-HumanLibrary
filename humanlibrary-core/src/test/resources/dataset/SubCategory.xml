@@ -3,6 +3,19 @@
 	<SUB_CATEGORY 
 		ID = "1"
 		CATEGORY_NAME = "DEVELOP"
-		UPPER_CATEGORY_ID = "1"
+		PARENT_CATEGORY_ID = "1"
+	/>
+	<SUB_CATEGORY 
+		ID = "2"
+		CATEGORY_NAME = "DBA"
+		PARENT_CATEGORY_ID = "1"
+	/>
+	<CATEGORY
+		ID = "1"
+		CATEGORY_NAME = "IT"
+	/>
+	<CATEGORY
+		ID = "2"
+		CATEGORY_NAME = "COURSE"
 	/>
 </dataset>

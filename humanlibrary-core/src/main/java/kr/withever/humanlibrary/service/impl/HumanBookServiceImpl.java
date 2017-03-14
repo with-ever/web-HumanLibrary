@@ -4,13 +4,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kr.withever.humanlibrary.domain.common.exception.ExceptionType;
+import kr.withever.humanlibrary.domain.common.humanbook.HumanbookState;
 import kr.withever.humanlibrary.domain.humanbook.Humanbook;
+import kr.withever.humanlibrary.domain.humanbook.HumanbookSearch;
 import kr.withever.humanlibrary.exception.HumanLibraryException;
 import kr.withever.humanlibrary.repo.HumanbookRepository;
-import kr.withever.humanlibrary.service.HumanBookService;
+import kr.withever.humanlibrary.service.HumanbookService;
 
 @Service
-public class HumanBookServiceImpl implements HumanBookService {
+public class HumanbookServiceImpl implements HumanbookService {
 
 	@Autowired
 	private HumanbookRepository humanbookRepository;
@@ -30,17 +32,27 @@ public class HumanBookServiceImpl implements HumanBookService {
 	}
 	
 	@Override
-	public int createHumanbook(Humanbook humanbook){
+	public Long createHumanbook(Humanbook humanbook){
 		return this.humanbookRepository.createHumanbook(humanbook);
 	}
 	
 	@Override
-	public int removeHumanbook(Long id){
-		return this.humanbookRepository.removeHumanbook(id);
+	public void removeHumanbook(Long id){
+		this.humanbookRepository.removeHumanbook(id);
 	}
 	
 	@Override
-	public int modifyHumanbook(Humanbook humanbook){
-		return this.humanbookRepository.modifyHumanbook(humanbook);
+	public void modifyHumanbook(Humanbook humanbook){
+		this.humanbookRepository.modifyHumanbook(humanbook);
+	}
+
+	@Override
+	public void modifyHumanbookState(Long id, HumanbookState state) {
+		this.humanbookRepository.modifyHumanbookState(id, state);
+	}
+
+	@Override
+	public HumanbookSearch retrieveHumanbooksBySearch(HumanbookSearch search) {
+		return this.humanbookRepository.selectHumanbooksBySearch(search);
 	}
 }

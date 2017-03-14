@@ -99,7 +99,7 @@ CREATE TABLE `HUMANBOOK` (
   `title` varchar(45) DEFAULT NULL,
   `main_career` varchar(45) DEFAULT NULL,
   `service_time` varchar(45) DEFAULT NULL,
-  `upper_category` varchar(45) NOT NULL,
+  `parent_category` varchar(45) NOT NULL,
   `sub_category` varchar(45) NOT NULL,
   `state` varchar(45) DEFAULT NULL,
   `create_time` int(11) DEFAULT NULL,
@@ -130,7 +130,7 @@ CREATE TABLE `CATEGORY` (
 CREATE TABLE `SUB_CATEGORY` (
   `id` int(11) NOT NULL,
   `category_name` varchar(45) DEFAULT NULL,
-  `upper_category_id` int(11) NOT NULL,
+  `parent_category_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 

@@ -16,9 +16,9 @@ public class Humanbook implements Serializable{
 	private String mainCareer;
 	private Set<String> serviceDay;
 	private String serviceTime;
-	private Category upperCategory;
+	private Category parentCategory;
 	private SubCategory subCategory;
-	private String state;
+	private HumanbookState state;
 	private Long createTime;
 	private Long updateTime;
 	
@@ -85,12 +85,12 @@ public class Humanbook implements Serializable{
 		this.serviceTime = serviceTime;
 	}
 
-	public Category getUpperCategory() {
-		return upperCategory;
+	public Category getParentCategory() {
+		return parentCategory;
 	}
 
-	public void setUpperCategory(Category upperCategory) {
-		this.upperCategory = upperCategory;
+	public void setParentCategory(Category upperCategory) {
+		this.parentCategory = upperCategory;
 	}
 
 	public SubCategory getSubCategory() {
@@ -101,11 +101,11 @@ public class Humanbook implements Serializable{
 		this.subCategory = subCategory;
 	}
 
-	public String getState() {
+	public HumanbookState getState() {
 		return state;
 	}
 
-	public void setState(String state) {
+	public void setState(HumanbookState state) {
 		this.state = state;
 	}
 

@@ -6,19 +6,55 @@
 	<resultMap id="subCategoryResultMap" type="SubCategory">
 		<id property="id" column="ID"/>
 		<result property="categoryName" column="CATEGORY_NAME"/>
-		<result property="upperCategoryId" column="UPPER_CATEGORY_ID"/>
+		<result property="parentCategoryId" column="PARENT_CATEGORY_ID"/>
 	</resultMap>
+	
+	<select id="selectSubCategoriesBySearch" parameterType="SubCategorySearch" resultMap="subCategoryResultMap">
+		SELECT
+			ID
+			,CATEGORY_NAME
+			,PARENT_CATEGORY_ID
+		FROM
+			SUB_CATEGORY
+	</select>
+	
+	<select id="selectSubCategoriesTotalCountBySearch" parameterType="SubCategorySearch" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			SUB_CATEGORY
+	</select>
+	
+	<select id="selectParentCategoryIdByName" parameterType="String" resultType="Long">
+		SELECT
+			ID
+		FROM 
+			CATEGORY
+		WHERE
+			CATEGORY_NAME = #{categoryName}
+	</select>
+	
+	<select id="selectChildCategoriesBySearch" parameterType="SubCategorySearch" resultMap="subCategoryResultMap">
+		SELECT
+			ID
+			,CATEGORY_NAME
+			,PARENT_CATEGORY_ID
+		FROM
+			SUB_CATEGORY
+		WHERE
+			PARENT_CATEGORY_ID = #{id}
+	</select>
 	
 	<insert id="insertSubCategory" parameterType="SubCategory" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
 		INSERT INTO SUB_CATEGORY(
 			ID
 			,CATEGORY_NAME
-			,UPPER_CATEGORY_ID
+			,PARENT_CATEGORY_ID
 		)
 		VALUES(
 			#{id}
 			,#{categoryName}
-			,#{upperCategoryId}
+			,#{parentCategoryId}
 		)
 	</insert>
 	
@@ -27,7 +63,7 @@
 			SUB_CATEGORY
 		SET
 			CATEGORY_NAME = #{categoryName}
-			,UPPER_CATEGORY_ID = #{upperCategoryId}
+			,PARENT_CATEGORY_ID = #{parentCategoryId}
 		WHERE
 			ID = #{id}
 	</update>
@@ -44,7 +80,7 @@
 		SELECT 
 			ID
 			,CATEGORY_NAME
-			,UPPER_CATEGORY_ID
+			,PARENT_CATEGORY_ID
 		FROM
 			SUB_CATEGORY
 		WHERE
@@ -55,7 +91,7 @@
 		SELECT 
 			ID
 			,CATEGORY_NAME
-			,UPPER_CATEGORY_ID
+			,PARENT_CATEGORY_ID
 		FROM
 			SUB_CATEGORY
 		WHERE

@@ -1,11 +1,16 @@
 package kr.withever.humanlibrary.repo;
 
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.withever.humanlibrary.domain.common.exception.ExceptionType;
+import kr.withever.humanlibrary.domain.common.humanbook.HumanbookState;
 import kr.withever.humanlibrary.domain.humanbook.Humanbook;
+import kr.withever.humanlibrary.domain.humanbook.HumanbookSearch;
+import kr.withever.humanlibrary.exception.HumanLibraryException;
 import kr.withever.humanlibrary.repo.mapper.HumanbookMapper;
 import kr.withever.humanlibrary.repo.mapper.HumanbookServiceDayMapper;
 
@@ -36,31 +41,43 @@ public class HumanbookRepository {
 		return humanbook;
 	}
 	
-	public int createHumanbook(Humanbook humanbook){
-		try{
-			this.humanbookMapper.insertHumanbook(humanbook);
-			return 1;
-		}catch(Exception e){
-			return 0;
-		}
+	public Long createHumanbook(Humanbook humanbook){
+		this.humanbookMapper.insertHumanbook(humanbook);
+		return humanbook.getId();
 	}
 	
-	public int modifyHumanbook(Humanbook humanbook){
+	public void modifyHumanbook(Humanbook humanbook){
 		try {
 			this.humanbookMapper.updateHumanbook(humanbook);
-			return 1;
 		} catch (Exception e) {
-			return 0;
+			throw new HumanLibraryException(e, ExceptionType.US10000);
 		}
 	}
 
-	public int removeHumanbook(Long id){
+	public void removeHumanbook(Long id){
 		try{
 			this.humanbookMapper.deleteHumanbook(id);
-			return 1;
 		}catch(Exception e){
-			return 0;
+			throw new HumanLibraryException(e, ExceptionType.US10000);
 		}
+	}
+	
+	public void modifyHumanbookState(Long id, HumanbookState state){
+		try {
+			this.humanbookMapper.updateHumanbookState(id, state);
+		} catch (Exception e) {
+			throw new HumanLibraryException(e, ExceptionType.US10000);
+		}
+	}
+	
+	public HumanbookSearch selectHumanbooksBySearch(HumanbookSearch search){
+		List<Humanbook> humanbooks = this.humanbookMapper.selectHumanbooksBySearch(search);
+		search.setResults(humanbooks);
+		if(humanbooks.size() != 0){
+			int totalCount = this.humanbookMapper.selectHumanbooksTotalCountBySearch(search);
+			search.setTotalCount(totalCount);
+		}
+		return search;
 	}
 	
 }

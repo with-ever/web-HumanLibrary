@@ -3,7 +3,16 @@ package kr.withever.humanlibrary.domain.humanbook;
 public class SubCategory {
 	private Long id;
 	private String categoryName;
-	private Long upperCategoryId;
+	private Long parentCategoryId;
+	
+	public SubCategory(){
+	}
+	
+	public SubCategory(Long id, String categoryName, Long upperCategoryId){
+		this.id = id;
+		this.categoryName = categoryName;
+		this.parentCategoryId = upperCategoryId;
+	}
 	
 	public Long getId() {
 		return id;
@@ -17,10 +26,10 @@ public class SubCategory {
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
 	}
-	public Long getUpperCategoryId() {
-		return upperCategoryId;
+	public Long getParentCategoryId() {
+		return parentCategoryId;
 	}
-	public void setUpperCategoryId(Long upperCategoryId) {
-		this.upperCategoryId = upperCategoryId;
+	public void setParentCategoryId(Long upperCategoryId) {
+		this.parentCategoryId = upperCategoryId;
 	}
 }

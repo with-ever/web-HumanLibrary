@@ -1,6 +1,9 @@
 package kr.withever.humanlibrary.repo.mapper;
 
+import java.util.List;
+
 import kr.withever.humanlibrary.domain.humanbook.SubCategory;
+import kr.withever.humanlibrary.domain.humanbook.SubCategorySearch;
 
 public interface SubCategoryMapper {
 	
@@ -15,4 +18,12 @@ public interface SubCategoryMapper {
 	int deleteSubCategory(Long id);
 	
 	int countSubCategory();
+	
+	Long selectParentCategoryIdByName(String categoryName);
+	
+	List<SubCategory> selectSubCategoriesBySearch(SubCategorySearch search);
+	
+	List<SubCategory> selectChildCategoriesBySearch(SubCategorySearch search);
+	
+	int selectSubCategoriesTotalCountBySearch(SubCategorySearch search);
 }

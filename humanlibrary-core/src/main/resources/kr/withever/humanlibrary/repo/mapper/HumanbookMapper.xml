@@ -4,105 +4,147 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 <mapper namespace="kr.withever.humanlibrary.repo.mapper.HumanbookMapper">
-	<!--<resultMap id="humanbookResultMap" type="Humanbook">-->
-        <!--<id property="id" column="ID"/>-->
-        <!--<result property="userId" column="USER_ID"/>-->
-        <!--<result property="title" column="TITLE"/>-->
-        <!--<result property="mainCareer" column="MAIN_CAREER"/>-->
-        <!--<result property="status" column="STATUS"/>-->
-        <!--<result property="serviceTime" column="SERVICE_TIME"/>-->
-        <!--<result property="upperCategory" column="UPPER_CATEGORY"/>-->
-        <!--<result property="subCategory" column="SUB_CATEGORY"/>-->
-        <!--<result property="createTime" column="CREATE_TIME"/>-->
-        <!--<result property="updateTime" column="UPDATE_TIME"/>-->
-    <!--</resultMap>-->
+    <resultMap id="humanbookResultMap" type="Humanbook">
+    	<id property="id" column="ID"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="title" column="TITLE"/>
+        <result property="mainCareer" column="MAIN_CAREER"/>
+        <result property="state" column="STATE"/>
+        <result property="serviceTime" column="SERVICE_TIME"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
+        <association property="parentCategory" resultMap="categoryResultMap" />
+        <association property="subCategory" resultMap="subCategoryResultMap"/>
+    </resultMap>
+    
+    <resultMap type="Category" id="categoryResultMap">
+    	<id property="id" column="ID" />
+    </resultMap>
+    
+    <resultMap type="SubCategory" id="subCategoryResultMap">
+    	<id property="id" column="ID" />
+    </resultMap>
+    
+    <select id="selectHumanbooksBySearch" parameterType="HumanbookSearch" resultMap="humanbookResultMap">
+    	SELECT
+    		ID
+    		,USER_ID
+    		,TITLE
+    		,MAIN_CAREER
+    		,SERVICE_TIME
+    		,PARENT_CATEGORY
+    		,SUB_CATEGORY
+    		,STATE
+    		,CREATE_TIME
+    		,UPDATE_TIME
+    	FROM
+    		HUMANBOOK
+		LIMIT
+			#{offset}
+			,#{limit}
+    </select>
+    
+    <select id="selectHumanbooksTotalCountBySearch" parameterType="HumanbookSearch" resultType="int">
+    	SELECT
+    		COUNT(*)
+   		FROM
+   			HUMANBOOK
+    </select>
+    
+    <update id="updateHumanbookState" >
+    	UPDATE
+    		HUMANBOOK
+    	SET
+    		STATE = #{state}	
+    	WHERE
+    		ID = #{id}
+    </update>
+    
+    <insert id="insertHumanbook" parameterType="Humanbook" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
+    	INSERT INTO HUMANBOOK(
+    		 ID
+    		,USER_ID
+			,TITLE
+			,MAIN_CAREER
+			,SERVICE_TIME
+			,PARENT_CATEGORY
+			,SUB_CATEGORY
+			,CREATE_TIME
+			,UPDATE_TIME
+			,STATE
+    	)
+    	VALUES(
+    		#{id}
+    		,#{userId}
+    		,#{title}
+    		,#{mainCareer}
+    		,#{serviceTime}
+    		,#{parentCategory.id}
+    		,#{subCategory.id}
+    		,#{createTime}
+    		,#{updateTime}
+    		,#{state}
+    	)
+    </insert>
+    
+   	<select id="selectHumanbook" parameterType="Long" resultMap="humanbookResultMap">
+		SELECT
+			 ID
+			,USER_ID
+			,TITLE
+			,MAIN_CAREER
+			,STATE
+			,SERVICE_TIME
+			,PARENT_CATEGORY
+			,SUB_CATEGORY
+			,CREATE_TIME
+			,UPDATE_TIME
+		FROM
+			HUMANBOOK
+		WHERE
+			ID = #{id}
+	</select>
+	
+	<select id="selectHumanbookByUserId" parameterType="String" resultMap="humanbookResultMap">
+		SELECT
+			 ID
+			,USER_ID
+			,TITLE
+			,MAIN_CAREER
+			,STATE
+			,SERVICE_TIME
+			,PARENT_CATEGORY
+			,SUB_CATEGORY
+			,CREATE_TIME
+			,UPDATE_TIME
+		FROM
+			HUMANBOOK
+		WHERE
+			USER_ID = #{userId}
+	</select>
+	
+	<update id="deleteHumanbook" parameterType="Long">
+    	UPDATE
+    		HUMANBOOK
+    	SET
+    		STATE = 'CANCEL'
+    	WHERE
+    		ID = #{id}
+    </update>
 
-    <!--<insert id="insertHumanbook" parameterType="Humanbook" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">-->
-    	<!--INSERT INTO Humanbook(-->
-    		 <!--ID-->
-    		<!--,USER_ID-->
-			<!--,TITLE-->
-			<!--,MAIN_CAREER-->
-			<!--,SERVICE_TIME-->
-			<!--,UPPER_CATEGORY-->
-			<!--,SUB_CATEGORY-->
-			<!--,CREATE_TIME-->
-			<!--,UPDATE_TIME-->
-			<!--,STATUS-->
-    	<!--)-->
-    	<!--VALUES(-->
-    		<!--#{id}-->
-    		<!--,#{userId}-->
-    		<!--,#{title}-->
-    		<!--,#{mainCareer}-->
-    		<!--,#{serviceTime}-->
-    		<!--,#{upperCategory}-->
-    		<!--,#{subCategory}-->
-    		<!--,#{createTime}-->
-    		<!--,#{updateTime}-->
-    		<!--,#{status}-->
-    	<!--)-->
-    <!--</insert>-->
-
-    <!--<update id="deleteHumanbook" parameterType="Long">-->
-    	<!--UPDATE-->
-    		<!--HUMANBOOK-->
-    	<!--SET-->
-    		<!--STATUS = 'DELETED'-->
-    	<!--WHERE-->
-    		<!--ID = #{id}-->
-    <!--</update>-->
-
-    <!--<update id="updateHumanbook" parameterType="Humanbook">-->
-    	<!--UPDATE-->
-    		<!--HUMANBOOK-->
-    	<!--SET-->
-    		<!--USER_ID = #{userId}-->
-			<!--,TITLE = #{title}-->
-			<!--,MAIN_CAREER = #{mainCareer}-->
-			<!--,SERVICE_TIME = #{serviceTime}-->
-			<!--,UPPER_CATEGORY = #{upperCategory}-->
-			<!--,SUB_CATEGORY = #{subCategory}-->
-			<!--,UPDATE_TIME = #{updateTime}-->
-			<!--,STATUS = #{status}-->
-		<!--WHERE-->
-			<!--ID = #{id}-->
-    <!--</update>-->
-
-	<!--<select id="selectHumanbook" parameterType="Long" resultMap="humanbookResultMap">-->
-		<!--SELECT-->
-			 <!--ID-->
-			<!--,USER_ID-->
-			<!--,TITLE-->
-			<!--,MAIN_CAREER-->
-			<!--,STATUS-->
-			<!--,SERVICE_TIME-->
-			<!--,UPPER_CATEGORY-->
-			<!--,SUB_CATEGORY-->
-			<!--,CREATE_TIME-->
-			<!--,UPDATE_TIME-->
-		<!--FROM-->
-			<!--HUMANBOOK-->
-		<!--WHERE-->
-			<!--ID = #{id}-->
-	<!--</select>-->
-
-	<!--<select id="selectHumanbookByUserId" parameterType="String" resultMap="humanbookResultMap">-->
-		<!--SELECT-->
-			 <!--ID-->
-			<!--,USER_ID-->
-			<!--,TITLE-->
-			<!--,MAIN_CAREER-->
-			<!--,STATUS-->
-			<!--,SERVICE_TIME-->
-			<!--,UPPER_CATEGORY-->
-			<!--,SUB_CATEGORY-->
-			<!--,CREATE_TIME-->
-			<!--,UPDATE_TIME-->
-		<!--FROM-->
-			<!--HUMANBOOK-->
-		<!--WHERE-->
-			<!--USER_ID = #{userId}-->
-	<!--</select>-->
-
+    <update id="updateHumanbook" parameterType="Humanbook">
+    	UPDATE
+    		HUMANBOOK
+    	SET
+    		USER_ID = #{userId}
+			,TITLE = #{title}
+			,MAIN_CAREER = #{mainCareer}
+			,SERVICE_TIME = #{serviceTime}
+			,PARENT_CATEGORY = #{parentCategory.id}
+			,SUB_CATEGORY = #{subCategory.id}
+			,UPDATE_TIME = #{updateTime}
+			,STATE = #{state}
+		WHERE
+			ID = #{id}
+    </update>
 </mapper>
