@@ -9,7 +9,11 @@ import kr.withever.humanlibrary.domain.humanbook.CategorySearch;
 import kr.withever.humanlibrary.exception.HumanLibraryException;
 import kr.withever.humanlibrary.repo.CategoryRepository;
 import kr.withever.humanlibrary.service.CategoryService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
+@Transactional
 public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired 

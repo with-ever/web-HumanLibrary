@@ -11,8 +11,10 @@ import kr.withever.humanlibrary.domain.humanbook.HumanbookSearch;
 import kr.withever.humanlibrary.exception.HumanLibraryException;
 import kr.withever.humanlibrary.repo.HumanbookRepository;
 import kr.withever.humanlibrary.service.HumanbookService;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
+@Transactional
 public class HumanbookServiceImpl implements HumanbookService {
 
     @Autowired
