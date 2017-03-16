@@ -34,7 +34,8 @@ public class SubCategoryRepository {
 		try {
 			this.subCategoryMapper.updateSubCategory(subCategory);
 		} catch (Exception e) {
-			throw new HumanLibraryException(e, ExceptionType.US10000);
+			// @TODO exception 코드 정리 필요.
+			throw new HumanLibraryException(e, ExceptionType.US_500_001);
 		}
 	}
 	
@@ -42,7 +43,8 @@ public class SubCategoryRepository {
 		try {
 			this.subCategoryMapper.deleteSubCategory(id);
 		} catch (Exception e) {
-			throw new HumanLibraryException(e, ExceptionType.US10000);
+			// @TODO exception 코드 정리 필요.
+			throw new HumanLibraryException(e, ExceptionType.US_500_001);
 		}
 	}
 	

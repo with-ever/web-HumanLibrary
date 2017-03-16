@@ -34,7 +34,7 @@ public class CategoryRepository {
 		try {
 			this.categoryMapper.updateCategory(category);
 		} catch (Exception e) {
-			throw new HumanLibraryException(e, ExceptionType.US10000);
+			throw new HumanLibraryException(e, ExceptionType.US_500_001);
 		}
 	}
 	
@@ -42,7 +42,7 @@ public class CategoryRepository {
 		try {
 			this.categoryMapper.deleteCategory(id);
 		} catch (Exception e) {
-			throw new HumanLibraryException(e, ExceptionType.US10000);
+			throw new HumanLibraryException(e, ExceptionType.US_500_001);
 		}
 	}
 	

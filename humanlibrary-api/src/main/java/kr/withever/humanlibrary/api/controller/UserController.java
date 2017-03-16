@@ -52,6 +52,7 @@ public class UserController {
         this.userService.modifyUser(user);
     }
 
+    // need test. 20170310 by youngjin.
     @RequestMapping(value="/verification/{loginId}", method = RequestMethod.GET)
     public Map<String, Boolean> verifyLoginId(
             @PathVariable(value="loginId") String loginId
@@ -62,6 +63,7 @@ public class UserController {
         return result;
     }
 
+    // need test. 20170310 by youngjin.
     @RequestMapping(value = "/password/{userId}", method = RequestMethod.PUT)
     public Map<String, String> changePassword(
             @PathVariable Long userId,
