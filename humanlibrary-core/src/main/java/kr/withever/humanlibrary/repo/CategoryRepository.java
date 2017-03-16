@@ -1,9 +1,14 @@
 package kr.withever.humanlibrary.repo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.withever.humanlibrary.domain.common.exception.ExceptionType;
 import kr.withever.humanlibrary.domain.humanbook.Category;
+import kr.withever.humanlibrary.domain.humanbook.CategorySearch;
+import kr.withever.humanlibrary.exception.HumanLibraryException;
 import kr.withever.humanlibrary.repo.mapper.CategoryMapper;
 
 @Repository
@@ -20,34 +25,38 @@ public class CategoryRepository {
 		return this.categoryMapper.selectCategoryByCategoryName(categoryName);
 	}
 	
-	public int insertCategory(Category category){
-		try {
-			this.categoryMapper.insertCategory(category);
-			return 1;
-		} catch (Exception e) {
-			return 0;
-		}
+	public Long createCategory(Category category){
+		this.categoryMapper.insertCategory(category);
+		return category.getId();
 	}
 	
-	public int updateCategory(Category category){
+	public void modifyCategory(Category category){
 		try {
 			this.categoryMapper.updateCategory(category);
-			return 1;
 		} catch (Exception e) {
-			return 0;
+			throw new HumanLibraryException(e, ExceptionType.US10000);
 		}
 	}
 	
-	public int deleteCategory(Long id){
+	public void removeCategory(Long id){
 		try {
 			this.categoryMapper.deleteCategory(id);
-			return 1;
 		} catch (Exception e) {
-			return 0;
+			throw new HumanLibraryException(e, ExceptionType.US10000);
 		}
 	}
 	
 	public int countCategory(){
 		return this.categoryMapper.countCategory();
+	}
+	
+	public CategorySearch retrieveCategoryBySearch(CategorySearch search){
+		List<Category> categories = this.categoryMapper.selectCategoriesBySearch(search);
+		search.setResults(categories);
+		if(categories.size() != 0){
+			int totalCount = this.categoryMapper.selectCategoriesTotalCountBySearch(search);
+			search.setTotalCount(totalCount);
+		}
+		return search;
 	}
 }

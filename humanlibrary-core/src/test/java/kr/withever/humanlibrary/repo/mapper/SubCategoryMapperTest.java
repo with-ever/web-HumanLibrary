@@ -2,6 +2,8 @@ package kr.withever.humanlibrary.repo.mapper;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -10,7 +12,9 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 
 import kr.withever.humanlibrary.config.WitheverDbUnitTestConfig;
+import kr.withever.humanlibrary.domain.humanbook.Category;
 import kr.withever.humanlibrary.domain.humanbook.SubCategory;
+import kr.withever.humanlibrary.domain.humanbook.SubCategorySearch;
 
 @DatabaseSetup(value={"/dataset/SubCategory.xml"}, type=DatabaseOperation.INSERT)
 @DatabaseTearDown(value={"/dataset/SubCategory.xml"}, type=DatabaseOperation.DELETE_ALL)
@@ -20,6 +24,38 @@ public class SubCategoryMapperTest extends WitheverDbUnitTestConfig{
 	private SubCategoryMapper subCategoryMapper;
 	
 	SubCategory subCategory;
+	
+	@Test
+	public void selectChildCategoriesBySearch() throws Exception{
+		Long parentCategoryId = this.subCategoryMapper.selectParentCategoryIdByName("IT");
+		System.out.println("parentCategoryId = "+parentCategoryId);
+		SubCategorySearch search = new SubCategorySearch();
+		search.setId(1L);
+		search.setCategoryName("DEVELOP");
+		search.setParentCategoryId(parentCategoryId);
+		List<SubCategory> list = this.subCategoryMapper.selectChildCategoriesBySearch(search);
+		assertEquals(2, list.size());
+	}
+	
+	@Test
+	public void selectSubCategoryList() throws Exception{
+		SubCategorySearch search = new SubCategorySearch();
+		search.setId(1L);
+		search.setCategoryName("DEVELOP");
+		List<SubCategory> list = this.subCategoryMapper.selectSubCategoriesBySearch(search);
+		assertEquals(2, list.size());
+	}
+	
+	@Test
+	public void selectSubCategoriesTotalCountBySearch() throws Exception{
+		SubCategorySearch search = new SubCategorySearch();
+		search.setCategoryName("DEVELOP");
+		search.setId(1L);
+		search.setParentCategoryId(1L);
+		int count = this.subCategoryMapper.selectSubCategoriesTotalCountBySearch(search);
+		
+		assertEquals(2, count);
+	}
 	
 	@Test
 	public void selectSubCategory() throws Exception{
@@ -36,9 +72,9 @@ public class SubCategoryMapperTest extends WitheverDbUnitTestConfig{
 	@Test
 	public void insertSubCategory() throws Exception{
 		SubCategory testSubCategory = new SubCategory();
-		testSubCategory.setId(2L);
+		testSubCategory.setId(3L);
 		testSubCategory.setCategoryName("OPERATION");
-		testSubCategory.setUpperCategoryId(1L);
+		testSubCategory.setParentCategoryId(1L);
 		this.subCategoryMapper.insertSubCategory(testSubCategory);
 		
 		subCategory = this.subCategoryMapper.selectSubCategory(2L);
@@ -50,7 +86,7 @@ public class SubCategoryMapperTest extends WitheverDbUnitTestConfig{
 		SubCategory testSubCategory = new SubCategory();
 		testSubCategory.setId(1L);
 		testSubCategory.setCategoryName("SOFTWARE");
-		testSubCategory.setUpperCategoryId(1L);
+		testSubCategory.setParentCategoryId(1L);
 		this.subCategoryMapper.updateSubCategory(testSubCategory);
 		
 		subCategory = this.subCategoryMapper.selectSubCategory(1L);
@@ -60,12 +96,12 @@ public class SubCategoryMapperTest extends WitheverDbUnitTestConfig{
 	@Test
 	public void deleteSubCategory() throws Exception{
 		this.subCategoryMapper.deleteSubCategory(1L);
-		assertEquals(0, this.subCategoryMapper.countSubCategory());
+		assertEquals(1, this.subCategoryMapper.countSubCategory());
 	}
 	
 	@Test
 	public void countSubCategory() throws Exception{
-		assertEquals(1,this.subCategoryMapper.countSubCategory());
+		assertEquals(2,this.subCategoryMapper.countSubCategory());
 	}
 	
 }

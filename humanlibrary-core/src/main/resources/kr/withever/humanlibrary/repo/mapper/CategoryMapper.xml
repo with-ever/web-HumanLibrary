@@ -8,6 +8,21 @@
 		<result property="categoryName" column="CATEGORY_NAME"/>
 	</resultMap>
 	
+	<select id="selectCategoriesBySearch" parameterType="CategorySearch" resultMap="categoryResultMap">
+		SELECT 
+			ID
+			,CATEGORY_NAME
+		FROM
+			CATEGORY
+	</select>
+	
+	<select id="selectCategoriesTotalCountBySearch" parameterType="CategorySearch" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			CATEGORY
+	</select>
+	
 	<insert id="insertCategory" parameterType="Category" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
 		INSERT INTO CATEGORY(
 			ID

@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import kr.withever.humanlibrary.domain.common.exception.ExceptionType;
 import kr.withever.humanlibrary.domain.humanbook.Category;
+import kr.withever.humanlibrary.domain.humanbook.CategorySearch;
 import kr.withever.humanlibrary.exception.HumanLibraryException;
 import kr.withever.humanlibrary.repo.CategoryRepository;
 import kr.withever.humanlibrary.service.CategoryService;
@@ -31,23 +32,28 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public int insertCategory(Category category) {
-		return this.categoryRepository.insertCategory(category);
+	public Long createCategory(Category category) {
+		return this.categoryRepository.createCategory(category);
 	}
 
 	@Override
-	public int updateCategory(Category category) {
-		return this.categoryRepository.updateCategory(category);
+	public void modifyCategory(Category category) {
+		this.categoryRepository.modifyCategory(category);
 	}
 
 	@Override
-	public int deleteCategory(Long id) {
-		return this.categoryRepository.deleteCategory(id);
+	public void removeCategory(Long id) {
+		this.categoryRepository.removeCategory(id);
 	}
 
 	@Override
 	public int countCategory() {
 		return this.categoryRepository.countCategory();
+	}
+
+	@Override
+	public CategorySearch retrieveCategoryBySearch(CategorySearch search) {
+		return this.categoryRepository.retrieveCategoryBySearch(search);
 	}
 	
 }
