@@ -50,7 +50,7 @@ public class HumanbookRepository {
 		try {
 			this.humanbookMapper.updateHumanbook(humanbook);
 		} catch (Exception e) {
-			throw new HumanLibraryException(e, ExceptionType.US10000);
+			throw new HumanLibraryException(e, ExceptionType.HB_500_001);
 		}
 	}
 
@@ -58,7 +58,8 @@ public class HumanbookRepository {
 		try{
 			this.humanbookMapper.deleteHumanbook(id);
 		}catch(Exception e){
-			throw new HumanLibraryException(e, ExceptionType.US10000);
+			// @TODO exception 코드 정리 필요.
+			throw new HumanLibraryException(e, ExceptionType.HB_500_002);
 		}
 	}
 	
@@ -66,7 +67,8 @@ public class HumanbookRepository {
 		try {
 			this.humanbookMapper.updateHumanbookState(id, state);
 		} catch (Exception e) {
-			throw new HumanLibraryException(e, ExceptionType.US10000);
+			// @TODO exception 코드 정리 필요.
+			throw new HumanLibraryException(e, ExceptionType.HB_500_003);
 		}
 	}
 	
