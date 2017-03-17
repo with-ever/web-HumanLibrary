@@ -21,4 +21,8 @@ public interface HumanbookService {
     void modifyHumanbookState(Long id, HumanbookState state);
 
     HumanbookSearch retrieveHumanbooksBySearch(HumanbookSearch search);
+    
+    void rejectHumanbookRegister(Long id);
+    
+    void acceptHumanbookRegister(Long id);
 }

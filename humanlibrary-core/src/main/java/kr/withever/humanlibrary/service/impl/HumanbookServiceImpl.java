@@ -58,4 +58,14 @@ public class HumanbookServiceImpl implements HumanbookService {
 	public HumanbookSearch retrieveHumanbooksBySearch(HumanbookSearch search) {
 		return this.humanbookRepository.selectHumanbooksBySearch(search);
 	}
+
+	@Override
+	public void rejectHumanbookRegister(Long id) {
+		this.humanbookRepository.modifyHumanbookState(id, HumanbookState.DENY);
+	}
+
+	@Override
+	public void acceptHumanbookRegister(Long id) {
+		this.humanbookRepository.modifyHumanbookState(id, HumanbookState.ACCEPT);
+	}
 }

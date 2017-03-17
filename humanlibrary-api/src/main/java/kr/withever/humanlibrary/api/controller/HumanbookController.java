@@ -50,5 +50,19 @@ public class HumanbookController {
     ){
     	this.humanbookService.removeHumanbook(hbId);
     }
+    
+    @RequestMapping(value = "/{hbId}/reject", method = RequestMethod.PUT)
+    public void rejectHumanbook(
+    		@PathVariable(value = "hbId") Long hbId
+    ){
+    	this.humanbookService.rejectHumanbookRegister(hbId);
+    }
+    
+    @RequestMapping(value = "/{hbId}/accept", method = RequestMethod.PUT)
+    public void acceptHumanbook(
+    		@PathVariable(value = "hbId") Long hbId
+    ){
+    	this.humanbookService.acceptHumanbookRegister(hbId);
+    }
   
 }
