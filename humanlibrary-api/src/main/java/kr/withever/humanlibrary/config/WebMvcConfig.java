@@ -24,9 +24,9 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
 	@Bean
 	public static PropertyPlaceholderConfigurer propertyPlaceholderConfigurer() {
-		PropertyPlaceholderConfigurer configurer = new PropertyPlaceholderConfigurer();
-		configurer.setLocations(new Resource[]{new ClassPathResource("application.properties")});
-		return configurer;
+		PropertyPlaceholderConfigurer property = new PropertyPlaceholderConfigurer();
+		property.setLocations(new Resource[]{new ClassPathResource("application.properties")});
+		return property;
 	}
 
 	@Bean

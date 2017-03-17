@@ -1,4 +1,4 @@
-package kr.withever.humanlibrary.api.controller.exception;
+package kr.withever.humanlibrary.exception;
 
 import kr.withever.humanlibrary.exception.HumanLibraryErrorMessage;
 import kr.withever.humanlibrary.exception.HumanLibraryException;
@@ -22,7 +22,6 @@ public class GlobalControllerExceptionHandler {
 
     @Autowired
     private MessageSource messageSource;
-
 
     @ExceptionHandler({HumanLibraryRuntimeException.class})
     public ResponseEntity<HumanLibraryErrorMessage> makeApiException(HumanLibraryRuntimeException exception) {

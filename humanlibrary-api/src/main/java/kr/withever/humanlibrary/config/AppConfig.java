@@ -17,7 +17,6 @@ public class AppConfig {
     @Bean
     public static PropertyPlaceholderConfigurer propertyPlaceholderConfigurer() {
         PropertyPlaceholderConfigurer property = new PropertyPlaceholderConfigurer();
-        // @TODO 설정이 웹에 있는게 맞는것인가?
         property.setLocations(new Resource[]{new ClassPathResource("application.properties")});
         return property;
     }
