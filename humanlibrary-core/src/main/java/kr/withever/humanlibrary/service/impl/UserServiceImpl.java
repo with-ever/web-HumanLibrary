@@ -32,7 +32,6 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Long createUser(User user) {
-        user.setTimeInfo();
         this.userRepository.createUser(user);
         this.userRoleRepository.createUserRoles(user.getUserId(), user.getRoles());
         return user.getUserId();
