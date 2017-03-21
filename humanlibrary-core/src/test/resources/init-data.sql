@@ -31,7 +31,7 @@ INSERT INTO
 	
 INSERT INTO
 	`SUB_CATEGORY` (`CATEGORY_NAME`, `DESC`, `PARENT_CATEGORY_ID`) VALUES
-	--이웃/커뮤니티
+	-- 이웃/커뮤니티
 	('LIFE EXPERT/TECHNICAL TALENT','생달달인/기술재능','1'),
 	('COMMUNITY ACTIVIST','지역공동체 활동가','1'),
 	('RETIRED WORKER','전직 직장인','1'),
@@ -39,7 +39,7 @@ INSERT INTO
 	('LOCAL CENTER LECTURER','지역센터 강사','1'),
 	('HEALTH CARE','건강관리','1'),
 	
-	--경제/경영
+	-- 경제/경영
 	('ECONOMIST','경제전문가','2'),
 	('BUSINESSMAN','기업인','2'),
 	('CEO','CEO','2'),
@@ -48,14 +48,14 @@ INSERT INTO
 	('SELFEMPLOYED','일반 자영업자','2'),
 	('SOCIAL ENTERPRISE','사회적 기업','2'),
 	
-	--금융/재테크
+	-- 금융/재테크
 	('STOCK','증권','3'),
 	('BANK','은행','3'),
 	('PROPERTY','부동산','3'),
 	('INSSURANCE','보험','3'),
 	('ASSET MANAGEMENT','자산관리','3'),
 	
-	--봉사활동
+	-- 봉사활동
 	('OLD PEOPLE','노인 봉사','4'),
 	('DISABILITY','장애인 봉사','4'),
 	('CHILDREN','어린이 봉사','4'),
@@ -63,7 +63,7 @@ INSERT INTO
 	('COMMUNITY','일반 사회 봉사','4'),
 	('GLOBAL','해외/국제 봉사','4'),
 	
-	--방송/언론
+	-- 방송/언론
 	('NEWSPAPER STAFF','신문사 종사자','5'),
 	('BROADCASTING STAFF','방송사 종사자','5'),
 	('LOCAL NEWSPAPER','지역신문','5'),
@@ -73,7 +73,7 @@ INSERT INTO
 	('BROADCASTING ENGINEER','방송기술자','5'),
 	('BROADCASTING STAFF','방송 스탭','5'),
 	
-	--의료인 
+	-- 의료인
 	('DOCTOR','의사','6'),
 	('HERB DOCTOR','한의사','6'),
 	('PHARMACIST','약사','6'),
@@ -82,7 +82,7 @@ INSERT INTO
 	('FOLK REMEDY','치기공사','6'),
 	('FOLK REMEDY','기타','6'),
 	
-	--문화/예술/체육
+	-- 문화/예술/체육
 	('AUTHOR','작가','7'),
 	('ART','미술','7'),
 	('PHOTO','사진','7'),
@@ -98,7 +98,7 @@ INSERT INTO
 	('BEAUTICIAN','미용사','7'),
 	('TRADITIONAL CULTURE','전통문화','7'),
 	
-	--복지상담
+	-- 복지상담
 	('SOCIAL WORKER','사회복지사','8'),
 	('YOUTH FIELD SPECIALIST/COUNSELOR','청소년지도사/상담사','8'),
 	('CARER','간병인','8'),
@@ -106,7 +106,7 @@ INSERT INTO
 	('HANDICAPPED WELFARE','장애인 복지','8'),
 	('COUNSEL SERVICE','상담봉사','8'),
 	
-	--사회운동
+	-- 사회운동
 	('LABOR ACTIVIST','노동 운동가','9'),
 	('FARMER ACTIVIST','농민 운동가','9'),
 	('POOR ACTIVIST','빈민 운동가','9'),
@@ -114,7 +114,7 @@ INSERT INTO
 	('ENVIRONMENTALIST','환경 운동가','9'),
 	('FEMINIST','여성 운동가','9'),
 	
-	--인생동행
+	-- 인생동행
 	('MULTI-CULTURAL FAMILY','다문화가족','10'),
 	('ADOPTIVE FAMILY','입양가족','10'),
 	('DISABLED PERSON','장애인','10'),
@@ -125,7 +125,7 @@ INSERT INTO
 	('FOREIGN WORKER','외국국적 노동자','10'),
 	('SINGLE MOTHER','미혼모','10'),
 	
-	--공무원
+	-- 공무원
 	('FIREFIGHTER','소방관','11'),
 	('POLICE OFFICER','경찰관','11'),
 	('SOLDIER','군인','11'),
@@ -133,28 +133,28 @@ INSERT INTO
 	('PUBLIC OFFICIAL','행정분야 외 공무원','11'),
 	('RETIRED PUBLIC OFFCIAL','퇴직공무원','11'),
 	
-	--정치/정당
+	-- 정치/정당
 	('CONGRESSMAN','국회의원','12'),
 	('COUNCILMAN','시의원','12'),
 	('DISTRICT DELEGATE','구의원','12'),
 	('LOCAL GOVERNMENT HEAD','자치단체장','12'),
 	('POLITICAL PARTY','정당인','12'),
 	
-	--법조인
+	-- 법조인
 	('LAWYER','변호사','13'),
 	('JUDGE','판사','13'),
 	('PROSECUTOR','검사','13'),
 	('LEGAL STAFF','법무사','13'),
 	('PURSER','사무장','13'),
 	
-	--종교인
+	-- 종교인
 	('PROTESTANTISM','개신교','14'),
 	('CATHOLICISM','천주교','14'),
 	('BUDDHISM','불교','14'),
 	('MINORITY RELIGION','소수종교','14'),
 	('SHAMANISM','무속인','14'),
 	
-	--교육인
+	-- 교육인
 	('PRIMARY AND INTERMEDIATE SCHOOL TEACHER','초중고교사','15'),
 	('ALTERNATIVE SCHOOL TEACHER','대안학교교사','15'),
 	('DISABLED SCHOOL TEACHER','장애인학교교사','15'),
@@ -164,13 +164,13 @@ INSERT INTO
 	('RETIREMENT TEACHER','퇴직교사','15'),
 	('LIFE COURSE LECTURER','생활강좌강사','15'),
 	
-	--해외활동
+	-- 해외활동
 	('OVERSEAS DIPLOMATIC OFFICE','해외 공관경험','16'),
 	('OVERSEAS SUPERIOR','해외 상사경험','16'),
 	('WORKING HOLIDAY/LANGUAGE STUDY','워킹홀리데이/어학연수','16'),
 	('FOREIGN STAY','외국 체류 생활경험','16'),
 	
-	--취미/힐링/여가활동
+	-- 취미/힐링/여가활동
 	('FOOD','음식','17'),
 	('HANDICRAFT','수공예','17'),
 	('TRAVEL(BACKPACKING, WILD)','여행(배낭여행, 오지체험)','17'),
@@ -179,19 +179,19 @@ INSERT INTO
 	('DISABLED SPORTS','장애인 스포츠','17'),
 	('AGRICULTURE','농업','17'),
 
-	--교수/학술인
+	-- 교수/학술인
 	('NATURAL SCIENCE','자연과학','18'),
 	('SOCIAL SCIENCE','사회과학','18'),
 	('ENGINEERING','각종 공학','18'),
 	('HUMANITIES/RELIGION','인문학/종교','18'),
 	('ART/MUSIC/PHYSICAL','예체능계','18'),
 	
-	--환경/동,식물
+	-- 환경/동,식물
 	('ANIMAL','동물(사육사, 동물원, 애견)','19'),
 	('PLANTS','식물(숲해설사, 조경사, 작목, 식물원)','19'),
 	('ENVIRONMENT GROUP STAFF','환경단체 소속인','19'),
 	
-	--IT/기술
+	-- IT/기술
 	('PROGRAMMER','프로그래머','20'),
 	('ENGINEER','엔지니어','20'),
 	('WEB DESIGNER','웹 디자이너','20'),
@@ -200,11 +200,11 @@ INSERT INTO
 	('WEB DEVELOPER','웹 개발자','20'),
 	('SERVER ADMINISTRATION','서버 관리자','20'),
 	
-	--도서관
+	-- 도서관
 	('PUBLIC LIBRARY LIBRARIAN','공공도서관 사서','21'),
 	('UNIVERSITY LIBRARY LIBRARIAN','대학도서관 사서','21'),
 	('SCHOOL LIBRARY LIBRARIAN','학교도서관 사서','21'),
 	('CHILD/YOUTH LIBRARY LIBRARIAN','어린이/청소년 도서관 사서','21'),
 	('SMALL LIBRARY LIBRARIAN','작은 도서관 사서','21'),
 	('SPECIAL LIBRARY LIBRARIAN','특수/전문 도서관 사서','21');
-	--휴먼라이브러리 직원
+	-- 휴먼라이브러리 직원

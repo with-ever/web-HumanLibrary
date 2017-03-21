@@ -121,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `HUMANBOOK_SERVICE_DAY_REL` (
 
 -- Add Category Table
 CREATE TABLE `CATEGORY` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `category_name` varchar(50) DEFAULT NULL,
   `desc` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
@@ -129,7 +129,7 @@ CREATE TABLE `CATEGORY` (
 
 -- Add Sub Category Table
 CREATE TABLE `SUB_CATEGORY` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
   `category_name` varchar(50) DEFAULT NULL,
   `desc` varchar(50) DEFAULT NULL,
   `parent_category_id` int(11) NOT NULL,
