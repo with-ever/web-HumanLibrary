@@ -109,4 +109,10 @@ public class Contract {
     public void setUpdateTime(Long updateTime) {
         this.updateTime = updateTime;
     }
+
+    public void setUpdatedContract(Contract contract) {
+        this.state = contract.getState();
+        this.contractTime = contract.getContractTime();
+        this.updateTime = System.currentTimeMillis();
+    }
 }
