@@ -25,6 +25,10 @@ public enum ExceptionType {
     CT_500_002,
     CT_500_003,
 
-
+    // 계약서 시간
+    CTT_404_001,
+    CTT_500_001,
+    CTT_500_002,
+    CTT_500_003,
 
 }
