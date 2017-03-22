@@ -2,6 +2,7 @@ package kr.withever.humanlibrary.repo.mapper;
 
 import kr.withever.humanlibrary.domain.user.User;
 import kr.withever.humanlibrary.domain.user.UserSearch;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -23,4 +24,8 @@ public interface UserMapper {
     List<User> selectUsersBySearch(UserSearch search);
 
     int selectUsersTotalCountBySearch(UserSearch search);
+
+    boolean selectUserByIdWithPassword(@Param("userId") Long userId, @Param("password") String password);
+
+    int updateUserPassword(@Param("userId") Long userId, @Param("password") String password);
 }

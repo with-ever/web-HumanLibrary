@@ -1,13 +1,19 @@
 package kr.withever.humanlibrary.service.impl;
 
+import kr.withever.humanlibrary.exception.HumanLibraryNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import kr.withever.humanlibrary.domain.common.exception.ExceptionType;
 import kr.withever.humanlibrary.domain.humanbook.Category;
+import kr.withever.humanlibrary.domain.humanbook.CategorySearch;
 import kr.withever.humanlibrary.exception.HumanLibraryException;
 import kr.withever.humanlibrary.repo.CategoryRepository;
 import kr.withever.humanlibrary.service.CategoryService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
+@Transactional
 public class CategoryServiceImpl implements CategoryService {
 
 	@Autowired 
@@ -16,35 +22,42 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public Category retrieveCategory(Long id) {
 		Category category = this.categoryRepository.retrieveCategory(id);
-		if(category == null) throw new HumanLibraryException(ExceptionType.US10002, String.valueOf(id), "success");
+		// @TODO error code update
+		// if(category == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(id), "success");
 		return category;
 	}
 
 	@Override
 	public Category retrieveCategoryByCategoryName(String categoryName) {
 		Category category = this.categoryRepository.retrieveCategoryByCategoryName(categoryName);
-		if(category == null) throw new HumanLibraryException(ExceptionType.US10002, String.valueOf(categoryName), "success");
+		// @TODO error code update
+		// if(category == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(categoryName), "success");
 		return category;
 	}
 
 	@Override
-	public int insertCategory(Category category) {
-		return this.categoryRepository.insertCategory(category);
+	public Long createCategory(Category category) {
+		return this.categoryRepository.createCategory(category);
 	}
 
 	@Override
-	public int updateCategory(Category category) {
-		return this.categoryRepository.updateCategory(category);
+	public void modifyCategory(Category category) {
+		this.categoryRepository.modifyCategory(category);
 	}
 
 	@Override
-	public int deleteCategory(Long id) {
-		return this.categoryRepository.deleteCategory(id);
+	public void removeCategory(Long id) {
+		this.categoryRepository.removeCategory(id);
 	}
 
 	@Override
 	public int countCategory() {
 		return this.categoryRepository.countCategory();
+	}
+
+	@Override
+	public CategorySearch retrieveCategoryBySearch(CategorySearch search) {
+		return this.categoryRepository.retrieveCategoryBySearch(search);
 	}
 	
 }

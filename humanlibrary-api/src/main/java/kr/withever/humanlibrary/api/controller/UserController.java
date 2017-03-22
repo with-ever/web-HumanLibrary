@@ -1,17 +1,13 @@
 package kr.withever.humanlibrary.api.controller;
 
-import io.swagger.annotations.ApiParam;
 import kr.withever.humanlibrary.domain.user.User;
 import kr.withever.humanlibrary.domain.user.UserSearch;
 import kr.withever.humanlibrary.service.UserService;
-import kr.withever.humanlibrary.util.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -45,6 +41,41 @@ public class UserController {
             UserSearch search
     ) {
         return this.userService.retrieveUserBySearch(search);
+    }
+
+    // need test. 20170310 by youngjin.
+    @RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
+    public void modifyUser(
+            @PathVariable(value = "userId") Long userId,
+            @RequestBody User user
+    ) {
+        this.userService.modifyUser(user);
+    }
+
+    // need test. 20170310 by youngjin.
+    @RequestMapping(value="/verification/{loginId}", method = RequestMethod.GET)
+    public Map<String, Boolean> verifyLoginId(
+            @PathVariable(value="loginId") String loginId
+    ) {
+        Map<String, Boolean> result = new HashMap<String, Boolean>();
+        User user = this.userService.retrieveUserByLoginId(loginId);
+        if (user != null) result.put("isExsited", true);
+        return result;
+    }
+
+    // need test. 20170310 by youngjin.
+    @RequestMapping(value = "/password/{userId}", method = RequestMethod.PUT)
+    public Map<String, String> changePassword(
+            @PathVariable Long userId,
+            @RequestBody Map<String, Object> requestParam
+    ) {
+        Map<String, String> result = new HashMap<String, String>();
+        String password = (String) requestParam.get("password");
+        String newPassword = (String) requestParam.get("newPassword");
+        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+        this.userService.modifyUserPassword(userId, encoder.encode(password), encoder.encode(newPassword));
+        result.put("result", "success");
+        return result;
     }
 
 }

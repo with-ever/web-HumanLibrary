@@ -1,9 +1,14 @@
 package kr.withever.humanlibrary.repo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import kr.withever.humanlibrary.domain.common.exception.ExceptionType;
 import kr.withever.humanlibrary.domain.humanbook.SubCategory;
+import kr.withever.humanlibrary.domain.humanbook.SubCategorySearch;
+import kr.withever.humanlibrary.exception.HumanLibraryException;
 import kr.withever.humanlibrary.repo.mapper.SubCategoryMapper;
 
 @Repository
@@ -20,31 +25,37 @@ public class SubCategoryRepository {
 		return this.subCategoryMapper.selectSubCategoryByCategoryName(categoryName);
 	}
 	
-	public int insertSubCategory(SubCategory subCategory){
-		try {
-			this.subCategoryMapper.insertSubCategory(subCategory);
-			return 1;
-		} catch (Exception e) {
-			return 0;
-		}
+	public Long createSubCategory(SubCategory subCategory){
+		this.subCategoryMapper.insertSubCategory(subCategory);
+		return subCategory.getId();
 	}
 	
-	public int updateSubCategory(SubCategory subCategory){
+	public void modifySubCategory(SubCategory subCategory){
 		try {
 			this.subCategoryMapper.updateSubCategory(subCategory);
-			return 1;
 		} catch (Exception e) {
-			return 0;
+			// @TODO exception 코드 정리 필요.
+			throw new HumanLibraryException(e, ExceptionType.US_500_001);
 		}
 	}
 	
-	public int deleteSubCategory(Long id){
+	public void removeSubCategory(Long id){
 		try {
 			this.subCategoryMapper.deleteSubCategory(id);
-			return 1;
 		} catch (Exception e) {
-			return 0;
+			// @TODO exception 코드 정리 필요.
+			throw new HumanLibraryException(e, ExceptionType.US_500_001);
 		}
+	}
+	
+	public SubCategorySearch retrieveSubCategoriesBySearch(SubCategorySearch search){
+		List<SubCategory> subCategories = this.subCategoryMapper.selectSubCategoriesBySearch(search);
+		search.setResults(subCategories);
+		if(subCategories.size() != 0){
+			int totalCount = this.subCategoryMapper.selectSubCategoriesTotalCountBySearch(search);
+			search.setTotalCount(totalCount);
+		}
+		return search;
 	}
 
 }

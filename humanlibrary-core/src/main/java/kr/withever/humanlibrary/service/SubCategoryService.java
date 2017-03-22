@@ -1,6 +1,7 @@
 package kr.withever.humanlibrary.service;
 
 import kr.withever.humanlibrary.domain.humanbook.SubCategory;
+import kr.withever.humanlibrary.domain.humanbook.SubCategorySearch;
 
 public interface SubCategoryService {
 	
@@ -8,9 +9,11 @@ public interface SubCategoryService {
 	
 	SubCategory retrieveSubCategoryByCategoryName(String categoryName);
 	
-	int insertSubCategory(SubCategory subCategory);
+	Long createSubCategory(SubCategory subCategory);
 	
-	int updateSubCategory(SubCategory subCategory);
+	void modifySubCategory(SubCategory subCategory);
 	
-	int deleteSubCategory(Long id);
+	void removeSubCategory(Long id);
+	
+	SubCategorySearch retrieveSubCategoriesBySearch(SubCategorySearch search);
 }

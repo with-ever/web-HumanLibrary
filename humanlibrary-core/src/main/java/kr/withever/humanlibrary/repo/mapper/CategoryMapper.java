@@ -1,6 +1,9 @@
 package kr.withever.humanlibrary.repo.mapper;
 
+import java.util.List;
+
 import kr.withever.humanlibrary.domain.humanbook.Category;
+import kr.withever.humanlibrary.domain.humanbook.CategorySearch;
 
 public interface CategoryMapper {
 	
@@ -15,5 +18,9 @@ public interface CategoryMapper {
 	int deleteCategory(Long id);
 	
 	int countCategory();
+	
+	List<Category> selectCategoriesBySearch(CategorySearch search);
+	
+	int selectCategoriesTotalCountBySearch(CategorySearch search);
 	
 }

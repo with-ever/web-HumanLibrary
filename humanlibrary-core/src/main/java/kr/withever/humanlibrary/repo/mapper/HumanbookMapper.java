@@ -1,6 +1,12 @@
 package kr.withever.humanlibrary.repo.mapper;
 
+import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import kr.withever.humanlibrary.domain.common.humanbook.HumanbookState;
 import kr.withever.humanlibrary.domain.humanbook.Humanbook;
+import kr.withever.humanlibrary.domain.humanbook.HumanbookSearch;
 
 public interface HumanbookMapper {
 	
@@ -14,4 +20,9 @@ public interface HumanbookMapper {
 	
 	int deleteHumanbook(Long id);
 	
+	int updateHumanbookState(@Param("id") Long id, @Param("state") HumanbookState state);
+	
+	List<Humanbook> selectHumanbooksBySearch(HumanbookSearch search);
+	
+	int selectHumanbooksTotalCountBySearch(HumanbookSearch search);
 }

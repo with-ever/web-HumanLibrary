@@ -1,6 +1,7 @@
 package kr.withever.humanlibrary.service;
 
 import kr.withever.humanlibrary.domain.humanbook.Category;
+import kr.withever.humanlibrary.domain.humanbook.CategorySearch;
 
 public interface CategoryService {
 	
@@ -8,11 +9,13 @@ public interface CategoryService {
 	
 	Category retrieveCategoryByCategoryName(String categoryName);
 	
-	int insertCategory(Category category);
+	Long createCategory(Category category);
 	
-	int updateCategory(Category category);
+	void modifyCategory(Category category);
 	
-	int deleteCategory(Long id);
+	void removeCategory(Long id);
 	
 	int countCategory();
+	
+	CategorySearch retrieveCategoryBySearch(CategorySearch search);
 }

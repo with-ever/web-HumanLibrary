@@ -171,8 +171,15 @@ public class User implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public void setTimeInfo() {
-        this.createTime = System.currentTimeMillis() / 1000;
-        this.updateTime = System.currentTimeMillis() / 1000;
+    public void setUpdatedUser(User user) {
+        this.name = user.getName();
+        this.email = user.getEmail();
+        this.phoneNo = user.getPhoneNo();
+        this.mPhoneNo = user.getmPhoneNo();
+        this.birth = user.getBirth();
+        this.zipCode = user.getZipCode();
+        this.address = user.getAddress();
+        this.detailAddress = user.getDetailAddress();
+        this.updateTime = System.currentTimeMillis();
     }
 }

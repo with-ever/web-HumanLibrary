@@ -13,9 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/api/test")
 public class TestController {
 
-    private final static String clientId = "clientapp";
+    @Value("${client.id}")
+    private String clientId;
 
-    private final static String clientSecret = "123456";
+    @Value("${client.secret}")
+    private String clientSecret;
+
+
+
 
     @RequestMapping(method = RequestMethod.GET)
     public String retrieveBasicToken () {

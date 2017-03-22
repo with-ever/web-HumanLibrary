@@ -2,6 +2,8 @@ package kr.withever.humanlibrary.repo.mapper;
 
 import static org.junit.Assert.assertEquals;
 
+import java.util.List;
+
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -11,6 +13,7 @@ import com.github.springtestdbunit.annotation.DatabaseTearDown;
 
 import kr.withever.humanlibrary.config.WitheverDbUnitTestConfig;
 import kr.withever.humanlibrary.domain.humanbook.Category;
+import kr.withever.humanlibrary.domain.humanbook.CategorySearch;
 
 @DatabaseSetup(value={"/dataset/Category.xml"}, type=DatabaseOperation.INSERT)
 @DatabaseTearDown(value={"/dataset/Category.xml"}, type=DatabaseOperation.DELETE_ALL)
@@ -18,6 +21,25 @@ public class CategoryMapperTest extends WitheverDbUnitTestConfig{
 
 	@Autowired
 	private CategoryMapper categoryMapper;
+	
+	@Test
+	public void selectCategoriesBySearch() throws Exception{
+		CategorySearch search = new CategorySearch();
+		search.setId(1L);
+		search.setCategoryName("IT");
+		List<Category> list = this.categoryMapper.selectCategoriesBySearch(search);
+		assertEquals(2, list.size());
+	}
+	
+	@Test
+	public void selectCategoriesTotalCountBySearch() throws Exception{
+		CategorySearch search = new CategorySearch();
+		search.setId(1L);
+		search.setCategoryName("IT");
+		int count = this.categoryMapper.selectCategoriesTotalCountBySearch(search);
+		
+		assertEquals(2, count);
+	}
 	
 	@Test
 	public void selectCategory() throws Exception{

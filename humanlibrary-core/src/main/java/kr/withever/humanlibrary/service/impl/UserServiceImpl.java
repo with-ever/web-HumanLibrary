@@ -6,6 +6,8 @@ import kr.withever.humanlibrary.domain.user.User;
 import kr.withever.humanlibrary.domain.common.exception.ExceptionType;
 import kr.withever.humanlibrary.domain.user.UserSearch;
 import kr.withever.humanlibrary.exception.HumanLibraryException;
+import kr.withever.humanlibrary.exception.HumanLibraryNotFoundException;
+import kr.withever.humanlibrary.exception.HumanLibraryRuntimeException;
 import kr.withever.humanlibrary.repo.UserRepository;
 import kr.withever.humanlibrary.repo.UserRoleRepository;
 import kr.withever.humanlibrary.service.UserService;
@@ -30,7 +32,6 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Long createUser(User user) {
-        user.setTimeInfo();
         this.userRepository.createUser(user);
         this.userRoleRepository.createUserRoles(user.getUserId(), user.getRoles());
         return user.getUserId();
@@ -39,13 +40,14 @@ public class UserServiceImpl implements UserService{
     @Override
     public User retrieveUser(Long userId) {
         User user = this.userRepository.retrieveUser(userId);
-        // @TODO exception 코드 정리 필요.
-        if (user == null) throw new HumanLibraryException(ExceptionType.US10002, String.valueOf(userId), "success");
+        if (user == null) throw new HumanLibraryNotFoundException(ExceptionType.US_404_001, String.valueOf(userId));
         return user;
     }
 
     @Override
     public void modifyUser(User user) {
+        User previousUser = this.userRepository.retrieveUser(user.getUserId());
+        previousUser.setUpdatedUser(user);
         this.userRepository.modifyUser(user);
     }
 
@@ -57,8 +59,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public User retrieveUserByLoginId(String loginId) {
         User user = this.userRepository.retrieveUserByLoginId(loginId);
-        // @TODO exception 코드 정리 필요.
-        if (user == null) throw new HumanLibraryException(ExceptionType.US10002, String.valueOf(loginId), "success");
+        if (user == null) throw new HumanLibraryNotFoundException(ExceptionType.US_404_002, String.valueOf(loginId));
         return user;
     }
 
@@ -67,4 +68,9 @@ public class UserServiceImpl implements UserService{
         return this.userRepository.retrieveUserBySearch(search);
     }
 
+    @Override
+    public void modifyUserPassword(Long userId, String password, String newPassword) {
+        if (!this.userRepository.verifyUserByIdWithPassword(userId, password)) throw new HumanLibraryRuntimeException(ExceptionType.US_500_003);
+        this.userRepository.modifyUserPassword(userId, newPassword);
+    }
 }

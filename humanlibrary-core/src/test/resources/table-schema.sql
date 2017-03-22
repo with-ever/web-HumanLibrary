@@ -92,14 +92,13 @@ CREATE TABLE IF NOT EXISTS `BOARD_FILE` (
 ) ENGINE=INNODB DEFAULT CHARSET=UTF8;
 
 
--- Add Humanbook Table
 CREATE TABLE `HUMANBOOK` (
   `id` int(11) NOT NULL,
   `user_id` varchar(45) NOT NULL,
   `title` varchar(45) DEFAULT NULL,
   `main_career` varchar(45) DEFAULT NULL,
   `service_time` varchar(45) DEFAULT NULL,
-  `upper_category` varchar(45) NOT NULL,
+  `parent_category` varchar(45) NOT NULL,
   `sub_category` varchar(45) NOT NULL,
   `state` varchar(45) DEFAULT NULL,
   `create_time` int(11) DEFAULT NULL,
@@ -107,30 +106,28 @@ CREATE TABLE `HUMANBOOK` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
--- SERVICE DAY TABLE
 CREATE TABLE `SERVICE_DAY` (
-	`DAY` VARCHAR(45) NOT NULL,
-	`DESC` VARCHAR(255) NULL,
+	`DAY` VARCHAR(10) NOT NULL,
 	PRIMARY KEY (`DAY`)
 ) ENGINE = InnoDB DEFAULT CHARSET=UTF8;
 
 CREATE TABLE IF NOT EXISTS `HUMANBOOK_SERVICE_DAY_REL` (
-  `HUMANBOOK_ID` INT NOT NULL,
-  `DAY_ID` VARCHAR(45) NOT NULL
+  `HUMANBOOK_ID` int(11) NOT NULL,
+  `DAY` VARCHAR(10) NOT NULL
 ) ENGINE = InnoDB DEFAULT CHARSET=UTF8;
 
--- Add Category Table
 CREATE TABLE `CATEGORY` (
-  `id` int(11) NOT NULL,
-  `category_name` varchar(45) DEFAULT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(50) DEFAULT NULL,
+  `desc` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 
--- Add Sub Category Table
 CREATE TABLE `SUB_CATEGORY` (
-  `id` int(11) NOT NULL,
-  `category_name` varchar(45) DEFAULT NULL,
-  `upper_category_id` int(11) NOT NULL,
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `category_name` varchar(50) DEFAULT NULL,
+  `desc` varchar(50) DEFAULT NULL,
+  `parent_category_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=UTF8;
 

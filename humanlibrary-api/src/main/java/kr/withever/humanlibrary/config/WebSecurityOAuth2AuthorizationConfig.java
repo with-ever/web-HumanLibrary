@@ -2,6 +2,7 @@ package kr.withever.humanlibrary.config;
 
 import kr.withever.humanlibrary.security.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Primary;
@@ -31,6 +32,35 @@ public class WebSecurityOAuth2AuthorizationConfig extends AuthorizationServerCon
     @Autowired
     private CustomUserDetailsService userDetailsService;
 
+    @Value("${client.id}")
+    private String clientId;
+
+    @Value("${client.secret}")
+    private String clientSecret;
+
+    @Value("${resource.id}")
+    private String resourceId;
+
+    @Override
+    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
+        // @formatter:off
+//        @TODO clientid / secret update.
+//        @TODO scope, expire time 정의.
+
+        clients
+                .inMemory()
+                .withClient(clientId)
+                    .secret(clientSecret)
+                    .authorizedGrantTypes("client_credentials", "password", "refresh_token")
+                    .authorities("CLIENT")
+                    .scopes("read", "write", "trust")
+//                    .accessTokenValiditySeconds(10)
+                    .resourceIds(resourceId);
+
+
+        // @formatter:on
+    }
+
     @Override
     public void configure(AuthorizationServerEndpointsConfigurer endpoints)
             throws Exception {
@@ -42,28 +72,12 @@ public class WebSecurityOAuth2AuthorizationConfig extends AuthorizationServerCon
         // @formatter:on
     }
 
-    @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        // @formatter:off
-//        @TODO clientid / secret update.
-//        @TODO scope, expire time 정의.
-
-        clients.inMemory()
-                .withClient("clientapp")
-                    .secret("123456")
-                    .authorizedGrantTypes("client_credentials", "password", "refresh_token")
-                    .authorities("CLIENT")
-                    .scopes("read")
-                    .resourceIds("restservice");
-
-        // @formatter:on
-    }
-
     @Bean
     @Primary
     public DefaultTokenServices tokenServices() {
         DefaultTokenServices tokenServices = new DefaultTokenServices();
         tokenServices.setSupportRefreshToken(true);
+//        tokenServices.setAccessTokenValiditySeconds(20);
         tokenServices.setTokenStore(this.tokenStore());
         return tokenServices;
     }
