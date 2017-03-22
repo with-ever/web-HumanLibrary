@@ -4,20 +4,20 @@ import kr.withever.humanlibrary.domain.common.DayOfWeek;
 
 public class ServiceDay {
 	
-	private String dayId;
+	private String day;
 
 	public ServiceDay(){
 	}
 
 	public ServiceDay(DayOfWeek day){
-		this.setDayId(day.getName());
+		this.setDay(day.getName());
 	}
 
-	public String getDayId() {
-		return dayId;
+	public String getDay() {
+		return day;
 	}
 
-	public void setDayId(String dayId) {
-		this.dayId = dayId;
+	public void setDay(String day) {
+		this.day = day;
 	}
 }
