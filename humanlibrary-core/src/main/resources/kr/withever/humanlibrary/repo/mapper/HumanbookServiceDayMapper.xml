@@ -6,12 +6,12 @@
 
 <mapper namespace="kr.withever.humanlibrary.repo.mapper.HumanbookServiceDayMapper">
     <resultMap id="serviceDayResultMap" type="ServiceDay">
-        <result property="dayId" column="DAY_ID"/>
+        <result property="day" column="DAY"/>
     </resultMap>
     
     <select id="selectHumanbookServiceDayList" parameterType="Long" resultType="String">
     	SELECT
-    		DAY_ID
+    		DAY
     	FROM
     		HUMANBOOK_SERVICE_DAY_REL
     	WHERE
@@ -21,11 +21,11 @@
     <insert id="insertHumanbookServiceDay">
     	INSERT INTO HUMANBOOK_SERVICE_DAY_REL (
     		HUMANBOOK_ID
-    		,DAY_ID
+    		,DAY
     	) 
     	VALUES(
     		#{humanbookId}
-    		,#{dayId}
+    		,#{day}
     	)
     </insert>
     
@@ -36,6 +36,6 @@
     	WHERE
     		HUMANBOOK_ID = #{humanbookId}
     	AND
-    		DAY_ID = #{dayId}
+    		DAY = #{day}
     </delete>
 </mapper>
