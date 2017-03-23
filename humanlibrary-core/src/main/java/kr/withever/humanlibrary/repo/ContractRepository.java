@@ -42,4 +42,12 @@ public class ContractRepository {
             throw new HumanLibraryRuntimeException(e, ExceptionType.CT_500_002);
         }
     }
+
+    public void modifyContractState(Long contractId, String state) {
+        try {
+            this.contractMapper.updateContractState(contractId, state);
+        } catch (Exception e) {
+            throw new HumanLibraryRuntimeException(e, ExceptionType.US_500_003);
+        }
+    }
 }

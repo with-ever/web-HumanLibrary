@@ -1,6 +1,5 @@
 package kr.withever.humanlibrary.api.controller;
 
-import jdk.nashorn.internal.ir.RuntimeNode;
 import kr.withever.humanlibrary.domain.contract.Contract;
 import kr.withever.humanlibrary.service.ContractService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +33,7 @@ public class ContractController {
             @PathVariable(value = "contractId") Long contractId,
             @RequestBody Contract contract
     ) {
+        if (contract.getId() == null) contract.setId(contractId);
         this.contractService.modifyContract(contract);
     }
 
@@ -42,5 +42,19 @@ public class ContractController {
             @PathVariable(value = "contractId") Long contractId
     ) {
         this.contractService.removeContract(contractId);
+    }
+
+    @RequestMapping(value = "/{contractId}/accept", method = RequestMethod.PUT)
+    public void acceptContract(
+            @PathVariable(value = "contractId") Long contractId
+    ) {
+        this.contractService.acceptContract(contractId);
+    }
+
+    @RequestMapping(value = "/{contractId}/reject", method = RequestMethod.PUT)
+    public void rejectContract(
+            @PathVariable(value = "contractId") Long contractId
+    ) {
+        this.contractService.rejectContract(contractId);
     }
 }

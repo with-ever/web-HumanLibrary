@@ -6,7 +6,7 @@ package kr.withever.humanlibrary.domain.common.humanbook;
 public enum ContractState {
 
     ACCEPT,
-    DENY,
+    REJECT,
     WAITING,
     CANCEL
 

@@ -16,4 +16,8 @@ public interface ContractService {
 
     void removeContract(Long contractId);
 
+    void acceptContract(Long contractId);
+
+    void rejectContract(Long contractId);
+
 }
