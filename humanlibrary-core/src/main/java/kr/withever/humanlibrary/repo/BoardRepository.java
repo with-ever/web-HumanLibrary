@@ -1,10 +1,12 @@
 package kr.withever.humanlibrary.repo;
 
 import java.util.List;
+import java.util.Map;
 
 import kr.withever.humanlibrary.exception.HumanLibraryRuntimeException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.ui.ModelMap;
 import kr.withever.humanlibrary.domain.board.Board;
 import kr.withever.humanlibrary.domain.board.BoardFile;
 import kr.withever.humanlibrary.domain.board.BoardSearch;
@@ -26,34 +28,32 @@ public class BoardRepository {
 	
 	@Autowired
 	private BoardFileMapper boardFileMapper;
+	
 		
 	public Board retrieveBoard(Long id){
 	 Board board =this.boardMapper.selectBoard(id);
 	 if(board != null ){
-		 BoardFile boardFile =  this.boardFileMapper.selectBoardFile(id);
-		 board.setBoardFile(boardFile);
+		 BoardFile boardFile =  this.boardFileMapper.selectBoardFile(id);		 
+		 board.setFileName(boardFile.getFileName());
 	 }	
 		return board;
 		
 	}
 		
-	public void createBoard(Board board){
-		try{
+	public void createBoard(ModelMap result){
+		Board board = (Board) result.get("board");
+		BoardFile boardFile = (BoardFile) result.get("boardFile");
 			this.boardMapper.insertBoard(board);
-			BoardFile boardFile = board.getBoardFile();
 			if(boardFile != null ){
 				this.boardFileMapper.insertBoardFile(boardFile);
-			}
-		}catch (Exception e) {
-			// @TODO error code update
-			// throw new HumanLibraryRuntimeException(e, ExceptionType.US10000);
-        }
+	 }
 	}
 	
-	public void modifyBoard(Board board){
+	public void modifyBoard(ModelMap result){
 		try {
+			Board board = (Board) result.get("board");
+			BoardFile boardFile = (BoardFile) result.get("boardFile");
 			this.boardMapper.updateBoard(board);
-			BoardFile boardFile = board.getBoardFile();
 			if(boardFile != null ){
 				this.boardFileMapper.updateBoardFile(boardFile);
 			}

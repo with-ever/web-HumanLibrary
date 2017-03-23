@@ -5,6 +5,8 @@ import org.springframework.context.annotation.*;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 /**
  * Created by youngjinkim on 2017. 2. 7..
@@ -20,6 +22,11 @@ public class AppConfig {
         // @TODO 설정이 웹에 있는게 맞는것인가?
         property.setLocations(new Resource[]{new ClassPathResource("application.properties")});
         return property;
+    }
+    
+    @Bean
+    public MultipartResolver multipartResolver() {
+        return new CommonsMultipartResolver();
     }
 
 }

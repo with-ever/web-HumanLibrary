@@ -28,7 +28,7 @@
         )
         VALUES (
          #{type}
-        ,#{createTime}
+        ,unix_timestamp()
         ,#{subject}
         ,#{contents}
         ,#{views}

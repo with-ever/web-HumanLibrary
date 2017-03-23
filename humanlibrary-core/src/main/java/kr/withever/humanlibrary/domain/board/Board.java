@@ -21,10 +21,10 @@ public class Board {
 	private Long createTime;
 
 	private Long updateTime;
-	
-	private BoardFile boardFile;
-	
+		
 	private String name;
+	
+	private String fileName;
 
  
     public Board() {
@@ -94,14 +94,6 @@ public class Board {
 		this.updateTime = updateTime;
 	}
 
-	public BoardFile getBoardFile() {
-		return boardFile;
-	}
-
-	public void setBoardFile(BoardFile boardFile) {
-		this.boardFile = boardFile;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -109,5 +101,14 @@ public class Board {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+	
 	
 }

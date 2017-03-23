@@ -21,22 +21,11 @@ public class BoardController {
 	@Autowired
     private BoardService boardService;
 
-    @RequestMapping(method = RequestMethod.POST)
-    public void createBoard(@RequestBody Board board) {
-        this.boardService.createBoard(board);
-    }
-	
-	
     @RequestMapping(value = "/{id}", method = RequestMethod.GET)
     public Board retrieveBoard(@PathVariable(value = "id") Long id) {
         return this.boardService.retrieveBoard(id);
     }
-    
-    @RequestMapping(value = "/{id}", method = RequestMethod.PUT)
-    public void modifyBoard(@RequestBody Board board) {
-        this.boardService.modifyBoard(board);
-    }
-    
+     
     @RequestMapping(value = "/{id}",method = RequestMethod.DELETE)
     public void removeBoard(@PathVariable(value = "id") Long id) {
         this.boardService.removeBoard(id);
