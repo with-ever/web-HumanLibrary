@@ -61,7 +61,7 @@ public class HumanbookServiceImpl implements HumanbookService {
 
 	@Override
 	public void rejectHumanbookRegister(Long id) {
-		this.humanbookRepository.modifyHumanbookState(id, HumanbookState.DENY);
+		this.humanbookRepository.modifyHumanbookState(id, HumanbookState.REJECT);
 	}
 
 	@Override

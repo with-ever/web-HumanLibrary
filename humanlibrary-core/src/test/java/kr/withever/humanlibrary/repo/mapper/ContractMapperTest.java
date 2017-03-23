@@ -65,4 +65,13 @@ public class ContractMapperTest extends WitheverDbUnitTestConfig{
         assertNull(contract);
     }
 
+    @Test
+    public void updateContractState() throws Exception {
+        Contract contract = this.contractMapper.selectContract(1L);
+        this.contractMapper.updateContractState(1L, ContractState.ACCEPT.name());
+
+        Contract updatedContract = this.contractMapper.selectContract(1L);
+        assertEquals(updatedContract.getState(), ContractState.ACCEPT.name());
+    }
+
 }

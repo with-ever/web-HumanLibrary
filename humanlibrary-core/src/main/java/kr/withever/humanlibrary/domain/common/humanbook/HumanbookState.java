@@ -6,7 +6,7 @@ package kr.withever.humanlibrary.domain.common.humanbook;
 public enum HumanbookState {
 
     ACCEPT,
-    DENY,
+    REJECT,
     WAITING,
     CANCEL
 

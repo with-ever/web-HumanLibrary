@@ -1,7 +1,7 @@
 package kr.withever.humanlibrary.repo.mapper;
 
 import kr.withever.humanlibrary.domain.contract.Contract;
-import org.springframework.stereotype.Repository;
+import org.apache.ibatis.annotations.Param;
 
 /**
  * Created by youngjinkim on 2017. 3. 6..
@@ -15,5 +15,7 @@ public interface ContractMapper {
     int updateContract(Contract contract);
 
     int deleteContract(Long contractId);
+
+    int updateContractState(@Param("id") Long contractId, @Param("state") String state);
 
 }

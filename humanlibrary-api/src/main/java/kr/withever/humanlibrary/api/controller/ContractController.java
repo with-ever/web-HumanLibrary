@@ -43,4 +43,18 @@ public class ContractController {
     ) {
         this.contractService.removeContract(contractId);
     }
+
+    @RequestMapping(value = "/{contractId}/accept", method = RequestMethod.PUT)
+    public void acceptContract(
+            @PathVariable(value = "contractId") Long contractId
+    ) {
+        this.contractService.acceptContract(contractId);
+    }
+
+    @RequestMapping(value = "/{contractId}/reject", method = RequestMethod.PUT)
+    public void rejectContract(
+            @PathVariable(value = "contractId") Long contractId
+    ) {
+        this.contractService.rejectContract(contractId);
+    }
 }

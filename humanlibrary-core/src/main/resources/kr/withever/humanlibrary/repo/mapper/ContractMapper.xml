@@ -48,13 +48,13 @@
 
     <select id="selectContract" parameterType="Long" resultMap="contractResultMap">
         SELECT
-        ID
-        ,USER_ID
-        ,HB_ID
-        ,STATE
-        ,CONTRACT_TIME_ID
-        ,CREATE_TIME
-        ,UPDATE_TIME
+            ID
+            ,USER_ID
+            ,HB_ID
+            ,STATE
+            ,CONTRACT_TIME_ID
+            ,CREATE_TIME
+            ,UPDATE_TIME
         FROM CONTRACTS
         WHERE ID = #{contractId}
     </select>
@@ -62,9 +62,9 @@
     <update id="updateContract" parameterType="Contract">
         UPDATE CONTRACTS
         SET
-        STATE = #{state}
-        ,CONTRACT_TIME_ID = #{contractTime.id}
-        ,UPDATE_TIME = #{updateTime}
+            STATE = #{state}
+            ,CONTRACT_TIME_ID = #{contractTime.id}
+            ,UPDATE_TIME = #{updateTime}
         WHERE ID = #{id}
     </update>
 
@@ -73,5 +73,12 @@
         FROM CONTRACTS
         WHERE ID = #{contractId}
     </delete>
+
+    <update id="updateContractState">
+        UPDATE CONTRACTS
+        SET
+          STATE = #{state}
+        WHERE ID = #{id}
+    </update>
 
 </mapper>

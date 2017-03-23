@@ -63,4 +63,14 @@ public class ContractServiceImpl implements ContractService {
     public void removeContract(Long contractId) {
         this.contractRepository.removeContract(contractId);
     }
+
+    @Override
+    public void acceptContract(Long contractId) {
+        this.contractRepository.modifyContractState(contractId, ContractState.ACCEPT.name());
+    }
+
+    @Override
+    public void rejectContract(Long contractId) {
+        this.contractRepository.modifyContractState(contractId, ContractState.REJECT.name());
+    }
 }

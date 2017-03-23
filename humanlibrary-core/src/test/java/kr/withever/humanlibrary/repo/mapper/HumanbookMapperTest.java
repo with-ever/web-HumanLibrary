@@ -45,9 +45,9 @@ public class HumanbookMapperTest extends WitheverDbUnitTestConfig{
 	
 	@Test
 	public void updateHumanbookState() throws Exception{
-		this.humanbookMapper.updateHumanbookState(1L, HumanbookState.DENY);
+		this.humanbookMapper.updateHumanbookState(1L, HumanbookState.REJECT);
 		Humanbook humanbook = this.humanbookMapper.selectHumanbook(1L);
-		assertEquals(HumanbookState.DENY, humanbook.getState());
+		assertEquals(HumanbookState.REJECT, humanbook.getState());
 	}
 	
 	@Test
