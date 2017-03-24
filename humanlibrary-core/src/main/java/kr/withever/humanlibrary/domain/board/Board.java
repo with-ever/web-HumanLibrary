@@ -28,6 +28,8 @@ public class Board {
 
  
     public Board() {
+    	this.createTime = System.currentTimeMillis() / 1000;
+    	this.updateTime = System.currentTimeMillis() / 1000;
     }
 
 	public Long getId() {
@@ -109,6 +111,4 @@ public class Board {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
-	
-	
 }

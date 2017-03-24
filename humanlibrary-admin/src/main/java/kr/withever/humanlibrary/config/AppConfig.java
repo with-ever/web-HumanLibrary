@@ -24,9 +24,4 @@ public class AppConfig {
         return property;
     }
     
-    @Bean
-    public MultipartResolver multipartResolver() {
-        return new CommonsMultipartResolver();
-    }
-
 }
