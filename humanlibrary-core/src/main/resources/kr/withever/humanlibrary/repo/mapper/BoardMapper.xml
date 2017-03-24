@@ -7,32 +7,34 @@
 <mapper namespace="kr.withever.humanlibrary.repo.mapper.BoardMapper">
     <resultMap id="boardResultMap" type="Board">
         <id property="id" column="ID"/>
+        <result property="userId" column="USER_ID"/>
         <result property="type" column="TYPE"/>
-        <result property="createTime" column="CREATE_TIME"/>
-        <result property="updateTime" column="UPDATE_TIME"/>
         <result property="subject" column="SUBJECT"/>
         <result property="contents" column="CONTENTS"/>
         <result property="views" column="VIEWS"/>
-        <result property="userId" column="USER_ID"/>
         <result property="name" column="NAME"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
     </resultMap>
 
     <insert id="insertBoard" parameterType="Board" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
         INSERT INTO BOARD (
-        TYPE
-        ,CREATE_TIME
-        ,SUBJECT
-        ,CONTENTS
-        ,VIEWS
-        ,USER_ID
+            USER_ID
+            ,TYPE
+            ,SUBJECT
+            ,CONTENTS
+            ,VIEWS
+            ,CREATE_TIME
+            ,UPDATE_TIME
         )
         VALUES (
-         #{type}
-        ,unix_timestamp()
+        #{userId}
+        ,#{type}
         ,#{subject}
         ,#{contents}
         ,#{views}
-        ,#{userId}
+        ,#{createTime}
+        ,#{updateTime}
         )
     </insert>
 
