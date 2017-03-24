@@ -99,22 +99,22 @@ public class BoardController {
 
 			String saveFileName = id + "_" + originalFilename;
 
-//
-//			String fileName = saveFileName.substring(0, saveFileName.lastIndexOf("."));
-//
-//			String suffix = saveFileName.substring(saveFileName.lastIndexOf(".") + 1, saveFileName.length());
-//
-//			String relativePath = filePath;
-//			
-//			BoardFile boardFile = new BoardFile();
-//			boardFile.setFileName(fileName);
-//			boardFile.setSuffix(suffix);
-//			boardFile.setRelativePath(relativePath);
-//			boardFile.setBoardId(id);
-//			
-//			result.put("boardFile", boardFile);
-//			
-//			this.boardService.createBoard(result);
+
+			String fileName = saveFileName.substring(0, saveFileName.lastIndexOf("."));
+
+			String suffix = saveFileName.substring(saveFileName.lastIndexOf(".") + 1, saveFileName.length());
+
+			String relativePath = filePath;
+			
+			BoardFile boardFile = new BoardFile();
+			boardFile.setFileName(fileName);
+			boardFile.setSuffix(suffix);
+			boardFile.setRelativePath(relativePath);
+			boardFile.setBoardId(id);
+			
+			result.put("boardFile", boardFile);
+			
+			this.boardService.createBoard(result);
 			
 			mFile.transferTo(new File(filePath + originalFilename));
 		}
