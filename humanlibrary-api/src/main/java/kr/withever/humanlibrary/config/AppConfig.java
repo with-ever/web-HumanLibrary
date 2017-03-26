@@ -22,10 +22,4 @@ public class AppConfig {
         property.setLocations(new Resource[]{new ClassPathResource("application.properties")});
         return property;
     }
-
-    
-    @Bean
-    public MultipartResolver multipartResolver() {
-        return new CommonsMultipartResolver();
-    }
 }
