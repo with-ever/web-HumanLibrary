@@ -66,7 +66,7 @@ public class HumanbookMapperTest extends WitheverDbUnitTestConfig{
 
 	@Test
 	public void insertHumanbook() throws Exception{
-		Category category = new Category(1L,"IT");
+		Category category = new Category(1L,"IT","아이티");
 		SubCategory subCategory = new SubCategory(1L, "DEVELOP", 1L);
 		Humanbook humanbook = new Humanbook();
 		humanbook.setId(3L);
@@ -98,7 +98,7 @@ public class HumanbookMapperTest extends WitheverDbUnitTestConfig{
 
 	@Test
 	public void updateHumanbook() throws Exception{
-		Category category = new Category(1L,"IT");
+		Category category = new Category(1L,"IT","아이티");
 		SubCategory subCategory = new SubCategory(2L, "DBA", 1L);
 		Humanbook humanbook = new Humanbook();
 		humanbook.setId(1L);

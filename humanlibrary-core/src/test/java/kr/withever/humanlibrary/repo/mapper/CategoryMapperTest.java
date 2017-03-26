@@ -48,6 +48,7 @@ public class CategoryMapperTest extends WitheverDbUnitTestConfig{
 		
 		category = this.categoryMapper.selectCategory(2L);
 		assertEquals("COURSE", category.getCategoryName());
+		assertEquals("코스",category.getDesc());
 	}
 	
 	@Test
@@ -61,6 +62,7 @@ public class CategoryMapperTest extends WitheverDbUnitTestConfig{
 		Category newCategory = new Category();
 		newCategory.setId(3L);
 		newCategory.setCategoryName("TOURISM");
+		newCategory.setDesc("관광");
 		this.categoryMapper.insertCategory(newCategory);
 		
 		Category category = this.categoryMapper.selectCategory(3L);

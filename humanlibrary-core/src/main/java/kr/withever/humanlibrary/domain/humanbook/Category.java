@@ -3,16 +3,15 @@ package kr.withever.humanlibrary.domain.humanbook;
 public class Category {
 	private Long id;
 	private String categoryName;
-//	private List<Category> parentCategory;
-	//root category has null in 'parentCategory'
-	//child category has parentCategory's id in 'parentCategory'
+	private String desc;
 	
 	public Category(){
 	}
-	
-	public Category(Long id, String categoryName){
+
+	public Category(Long id, String categoryName, String desc){
 		this.id = id;
 		this.categoryName = categoryName;
+		this.desc = desc;
 	}
 	
 	public Long getId() {
@@ -26,5 +25,11 @@ public class Category {
 	}
 	public void setCategoryName(String categoryName) {
 		this.categoryName = categoryName;
+	}
+	public String getDesc() {
+		return desc;
+	}
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 }

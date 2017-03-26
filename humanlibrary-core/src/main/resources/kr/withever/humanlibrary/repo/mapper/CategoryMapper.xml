@@ -6,12 +6,14 @@
 	<resultMap id="categoryResultMap" type="Category">
 		<id property="id" column="ID"/>
 		<result property="categoryName" column="CATEGORY_NAME"/>
+		<result property="desc" column="DESC"/>
 	</resultMap>
 	
 	<select id="selectCategoriesBySearch" parameterType="CategorySearch" resultMap="categoryResultMap">
 		SELECT 
 			ID
 			,CATEGORY_NAME
+			,`DESC`
 		FROM
 			CATEGORY
 	</select>
@@ -24,13 +26,16 @@
 	</select>
 	
 	<insert id="insertCategory" parameterType="Category" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
-		INSERT INTO CATEGORY(
+		INSERT INTO CATEGORY
+		(
 			ID
 			,CATEGORY_NAME
+			,`DESC`
 		)
 		VALUES(
 			#{id}
 			,#{categoryName}
+			,#{desc}
 		)
 	</insert>
 	
@@ -39,6 +44,7 @@
 			CATEGORY
 		SET
 			CATEGORY_NAME = #{categoryName}
+			,`DESC` = #{desc}
 		WHERE
 			ID = #{id}
 	</update>
@@ -55,6 +61,7 @@
 		SELECT
 			ID
 			,CATEGORY_NAME
+			,`DESC`
 		FROM
 			CATEGORY
 		WHERE
@@ -65,6 +72,7 @@
 		SELECT
 			ID
 			,CATEGORY_NAME
+			,`DESC`
 		FROM
 			CATEGORY
 		WHERE
