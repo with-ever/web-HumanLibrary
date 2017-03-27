@@ -3,19 +3,23 @@
 	<SUB_CATEGORY 
 		ID = "1"
 		CATEGORY_NAME = "DEVELOP"
+		DESC = "개발자"
 		PARENT_CATEGORY_ID = "1"
 	/>
 	<SUB_CATEGORY 
 		ID = "2"
 		CATEGORY_NAME = "DBA"
+		DESC = "디비에이"
 		PARENT_CATEGORY_ID = "1"
 	/>
 	<CATEGORY
 		ID = "1"
 		CATEGORY_NAME = "IT"
+		DESC = "아이티"
 	/>
 	<CATEGORY
 		ID = "2"
 		CATEGORY_NAME = "COURSE"
+		DESC = "코스"
 	/>
 </dataset>

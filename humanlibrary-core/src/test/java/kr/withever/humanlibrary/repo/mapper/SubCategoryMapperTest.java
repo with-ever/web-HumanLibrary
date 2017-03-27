@@ -74,6 +74,7 @@ public class SubCategoryMapperTest extends WitheverDbUnitTestConfig{
 		SubCategory testSubCategory = new SubCategory();
 		testSubCategory.setId(3L);
 		testSubCategory.setCategoryName("OPERATION");
+		testSubCategory.setDesc("경영");
 		testSubCategory.setParentCategoryId(1L);
 		this.subCategoryMapper.insertSubCategory(testSubCategory);
 		
@@ -86,11 +87,13 @@ public class SubCategoryMapperTest extends WitheverDbUnitTestConfig{
 		SubCategory testSubCategory = new SubCategory();
 		testSubCategory.setId(1L);
 		testSubCategory.setCategoryName("SOFTWARE");
+		testSubCategory.setDesc("소프트웨어");
 		testSubCategory.setParentCategoryId(1L);
 		this.subCategoryMapper.updateSubCategory(testSubCategory);
 		
 		subCategory = this.subCategoryMapper.selectSubCategory(1L);
 		assertEquals("SOFTWARE", subCategory.getCategoryName());
+		assertEquals("소프트웨어", subCategory.getDesc());
 	}
 	
 	@Test

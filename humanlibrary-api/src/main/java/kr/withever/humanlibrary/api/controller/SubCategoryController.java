@@ -39,7 +39,7 @@ public class SubCategoryController {
 		this.SubCategoryService.modifySubCategory(subCategory);
 	}
 	
-	@RequestMapping(value = "/{subCategodyId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{subCategoryId}", method = RequestMethod.DELETE)
 	public void removeSubCategory(
 			@PathVariable(value = "subCategoryId") Long subCategoryId
 	){

@@ -6,6 +6,7 @@
 	<resultMap id="subCategoryResultMap" type="SubCategory">
 		<id property="id" column="ID"/>
 		<result property="categoryName" column="CATEGORY_NAME"/>
+		<result property="desc" column="DESC"/>
 		<result property="parentCategoryId" column="PARENT_CATEGORY_ID"/>
 	</resultMap>
 	
@@ -49,11 +50,13 @@
 		INSERT INTO SUB_CATEGORY(
 			ID
 			,CATEGORY_NAME
+			,`DESC`
 			,PARENT_CATEGORY_ID
 		)
 		VALUES(
 			#{id}
 			,#{categoryName}
+			,#{desc}
 			,#{parentCategoryId}
 		)
 	</insert>
@@ -63,6 +66,7 @@
 			SUB_CATEGORY
 		SET
 			CATEGORY_NAME = #{categoryName}
+			,`DESC` = #{desc}
 			,PARENT_CATEGORY_ID = #{parentCategoryId}
 		WHERE
 			ID = #{id}
@@ -80,6 +84,7 @@
 		SELECT 
 			ID
 			,CATEGORY_NAME
+			,`DESC`
 			,PARENT_CATEGORY_ID
 		FROM
 			SUB_CATEGORY
@@ -91,6 +96,7 @@
 		SELECT 
 			ID
 			,CATEGORY_NAME
+			,`DESC`
 			,PARENT_CATEGORY_ID
 		FROM
 			SUB_CATEGORY
