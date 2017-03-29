@@ -17,12 +17,17 @@
         <association property="subCategory" resultMap="subCategoryResultMap"/>
     </resultMap>
     
-    <resultMap type="Category" id="categoryResultMap">
-    	<id property="id" column="ID" />
+    <resultMap id="categoryResultMap" type="Category">
+    	<id property="id" column="PARENT_CATEGORY" />
+    	<result property="categoryName" column="CATEGORY_NAME"/>
+    	<result property="desc" column="DESC"/>
     </resultMap>
     
-    <resultMap type="SubCategory" id="subCategoryResultMap">
-    	<id property="id" column="ID" />
+    <resultMap id="subCategoryResultMap" type="SubCategory">
+    	<id property="id" column="SUB_CATEGORY" />
+    	<result property="categoryName" column="CATEGORY_NAME"/>
+    	<result property="desc" column="DESC"/>
+    	<result property="parentCategoryId" column="PARENT_CATEGORY"/>
     </resultMap>
     
     <select id="selectHumanbooksBySearch" parameterType="HumanbookSearch" resultMap="humanbookResultMap">
