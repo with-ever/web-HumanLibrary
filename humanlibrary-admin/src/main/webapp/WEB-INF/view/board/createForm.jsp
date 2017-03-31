@@ -33,6 +33,7 @@
 			<tr>
 				<th>파일</th>
 				<td><input type="file" name="files" required="required"></td>
+				<td><input type="file" name="files" required="required"></td>
 			</tr>
 
 			<tr>

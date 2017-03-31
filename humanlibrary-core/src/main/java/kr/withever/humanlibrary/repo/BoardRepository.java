@@ -40,10 +40,11 @@ public class BoardRepository {
 	}
 
 	public void createBoard(Board board) {
-		this.boardMapper.insertBoard(board);
 		BoardFile boardFile = board.getBoardFile();
 		if (boardFile != null) {
 			this.boardFileMapper.insertBoardFile(boardFile);
+		}else{			
+			this.boardMapper.insertBoard(board);
 		}
 	}
 
