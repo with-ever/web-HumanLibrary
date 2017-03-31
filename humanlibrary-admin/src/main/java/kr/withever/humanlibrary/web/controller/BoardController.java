@@ -2,17 +2,11 @@ package kr.withever.humanlibrary.web.controller;
 
 import kr.withever.humanlibrary.domain.board.Board;
 import kr.withever.humanlibrary.domain.board.BoardFile;
-import kr.withever.humanlibrary.security.LoginUser;
 import kr.withever.humanlibrary.service.BoardService;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.Iterator;
-import java.util.Set;
-
-import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -39,7 +33,7 @@ public class BoardController {
 		mav.setViewName("/board/list");
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/createForm", method = RequestMethod.GET)
 	public ModelAndView createBoardForm() {
 		ModelAndView mav = new ModelAndView();
@@ -48,75 +42,53 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public void createBoard(HttpServletRequest request) throws IllegalStateException, IOException {
-			
-		ModelMap result = new ModelMap();
-		
-		String filePath =request.getSession().getServletContext().getRealPath("/WEB-INF/file/");
-		
-		System.out.println("filePath:"+filePath);
-		
-		File dir = new File(filePath); 
+	public void createBoard(Board board, HttpServletRequest request) throws IllegalStateException, IOException {
 
-		if (!dir.isDirectory()) {  // 폴더가 없을시 만듬
+		String filePath = request.getSession().getServletContext().getRealPath("/WEB-INF/file/");
+
+		System.out.println("filePath:" + filePath);
+
+		File dir = new File(filePath);
+
+		if (!dir.isDirectory()) { // 폴더가 없을시 만듬
 
 			dir.mkdirs();
 
 		}
-		
-		
-		MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
 
 		Long userId = 123L;
 
-		String type = request.getParameter("type");
-
-		String subject = request.getParameter("subject");
-
-		String contents = request.getParameter("contents");
-		
-		Board board = new Board();
 		board.setUserId(userId);
-		board.setType(type);
-		board.setSubject(subject);
-		board.setContents(contents);
 
-		result.put("board", board);
+		this.boardService.createBoard(board);
+
+		Long boardId = 123L; // 추후 insert된 board id로 수정
 		
-		this.boardService.createBoard(result);
-		
-		Long id = 123L; // 추후 insert된 id로 수정
-		
-		Iterator<String> iter = multipartHttpServletRequest.getFileNames();
+		if (board.getFiles() != null) {
+			for (MultipartFile file : board.getFiles()) {
 
-		while (iter.hasNext()) {
+				String originalFilename = file.getOriginalFilename();
 
-			String uploadFileName = iter.next();
+				String saveFileName = boardId + "_" + originalFilename;
 
-			MultipartFile mFile = multipartHttpServletRequest.getFile(uploadFileName);
+				String fileName = saveFileName.substring(0, saveFileName.lastIndexOf("."));
 
-			String originalFilename = mFile.getOriginalFilename();
+				String suffix = saveFileName.substring(saveFileName.lastIndexOf(".") + 1, saveFileName.length());
 
-			String saveFileName = id + "_" + originalFilename;
+				String relativePath = filePath;
 
+				BoardFile boardFile = new BoardFile();
+				boardFile.setFileName(fileName);
+				boardFile.setSuffix(suffix);
+				boardFile.setRelativePath(relativePath);
+				boardFile.setBoardId(boardId);
 
-			String fileName = saveFileName.substring(0, saveFileName.lastIndexOf("."));
+				board.setBoardFile(boardFile);
 
-			String suffix = saveFileName.substring(saveFileName.lastIndexOf(".") + 1, saveFileName.length());
+				this.boardService.createBoard(board);
 
-			String relativePath = filePath;
-			
-			BoardFile boardFile = new BoardFile();
-			boardFile.setFileName(fileName);
-			boardFile.setSuffix(suffix);
-			boardFile.setRelativePath(relativePath);
-			boardFile.setBoardId(id);
-			
-			result.put("boardFile", boardFile);
-			
-			this.boardService.createBoard(result);
-			
-			mFile.transferTo(new File(filePath + originalFilename));
+				file.transferTo(new File(filePath + saveFileName));
+			}
 		}
 
 	}

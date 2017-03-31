@@ -33,13 +33,13 @@ public class BoardServiceImpl implements BoardService{
     }
 
     @Override
-    public void createBoard(ModelMap result) {
-    	this.boardRepository.createBoard(result);
+    public void createBoard(Board board) {
+    	this.boardRepository.createBoard(board);
     }
 
     @Override
-    public void modifyBoard(ModelMap result) {
-        this.boardRepository.modifyBoard(result);
+    public void modifyBoard(Board board) {
+        this.boardRepository.modifyBoard(board);
     }
 
     @Override

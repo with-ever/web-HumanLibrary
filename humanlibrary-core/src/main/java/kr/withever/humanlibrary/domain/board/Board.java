@@ -1,4 +1,5 @@
 package kr.withever.humanlibrary.domain.board;
+import org.springframework.web.multipart.MultipartFile;
 
 
 /**
@@ -25,6 +26,10 @@ public class Board {
 	private String name;
 	
 	private String fileName;
+	
+    private MultipartFile[] files;
+    
+    private BoardFile boardFile;
 
  
     public Board() {
@@ -111,4 +116,23 @@ public class Board {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
+
+
+	public MultipartFile[] getFiles() {
+		return files;
+	}
+
+	public void setFiles(MultipartFile[] files) {
+		this.files = files;
+	}
+
+	public BoardFile getBoardFile() {
+		return boardFile;
+	}
+
+	public void setBoardFile(BoardFile boardFile) {
+		this.boardFile = boardFile;
+	}
+	
+	
 }

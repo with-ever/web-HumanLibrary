@@ -14,9 +14,9 @@ public interface BoardService {
 
     Board retrieveBoard(Long id);
 
-    void createBoard(ModelMap result);
+    void createBoard(Board board);
 
-	void modifyBoard(ModelMap result);
+	void modifyBoard(Board board);
 
 	void removeBoard(Long id);
 

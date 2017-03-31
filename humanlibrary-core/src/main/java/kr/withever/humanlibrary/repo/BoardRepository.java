@@ -22,65 +22,57 @@ import kr.withever.humanlibrary.repo.mapper.BoardMapper;
  */
 @Repository
 public class BoardRepository {
-	
+
 	@Autowired
 	private BoardMapper boardMapper;
-	
+
 	@Autowired
 	private BoardFileMapper boardFileMapper;
-	
-		
-	public Board retrieveBoard(Long id){
-	 Board board =this.boardMapper.selectBoard(id);
-	 if(board != null ){
-		 BoardFile boardFile =  this.boardFileMapper.selectBoardFile(id);		 
-		 board.setFileName(boardFile.getFileName());
-	 }	
+
+	public Board retrieveBoard(Long id) {
+		Board board = this.boardMapper.selectBoard(id);
+		if (board != null) {
+			BoardFile boardFile = this.boardFileMapper.selectBoardFile(id);
+			board.setFileName(boardFile.getFileName());
+		}
 		return board;
-		
+
 	}
-		
-	public void createBoard(ModelMap result){
-		Board board = (Board) result.get("board");
-		BoardFile boardFile = (BoardFile) result.get("boardFile");
-			this.boardMapper.insertBoard(board);
-			if(boardFile != null ){
-				this.boardFileMapper.insertBoardFile(boardFile);
-	 }
+
+	public void createBoard(Board board) {
+		this.boardMapper.insertBoard(board);
+		BoardFile boardFile = board.getBoardFile();
+		if (boardFile != null) {
+			this.boardFileMapper.insertBoardFile(boardFile);
+		}
 	}
-	
-	public void modifyBoard(ModelMap result){
+
+	public void modifyBoard(Board board) {
+		this.boardMapper.updateBoard(board);
+		BoardFile boardFile = board.getBoardFile();
+		if (boardFile != null) {
+			this.boardFileMapper.updateBoardFile(boardFile);
+		}
+	}
+
+	public void removeBoard(Long id) {
 		try {
-			Board board = (Board) result.get("board");
-			BoardFile boardFile = (BoardFile) result.get("boardFile");
-			this.boardMapper.updateBoard(board);
-			if(boardFile != null ){
-				this.boardFileMapper.updateBoardFile(boardFile);
-			}
+			this.boardMapper.deleteBoard(id);
+			this.boardFileMapper.deleteBoardFile(id);
 		} catch (Exception e) {
 			// @TODO error code update
 			// throw new HumanLibraryRuntimeException(e, ExceptionType.US10000);
-        }
+		}
 	}
 
-	public void removeBoard(Long id){
-		try{
-			this.boardMapper.deleteBoard(id);
-			this.boardFileMapper.deleteBoardFile(id);
-		}catch (Exception e) {
-			// @TODO error code update
-			// throw new HumanLibraryRuntimeException(e, ExceptionType.US10000);
-        }
-	}
-	
 	public BoardSearch retrieveBoardBySearch(BoardSearch search) {
-        List<Board> board = this.boardMapper.selectBoardBySearch(search);
-        search.setResults(board);
-        if (board.size() != 0) {
-            int totalCount = this.boardMapper.selectBoardTotalCountBySearch(search);
-            search.setTotalCount(totalCount);
-        }
-        return search;
-    }
-	
+		List<Board> board = this.boardMapper.selectBoardBySearch(search);
+		search.setResults(board);
+		if (board.size() != 0) {
+			int totalCount = this.boardMapper.selectBoardTotalCountBySearch(search);
+			search.setTotalCount(totalCount);
+		}
+		return search;
+	}
+
 }
