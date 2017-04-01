@@ -29,8 +29,6 @@ public class Board {
 	
     private MultipartFile[] files;
     
-    private BoardFile boardFile;
-
  
     public Board() {
     	this.createTime = System.currentTimeMillis() / 1000;
@@ -124,14 +122,6 @@ public class Board {
 
 	public void setFiles(MultipartFile[] files) {
 		this.files = files;
-	}
-
-	public BoardFile getBoardFile() {
-		return boardFile;
-	}
-
-	public void setBoardFile(BoardFile boardFile) {
-		this.boardFile = boardFile;
 	}
 	
 	

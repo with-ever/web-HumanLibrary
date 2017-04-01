@@ -1,10 +1,12 @@
 package kr.withever.humanlibrary.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.ui.ModelMap;
 
 import kr.withever.humanlibrary.domain.board.Board;
+import kr.withever.humanlibrary.domain.board.BoardFile;
 import kr.withever.humanlibrary.domain.board.BoardSearch;
 
 /**
@@ -14,7 +16,7 @@ public interface BoardService {
 
     Board retrieveBoard(Long id);
 
-    void createBoard(Board board);
+    void createBoard(Board board,List<BoardFile> boardFileList);
 
 	void modifyBoard(Board board);
 

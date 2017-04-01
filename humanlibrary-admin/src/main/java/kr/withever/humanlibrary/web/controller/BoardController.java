@@ -5,7 +5,10 @@ import kr.withever.humanlibrary.domain.board.BoardFile;
 import kr.withever.humanlibrary.service.BoardService;
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Iterator;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
@@ -44,6 +47,8 @@ public class BoardController {
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
 	public void createBoard(Board board, HttpServletRequest request) throws IllegalStateException, IOException {
 
+		List<BoardFile> boardFileList = new ArrayList<BoardFile>();
+
 		String filePath = request.getSession().getServletContext().getRealPath("/WEB-INF/file/");
 
 		System.out.println("filePath:" + filePath);
@@ -60,10 +65,8 @@ public class BoardController {
 
 		board.setUserId(userId);
 
-		this.boardService.createBoard(board);
+		Long boardId = 123L; // 추후 insert된 board id로 수정(board row+1)
 
-		Long boardId = 123L; // 추후 insert된 board id로 수정
-		
 		if (board.getFiles() != null) {
 			for (MultipartFile file : board.getFiles()) {
 
@@ -76,20 +79,18 @@ public class BoardController {
 				String suffix = saveFileName.substring(saveFileName.lastIndexOf(".") + 1, saveFileName.length());
 
 				String relativePath = filePath;
-
 				BoardFile boardFile = new BoardFile();
 				boardFile.setFileName(fileName);
 				boardFile.setSuffix(suffix);
 				boardFile.setRelativePath(relativePath);
 				boardFile.setBoardId(boardId);
 
-				board.setBoardFile(boardFile);
-
-				this.boardService.createBoard(board);
-
+				boardFileList.add(boardFile);
 				file.transferTo(new File(filePath + saveFileName));
 			}
 		}
+		
+		this.boardService.createBoard(board, boardFileList);
 
 	}
 
