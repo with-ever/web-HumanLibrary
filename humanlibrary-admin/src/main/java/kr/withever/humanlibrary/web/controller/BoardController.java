@@ -86,11 +86,14 @@ public class BoardController {
 				boardFile.setBoardId(boardId);
 
 				boardFileList.add(boardFile);
+				
+				board.setBoardFileList(boardFileList);
+				
 				file.transferTo(new File(filePath + saveFileName));
 			}
 		}
 		
-		this.boardService.createBoard(board, boardFileList);
+		this.boardService.createBoard(board);
 
 	}
 

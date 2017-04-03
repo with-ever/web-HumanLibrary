@@ -16,7 +16,7 @@ public interface BoardService {
 
     Board retrieveBoard(Long id);
 
-    void createBoard(Board board,List<BoardFile> boardFileList);
+    void createBoard(Board board);
 
 	void modifyBoard(Board board);
 

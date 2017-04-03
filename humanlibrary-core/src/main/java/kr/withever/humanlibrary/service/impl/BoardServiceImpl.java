@@ -33,11 +33,11 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void createBoard(Board board, List<BoardFile> boardFileList) {
+	public void createBoard(Board board) {
 		this.boardRepository.createBoard(board);
-		if (boardFileList != null) {
-			for (int i = 0; i < boardFileList.size(); i++) {
-				this.boardFileRepository.createBoardFile(boardFileList.get(i));
+		if (board.getBoardFileList() != null) {
+			for (int i = 0; i < board.getBoardFileList().size(); i++) {
+				this.boardFileRepository.createBoardFile(board.getBoardFileList().get(i));
 			}
 		}
 

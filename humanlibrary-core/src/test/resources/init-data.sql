@@ -208,3 +208,14 @@ INSERT INTO
 	('SMALL LIBRARY LIBRARIAN','작은 도서관 사서','21'),
 	('SPECIAL LIBRARY LIBRARIAN','특수/전문 도서관 사서','21');
 	-- 휴먼라이브러리 직원
+
+	
+	
+INSERT INTO BOARD
+	  (ID, `TYPE`, CREATE_TIME, UPDATE_TIME, SUBJECT, CONTENTS, VIEWS, USER_ID) VALUES
+	  -- TYPE 'MP' 주요프로그램
+	  (0,'MP', 1490258697, 1490258697,'주요프로그램 제목','주요프로그램 내용',1,1),
+	  -- TYPE 'PT' 게시물 
+	  (0,'PT', 1490258697, 1490258697,'게시물 제목','게시물 내용',1,1),
+	  -- TYPE 'NT' 공지사항
+	  (0,'NT', 1490258697, 1490258697,'공지사항 제목','공지사항 내용',1,1);
