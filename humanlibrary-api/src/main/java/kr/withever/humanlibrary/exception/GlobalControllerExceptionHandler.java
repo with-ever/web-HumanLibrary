@@ -25,7 +25,7 @@ public class GlobalControllerExceptionHandler {
 
     @ExceptionHandler({HumanLibraryRuntimeException.class})
     public ResponseEntity<HumanLibraryErrorMessage> makeApiException(HumanLibraryRuntimeException exception) {
-        String message = messageSource.getMessage(exception.getCode().name(), exception.getMessages().toArray(), Locale.KOREA);
+        String message = messageSource.getMessage(exception.getCode().name(), exception.getMessages() != null ? exception.getMessages().toArray() : null, Locale.KOREA);
         HumanLibraryErrorMessage errorMessage = new HumanLibraryErrorMessage(exception.getCode(), message);
         ResponseEntity<HumanLibraryErrorMessage> responseEntity = new ResponseEntity<HumanLibraryErrorMessage>(errorMessage, HttpStatus.INTERNAL_SERVER_ERROR);
         return responseEntity;
@@ -33,7 +33,7 @@ public class GlobalControllerExceptionHandler {
 
     @ExceptionHandler({HumanLibraryNotFoundException.class})
     public ResponseEntity<HumanLibraryErrorMessage> makeNotFoundApiException(HumanLibraryNotFoundException exception) {
-        String message = messageSource.getMessage(exception.getCode().name(), exception.getMessages().toArray(), Locale.KOREA);
+        String message = messageSource.getMessage(exception.getCode().name(), exception.getMessages() != null ? exception.getMessages().toArray() : null, Locale.KOREA);
         HumanLibraryErrorMessage errorMessage = new HumanLibraryErrorMessage(exception.getCode(), message);
         ResponseEntity<HumanLibraryErrorMessage> responseEntity = new ResponseEntity<HumanLibraryErrorMessage>(errorMessage, HttpStatus.NOT_FOUND);
         return responseEntity;

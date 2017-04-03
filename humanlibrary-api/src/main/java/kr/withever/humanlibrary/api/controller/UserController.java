@@ -1,10 +1,15 @@
 package kr.withever.humanlibrary.api.controller;
 
+import kr.withever.humanlibrary.domain.common.exception.ExceptionType;
 import kr.withever.humanlibrary.domain.user.User;
 import kr.withever.humanlibrary.domain.user.UserSearch;
+import kr.withever.humanlibrary.exception.HumanLibraryRuntimeException;
 import kr.withever.humanlibrary.service.UserService;
+import kr.withever.humanlibrary.util.HumanLibraryResponse;
+import kr.withever.humanlibrary.util.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
@@ -21,12 +26,16 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private PasswordEncoder encoder;
+
     @RequestMapping(method = RequestMethod.POST)
-    public Long createUser(
+    public HumanLibraryResponse createUser(
             @RequestBody User user
     ) {
-        user.setPassword(new BCryptPasswordEncoder().encode(user.getPassword()));
-        return this.userService.createUser(user);
+        user.setPassword(encoder.encode(user.getPassword()));
+        Long userId = this.userService.createUser(user);
+        return new HumanLibraryResponse(userId);
     }
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
@@ -43,7 +52,6 @@ public class UserController {
         return this.userService.retrieveUserBySearch(search);
     }
 
-    // need test. 20170310 by youngjin.
     @RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
     public void modifyUser(
             @PathVariable(value = "userId") Long userId,
@@ -52,30 +60,27 @@ public class UserController {
         this.userService.modifyUser(user);
     }
 
-    // need test. 20170310 by youngjin.
     @RequestMapping(value="/verification/{loginId}", method = RequestMethod.GET)
-    public Map<String, Boolean> verifyLoginId(
+    public HumanLibraryResponse verifyLoginId(
             @PathVariable(value="loginId") String loginId
     ) {
         Map<String, Boolean> result = new HashMap<String, Boolean>();
         User user = this.userService.retrieveUserByLoginId(loginId);
-        if (user != null) result.put("isExsited", true);
-        return result;
+        return user != null ? new HumanLibraryResponse(true) : new HumanLibraryResponse(false);
     }
 
-    // need test. 20170310 by youngjin.
     @RequestMapping(value = "/password/{userId}", method = RequestMethod.PUT)
-    public Map<String, String> changePassword(
+    public HumanLibraryResponse changePassword(
             @PathVariable Long userId,
             @RequestBody Map<String, Object> requestParam
     ) {
-        Map<String, String> result = new HashMap<String, String>();
         String password = (String) requestParam.get("password");
         String newPassword = (String) requestParam.get("newPassword");
-        BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
-        this.userService.modifyUserPassword(userId, encoder.encode(password), encoder.encode(newPassword));
-        result.put("result", "success");
-        return result;
+
+        boolean isMatched = encoder.matches(password, this.userService.retrievePasswordByUserId(userId));
+        if (!isMatched) throw new HumanLibraryRuntimeException(ExceptionType.US_500_003);
+        this.userService.modifyUserPassword(userId, encoder.encode(newPassword));
+        return new HumanLibraryResponse("success");
     }
 
 }

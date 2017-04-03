@@ -1,5 +1,6 @@
 package kr.withever.humanlibrary.api.controller;
 
+import kr.withever.humanlibrary.util.HumanLibraryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -22,10 +23,10 @@ public class HumanbookController {
 	private HumanbookService humanbookService;
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public Long createHumanbook(
+	public HumanLibraryResponse createHumanbook(
 			@RequestBody Humanbook humanbook
 			){
-		return this.humanbookService.createHumanbook(humanbook);
+		return new HumanLibraryResponse(this.humanbookService.createHumanbook(humanbook));
 	}
 	
 	@RequestMapping(value = "/{hbId}", method = RequestMethod.GET)

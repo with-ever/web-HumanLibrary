@@ -21,5 +21,7 @@ public interface UserService {
 
     UserSearch retrieveUserBySearch(UserSearch search);
 
-    void modifyUserPassword(Long userId, String encode, String encode1);
+    void modifyUserPassword(Long userId, String newPassword);
+
+    String retrievePasswordByUserId(Long userId);
 }

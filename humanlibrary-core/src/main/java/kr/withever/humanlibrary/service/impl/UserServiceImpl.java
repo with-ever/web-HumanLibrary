@@ -69,8 +69,12 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public void modifyUserPassword(Long userId, String password, String newPassword) {
-        if (!this.userRepository.verifyUserByIdWithPassword(userId, password)) throw new HumanLibraryRuntimeException(ExceptionType.US_500_003);
+    public void modifyUserPassword(Long userId, String newPassword) {
         this.userRepository.modifyUserPassword(userId, newPassword);
+    }
+
+    @Override
+    public String retrievePasswordByUserId(Long userId) {
+        return this.userRepository.retrievePasswordByUserId(userId);
     }
 }

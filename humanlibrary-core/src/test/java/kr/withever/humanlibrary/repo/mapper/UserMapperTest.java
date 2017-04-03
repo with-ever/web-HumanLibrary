@@ -102,4 +102,10 @@ public class UserMapperTest extends WitheverDbUnitTestConfig {
         assertTrue(isExsited);
     }
 
+    @Test
+    public void selectPasswordByUserId() throws Exception {
+        String password = this.userMapper.selectPasswordByUserId(2L);
+        assertEquals(password, "1234");
+    }
+
 }

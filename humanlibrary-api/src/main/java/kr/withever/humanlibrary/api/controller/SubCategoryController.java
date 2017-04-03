@@ -1,5 +1,6 @@
 package kr.withever.humanlibrary.api.controller;
 
+import kr.withever.humanlibrary.util.HumanLibraryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,10 +20,10 @@ public class SubCategoryController {
 	private SubCategoryService SubCategoryService;
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public Long createSubCategory(
+	public HumanLibraryResponse createSubCategory(
 			@RequestBody SubCategory subCategory
 	){
-		return this.SubCategoryService.createSubCategory(subCategory);
+		return new HumanLibraryResponse(this.SubCategoryService.createSubCategory(subCategory));
 	}
 	
 	@RequestMapping(value = "/{subCategoryId}", method = RequestMethod.GET)

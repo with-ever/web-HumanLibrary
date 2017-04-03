@@ -165,4 +165,11 @@
         WHERE USER_ID = #{userId}
     </update>
 
+    <select id="selectPasswordByUserId" resultType="String">
+        SELECT
+          PASSWORD
+        FROM USERS
+        WHERE USER_ID = #{userId}
+    </select>
+
 </mapper>

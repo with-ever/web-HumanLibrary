@@ -81,10 +81,15 @@ public class UserRepository {
     }
 
     public boolean verifyUserByIdWithPassword(Long userId, String password) {
-        return this.userMapper.selectUserByIdWithPassword(userId, password);
+        boolean b = this.userMapper.selectUserByIdWithPassword(userId, password);
+        return b;
     }
 
     public int modifyUserPassword(Long userId, String newPassword) {
         return this.userMapper.updateUserPassword(userId, newPassword);
+    }
+
+    public String retrievePasswordByUserId(Long userId) {
+        return this.userMapper.selectPasswordByUserId(userId);
     }
 }

@@ -2,6 +2,7 @@ package kr.withever.humanlibrary.api.controller;
 
 import kr.withever.humanlibrary.domain.contract.Contract;
 import kr.withever.humanlibrary.service.ContractService;
+import kr.withever.humanlibrary.util.HumanLibraryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,10 +18,10 @@ public class ContractController {
     private ContractService contractService;
 
     @RequestMapping(method = RequestMethod.POST)
-    public Long createContract(
+    public HumanLibraryResponse createContract(
             @RequestBody Contract contract
     ) {
-        return this.contractService.createContract(contract);
+        return new HumanLibraryResponse(this.contractService.createContract(contract));
     }
 
     @RequestMapping(value = "/{contractId}", method = RequestMethod.GET)

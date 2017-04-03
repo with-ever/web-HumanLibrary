@@ -1,6 +1,7 @@
 package kr.withever.humanlibrary.config;
 
 import org.apache.commons.dbcp.BasicDataSource;
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -16,7 +17,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
  * Created by youngjinkim on 2017. 2. 7..
  */
 @Configuration
-@MapperScan(basePackages = {"kr.withever.humanlibrary.repo.mapper"})
+@MapperScan(basePackages = {"kr.withever.humanlibrary.repo.mapper"}, annotationClass = Mapper.class)
 @EnableTransactionManagement
 public class DbConfig {
     @Bean

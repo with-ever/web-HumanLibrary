@@ -4,7 +4,9 @@ import java.util.List;
 
 import kr.withever.humanlibrary.domain.humanbook.Category;
 import kr.withever.humanlibrary.domain.humanbook.CategorySearch;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface CategoryMapper {
 	
 	Category selectCategory(Long id);

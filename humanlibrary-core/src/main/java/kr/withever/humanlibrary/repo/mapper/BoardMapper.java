@@ -5,11 +5,13 @@ import kr.withever.humanlibrary.domain.board.BoardSearch;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 /**
  * Created by hyunseunglee on 2017. 2. 28..
  */
+@Mapper
 public interface BoardMapper {
 
     int insertBoard(Board board);

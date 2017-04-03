@@ -2,12 +2,14 @@ package kr.withever.humanlibrary.repo.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import kr.withever.humanlibrary.domain.common.humanbook.HumanbookState;
 import kr.withever.humanlibrary.domain.humanbook.Humanbook;
 import kr.withever.humanlibrary.domain.humanbook.HumanbookSearch;
 
+@Mapper
 public interface HumanbookMapper {
 	
 	Humanbook selectHumanbook(Long id);
