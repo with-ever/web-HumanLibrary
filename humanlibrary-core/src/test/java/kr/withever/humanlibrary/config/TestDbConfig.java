@@ -1,5 +1,6 @@
 package kr.withever.humanlibrary.config;
 
+import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.SqlSessionTemplate;
@@ -22,7 +23,7 @@ import javax.sql.DataSource;
  */
 @Configuration
 @ComponentScan(basePackages = {"kr.withever.humanlibrary"})
-@MapperScan(basePackages = {"kr.withever.humanlibrary.repo.mapper"})
+@MapperScan(basePackages = {"kr.withever.humanlibrary.repo.mapper"}, annotationClass = Mapper.class)
 @EnableTransactionManagement
 public class TestDbConfig {
 
