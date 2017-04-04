@@ -6,11 +6,16 @@ import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import kr.withever.humanlibrary.config.WitheverDbUnitTestConfig;
 import kr.withever.humanlibrary.domain.common.humanbook.ContractState;
 import kr.withever.humanlibrary.domain.contract.Contract;
+import kr.withever.humanlibrary.domain.contract.ContractSearch;
 import kr.withever.humanlibrary.domain.contract.ContractTime;
 import kr.withever.humanlibrary.domain.humanbook.Humanbook;
 import kr.withever.humanlibrary.domain.user.User;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -31,9 +36,10 @@ public class ContractMapperTest extends WitheverDbUnitTestConfig{
         contract.setUser(new User(2L));
         contract.setHumanbook(new Humanbook(2L));
         contract.setState(ContractState.WAITING.name());
+        contract.setContractTime(new ContractTime(1L, "20170404", "16"));
         this.contractMapper.insertContract(contract);
 
-        Contract insertedContract = this.contractMapper.selectContract(2L);
+        Contract insertedContract = this.contractMapper.selectContract(6L);
 
         assertEquals(insertedContract.getState(), contract.getState());
     }
@@ -42,6 +48,28 @@ public class ContractMapperTest extends WitheverDbUnitTestConfig{
     public void selectContract() throws Exception {
         Contract contract = this.contractMapper.selectContract(1L);
         assertEquals(1, (long) contract.getId());
+        assertEquals("20170201", contract.getContractTime().getDate());
+        assertEquals("12", contract.getContractTime().getTime());
+    }
+
+    @Test
+    public void selectContractsBySearch() {
+        ContractSearch search = new ContractSearch();
+        search.setUserId(1L);
+        search.setState(Arrays.asList(ContractState.ACCEPT.name(), ContractState.WAITING.name()));
+        search.setStartDate("201702");
+        search.setEndDate("201703");
+
+        List<Contract> contracts = this.contractMapper.selectContractsBySearch(search);
+        assertEquals(1, contracts.size());
+    }
+
+    @Test
+    public void selectContractsTotalCountBySearch() {
+        ContractSearch search = new ContractSearch();
+        search.setHbId(1L);
+        int count = this.contractMapper.selectContractsTotalCountBySearch(search);
+        assertEquals(5, count);
     }
 
     @Test

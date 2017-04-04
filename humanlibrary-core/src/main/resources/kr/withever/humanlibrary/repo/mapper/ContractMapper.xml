@@ -24,6 +24,8 @@
 
     <resultMap type="ContractTime" id="contractTimeResultMap" >
         <id		property="id"		column="CONTRACT_TIME_ID"/>
+        <result property="date"     column="DATE"/>
+        <result property="time"     column="TIME"/>
     </resultMap>
 
     <insert id="insertContract" parameterType="Contract" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
@@ -32,6 +34,8 @@
         ,HB_ID
         ,STATE
         ,CONTRACT_TIME_ID
+        ,DATE
+        ,TIME
         ,CREATE_TIME
         ,UPDATE_TIME
         )
@@ -40,6 +44,8 @@
         ,#{humanbook.id}
         ,#{state}
         ,#{contractTime.id}
+        ,#{contractTime.date}
+        ,#{contractTime.time}
         ,#{createTime}
         ,#{updateTime}
         )
@@ -53,10 +59,65 @@
             ,HB_ID
             ,STATE
             ,CONTRACT_TIME_ID
+            ,DATE
+            ,TIME
             ,CREATE_TIME
             ,UPDATE_TIME
         FROM CONTRACTS
         WHERE ID = #{contractId}
+    </select>
+
+    <select id="selectContractsBySearch" parameterType="ContractSearch" resultMap="contractResultMap">
+        SELECT
+            ID
+            ,USER_ID
+            ,HB_ID
+            ,STATE
+            ,CONTRACT_TIME_ID
+            ,DATE
+            ,TIME
+            ,CREATE_TIME
+            ,UPDATE_TIME
+        FROM CONTRACTS
+        WHERE 1 = 1
+        <if test="userId != null and userId != 0">
+            AND USER_ID = #{userId}
+        </if>
+        <if test="hbId != null and hbId != 0">
+            AND HB_ID = #{hbId}
+        </if>
+        <if test="state != null">
+            AND STATE IN
+            <foreach item="item" collection="state" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
+            AND DATE > #{startDate} AND #{endDate} > DATE AND STATE = 'ACCEPT'
+        </if>
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="selectContractsTotalCountBySearch" parameterType="ContractSearch" resultType="int">
+        SELECT
+          COUNT(1)
+        FROM CONTRACTS
+        WHERE 1 = 1
+        <if test="userId != null and userId != 0">
+            AND USER_ID = #{userId}
+        </if>
+        <if test="hbId != null and hbId != 0">
+            AND HB_ID = #{hbId}
+        </if>
+        <if test="state != null">
+            AND STATE IN
+            <foreach item="item" collection="state" open="(" separator="," close=")">
+                #{item}
+            </foreach>
+        </if>
+        <if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
+            AND DATE > #{startDate} AND #{endDate} > DATE AND STATE = 'ACCEPT'
+        </if>
     </select>
 
     <update id="updateContract" parameterType="Contract">
@@ -64,6 +125,8 @@
         SET
             STATE = #{state}
             ,CONTRACT_TIME_ID = #{contractTime.id}
+            ,DATE = #{contractTime.date}
+            ,TIME = #{contractTime.time}
             ,UPDATE_TIME = #{updateTime}
         WHERE ID = #{id}
     </update>

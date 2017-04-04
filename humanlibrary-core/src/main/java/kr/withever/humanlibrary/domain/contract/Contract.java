@@ -13,14 +13,19 @@ public class Contract {
 
     private Long id;
 
+    /** 구독자 **/
     private User user;
 
+    /** 휴먼북 **/
     private Humanbook humanbook;
 
+    /** {@link ContractState} **/
     private String state;
 
+    /** 계약 시간 **/
     private ContractTime contractTime;
 
+    /** 계약 가능한 시간 **/
     private List<ContractTime> availableContractTimes;
 
     private Long createTime;

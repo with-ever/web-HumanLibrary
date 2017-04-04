@@ -6,7 +6,54 @@
             HB_ID = "1"
             STATE = "WAITING"
             CONTRACT_TIME_ID = "2"
+            DATE = "20170201"
+            TIME = "12"
             CREATE_TIME = "111111"
             UPDATE_TIME = "222222"
     />
+    <CONTRACTS
+            ID = "2"
+            USER_ID = "1"
+            HB_ID = "1"
+            STATE = "ACCEPT"
+            CONTRACT_TIME_ID = "3"
+            DATE = "20170202"
+            TIME = "12"
+            CREATE_TIME = "111111"
+            UPDATE_TIME = "222222"
+    />
+    <CONTRACTS
+            ID = "3"
+            USER_ID = "2"
+            HB_ID = "1"
+            STATE = "REJECT"
+            CONTRACT_TIME_ID = "4"
+            DATE = "20170301"
+            TIME = "12"
+            CREATE_TIME = "111111"
+            UPDATE_TIME = "222222"
+    />
+    <CONTRACTS
+            ID = "4"
+            USER_ID = "2"
+            HB_ID = "1"
+            STATE = "CANCEL"
+            CONTRACT_TIME_ID = "5"
+            DATE = "20170331"
+            TIME = "12"
+            CREATE_TIME = "111111"
+            UPDATE_TIME = "222222"
+    />
+    <CONTRACTS
+            ID = "5"
+            USER_ID = "3"
+            HB_ID = "1"
+            STATE = "WAITING"
+            CONTRACT_TIME_ID = "6"
+            DATE = "20170404"
+            TIME = "12"
+            CREATE_TIME = "111111"
+            UPDATE_TIME = "222222"
+    />
+
 </dataset>

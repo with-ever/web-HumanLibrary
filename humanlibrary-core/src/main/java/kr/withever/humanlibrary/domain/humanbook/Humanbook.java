@@ -10,8 +10,9 @@ public class Humanbook implements Serializable{
 
 	private static final long serialVersionUID = -5705360965002860670L;
 
-	private Long id; // humanbook primary key
-	private String userId; // login id
+	private Long id;
+	/** 휴먼북 등록한 사용자 ID **/
+	private String userId;
 	private String title;
 	private String mainCareer;
 	private Set<String> serviceDay;
