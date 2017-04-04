@@ -1,6 +1,8 @@
 package kr.withever.humanlibrary.api.controller;
 
 import kr.withever.humanlibrary.domain.contract.Contract;
+import kr.withever.humanlibrary.domain.contract.ContractSearch;
+import kr.withever.humanlibrary.domain.user.UserSearch;
 import kr.withever.humanlibrary.service.ContractService;
 import kr.withever.humanlibrary.util.HumanLibraryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +31,14 @@ public class ContractController {
         return this.contractService.retrieveContract(contractId);
     }
 
+
+    @RequestMapping(method = RequestMethod.GET)
+    public ContractSearch retrieveContractList(
+            ContractSearch search
+    ) {
+        return this.contractService.retrieveContractBySearch(search);
+    }
+
     @RequestMapping(value = "/{contractId}", method = RequestMethod.PUT)
     public void modifyContract(
             @PathVariable(value = "contractId") Long contractId,
@@ -45,11 +55,12 @@ public class ContractController {
         this.contractService.removeContract(contractId);
     }
 
-    @RequestMapping(value = "/{contractId}/accept", method = RequestMethod.PUT)
+    @RequestMapping(value = "/{contractId}/accept/{contractTimeId}", method = RequestMethod.PUT)
     public void acceptContract(
-            @PathVariable(value = "contractId") Long contractId
+            @PathVariable(value = "contractId") Long contractId,
+            @PathVariable(value = "contractTimeId") Long contractTimeId
     ) {
-        this.contractService.acceptContract(contractId);
+        this.contractService.acceptContract(contractId, contractTimeId);
     }
 
     @RequestMapping(value = "/{contractId}/reject", method = RequestMethod.PUT)

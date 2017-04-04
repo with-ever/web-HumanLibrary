@@ -180,6 +180,6 @@ public class User implements Serializable {
         this.zipCode = user.getZipCode();
         this.address = user.getAddress();
         this.detailAddress = user.getDetailAddress();
-        this.updateTime = System.currentTimeMillis();
+        this.updateTime = System.currentTimeMillis() / 1000;
     }
 }

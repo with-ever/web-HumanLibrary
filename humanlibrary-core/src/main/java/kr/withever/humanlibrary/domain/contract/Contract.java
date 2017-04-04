@@ -118,6 +118,6 @@ public class Contract {
     public void setUpdatedContract(Contract contract) {
         this.state = contract.getState();
         this.contractTime = contract.getContractTime();
-        this.updateTime = System.currentTimeMillis();
+        this.updateTime = System.currentTimeMillis() / 1000;
     }
 }

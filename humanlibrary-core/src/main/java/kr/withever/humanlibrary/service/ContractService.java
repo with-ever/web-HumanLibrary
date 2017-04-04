@@ -1,6 +1,7 @@
 package kr.withever.humanlibrary.service;
 
 import kr.withever.humanlibrary.domain.contract.Contract;
+import kr.withever.humanlibrary.domain.contract.ContractSearch;
 import kr.withever.humanlibrary.domain.user.User;
 
 /**
@@ -12,11 +13,13 @@ public interface ContractService {
 
     Contract retrieveContract(Long contractId);
 
+    ContractSearch retrieveContractBySearch(ContractSearch search);
+
     void modifyContract(Contract contract);
 
     void removeContract(Long contractId);
 
-    void acceptContract(Long contractId);
+    void acceptContract(Long contractId, Long contractTimeId);
 
     void rejectContract(Long contractId);
 

@@ -48,7 +48,7 @@ public class UserServiceImpl implements UserService{
     public void modifyUser(User user) {
         User previousUser = this.userRepository.retrieveUser(user.getUserId());
         previousUser.setUpdatedUser(user);
-        this.userRepository.modifyUser(user);
+        this.userRepository.modifyUser(previousUser);
     }
 
     @Override
