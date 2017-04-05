@@ -26,11 +26,7 @@ public class Board {
 	private Long updateTime;
 		
 	private String name;
-	
-	private String fileName;
-	
-    private MultipartFile[] files;
-    
+	    
     private List<BoardFile> BoardFileList;
     
  
@@ -110,23 +106,7 @@ public class Board {
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
 	
-	public MultipartFile[] getFiles() {
-		return files;
-	}
-
-	public void setFiles(MultipartFile[] files) {
-		this.files = files;
-	}
-
 	public List<BoardFile> getBoardFileList() {
 		return BoardFileList;
 	}

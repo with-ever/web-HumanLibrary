@@ -45,8 +45,10 @@ public class BoardController {
 	}
 
 	@RequestMapping(value = "/create", method = RequestMethod.POST)
-	public void createBoard(Board board, HttpServletRequest request) throws IllegalStateException, IOException {
-
+	public void createBoard(HttpServletRequest request,Board board) throws IllegalStateException, IOException {
+		
+        MultipartHttpServletRequest multipartHttpServletRequest = (MultipartHttpServletRequest) request;
+		
 		List<BoardFile> boardFileList = new ArrayList<BoardFile>();
 
 		String filePath = request.getSession().getServletContext().getRealPath("/WEB-INF/file/");
@@ -66,11 +68,17 @@ public class BoardController {
 		board.setUserId(userId);
 
 		Long boardId = 123L; // 추후 insert된 board id로 수정(board row+1)
+		
+        Iterator<String> iter = multipartHttpServletRequest.getFileNames();
 
-		if (board.getFiles() != null) {
-			for (MultipartFile file : board.getFiles()) {
+		if (iter != null) {
+	        while (iter.hasNext()) {
 
-				String originalFilename = file.getOriginalFilename();
+	            String uploadFileName = iter.next();
+	            
+	            MultipartFile mFile = multipartHttpServletRequest.getFile(uploadFileName);
+
+	            String originalFilename = mFile.getOriginalFilename();
 
 				String saveFileName = boardId + "_" + originalFilename;
 
@@ -88,8 +96,8 @@ public class BoardController {
 				boardFileList.add(boardFile);
 				
 				board.setBoardFileList(boardFileList);
-				
-				file.transferTo(new File(filePath + saveFileName));
+
+	            mFile.transferTo(new File(filePath + saveFileName));
 			}
 		}
 		
