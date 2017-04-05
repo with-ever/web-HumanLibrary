@@ -13,6 +13,7 @@
 
 package kr.withever.humanlibrary.config;
 
+import org.sitemesh.config.ConfigurableSiteMeshFilter;
 import org.springframework.web.context.WebApplicationContext;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
@@ -60,6 +61,9 @@ public class ServletInitializer extends AbstractDispatcherServletInitializer {
 
 		DelegatingFilterProxy delegatingFilterProxy = new DelegatingFilterProxy("springSecurityFilterChain");
 		servletContext.addFilter("springSecurityFilterChain", delegatingFilterProxy).addMappingForUrlPatterns(null, false, "/*");
+
+		ConfigurableSiteMeshFilter configurableSiteMeshFilter = new ConfigurableSiteMeshFilter();
+		servletContext.addFilter("siteMeshFilter", configurableSiteMeshFilter).addMappingForUrlPatterns(null, false, "/*");
 	}
 
 }

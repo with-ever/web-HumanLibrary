@@ -31,7 +31,6 @@ public class WebSecurityOAuth2ResourceConfig extends ResourceServerConfigurerAda
         http
                 .authorizeRequests()
 //                .antMatchers(HttpMethod.POST, "/api/users").hasAnyAuthority("CLIENT", "ADMIN")
-//                .antMatchers( "/api/splash/**").hasAnyAuthority("CLIENT", "ADMIN")
                 .antMatchers("/api/users/**").hasAnyAuthority("ADMIN", "SUBSCRIBER", "HUMAN_BOOK")
 //                .antMatchers("/api/test").hasAnyAuthority("CLIENT")
                 .antMatchers("/api/**").hasAnyAuthority("CLIENT", "ADMIN", "SUBSCRIBER", "HUMAN_BOOK");
