@@ -30,40 +30,6 @@
     	<result property="parentCategoryId" column="PARENT_CATEGORY"/>
     </resultMap>
     
-    <select id="selectHumanbooksBySearch" parameterType="HumanbookSearch" resultMap="humanbookResultMap">
-    	SELECT
-    		ID
-    		,USER_ID
-    		,TITLE
-    		,MAIN_CAREER
-    		,SERVICE_TIME
-    		,PARENT_CATEGORY
-    		,SUB_CATEGORY
-    		,STATE
-    		,CREATE_TIME
-    		,UPDATE_TIME
-    	FROM
-    		HUMANBOOK
-		LIMIT
-			#{offset}
-			,#{limit}
-    </select>
-    
-    <select id="selectHumanbooksTotalCountBySearch" parameterType="HumanbookSearch" resultType="int">
-    	SELECT
-    		COUNT(*)
-   		FROM
-   			HUMANBOOK
-    </select>
-    
-    <update id="updateHumanbookState" >
-    	UPDATE
-    		HUMANBOOK
-    	SET
-    		STATE = #{state}	
-    	WHERE
-    		ID = #{id}
-    </update>
     
     <insert id="insertHumanbook" parameterType="Humanbook" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
     	INSERT INTO HUMANBOOK(
@@ -92,7 +58,7 @@
     	)
     </insert>
     
-   	<select id="selectHumanbook" parameterType="Long" resultMap="humanbookResultMap">
+    <select id="selectHumanbook" parameterType="Long" resultMap="humanbookResultMap">
 		SELECT
 			 ID
 			,USER_ID
@@ -128,16 +94,78 @@
 			USER_ID = #{userId}
 	</select>
 	
-	<update id="deleteHumanbook" parameterType="Long">
+	<select id="selectHumanbooksByCategory" parameterType="HumanbookSearch" resultMap="humanbookResultMap">
+		SELECT
+			 ID
+			,USER_ID
+			,TITLE
+			,MAIN_CAREER
+			,STATE
+			,SERVICE_TIME
+			,PARENT_CATEGORY
+			,SUB_CATEGORY
+			,CREATE_TIME
+			,UPDATE_TIME
+		FROM
+			HUMANBOOK
+		WHERE
+			PARENT_CATEGORY = #{parentCategoryId}
+	</select>
+	
+	<select id="selectHumanbooksBySubCategory" parameterType="HumanbookSearch" resultMap="humanbookResultMap">
+		SELECT
+			 ID
+			,USER_ID
+			,TITLE
+			,MAIN_CAREER
+			,STATE
+			,SERVICE_TIME
+			,PARENT_CATEGORY
+			,SUB_CATEGORY
+			,CREATE_TIME
+			,UPDATE_TIME
+		FROM
+			HUMANBOOK
+		WHERE
+			SUB_CATEGORY = #{subCategoryId}
+	</select>
+	
+    <select id="selectHumanbooksBySearch" parameterType="HumanbookSearch" resultMap="humanbookResultMap">
+    	SELECT
+    		ID
+    		,USER_ID
+    		,TITLE
+    		,MAIN_CAREER
+    		,SERVICE_TIME
+    		,PARENT_CATEGORY
+    		,SUB_CATEGORY
+    		,STATE
+    		,CREATE_TIME
+    		,UPDATE_TIME
+    	FROM
+    		HUMANBOOK
+		LIMIT
+			#{offset}
+			,#{limit}
+    </select>
+    
+    <select id="selectHumanbooksTotalCountBySearch" parameterType="HumanbookSearch" resultType="int">
+    	SELECT
+    		COUNT(*)
+   		FROM
+   			HUMANBOOK
+    </select>
+    
+    <update id="updateHumanbookState" >
     	UPDATE
     		HUMANBOOK
     	SET
-    		STATE = 'CANCEL'
+    		STATE = #{state}	
     	WHERE
     		ID = #{id}
     </update>
-
-    <update id="updateHumanbook" parameterType="Humanbook">
+	
+	<update id="updateHumanbook" parameterType="Humanbook">
     	UPDATE
     		HUMANBOOK
     	SET
@@ -151,5 +179,14 @@
 			,STATE = #{state}
 		WHERE
 			ID = #{id}
+    </update>
+    
+    <update id="deleteHumanbook" parameterType="Long">
+    	UPDATE
+    		HUMANBOOK
+    	SET
+    		STATE = 'CANCEL'
+    	WHERE
+    		ID = #{id}
     </update>
 </mapper>

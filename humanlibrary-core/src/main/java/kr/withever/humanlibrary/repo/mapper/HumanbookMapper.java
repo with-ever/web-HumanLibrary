@@ -16,6 +16,14 @@ public interface HumanbookMapper {
 	
 	Humanbook selectHumanbookByUserId(String userId);
 	
+	List<Humanbook> selectHumanbooksBySearch(HumanbookSearch search);
+	
+	int selectHumanbooksTotalCountBySearch(HumanbookSearch search);
+	
+	List<Humanbook> selectHumanbooksByCategory(HumanbookSearch search);
+	
+	List<Humanbook> selectHumanbooksBySubCategory(HumanbookSearch search);
+	
 	int insertHumanbook(Humanbook humanbook);
 	
 	int updateHumanbook(Humanbook humanbook);
@@ -24,7 +32,5 @@ public interface HumanbookMapper {
 	
 	int updateHumanbookState(@Param("id") Long id, @Param("state") HumanbookState state);
 	
-	List<Humanbook> selectHumanbooksBySearch(HumanbookSearch search);
 	
-	int selectHumanbooksTotalCountBySearch(HumanbookSearch search);
 }
