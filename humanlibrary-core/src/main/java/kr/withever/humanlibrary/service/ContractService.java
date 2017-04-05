@@ -23,4 +23,5 @@ public interface ContractService {
 
     void rejectContract(Long contractId);
 
+    int isExistAcceptedContractBetweenUserAndHumanbook(Long userId, Long HumanbookId);
 }

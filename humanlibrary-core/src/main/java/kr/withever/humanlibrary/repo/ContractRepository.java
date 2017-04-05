@@ -69,4 +69,8 @@ public class ContractRepository {
             throw new HumanLibraryRuntimeException(e, ExceptionType.US_500_003);
         }
     }
+    
+    public int isExistAcceptedContractBetweenUserAndHumanbook(Long userId, Long humanbookId){
+    	return this.contractMapper.selectAcceptedContractBetweenUserAndHumanbook(userId, humanbookId);
+    }
 }

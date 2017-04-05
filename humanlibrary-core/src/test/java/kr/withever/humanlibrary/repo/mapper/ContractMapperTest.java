@@ -29,6 +29,11 @@ public class ContractMapperTest extends WitheverDbUnitTestConfig{
 
     @Autowired
     private ContractMapper contractMapper;
+    
+    @Test
+    public void selectAcceptedContractBetweenUserAndHumanbook() throws Exception{
+    	assertEquals(1, this.contractMapper.selectAcceptedContractBetweenUserAndHumanbook(1L, 1L));
+    }
 
     @Test
     public void insertContract() throws Exception {

@@ -69,4 +69,13 @@ public class ContractController {
     ) {
         this.contractService.rejectContract(contractId);
     }
+    
+    @RequestMapping(value = "/{userId}/{humanbookId}", method = RequestMethod.GET)
+    public int checkExistContractBetweenUserAndHumanbook(
+    		@PathVariable(value = "userId") Long userId,
+    		@PathVariable(value = "humanbookId") Long humanbookId
+    		){
+    	//Accept된 계약이 없으면 0이 return, 있으면 1 return
+    	return this.contractService.isExistAcceptedContractBetweenUserAndHumanbook(userId, humanbookId);
+    }
 }
