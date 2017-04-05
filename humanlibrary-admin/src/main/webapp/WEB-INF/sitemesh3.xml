@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--<decorators defaultdir="/WEB-INF/view/layout">-->
+
+    <!--<excludes>-->
+        <!--<pattern>/login**</pattern>-->
+        <!--<pattern>/</pattern>-->
+        <!--<pattern></pattern>-->
+    <!--</excludes>-->
+
+    <!--<decorator name="default" page="default-layout.jsp">-->
+        <!--<pattern>/*</pattern>-->
+    <!--</decorator>-->
+
+<!--</decorators>-->
+
+<sitemesh>
+    <mapping path="/*" decorator="/WEB-INF/view/layout/default-layout.jsp"/>
+</sitemesh>
