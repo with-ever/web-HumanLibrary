@@ -143,5 +143,18 @@
           STATE = #{state}
         WHERE ID = #{id}
     </update>
+    
+    <select id="selectAcceptedContractBetweenUserAndHumanbook" resultType="int">
+    	SELECT
+    		COUNT(*)
+    	FROM 
+    		CONTRACTS
+    	WHERE
+    		STATE = 'ACCEPT'
+    	AND
+    		USER_ID = #{userId}
+    	AND
+    		HB_ID = #{humanbookId}
+    </select>
 
 </mapper>

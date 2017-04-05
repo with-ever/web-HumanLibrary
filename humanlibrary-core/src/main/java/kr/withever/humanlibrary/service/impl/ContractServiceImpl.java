@@ -108,4 +108,9 @@ public class ContractServiceImpl implements ContractService {
 
         this.contractRepository.modifyContract(previousContract);
     }
+
+	@Override
+	public int isExistAcceptedContractBetweenUserAndHumanbook(Long userId, Long humanbookId) {
+		return this.contractRepository.isExistAcceptedContractBetweenUserAndHumanbook(userId, humanbookId);
+	}
 }
