@@ -26,18 +26,6 @@ public class SubCategoryMapperTest extends WitheverDbUnitTestConfig{
 	SubCategory subCategory;
 	
 	@Test
-	public void selectChildCategoriesBySearch() throws Exception{
-		Long parentCategoryId = this.subCategoryMapper.selectParentCategoryIdByName("IT");
-		System.out.println("parentCategoryId = "+parentCategoryId);
-		SubCategorySearch search = new SubCategorySearch();
-		search.setId(1L);
-		search.setCategoryName("DEVELOP");
-		search.setParentCategoryId(parentCategoryId);
-		List<SubCategory> list = this.subCategoryMapper.selectChildCategoriesBySearch(search);
-		assertEquals(2, list.size());
-	}
-	
-	@Test
 	public void selectSubCategoryList() throws Exception{
 		SubCategorySearch search = new SubCategorySearch();
 		search.setId(1L);

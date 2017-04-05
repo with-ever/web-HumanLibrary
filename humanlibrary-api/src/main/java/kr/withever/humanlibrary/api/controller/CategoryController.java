@@ -33,6 +33,13 @@ public class CategoryController {
 		return this.categoryService.retrieveCategory(categoryId);
 	}
 	
+	@RequestMapping(method = RequestMethod.GET)
+	public CategorySearch retrieveCategoryList(
+			CategorySearch search
+	){
+		return this.categoryService.retrieveCategoryBySearch(search);
+	}
+	
 	@RequestMapping(method = RequestMethod.PUT)
 	public void modifyCategory(
 			@RequestBody Category category
@@ -45,12 +52,5 @@ public class CategoryController {
 			@PathVariable(value = "categoryId") Long categoryId
 	){
 		this.categoryService.removeCategory(categoryId);
-	}
-	
-	@RequestMapping(method = RequestMethod.GET)
-	public CategorySearch retrieveCategoryList(
-			CategorySearch search
-	){
-		return this.categoryService.retrieveCategoryBySearch(search);
 	}
 }

@@ -9,11 +9,17 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface SubCategoryMapper {
 	
+	int insertSubCategory(SubCategory subCategory);
+	
 	SubCategory selectSubCategory(Long id);
 	
 	SubCategory selectSubCategoryByCategoryName(String categoryName);
 	
-	int insertSubCategory(SubCategory subCategory);
+	List<SubCategory> selectSubCategories();
+	
+	List<SubCategory> selectSubCategoriesBySearch(SubCategorySearch search);
+	
+	int selectSubCategoriesTotalCountBySearch(SubCategorySearch search);
 	
 	int updateSubCategory(SubCategory subCategory);
 	
@@ -21,11 +27,4 @@ public interface SubCategoryMapper {
 	
 	int countSubCategory();
 	
-	Long selectParentCategoryIdByName(String categoryName);
-	
-	List<SubCategory> selectSubCategoriesBySearch(SubCategorySearch search);
-	
-	List<SubCategory> selectChildCategoriesBySearch(SubCategorySearch search);
-	
-	int selectSubCategoriesTotalCountBySearch(SubCategorySearch search);
 }

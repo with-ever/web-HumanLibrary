@@ -9,20 +9,20 @@ import org.apache.ibatis.annotations.Mapper;
 @Mapper
 public interface CategoryMapper {
 	
+	int insertCategory(Category category);
+
 	Category selectCategory(Long id);
 	
 	Category selectCategoryByCategoryName(String categoryName);
 	
-	int insertCategory(Category category);
+	List<Category> selectCategoriesBySearch(CategorySearch search);
+	
+	int selectCategoriesTotalCountBySearch(CategorySearch search);
 	
 	int updateCategory(Category category);
 	
 	int deleteCategory(Long id);
 	
 	int countCategory();
-	
-	List<Category> selectCategoriesBySearch(CategorySearch search);
-	
-	int selectCategoriesTotalCountBySearch(CategorySearch search);
 	
 }

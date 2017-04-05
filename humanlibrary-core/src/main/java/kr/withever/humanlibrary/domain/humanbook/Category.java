@@ -1,9 +1,12 @@
 package kr.withever.humanlibrary.domain.humanbook;
 
+import java.util.List;
+
 public class Category {
 	private Long id;
 	private String categoryName;
 	private String desc;
+	private List<SubCategory> childCategories;
 	
 	public Category(){
 	}
@@ -31,5 +34,13 @@ public class Category {
 	}
 	public void setDesc(String desc) {
 		this.desc = desc;
+	}
+
+	public List<SubCategory> getChildCategories() {
+		return childCategories;
+	}
+
+	public void setChildCategories(List<SubCategory> childCategories) {
+		this.childCategories = childCategories;
 	}
 }

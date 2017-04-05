@@ -9,22 +9,6 @@
 		<result property="desc" column="DESC"/>
 	</resultMap>
 	
-	<select id="selectCategoriesBySearch" parameterType="CategorySearch" resultMap="categoryResultMap">
-		SELECT 
-			ID
-			,CATEGORY_NAME
-			,`DESC`
-		FROM
-			CATEGORY
-	</select>
-	
-	<select id="selectCategoriesTotalCountBySearch" parameterType="CategorySearch" resultType="int">
-		SELECT
-			COUNT(1)
-		FROM
-			CATEGORY
-	</select>
-	
 	<insert id="insertCategory" parameterType="Category" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
 		INSERT INTO CATEGORY
 		(
@@ -38,24 +22,6 @@
 			,#{desc}
 		)
 	</insert>
-	
-	<update id="updateCategory" parameterType="Category">
-		UPDATE 
-			CATEGORY
-		SET
-			CATEGORY_NAME = #{categoryName}
-			,`DESC` = #{desc}
-		WHERE
-			ID = #{id}
-	</update>
-	
-	<delete id="deleteCategory" parameterType="Long">
-		DELETE
-		FROM
-			CATEGORY
-		WHERE
-			ID = #{id}
-	</delete>
 	
 	<select id="selectCategory" parameterType="Long" resultMap="categoryResultMap">
 		SELECT
@@ -78,7 +44,42 @@
 		WHERE
 			CATEGORY_NAME = #{categoryName}
 	</select>
+	
+	<select id="selectCategoriesBySearch" parameterType="CategorySearch" resultMap="categoryResultMap">
+		SELECT 
+			ID
+			,CATEGORY_NAME
+			,`DESC`
+		FROM
+			CATEGORY
+	</select>
+	
+	<select id="selectCategoriesTotalCountBySearch" parameterType="CategorySearch" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			CATEGORY
+	</select>
+	
+	<update id="updateCategory" parameterType="Category">
+		UPDATE 
+			CATEGORY
+		SET
+			CATEGORY_NAME = #{categoryName}
+			,`DESC` = #{desc}
+		WHERE
 
+			ID = #{id}
+	</update>
+	
+	<delete id="deleteCategory" parameterType="Long">
+		DELETE
+		FROM
+			CATEGORY
+		WHERE
+			ID = #{id}
+	</delete>
+	
 	<select id="countCategory" resultType="int">
 		SELECT
 			COUNT(*)

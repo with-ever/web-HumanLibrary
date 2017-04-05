@@ -10,41 +10,6 @@
 		<result property="parentCategoryId" column="PARENT_CATEGORY_ID"/>
 	</resultMap>
 	
-	<select id="selectSubCategoriesBySearch" parameterType="SubCategorySearch" resultMap="subCategoryResultMap">
-		SELECT
-			ID
-			,CATEGORY_NAME
-			,PARENT_CATEGORY_ID
-		FROM
-			SUB_CATEGORY
-	</select>
-	
-	<select id="selectSubCategoriesTotalCountBySearch" parameterType="SubCategorySearch" resultType="int">
-		SELECT
-			COUNT(*)
-		FROM
-			SUB_CATEGORY
-	</select>
-	
-	<select id="selectParentCategoryIdByName" parameterType="String" resultType="Long">
-		SELECT
-			ID
-		FROM 
-			CATEGORY
-		WHERE
-			CATEGORY_NAME = #{categoryName}
-	</select>
-	
-	<select id="selectChildCategoriesBySearch" parameterType="SubCategorySearch" resultMap="subCategoryResultMap">
-		SELECT
-			ID
-			,CATEGORY_NAME
-			,PARENT_CATEGORY_ID
-		FROM
-			SUB_CATEGORY
-		WHERE
-			PARENT_CATEGORY_ID = #{id}
-	</select>
 	
 	<insert id="insertSubCategory" parameterType="SubCategory" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
 		INSERT INTO SUB_CATEGORY(
@@ -60,25 +25,6 @@
 			,#{parentCategoryId}
 		)
 	</insert>
-	
-	<update id="updateSubCategory" parameterType="SubCategory">
-		UPDATE
-			SUB_CATEGORY
-		SET
-			CATEGORY_NAME = #{categoryName}
-			,`DESC` = #{desc}
-			,PARENT_CATEGORY_ID = #{parentCategoryId}
-		WHERE
-			ID = #{id}
-	</update>
-	
-	<delete id="deleteSubCategory" parameterType="Long">
-		DELETE
-		FROM
-			SUB_CATEGORY
-		WHERE
-			ID = #{id}
-	</delete>
 	
 	<select id="selectSubCategory" parameterType="Long" resultMap="subCategoryResultMap">
 		SELECT 
@@ -103,6 +49,55 @@
 		WHERE
 			CATEGORY_NAME = #{categoryName}
 	</select>
+	
+	<select id="selectSubCategories" resultMap="subCategoryResultMap">
+			SELECT
+				ID
+				,CATEGORY_NAME
+				,`DESC`
+				,PARENT_CATEGORY_ID
+			FROM
+				SUB_CATEGORY
+	</select>
+	
+	<select id="selectSubCategoriesBySearch" parameterType="SubCategorySearch" resultMap="subCategoryResultMap">
+		SELECT
+			ID
+			,CATEGORY_NAME
+			,`DESC`
+			,PARENT_CATEGORY_ID
+		FROM
+			SUB_CATEGORY
+		LIMIT
+		 	#{offset}
+		 	,#{limit}
+	</select>
+	
+	<select id="selectSubCategoriesTotalCountBySearch" parameterType="SubCategorySearch" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			SUB_CATEGORY
+	</select>
+	
+	<update id="updateSubCategory" parameterType="SubCategory">
+		UPDATE
+			SUB_CATEGORY
+		SET
+			CATEGORY_NAME = #{categoryName}
+			,`DESC` = #{desc}
+			,PARENT_CATEGORY_ID = #{parentCategoryId}
+		WHERE
+			ID = #{id}
+	</update>
+	
+	<delete id="deleteSubCategory" parameterType="Long">
+		DELETE
+		FROM
+			SUB_CATEGORY
+		WHERE
+			ID = #{id}
+	</delete>
 	
 	<select id="countSubCategory" resultType="int">
 		SELECT

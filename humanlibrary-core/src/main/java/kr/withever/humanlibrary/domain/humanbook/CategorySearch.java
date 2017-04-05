@@ -6,6 +6,7 @@ public class CategorySearch extends PageSearch<Category>{
 	
 	private Long id;
 	private String categoryName;
+	private String desc;
 	
 	
 	public String getCategoryName() {
@@ -22,6 +23,14 @@ public class CategorySearch extends PageSearch<Category>{
 	
 	public void setId(Long id) {
 		this.id = id;
+	}
+
+	public String getDesc() {
+		return desc;
+	}
+
+	public void setDesc(String desc) {
+		this.desc = desc;
 	}
 	
 
