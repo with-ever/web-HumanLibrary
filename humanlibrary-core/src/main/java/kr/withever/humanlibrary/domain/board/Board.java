@@ -27,6 +27,8 @@ public class Board {
 			    
     private List<BoardFile> BoardFileList;
     
+    private String url;
+    
  
     public Board() {
     	this.createTime = System.currentTimeMillis() / 1000;
@@ -104,6 +106,15 @@ public class Board {
 	public void setBoardFileList(List<BoardFile> boardFileList) {
 		BoardFileList = boardFileList;
 	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+	
 	
 	
 }
