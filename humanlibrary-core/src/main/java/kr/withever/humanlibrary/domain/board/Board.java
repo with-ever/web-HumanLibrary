@@ -24,9 +24,7 @@ public class Board {
 	private Long createTime;
 
 	private Long updateTime;
-		
-	private String name;
-	    
+			    
     private List<BoardFile> BoardFileList;
     
  
@@ -97,14 +95,6 @@ public class Board {
 
 	public void setUpdateTime(Long updateTime) {
 		this.updateTime = updateTime;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
 	}
 	
 	public List<BoardFile> getBoardFileList() {
