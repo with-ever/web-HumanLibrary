@@ -71,7 +71,7 @@ public class ContractController {
     }
     
     @RequestMapping(value = "/{userId}/{humanbookId}", method = RequestMethod.GET)
-    public int checkExistContractBetweenUserAndHumanbook(
+    public int isExistContractBetweenUserAndHumanbook(
     		@PathVariable(value = "userId") Long userId,
     		@PathVariable(value = "humanbookId") Long humanbookId
     		){
