@@ -12,7 +12,7 @@
         <result property="subject" column="SUBJECT"/>
         <result property="contents" column="CONTENTS"/>
         <result property="views" column="VIEWS"/>
-        <result property="name" column="NAME"/>
+        <result property="url" column="URL"/>
         <result property="createTime" column="CREATE_TIME"/>
         <result property="updateTime" column="UPDATE_TIME"/>
     </resultMap>
@@ -24,6 +24,7 @@
             ,SUBJECT
             ,CONTENTS
             ,VIEWS
+            ,URL
             ,CREATE_TIME
             ,UPDATE_TIME
         )
@@ -33,6 +34,7 @@
         ,#{subject}
         ,#{contents}
         ,#{views}
+        ,#{url}
         ,#{createTime}
         ,#{updateTime}
         )
@@ -41,18 +43,17 @@
 
     <select id="selectBoard" parameterType="Long" resultMap="boardResultMap">
         SELECT
-         B.ID
-        ,B.TYPE
-        ,B.CREATE_TIME
-        ,B.UPDATE_TIME
-        ,B.SUBJECT
-        ,B.CONTENTS
-        ,B.VIEWS
-        ,B.USER_ID
-        ,U.NAME
-        FROM BOARD B,USERS U
-        WHERE B.USER_ID = U.USER_ID
-          AND ID = #{id}
+         ID
+        ,TYPE
+        ,CREATE_TIME
+        ,UPDATE_TIME
+        ,SUBJECT
+        ,CONTENTS
+        ,VIEWS
+        ,USER_ID
+        ,URL
+        FROM BOARD
+        WHERE ID = #{id}
     </select>
 
     <update id="updateBoard" parameterType="Board">
@@ -74,7 +75,7 @@
         VIEWS = #{views},
         </if>
         <if test='userId != null and userId != ""'>
-        USER_ID = #{userId},
+        USER_ID = #{userId}
         </if>
         </set>
         WHERE ID = #{id}
@@ -88,28 +89,25 @@
 
 <select id="selectBoardBySearch" parameterType="BoardSearch" resultMap="boardResultMap">
         SELECT
-         B.ID
-        ,B.TYPE
-        ,B.CREATE_TIME
-        ,B.UPDATE_TIME
-        ,B.SUBJECT
-        ,B.CONTENTS
-        ,B.VIEWS
-        ,B.USER_ID
-        ,U.NAME
-        FROM BOARD B,USERS U
-        WHERE B.USER_ID = U.USER_ID
-            <if test="name != null and name != ''">
-                AND U.NAME LIKE CONCAT('%', #{name}, '%')
-            </if>
+         ID
+        ,TYPE
+        ,CREATE_TIME
+        ,UPDATE_TIME
+        ,SUBJECT
+        ,CONTENTS
+        ,VIEWS
+        ,USER_ID
+        ,URL
+        FROM BOARD
+        WHERE 1 = 1
             <if test="type != null and type != ''">
-                AND B.TYPE LIKE CONCAT('%', #{type}, '%')
+                AND TYPE LIKE CONCAT('%', #{type}, '%')
             </if>
             <if test="subject != null and subject != ''">
-                AND B.SUBJECT LIKE CONCAT('%', #{subject}, '%')
+                AND SUBJECT LIKE CONCAT('%', #{subject}, '%')
             </if>
             <if test="contents != null and contents != ''">
-                AND B.CONTENTS LIKE CONCAT('%', #{contents}, '%')
+                AND CONTENTS LIKE CONCAT('%', #{contents}, '%')
             </if>
         LIMIT #{offset}, #{limit}
     </select>
@@ -117,19 +115,16 @@
     <select id="selectBoardTotalCountBySearch" parameterType="BoardSearch" resultType="int">
         SELECT
             COUNT(1)
-        FROM BOARD B,USERS U
-        WHERE B.USER_ID = U.USER_ID
-       	    <if test="name != null and name != ''">
-                AND U.NAME LIKE CONCAT('%', #{name}, '%')
-            </if>
+        FROM BOARD
+        WHERE 1 = 1
             <if test="type != null and type != ''">
-                AND B.TYPE LIKE CONCAT('%', #{type}, '%')
+                AND TYPE LIKE CONCAT('%', #{type}, '%')
             </if>
             <if test="subject != null and subject != ''">
-                AND B.SUBJECT LIKE CONCAT('%', #{subject}, '%')
+                AND SUBJECT LIKE CONCAT('%', #{subject}, '%')
             </if>
             <if test="contents != null and contents != ''">
-                AND B.CONTENTS LIKE CONCAT('%', #{contents}, '%')
+                AND CONTENTS LIKE CONCAT('%', #{contents}, '%')
             </if>
     </select>
 

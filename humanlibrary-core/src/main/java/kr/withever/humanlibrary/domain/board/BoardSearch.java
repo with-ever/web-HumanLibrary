@@ -7,21 +7,11 @@ import kr.withever.humanlibrary.domain.common.PageSearch;
  */
 public class BoardSearch extends PageSearch<Board> {
 
-    private String name;
-
     private String type;
 
     private String subject;
 
     private String contents;
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
 
 	public String getType() {
 		return type;

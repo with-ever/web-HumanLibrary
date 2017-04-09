@@ -21,9 +21,7 @@ import java.util.List;
  */
 
 @DatabaseSetup(value = { "/dataset/Board.xml" }, type = DatabaseOperation.INSERT)
-@DatabaseSetup(value = { "/dataset/User.xml" }, type = DatabaseOperation.INSERT)
 @DatabaseTearDown(value = { "/dataset/Board.xml" }, type = DatabaseOperation.DELETE_ALL)
-@DatabaseTearDown(value = { "/dataset/User.xml" }, type = DatabaseOperation.DELETE_ALL)
 public class BoardMapperTest extends WitheverDbUnitTestConfig {
 
 	@Autowired
@@ -69,7 +67,6 @@ public class BoardMapperTest extends WitheverDbUnitTestConfig {
 	 @Test
 	    public void selectBoardBySearch() throws Exception {
 	        BoardSearch search = new BoardSearch();
-	        search.setName("youngjinkim");
 	        search.setSubject("TEST SUBJECT");
 	        List<Board> board = this.boardMapper.selectBoardBySearch(search);
 	        assertEquals(2, board.size());
@@ -78,7 +75,6 @@ public class BoardMapperTest extends WitheverDbUnitTestConfig {
 	    @Test
 	    public void selectUsersTotalCountBySearch() throws Exception {
 	    	BoardSearch search = new BoardSearch();
-	        search.setName("youngjin");
 	        int count = this.boardMapper.selectBoardTotalCountBySearch(search);
 	        assertEquals(2, count);
 	    }

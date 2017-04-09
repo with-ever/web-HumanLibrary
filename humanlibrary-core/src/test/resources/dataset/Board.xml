@@ -9,6 +9,7 @@
             CONTENTS = "TEST CONTENTS"
             VIEWS = "15"
             USER_ID = "1"
+            URL = "1234"
     />
     <BOARD
             ID = "2"
@@ -19,5 +20,6 @@
             CONTENTS = "TEST CONTENTS2"
             VIEWS = "16"
             USER_ID = "1"
+            URL = "4566"
     />
 </dataset>
