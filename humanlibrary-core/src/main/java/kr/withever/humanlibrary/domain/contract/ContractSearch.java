@@ -22,7 +22,11 @@ public class ContractSearch extends PageSearch{
     private Long hbId;
 
     // utime 기준
-//    private String orderBy;
+    private String orderBy;
+
+    public ContractSearch() {
+        this.orderBy = "DESC";
+    }
 
     public List<String> getState() {
         return state;
@@ -62,5 +66,13 @@ public class ContractSearch extends PageSearch{
 
     public void setHbId(Long hbId) {
         this.hbId = hbId;
+    }
+
+    public String getOrderBy() {
+        return orderBy;
+    }
+
+    public void setOrderBy(String orderBy) {
+        this.orderBy = orderBy.toUpperCase().equals("ASC") ? "ASC" : "DESC";
     }
 }

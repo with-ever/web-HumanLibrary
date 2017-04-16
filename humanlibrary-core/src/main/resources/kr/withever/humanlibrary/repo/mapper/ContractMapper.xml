@@ -95,6 +95,17 @@
         <if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
             AND DATE > #{startDate} AND #{endDate} > DATE AND STATE = 'ACCEPT'
         </if>
+        <if test="orderBy != null and orderBy != ''">
+            <choose>
+                <when test="orderBy == 'DESC'">
+                    ORDER BY UPDATE_TIME DESC
+                </when>
+                <when test="orderBy == 'ASC'">
+                    ORDER BY UPDATE_TIME ASC
+                </when>
+            </choose>
+
+        </if>
         LIMIT #{offset}, #{limit}
     </select>
 
