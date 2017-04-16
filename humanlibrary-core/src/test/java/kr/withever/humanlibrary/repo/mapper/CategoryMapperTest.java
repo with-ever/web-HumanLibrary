@@ -90,4 +90,10 @@ public class CategoryMapperTest extends WitheverDbUnitTestConfig{
 		this.categoryMapper.deleteCategory(2L);
 		assertEquals(1, this.categoryMapper.countCategory());
 	}
+
+	@Test
+	public void selectCategories() throws Exception {
+		List<Category> categories = this.categoryMapper.selectCategories();
+		assertEquals(2, categories.size());
+	}
 }

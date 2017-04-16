@@ -12,6 +12,8 @@ import kr.withever.humanlibrary.service.CategoryService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @Transactional
 public class CategoryServiceImpl implements CategoryService {
@@ -58,6 +60,11 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public CategorySearch retrieveCategoryBySearch(CategorySearch search) {
 		return this.categoryRepository.retrieveCategoryBySearch(search);
+	}
+
+	@Override
+	public List<Category> retrieveCategoriesWithSubCategory() {
+		return this.categoryRepository.retrieveCategoriesWithSubCategory();
 	}
 	
 }

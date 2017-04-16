@@ -24,5 +24,7 @@ public interface CategoryMapper {
 	int deleteCategory(Long id);
 	
 	int countCategory();
-	
+
+	List<Category> selectCategories();
+
 }
