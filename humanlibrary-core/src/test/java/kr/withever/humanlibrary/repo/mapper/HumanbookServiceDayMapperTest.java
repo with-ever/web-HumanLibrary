@@ -29,10 +29,10 @@ public class HumanbookServiceDayMapperTest extends WitheverDbUnitTestConfig{
 	
 	@Test
 	public void insertHumanbookServiceDay() throws Exception{
-		this.humanbookServiceDayMapper.insertHumanbookServiceDay(2L, DayOfWeek.SATURDAY.getName());
+		this.humanbookServiceDayMapper.insertHumanbookServiceDay(2L, DayOfWeek.SATURDAY.name());
 		Set<String> dayList = this.humanbookServiceDayMapper.selectHumanbookServiceDayList(2L);
 		String day = dayList.iterator().next().toString();
-		assertEquals(day, DayOfWeek.SATURDAY.getName());
+		assertEquals(day, DayOfWeek.SATURDAY.name());
 		assertEquals(1, dayList.size());
 	}
 	
@@ -40,7 +40,7 @@ public class HumanbookServiceDayMapperTest extends WitheverDbUnitTestConfig{
 	public void deleteHumanbookServiceDay() throws Exception{
 		Set<String> dayList = this.humanbookServiceDayMapper.selectHumanbookServiceDayList(1L);
 		assertEquals(3, dayList.size());
-		this.humanbookServiceDayMapper.deleteHumanbookServiceDay(1L, DayOfWeek.TUESDAY.getName());
+		this.humanbookServiceDayMapper.deleteHumanbookServiceDay(1L, DayOfWeek.TUESDAY.name());
 		dayList = this.humanbookServiceDayMapper.selectHumanbookServiceDayList(1L);
 		assertEquals(2, dayList.size());
 	}

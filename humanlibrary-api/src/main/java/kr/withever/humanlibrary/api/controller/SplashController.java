@@ -28,8 +28,8 @@ public class SplashController {
     public Splash retrieveAndroidSplash() {
         Splash splash = new Splash();
         ClientVersion version = new AndroidVersion();
-        splash.setVersion(version);
-        splash.setCategories(createCategoryList());
+        splash.setVersion(createClientVersion(version));
+        splash.setCategories(this.categoryService.retrieveCategoriesWithSubCategory());
         return splash;
     }
 
@@ -37,9 +37,17 @@ public class SplashController {
     public Splash retrieveIOSSplash() {
         Splash splash = new Splash();
         ClientVersion version = new IOSVersion();
-        splash.setVersion(version);
-        splash.setCategories(createCategoryList());
+        splash.setVersion(createClientVersion(version));
+        splash.setCategories(this.categoryService.retrieveCategoriesWithSubCategory());
         return splash;
+    }
+
+    private ClientVersion createClientVersion(ClientVersion version) {
+        version.setCurrentVersion(2L);
+        version.setMinVersion(1L);
+        version.setName("1.0.0");
+        version.setUrl("hi");
+        return version;
     }
 
     private List<Category> createCategoryList() {

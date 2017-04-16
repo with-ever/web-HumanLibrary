@@ -5,10 +5,6 @@
 
 
 <mapper namespace="kr.withever.humanlibrary.repo.mapper.HumanbookServiceDayMapper">
-    <resultMap id="serviceDayResultMap" type="ServiceDay">
-        <result property="day" column="DAY"/>
-    </resultMap>
-    
     <select id="selectHumanbookServiceDayList" parameterType="Long" resultType="String">
     	SELECT
     		DAY

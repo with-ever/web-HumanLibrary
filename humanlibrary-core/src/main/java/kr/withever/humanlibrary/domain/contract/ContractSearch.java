@@ -21,6 +21,9 @@ public class ContractSearch extends PageSearch{
 
     private Long hbId;
 
+    // utime 기준
+//    private String orderBy;
+
     public List<String> getState() {
         return state;
     }

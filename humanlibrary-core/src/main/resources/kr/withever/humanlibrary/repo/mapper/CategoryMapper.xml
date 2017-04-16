@@ -27,7 +27,7 @@
 		SELECT
 			ID
 			,CATEGORY_NAME
-			,`DESC`
+			,DESC
 		FROM
 			CATEGORY
 		WHERE
@@ -85,5 +85,14 @@
 			COUNT(*)
 		FROM
 		 	CATEGORY
+	</select>
+
+	<select id="selectCategories" resultMap="categoryResultMap">
+		SELECT
+			ID
+			,CATEGORY_NAME
+			,`DESC`
+		FROM
+			CATEGORY
 	</select>
 </mapper>
