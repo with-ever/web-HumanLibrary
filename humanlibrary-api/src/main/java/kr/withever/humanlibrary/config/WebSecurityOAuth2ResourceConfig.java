@@ -30,7 +30,8 @@ public class WebSecurityOAuth2ResourceConfig extends ResourceServerConfigurerAda
     public void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
-//                .antMatchers(HttpMethod.POST, "/api/users").hasAnyAuthority("CLIENT", "ADMIN")
+                .antMatchers(HttpMethod.POST, "/api/users").hasAnyAuthority("CLIENT", "ADMIN")
+                .antMatchers(HttpMethod.GET, "/api/users/verification/**").hasAnyAuthority("CLIENT", "ADMIN")
                 .antMatchers("/api/users/**").hasAnyAuthority("ADMIN", "SUBSCRIBER", "HUMAN_BOOK")
 //                .antMatchers("/api/test").hasAnyAuthority("CLIENT")
                 .antMatchers("/api/**").hasAnyAuthority("CLIENT", "ADMIN", "SUBSCRIBER", "HUMAN_BOOK");
