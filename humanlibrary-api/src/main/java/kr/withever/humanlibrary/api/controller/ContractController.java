@@ -66,8 +66,9 @@ public class ContractController {
     @RequestMapping(value = "/{contractId}/reject", method = RequestMethod.PUT)
     public void rejectContract(
             @PathVariable(value = "contractId") Long contractId
+            ,@RequestBody String rejectMsg
     ) {
-        this.contractService.rejectContract(contractId);
+        this.contractService.rejectContract(contractId, rejectMsg);
     }
     
     @RequestMapping(value = "/{userId}/{humanbookId}", method = RequestMethod.GET)

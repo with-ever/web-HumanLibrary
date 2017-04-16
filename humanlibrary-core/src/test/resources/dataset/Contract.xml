@@ -32,6 +32,7 @@
             TIME = "12"
             CREATE_TIME = "111111"
             UPDATE_TIME = "222222"
+            REJECT_MSG = "시간없음"
     />
     <CONTRACTS
             ID = "4"

@@ -97,7 +97,7 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    public void rejectContract(Long contractId) {
+    public void rejectContract(Long contractId, String rejectMsg) {
         // @TODO 푸쉬 메시지 보내기
         Contract updatedContract = new Contract();
         updatedContract.setContractTime(null);
@@ -105,6 +105,7 @@ public class ContractServiceImpl implements ContractService {
 
         Contract previousContract = this.contractRepository.retrieveContract(contractId);
         previousContract.setUpdatedContract(updatedContract);
+        previousContract.setRejectMsg(rejectMsg);
 
         this.contractRepository.modifyContract(previousContract);
     }

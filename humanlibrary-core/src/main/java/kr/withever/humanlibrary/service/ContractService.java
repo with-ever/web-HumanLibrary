@@ -21,7 +21,7 @@ public interface ContractService {
 
     void acceptContract(Long contractId, Long contractTimeId);
 
-    void rejectContract(Long contractId);
+    void rejectContract(Long contractId, String rejectMsg);
 
     int isExistAcceptedContractBetweenUserAndHumanbook(Long userId, Long HumanbookId);
 }

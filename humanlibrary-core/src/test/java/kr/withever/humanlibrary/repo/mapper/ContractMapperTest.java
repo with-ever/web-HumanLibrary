@@ -68,6 +68,27 @@ public class ContractMapperTest extends WitheverDbUnitTestConfig{
         List<Contract> contracts = this.contractMapper.selectContractsBySearch(search);
         assertEquals(1, contracts.size());
     }
+    
+    @Test
+    public void selectRejectedContract(){
+    	Contract contract = this.contractMapper.selectContract(3L);
+    	assertEquals("시간없음",contract.getRejectMsg());
+    	assertEquals("REJECT",contract.getState());
+    }
+    @Test
+    public void rejectContract(){
+    	String rejectMsg = "시간부족";
+    	Contract contract = this.contractMapper.selectContract(1L);
+    	contract.setRejectMsg(rejectMsg);
+    	contract.setContractTime(null);
+    	contract.setState(ContractState.REJECT.name());
+    	
+    	this.contractMapper.updateContract(contract);
+    	Contract rejectedContract = this.contractMapper.selectContract(1L);
+    	
+    	assertEquals("시간부족",rejectedContract.getRejectMsg());
+    	assertEquals(ContractState.REJECT.name(), rejectedContract.getState());
+    }
 
     @Test
     public void selectContractsTotalCountBySearch() {

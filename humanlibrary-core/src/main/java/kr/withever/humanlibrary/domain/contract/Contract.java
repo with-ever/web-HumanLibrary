@@ -27,6 +27,9 @@ public class Contract {
 
     /** 계약 가능한 시간 **/
     private List<ContractTime> availableContractTimes;
+    
+    /** 반려 사유 **/
+    private String rejectMsg;
 
     private Long createTime;
 
@@ -120,4 +123,13 @@ public class Contract {
         this.contractTime = contract.getContractTime();
         this.updateTime = System.currentTimeMillis() / 1000;
     }
+
+	public String getRejectMsg() {
+		return rejectMsg;
+	}
+
+	public void setRejectMsg(String rejectMsg) {
+		this.rejectMsg = rejectMsg;
+	}
+
 }
