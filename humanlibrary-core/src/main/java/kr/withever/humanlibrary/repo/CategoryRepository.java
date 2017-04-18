@@ -1,6 +1,7 @@
 package kr.withever.humanlibrary.repo;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -29,13 +30,7 @@ public class CategoryRepository {
 
 	public Category retrieveCategory(Long id){
 		Category category = this.categoryMapper.selectCategory(id);
-		List<SubCategory> childCategoryList = this.subCategoryMapper.selectSubCategories();
-		for (int i=childCategoryList.size()-1 ; i>=0 ; i--) {
-			if(childCategoryList.get(i).getParentCategoryId() != id){
-				childCategoryList.remove(i);
-			}
-		}
-		category.setChildCategories(childCategoryList);
+		setSubCategoryInCategory(category);
 		return category;
 	}
 	
@@ -75,15 +70,19 @@ public class CategoryRepository {
 
 	public List<Category> retrieveCategoriesWithSubCategory() {
 		List<Category> categories = this.categoryMapper.selectCategories();
-		List<SubCategory> subCategories = this.subCategoryMapper.selectSubCategories();
 		for (Category category : categories) {
-			List<SubCategory> addedSubCategories = new ArrayList<SubCategory>();
-			for (SubCategory subCategory : subCategories) {
-				if (category.getId() == subCategory.getParentCategoryId()) addedSubCategories.add(subCategory);
-			}
-			category.setChildCategories(addedSubCategories);
+			setSubCategoryInCategory(category);
 		}
 
 		return categories;
+	}
+	
+	private void setSubCategoryInCategory(Category category){
+		List<SubCategory> subCategories = this.subCategoryMapper.selectSubCategories();
+		List<SubCategory> addedSubCategories = new ArrayList<SubCategory>();
+		for (SubCategory subCategory : subCategories) {
+			if (category.getId() == subCategory.getParentCategoryId()) addedSubCategories.add(subCategory);
+		}
+		category.setSubCategories(addedSubCategories);
 	}
 }

@@ -6,7 +6,7 @@ public class Category {
 	private Long id;
 	private String categoryName;
 	private String desc;
-	private List<SubCategory> childCategories;
+	private List<SubCategory> subCategories;
 	
 	public Category(){
 	}
@@ -36,11 +36,11 @@ public class Category {
 		this.desc = desc;
 	}
 
-	public List<SubCategory> getChildCategories() {
-		return childCategories;
+	public List<SubCategory> getSubCategories() {
+		return subCategories;
 	}
 
-	public void setChildCategories(List<SubCategory> childCategories) {
-		this.childCategories = childCategories;
+	public void setSubCategories(List<SubCategory> subCategories) {
+		this.subCategories = subCategories;
 	}
 }

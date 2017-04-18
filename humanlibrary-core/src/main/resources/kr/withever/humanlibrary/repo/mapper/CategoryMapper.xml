@@ -27,7 +27,7 @@
 		SELECT
 			ID
 			,CATEGORY_NAME
-			,DESC
+			,`DESC`
 		FROM
 			CATEGORY
 		WHERE
