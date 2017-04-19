@@ -57,6 +57,7 @@ public class UserController {
             @PathVariable(value = "userId") Long userId,
             @RequestBody User user
     ) {
+        user.setUserId(userId);
         this.userService.modifyUser(user);
     }
 
