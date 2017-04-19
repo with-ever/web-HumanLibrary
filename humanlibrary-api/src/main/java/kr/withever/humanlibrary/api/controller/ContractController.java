@@ -2,6 +2,7 @@ package kr.withever.humanlibrary.api.controller;
 
 import java.util.Map;
 
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -72,7 +73,7 @@ public class ContractController {
     @RequestMapping(value = "/{contractId}/reject", method = RequestMethod.PUT)
     public void rejectContract(
             @PathVariable(value = "contractId") Long contractId
-            ,@RequestBody Map<String, Object> requestMap
+            ,@ApiParam(name = "rejectMsg", value = "reject message", required = true) @RequestBody Map<String, Object> requestMap
     ) {
     	String rejectMsg = (String) requestMap.get("rejectMsg");
         this.contractService.rejectContract(contractId, rejectMsg);
