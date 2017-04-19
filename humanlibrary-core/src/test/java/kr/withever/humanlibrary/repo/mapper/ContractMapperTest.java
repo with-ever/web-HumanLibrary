@@ -70,12 +70,6 @@ public class ContractMapperTest extends WitheverDbUnitTestConfig{
     }
     
     @Test
-    public void selectRejectedContract(){
-    	Contract contract = this.contractMapper.selectContract(3L);
-    	assertEquals("시간없음",contract.getRejectMsg());
-    	assertEquals("REJECT",contract.getState());
-    }
-    @Test
     public void rejectContract(){
     	String rejectMsg = "시간부족";
     	Contract contract = this.contractMapper.selectContract(1L);
@@ -84,9 +78,9 @@ public class ContractMapperTest extends WitheverDbUnitTestConfig{
     	contract.setState(ContractState.REJECT.name());
     	
     	this.contractMapper.updateContract(contract);
+
     	Contract rejectedContract = this.contractMapper.selectContract(1L);
-    	
-    	assertEquals("시간부족",rejectedContract.getRejectMsg());
+    	assertEquals(contract.getRejectMsg(),rejectedContract.getRejectMsg());
     	assertEquals(ContractState.REJECT.name(), rejectedContract.getState());
     }
 
@@ -100,14 +94,18 @@ public class ContractMapperTest extends WitheverDbUnitTestConfig{
 
     @Test
     public void updateContract() throws Exception {
-        Contract contract = this.contractMapper.selectContract(1L);
+    	String applyMsg = "진로상담";
+    	Contract contract = this.contractMapper.selectContract(1L);
+    	contract.setApplyMsg(applyMsg);
         contract.setState(ContractState.ACCEPT.name());
         contract.setContractTime(new ContractTime(3L));
+        
 
         this.contractMapper.updateContract(contract);
 
         Contract updatedContract = this.contractMapper.selectContract(1L);
         assertEquals(contract.getState(), updatedContract.getState());
+        assertEquals(contract.getApplyMsg(), updatedContract.getApplyMsg());
         assertEquals(contract.getContractTime().getId(), updatedContract.getContractTime().getId());
     }
 

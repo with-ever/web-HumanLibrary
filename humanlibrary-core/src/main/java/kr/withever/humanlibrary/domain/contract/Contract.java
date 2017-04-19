@@ -30,6 +30,9 @@ public class Contract {
     
     /** 반려 사유 **/
     private String rejectMsg;
+    
+    /** 신청 사유 **/
+    private String applyMsg;
 
     private Long createTime;
 
@@ -130,6 +133,14 @@ public class Contract {
 
 	public void setRejectMsg(String rejectMsg) {
 		this.rejectMsg = rejectMsg;
+	}
+
+	public String getApplyMsg() {
+		return applyMsg;
+	}
+
+	public void setApplyMsg(String applyMsg) {
+		this.applyMsg = applyMsg;
 	}
 
 }

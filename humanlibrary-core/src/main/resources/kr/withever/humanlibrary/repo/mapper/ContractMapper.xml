@@ -9,6 +9,7 @@
         <result property="state" column="STATE"/>
         <result property="createTime" column="CREATE_TIME"/>
         <result property="updateTime" column="UPDATE_TIME"/>
+        <result property="applyMsg" column="APPLY_MSG" />
         <result property="rejectMsg" column="REJECT_MSG" />
         <association property="user" resultMap="userResultMap"/>
         <association property="humanbook" resultMap="humanbookResultMap"/>
@@ -64,6 +65,7 @@
             ,TIME
             ,CREATE_TIME
             ,UPDATE_TIME
+            ,APPLY_MSG
             ,REJECT_MSG
         FROM CONTRACTS
         WHERE ID = #{contractId}
@@ -80,6 +82,7 @@
             ,TIME
             ,CREATE_TIME
             ,UPDATE_TIME
+            ,APPLY_MSG
             ,REJECT_MSG
         FROM CONTRACTS
         WHERE 1 = 1
@@ -144,6 +147,9 @@
             ,UPDATE_TIME = #{updateTime}
             <if test="rejectMsg != null">
             	,REJECT_MSG = #{rejectMsg}
+            </if>
+            <if test="applyMsg != null">
+            	,APPLY_MSG = #{applyMsg}
             </if>
         WHERE ID = #{id}
     </update>
