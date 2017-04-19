@@ -62,7 +62,7 @@ public class UserController {
 
     @RequestMapping(value="/verification/{loginId}", method = RequestMethod.GET)
     public HumanLibraryResponse verifyLoginId(
-            @PathVariable(value="loginId") String loginId
+            @PathVariable(value = "loginId") String loginId
     ) {
         Map<String, Boolean> result = new HashMap<String, Boolean>();
         User user = this.userService.retrieveUserByLoginId(loginId);
@@ -81,6 +81,13 @@ public class UserController {
         if (!isMatched) throw new HumanLibraryRuntimeException(ExceptionType.US_500_003);
         this.userService.modifyUserPassword(userId, encoder.encode(newPassword));
         return new HumanLibraryResponse("success");
+    }
+
+    @RequestMapping(value = "/info/{loginId}", method = RequestMethod.GET)
+    public User retrieveUserByLoginId(
+            @PathVariable(value = "loginId") String loginId
+    ) {
+        return this.userService.retrieveUserByLoginId(loginId);
     }
 
 }
