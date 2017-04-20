@@ -7,11 +7,11 @@ import java.util.List;
 /**
  * Created by youngjinkim on 2017. 4. 5..
  */
-public class Splash {
+public class Splash<T> {
 
     List<Category> categories;
 
-    ClientVersion version;
+    T version;
 
     public Splash() {}
 
@@ -23,11 +23,11 @@ public class Splash {
         this.categories = categories;
     }
 
-    public ClientVersion getVersion() {
+    public T getVersion() {
         return version;
     }
 
-    public void setVersion(ClientVersion version) {
+    public void setVersion(T version) {
         this.version = version;
     }
 }

@@ -30,7 +30,7 @@ public class CategoryRepository {
 
 	public Category retrieveCategory(Long id){
 		Category category = this.categoryMapper.selectCategory(id);
-		setSubCategoryInCategory(category);
+		if (category != null) setSubCategoryInCategory(category);
 		return category;
 	}
 	
@@ -70,10 +70,11 @@ public class CategoryRepository {
 
 	public List<Category> retrieveCategoriesWithSubCategory() {
 		List<Category> categories = this.categoryMapper.selectCategories();
-		for (Category category : categories) {
-			setSubCategoryInCategory(category);
+		if (categories.size() != 0) {
+			for (Category category : categories) {
+				setSubCategoryInCategory(category);
+			}
 		}
-
 		return categories;
 	}
 	

@@ -1,13 +1,15 @@
 package kr.withever.humanlibrary.api.controller;
 
+import io.swagger.annotations.ApiParam;
 import kr.withever.humanlibrary.util.AWSS3Util;
 import kr.withever.humanlibrary.util.FileUtil;
 import kr.withever.humanlibrary.util.HumanLibraryResponse;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
 /**
@@ -18,11 +20,10 @@ import java.io.IOException;
 public class ImageController {
 
     @RequestMapping(method = RequestMethod.POST)
-    @ResponseBody
     public HumanLibraryResponse createImage(
             @RequestParam(value = "image") MultipartFile multipartFile,
             @RequestParam(value = "id") String id,
-            @RequestParam(value = "type") String type
+            @ApiParam(value = "humanbook & user", required = true) @RequestParam(value = "type") String type
     ) throws IOException {
         AWSS3Util s3Util = new AWSS3Util();
         String bucketName = s3Util.createBuckectName(type);

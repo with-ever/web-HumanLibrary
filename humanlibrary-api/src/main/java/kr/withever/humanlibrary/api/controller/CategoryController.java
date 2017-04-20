@@ -40,10 +40,12 @@ public class CategoryController {
 		return this.categoryService.retrieveCategoryBySearch(search);
 	}
 	
-	@RequestMapping(method = RequestMethod.PUT)
+	@RequestMapping(value = "/{categoryId}", method = RequestMethod.PUT)
 	public void modifyCategory(
+			@PathVariable(value = "categoryId") Long categoryId,
 			@RequestBody Category category
 	){
+		category.setId(categoryId);
 		this.categoryService.modifyCategory(category);
 	}
 	
