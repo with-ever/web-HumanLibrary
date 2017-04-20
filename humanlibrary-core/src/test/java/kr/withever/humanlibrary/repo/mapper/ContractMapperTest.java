@@ -42,11 +42,13 @@ public class ContractMapperTest extends WitheverDbUnitTestConfig{
         contract.setHumanbook(new Humanbook(2L));
         contract.setState(ContractState.WAITING.name());
         contract.setContractTime(new ContractTime(1L, "20170404", "16"));
+        contract.setApplyMsg("apply msg");
         this.contractMapper.insertContract(contract);
 
         Contract insertedContract = this.contractMapper.selectContract(6L);
 
         assertEquals(insertedContract.getState(), contract.getState());
+        assertEquals(insertedContract.getApplyMsg(), contract.getApplyMsg());
     }
 
     @Test

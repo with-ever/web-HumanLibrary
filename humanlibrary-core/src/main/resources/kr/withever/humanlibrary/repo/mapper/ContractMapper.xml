@@ -32,24 +32,28 @@
 
     <insert id="insertContract" parameterType="Contract" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
         INSERT INTO CONTRACTS (
-        USER_ID
-        ,HB_ID
-        ,STATE
-        ,CONTRACT_TIME_ID
-        ,DATE
-        ,TIME
-        ,CREATE_TIME
-        ,UPDATE_TIME
+            USER_ID
+            ,HB_ID
+            ,STATE
+            ,CONTRACT_TIME_ID
+            ,DATE
+            ,TIME
+            ,APPLY_MSG
+            ,REJECT_MSG
+            ,CREATE_TIME
+            ,UPDATE_TIME
         )
         VALUES (
-        #{user.userId}
-        ,#{humanbook.id}
-        ,#{state}
-        ,#{contractTime.id}
-        ,#{contractTime.date}
-        ,#{contractTime.time}
-        ,#{createTime}
-        ,#{updateTime}
+            #{user.userId}
+            ,#{humanbook.id}
+            ,#{state}
+            ,#{contractTime.id}
+            ,#{contractTime.date}
+            ,#{contractTime.time}
+            ,#{applyMsg}
+            ,#{rejectMsg}
+            ,#{createTime}
+            ,#{updateTime}
         )
     </insert>
 
