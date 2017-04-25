@@ -23,10 +23,6 @@ public class AWSS3Util {
 	private static final String END_POINT = "s3.ap-northeast-2.amazonaws.com";
 	
 	private static final String BUCKET_NAME = "humanlibrary";
-	
-	public static final String BUCKET_OF_PARENTS = "parents";
-	public static final String BUCKET_OF_CROCS = "crocs";
-	public static final String BUCKET_OF_BABIES = "babies";
 
 	private AmazonS3 conn;
 
@@ -53,6 +49,7 @@ public class AWSS3Util {
     }
      
     // 파일 업로드
+    // InputStream 으로 코드 리팩토링
     public void fileUpload(String bucketName, String fileName, File file) throws FileNotFoundException {
     	PutObjectRequest putObjectRequest = new PutObjectRequest(bucketName, fileName, file);
     	putObjectRequest.setCannedAcl(CannedAccessControlList.PublicRead);
