@@ -1,5 +1,5 @@
-<html>
 <body>
-<h2>Hello World!</h2>
+    <div class="row">
+        <h2>Hello World!</h2>
+    </div>
 </body>
-</html>
