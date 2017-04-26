@@ -20,10 +20,6 @@ public interface HumanbookMapper {
 	
 	int selectHumanbooksTotalCountBySearch(HumanbookSearch search);
 	
-	List<Humanbook> selectHumanbooksByCategory(HumanbookSearch search);
-	
-	List<Humanbook> selectHumanbooksBySubCategory(HumanbookSearch search);
-	
 	int insertHumanbook(Humanbook humanbook);
 	
 	int updateHumanbook(Humanbook humanbook);

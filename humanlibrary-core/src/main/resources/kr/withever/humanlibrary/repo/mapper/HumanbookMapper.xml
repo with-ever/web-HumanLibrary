@@ -94,42 +94,6 @@
 			USER_ID = #{userId}
 	</select>
 	
-	<select id="selectHumanbooksByCategory" parameterType="HumanbookSearch" resultMap="humanbookResultMap">
-		SELECT
-			 ID
-			,USER_ID
-			,TITLE
-			,MAIN_CAREER
-			,STATE
-			,SERVICE_TIME
-			,PARENT_CATEGORY
-			,SUB_CATEGORY
-			,CREATE_TIME
-			,UPDATE_TIME
-		FROM
-			HUMANBOOK
-		WHERE
-			PARENT_CATEGORY = #{parentCategoryId}
-	</select>
-	
-	<select id="selectHumanbooksBySubCategory" parameterType="HumanbookSearch" resultMap="humanbookResultMap">
-		SELECT
-			 ID
-			,USER_ID
-			,TITLE
-			,MAIN_CAREER
-			,STATE
-			,SERVICE_TIME
-			,PARENT_CATEGORY
-			,SUB_CATEGORY
-			,CREATE_TIME
-			,UPDATE_TIME
-		FROM
-			HUMANBOOK
-		WHERE
-			SUB_CATEGORY = #{subCategoryId}
-	</select>
-	
     <select id="selectHumanbooksBySearch" parameterType="HumanbookSearch" resultMap="humanbookResultMap">
     	SELECT
     		ID
