@@ -2,16 +2,16 @@ package kr.withever.humanlibrary.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import kr.withever.humanlibrary.domain.common.humanbook.HumanbookState;
 import kr.withever.humanlibrary.domain.humanbook.Humanbook;
 import kr.withever.humanlibrary.domain.humanbook.HumanbookSearch;
-import kr.withever.humanlibrary.repo.CategoryRepository;
 import kr.withever.humanlibrary.repo.HumanbookRepository;
-import kr.withever.humanlibrary.repo.SubCategoryRepository;
 import kr.withever.humanlibrary.service.HumanbookService;
 
 @Service
+@Transactional
 public class HumanbookServiceImpl implements HumanbookService {
 
 	@Autowired

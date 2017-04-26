@@ -144,6 +144,13 @@
     		,UPDATE_TIME
     	FROM
     		HUMANBOOK
+		WHERE 1 = 1
+		<if test="categoryId != null">
+			AND PARENT_CATEGORY = #{categoryId}
+		</if>
+		<if test="subCategoryId != null">
+			AND SUB_CATEGORY = #{subCategoryId}
+		</if>
 		LIMIT
 			#{offset}
 			,#{limit}
@@ -154,6 +161,13 @@
     		COUNT(*)
    		FROM
    			HUMANBOOK
+   		WHERE 1 = 1
+   			<if test="categoryId != null">
+   				AND PARENT_CATEGORY = #{categoryId}
+   			</if>
+   			<if test="subCategoryId != null">
+   				AND SUB_CATEGORY = #{subCategoryId}
+   			</if>
     </select>
     
     <update id="updateHumanbookState" >

@@ -5,15 +5,15 @@ import kr.withever.humanlibrary.domain.common.PageSearch;
 public class HumanbookSearch extends PageSearch<Humanbook>{
 	
 	private Long id;
-	private Long parentCategoryId;
+	private Long categoryId;
 	private Long subCategoryId;
 
-	public Long getParentCategoryId() {
-		return parentCategoryId;
+	public Long getCategoryId() {
+		return categoryId;
 	}
 
-	public void setParentCategoryId(Long parentCategoryId) {
-		this.parentCategoryId = parentCategoryId;
+	public void setCategoryId(Long parentCategoryId) {
+		this.categoryId = parentCategoryId;
 	}
 
 	public Long getSubCategoryId() {

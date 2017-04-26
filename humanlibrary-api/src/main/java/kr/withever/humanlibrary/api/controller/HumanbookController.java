@@ -43,7 +43,7 @@ public class HumanbookController {
 			@PathVariable(value = "categoryId") Long categoryId 
 			,HumanbookSearch search
 	){
-		search.setParentCategoryId(categoryId);
+		search.setCategoryId(categoryId);
 		return this.humanbookService.retrieveHumanbooksByCategory(search);
 	}
 	
