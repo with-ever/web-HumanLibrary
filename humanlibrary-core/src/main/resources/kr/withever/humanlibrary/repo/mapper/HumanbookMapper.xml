@@ -11,6 +11,7 @@
         <result property="mainCareer" column="MAIN_CAREER"/>
         <result property="state" column="STATE"/>
         <result property="serviceTime" column="SERVICE_TIME"/>
+		<result property="imageUrl" column="IMAGE_URL"/>
         <result property="createTime" column="CREATE_TIME"/>
         <result property="updateTime" column="UPDATE_TIME"/>
         <association property="parentCategory" resultMap="categoryResultMap" />
@@ -40,9 +41,10 @@
 			,SERVICE_TIME
 			,PARENT_CATEGORY
 			,SUB_CATEGORY
+			,STATE
+			,IMAGE_URL
 			,CREATE_TIME
 			,UPDATE_TIME
-			,STATE
     	)
     	VALUES(
     		#{id}
@@ -52,9 +54,10 @@
     		,#{serviceTime}
     		,#{parentCategory.id}
     		,#{subCategory.id}
+    		,#{state}
+    		,#{imageUrl}
     		,#{createTime}
     		,#{updateTime}
-    		,#{state}
     	)
     </insert>
     
@@ -68,6 +71,7 @@
 			,SERVICE_TIME
 			,PARENT_CATEGORY
 			,SUB_CATEGORY
+			,IMAGE_URL
 			,CREATE_TIME
 			,UPDATE_TIME
 		FROM
@@ -86,6 +90,7 @@
 			,SERVICE_TIME
 			,PARENT_CATEGORY
 			,SUB_CATEGORY
+			,IMAGE_URL
 			,CREATE_TIME
 			,UPDATE_TIME
 		FROM
@@ -122,6 +127,7 @@
 			,SERVICE_TIME
 			,PARENT_CATEGORY
 			,SUB_CATEGORY
+			,IMAGE_URL
 			,CREATE_TIME
 			,UPDATE_TIME
 		FROM
@@ -140,6 +146,7 @@
     		,PARENT_CATEGORY
     		,SUB_CATEGORY
     		,STATE
+			,IMAGE_URL
     		,CREATE_TIME
     		,UPDATE_TIME
     	FROM
@@ -191,6 +198,7 @@
 			,SUB_CATEGORY = #{subCategory.id}
 			,UPDATE_TIME = #{updateTime}
 			,STATE = #{state}
+			,IMAGE_URL = #{imageUrl}
 		WHERE
 			ID = #{id}
     </update>

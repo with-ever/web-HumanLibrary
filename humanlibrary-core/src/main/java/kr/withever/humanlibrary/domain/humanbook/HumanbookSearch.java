@@ -12,8 +12,8 @@ public class HumanbookSearch extends PageSearch<Humanbook>{
 		return categoryId;
 	}
 
-	public void setCategoryId(Long parentCategoryId) {
-		this.categoryId = parentCategoryId;
+	public void setCategoryId(Long categoryId) {
+		this.categoryId = categoryId;
 	}
 
 	public Long getSubCategoryId() {
