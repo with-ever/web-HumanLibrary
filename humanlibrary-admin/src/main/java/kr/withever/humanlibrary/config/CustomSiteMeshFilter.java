@@ -12,10 +12,7 @@ public class CustomSiteMeshFilter extends ConfigurableSiteMeshFilter {
     @Override
     protected void applyCustomConfiguration(SiteMeshFilterBuilder builder) {
         builder
-                .addDecoratorPath("/", "/WEB-INF/views/layout/default-layout.jsp")
-//                .addDecoratorPath("/*", "/WEB-INF/views/layout/layout_default.jsp")
-//                .addDecoratorPath("**popup", "/WEB-INF/views/layout/layout_popup.jsp")
-
+                .addDecoratorPath("/", "/WEB-INF/view/layout/default-layout.jsp")
                 .addExcludedPath("/js/*")
                 .addExcludedPath("/css/*")
                 .addExcludedPath("/img/*")
