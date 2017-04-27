@@ -11,12 +11,14 @@
         <result property="name" column="NAME"/>
         <result property="email" column="EMAIL"/>
         <result property="password" column="PASSWORD"/>
+        <result property="gender" column="GENDER"/>
         <result property="phoneNo" column="PHONE_NO"/>
         <result property="mPhoneNo" column="M_PHONE_NO"/>
         <result property="birth" column="BIRTH"/>
         <result property="zipCode" column="ZIP_CODE"/>
         <result property="address" column="ADDRESS"/>
         <result property="detailAddress" column="DETAIL_ADDRESS"/>
+        <result property="imageUrl" column="IMAGE_URL"/>
         <result property="createTime" column="CREATE_TIME"/>
         <result property="updateTime" column="UPDATE_TIME"/>
     </resultMap>
@@ -27,12 +29,14 @@
             ,NAME
             ,EMAIL
             ,PASSWORD
+            ,GENDER
             ,PHONE_NO
             ,M_PHONE_NO
             ,BIRTH
             ,ZIP_CODE
             ,ADDRESS
             ,DETAIL_ADDRESS
+            ,IMAGE_URL
             ,CREATE_TIME
             ,UPDATE_TIME
         )
@@ -41,12 +45,14 @@
             ,#{name}
             ,#{email}
             ,#{password}
+            ,#{gender}
             ,#{phoneNo}
             ,#{mPhoneNo}
             ,#{birth}
             ,#{zipCode}
             ,#{address}
             ,#{detailAddress}
+            ,#{imageUrl}
             ,#{createTime}
             ,#{updateTime}
         )
@@ -59,13 +65,14 @@
             ,LOGIN_ID
             ,NAME
             ,EMAIL
-            ,PASSWORD
+            ,GENDER
             ,PHONE_NO
             ,M_PHONE_NO
             ,BIRTH
             ,ZIP_CODE
             ,ADDRESS
             ,DETAIL_ADDRESS
+            ,IMAGE_URL
             ,CREATE_TIME
             ,UPDATE_TIME
         FROM USERS
@@ -77,12 +84,14 @@
         SET
             NAME = #{name}
             ,EMAIL = #{email}
+            ,GENDER = #{gender}
             ,PHONE_NO = #{phoneNo}
             ,M_PHONE_NO = #{mPhoneNo}
             ,BIRTH = #{birth}
             ,ZIP_CODE = #{zipCode}
             ,ADDRESS = #{address}
             ,DETAIL_ADDRESS = #{detailAddress}
+            ,IMAGE_URL = #{imageUrl}
             ,UPDATE_TIME = #{updateTime}
         WHERE USER_ID = #{userId}
     </update>
@@ -100,12 +109,14 @@
             ,NAME
             ,EMAIL
             ,PASSWORD
+            ,GENDER
             ,PHONE_NO
             ,M_PHONE_NO
             ,BIRTH
             ,ZIP_CODE
             ,ADDRESS
             ,DETAIL_ADDRESS
+            ,IMAGE_URL
             ,CREATE_TIME
             ,UPDATE_TIME
         FROM USERS
@@ -118,7 +129,7 @@
             ,LOGIN_ID
             ,NAME
             ,EMAIL
-            ,PASSWORD
+            ,GENDER
             ,PHONE_NO
             ,M_PHONE_NO
             ,BIRTH

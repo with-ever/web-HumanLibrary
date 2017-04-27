@@ -62,8 +62,8 @@ public class ServletInitializer extends AbstractDispatcherServletInitializer {
 		DelegatingFilterProxy delegatingFilterProxy = new DelegatingFilterProxy("springSecurityFilterChain");
 		servletContext.addFilter("springSecurityFilterChain", delegatingFilterProxy).addMappingForUrlPatterns(null, false, "/*");
 
-		ConfigurableSiteMeshFilter configurableSiteMeshFilter = new ConfigurableSiteMeshFilter();
-		servletContext.addFilter("siteMeshFilter", configurableSiteMeshFilter).addMappingForUrlPatterns(null, false, "/*");
+		CustomSiteMeshFilter customSiteMeshFilter = new CustomSiteMeshFilter();
+		servletContext.addFilter("sitemesh", customSiteMeshFilter).addMappingForUrlPatterns(null, false, "/*");
 	}
 
 }

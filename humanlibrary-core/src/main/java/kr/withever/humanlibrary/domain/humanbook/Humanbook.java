@@ -20,6 +20,7 @@ public class Humanbook implements Serializable{
 	private Category parentCategory;
 	private SubCategory subCategory;
 	private HumanbookState state;
+	private String imageUrl;
 	private Long createTime;
 	private Long updateTime;
 	
@@ -108,6 +109,14 @@ public class Humanbook implements Serializable{
 
 	public void setState(HumanbookState state) {
 		this.state = state;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 	public Long getCreateTime() {

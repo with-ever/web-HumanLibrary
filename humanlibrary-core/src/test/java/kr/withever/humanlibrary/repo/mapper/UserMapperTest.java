@@ -4,6 +4,7 @@ import com.github.springtestdbunit.annotation.DatabaseOperation;
 import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import kr.withever.humanlibrary.config.WitheverDbUnitTestConfig;
+import kr.withever.humanlibrary.domain.common.user.Gender;
 import kr.withever.humanlibrary.domain.user.User;
 import kr.withever.humanlibrary.domain.user.UserSearch;
 import org.junit.Test;
@@ -28,14 +29,17 @@ public class UserMapperTest extends WitheverDbUnitTestConfig {
 
     @Test
     public void insertUser() throws Exception {
-        User user = new User("yjkim", "김영진", "jin@gmail.com", "123456");
+        User user = new User("yjkim", "김영진", "jin@gmail.com", "123456", Gender.MALE.name());
+        user.setImageUrl("2134");
         this.userMapper.insertUser(user);
 
         User insertedUser = this.userMapper.selectUser(3L);
         assertEquals(user.getLoginId(), insertedUser.getLoginId());
         assertEquals(user.getName(), insertedUser.getName());
         assertEquals(user.getEmail(), insertedUser.getEmail());
-        assertEquals(user.getPassword(), insertedUser.getPassword());
+        assertEquals(user.getGender(), insertedUser.getGender());
+        assertEquals(user.getImageUrl(), insertedUser.getImageUrl());
+
     }
 
     @Test
