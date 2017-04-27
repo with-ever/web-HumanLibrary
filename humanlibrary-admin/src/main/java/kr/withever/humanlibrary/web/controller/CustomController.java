@@ -10,6 +10,7 @@ public class CustomController {
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public String custom() {
+		System.out.print("!234");
 		return "test";
 	}
 
