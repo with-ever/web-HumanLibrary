@@ -76,8 +76,10 @@ public class CategoryMapperTest extends WitheverDbUnitTestConfig{
 		category.setCategoryName("TOURISM");
 		this.categoryMapper.updateCategory(category);
 
-		category = this.categoryMapper.selectCategory(2L);
-		assertEquals("TOURISM", category.getCategoryName());
+//		category = this.categoryMapper.selectCategory(2L);
+		Category updatedCategory = this.categoryMapper.selectCategory(2L);
+//		assertEquals("TOURISM", updatedCategory.getCategoryName());
+		assertEquals(category.getCategoryName(), updatedCategory.getCategoryName());
 	}
 	
 	@Test

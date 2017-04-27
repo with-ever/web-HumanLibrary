@@ -138,7 +138,7 @@ public class Contract {
 	public String getApplyMsg() {
 		return applyMsg;
 	}
-
+	
 	public void setApplyMsg(String applyMsg) {
 		this.applyMsg = applyMsg;
 	}

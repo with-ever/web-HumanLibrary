@@ -11,6 +11,7 @@ public class CustomController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String custom() {
 		System.out.print("!234");
+		System.out.println("머지태ㅔ스");
 		return "test";
 	}
 
