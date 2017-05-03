@@ -11,12 +11,10 @@ import kr.withever.humanlibrary.domain.common.humanbook.HumanbookState;
 import kr.withever.humanlibrary.domain.humanbook.Category;
 import kr.withever.humanlibrary.domain.humanbook.Humanbook;
 import kr.withever.humanlibrary.domain.humanbook.HumanbookSearch;
-import kr.withever.humanlibrary.domain.humanbook.SubCategory;
 import kr.withever.humanlibrary.exception.HumanLibraryException;
 import kr.withever.humanlibrary.repo.mapper.CategoryMapper;
 import kr.withever.humanlibrary.repo.mapper.HumanbookMapper;
 import kr.withever.humanlibrary.repo.mapper.HumanbookServiceDayMapper;
-import kr.withever.humanlibrary.repo.mapper.SubCategoryMapper;
 
 @Repository
 public class HumanbookRepository {
@@ -27,9 +25,6 @@ public class HumanbookRepository {
 	private HumanbookServiceDayMapper humanbookServiceDayMapper;
 	@Autowired
 	private CategoryMapper categoryMapper;
-	@Autowired
-	private SubCategoryMapper subCategoryMapper;
-
 	
 	/* 휴먼북 추가 */
 	public Long createHumanbook(Humanbook humanbook){
@@ -148,7 +143,7 @@ public class HumanbookRepository {
 		Category parentCategory = categoryMapper.selectCategory(humanbook.getParentCategory().getId());
 		humanbook.setParentCategory(parentCategory);
 		
-		SubCategory subCategory = subCategoryMapper.selectSubCategory(humanbook.getSubCategory().getId());
+		Category subCategory = categoryMapper.selectCategory(humanbook.getSubCategory().getId());
 		humanbook.setSubCategory(subCategory);
 	}
 }

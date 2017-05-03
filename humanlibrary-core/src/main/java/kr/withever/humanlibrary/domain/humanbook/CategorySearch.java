@@ -5,6 +5,7 @@ import kr.withever.humanlibrary.domain.common.PageSearch;
 public class CategorySearch extends PageSearch<Category>{
 	
 	private Long id;
+	private Long parentCategoryId;
 	private String categoryName;
 	private String desc;
 	
@@ -31,6 +32,14 @@ public class CategorySearch extends PageSearch<Category>{
 
 	public void setDesc(String desc) {
 		this.desc = desc;
+	}
+
+	public Long getParentCategoryId() {
+		return parentCategoryId;
+	}
+
+	public void setParentCategoryId(Long parentCategoryId) {
+		this.parentCategoryId = parentCategoryId;
 	}
 	
 

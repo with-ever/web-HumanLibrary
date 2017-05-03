@@ -16,7 +16,6 @@ import kr.withever.humanlibrary.domain.common.humanbook.HumanbookState;
 import kr.withever.humanlibrary.domain.humanbook.Category;
 import kr.withever.humanlibrary.domain.humanbook.Humanbook;
 import kr.withever.humanlibrary.domain.humanbook.HumanbookSearch;
-import kr.withever.humanlibrary.domain.humanbook.SubCategory;
 
 @DatabaseSetup(value={"/dataset/Humanbook.xml"}, type=DatabaseOperation.INSERT)
 @DatabaseTearDown(value={"/dataset/Humanbook.xml"}, type=DatabaseOperation.DELETE_ALL)
@@ -66,8 +65,8 @@ public class HumanbookMapperTest extends WitheverDbUnitTestConfig{
 
 	@Test
 	public void insertHumanbook() throws Exception{
-		Category category = new Category(1L,"IT","아이티");
-		SubCategory subCategory = new SubCategory(1L, "DEVELOP", 1L);
+		Category category = new Category(1L,"IT","아이티", null);
+		Category subCategory = new Category(3L, "DEVELOP", "개발자", 1L);
 		Humanbook humanbook = new Humanbook();
 		humanbook.setId(3L);
 		humanbook.setMainCareer("aa");
@@ -98,8 +97,8 @@ public class HumanbookMapperTest extends WitheverDbUnitTestConfig{
 
 	@Test
 	public void updateHumanbook() throws Exception{
-		Category category = new Category(1L,"IT","아이티");
-		SubCategory subCategory = new SubCategory(2L, "DBA", 1L);
+		Category category = new Category(1L,"IT","아이티", null);
+		Category subCategory = new Category(2L, "DBA", "DB관리자", 1L);
 		Humanbook humanbook = new Humanbook();
 		humanbook.setId(1L);
 		humanbook.setMainCareer("aa");

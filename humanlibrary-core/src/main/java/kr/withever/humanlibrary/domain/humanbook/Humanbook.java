@@ -18,7 +18,7 @@ public class Humanbook implements Serializable{
 	private Set<String> serviceDay;
 	private String serviceTime;
 	private Category parentCategory;
-	private SubCategory subCategory;
+	private Category subCategory;
 	private HumanbookState state;
 	private String imageUrl;
 	private Long createTime;
@@ -95,11 +95,11 @@ public class Humanbook implements Serializable{
 		this.parentCategory = upperCategory;
 	}
 
-	public SubCategory getSubCategory() {
+	public Category getSubCategory() {
 		return subCategory;
 	}
 
-	public void setSubCategory(SubCategory subCategory) {
+	public void setSubCategory(Category subCategory) {
 		this.subCategory = subCategory;
 	}
 

@@ -19,12 +19,13 @@
     </resultMap>
     
     <resultMap id="categoryResultMap" type="Category">
-    	<id property="id" column="PARENT_CATEGORY" />
+    	<id property="id" column="PARENT_CATEGORY" /> <!-- COLUMN명 확인 -->
     	<result property="categoryName" column="CATEGORY_NAME"/>
     	<result property="desc" column="DESC"/>
+    	<result property="parentCategoryId" column="PARENT_CATEGORY"/>
     </resultMap>
     
-    <resultMap id="subCategoryResultMap" type="SubCategory">
+    <resultMap id="subCategoryResultMap" type="Category">
     	<id property="id" column="SUB_CATEGORY" />
     	<result property="categoryName" column="CATEGORY_NAME"/>
     	<result property="desc" column="DESC"/>

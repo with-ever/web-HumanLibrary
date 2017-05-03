@@ -25,8 +25,7 @@ public class CategoryMapperTest extends WitheverDbUnitTestConfig{
 	@Test
 	public void selectCategoriesBySearch() throws Exception{
 		CategorySearch search = new CategorySearch();
-		search.setId(1L);
-		search.setCategoryName("IT");
+		search.setParentCategoryId(2L);
 		List<Category> list = this.categoryMapper.selectCategoriesBySearch(search);
 		assertEquals(2, list.size());
 	}
@@ -34,11 +33,12 @@ public class CategoryMapperTest extends WitheverDbUnitTestConfig{
 	@Test
 	public void selectCategoriesTotalCountBySearch() throws Exception{
 		CategorySearch search = new CategorySearch();
-		search.setId(1L);
-		search.setCategoryName("IT");
 		int count = this.categoryMapper.selectCategoriesTotalCountBySearch(search);
-		
-		assertEquals(2, count);
+		assertEquals(5, count);
+
+		search.setCategoryName("IT");
+		count = this.categoryMapper.selectCategoriesTotalCountBySearch(search);
+		assertEquals(1, count);
 	}
 	
 	@Test
@@ -52,21 +52,16 @@ public class CategoryMapperTest extends WitheverDbUnitTestConfig{
 	}
 	
 	@Test
-	public void selectCategoryByCategoryName() throws Exception{
-		Category category = this.categoryMapper.selectCategoryByCategoryName("IT");
-		assertEquals(new Long(1L), category.getId());
-	}
-	
-	@Test
 	public void insertCategory() throws Exception{
 		Category newCategory = new Category();
-		newCategory.setId(3L);
+		newCategory.setId(6L);
 		newCategory.setCategoryName("TOURISM");
 		newCategory.setDesc("관광");
+		
 		this.categoryMapper.insertCategory(newCategory);
 		
-		Category category = this.categoryMapper.selectCategory(3L);
-		assertEquals("TOURISM",category.getCategoryName());
+		Category category = this.categoryMapper.selectCategory(6L);
+		assertEquals(newCategory.getCategoryName(),category.getCategoryName());
 	}
 	
 	@Test
@@ -84,18 +79,18 @@ public class CategoryMapperTest extends WitheverDbUnitTestConfig{
 	
 	@Test
 	public void countCategory() throws Exception{
-		assertEquals(2, this.categoryMapper.countCategory());
+		assertEquals(5, this.categoryMapper.countCategory());
 	}
 	
 	@Test
 	public void deleteCategory() throws Exception{
 		this.categoryMapper.deleteCategory(2L);
-		assertEquals(1, this.categoryMapper.countCategory());
+		assertEquals(4, this.categoryMapper.countCategory());
 	}
 
 	@Test
 	public void selectCategories() throws Exception {
 		List<Category> categories = this.categoryMapper.selectCategories();
-		assertEquals(2, categories.size());
+		assertEquals(5, categories.size());
 	}
 }
