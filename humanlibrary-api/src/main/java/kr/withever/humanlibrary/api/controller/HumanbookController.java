@@ -29,6 +29,13 @@ public class HumanbookController {
 		return new HumanLibraryResponse(this.humanbookService.createHumanbook(humanbook));
 	}
 	
+	@RequestMapping(method = RequestMethod.GET)
+	public HumanbookSearch retrieveAllHumanbooks(
+			HumanbookSearch search
+			){
+		return this.humanbookService.retrieveHumanbooksBySearch(search);
+	}
+	
 	@RequestMapping(value = "/{hbId}", method = RequestMethod.GET)
 	public Humanbook retrieveHumanbook(
 			@PathVariable(value = "hbId") Long hbId
