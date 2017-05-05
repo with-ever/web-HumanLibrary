@@ -14,8 +14,6 @@ public interface HumanbookMapper {
 	
 	Humanbook selectHumanbook(Long id);
 	
-	Humanbook selectHumanbookByUserId(String userId);
-	
 	List<Humanbook> selectHumanbooksBySearch(HumanbookSearch search);
 	
 	int selectHumanbooksTotalCountBySearch(HumanbookSearch search);

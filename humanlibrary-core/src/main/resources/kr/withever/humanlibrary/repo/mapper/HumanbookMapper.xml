@@ -81,25 +81,6 @@
 			ID = #{id}
 	</select>
 	
-	<select id="selectHumanbookByUserId" parameterType="String" resultMap="humanbookResultMap">
-		SELECT
-			 ID
-			,USER_ID
-			,TITLE
-			,MAIN_CAREER
-			,STATE
-			,SERVICE_TIME
-			,PARENT_CATEGORY
-			,SUB_CATEGORY
-			,IMAGE_URL
-			,CREATE_TIME
-			,UPDATE_TIME
-		FROM
-			HUMANBOOK
-		WHERE
-			USER_ID = #{userId}
-	</select>
-	
     <select id="selectHumanbooksBySearch" parameterType="HumanbookSearch" resultMap="humanbookResultMap">
     	SELECT
     		ID
@@ -121,6 +102,9 @@
 		</if>
 		<if test="subCategoryId != null">
 			AND SUB_CATEGORY = #{subCategoryId}
+		</if>
+		<if test="userId != null">
+			AND USER_ID = #{userId}
 		</if>
 		LIMIT
 			#{offset}

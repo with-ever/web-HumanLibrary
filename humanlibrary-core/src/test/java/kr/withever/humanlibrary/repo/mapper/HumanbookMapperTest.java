@@ -58,12 +58,6 @@ public class HumanbookMapperTest extends WitheverDbUnitTestConfig{
 	}
 
 	@Test
-	public void selectHumanbookById() throws Exception{
-		Humanbook humanbook = this.humanbookMapper.selectHumanbookByUserId("SEUNG1107");
-		assertEquals(new Long(1L), humanbook.getId());
-	}
-
-	@Test
 	public void insertHumanbook() throws Exception{
 		Category category = new Category(1L,"IT","아이티", null);
 		Category subCategory = new Category(3L, "DEVELOP", "개발자", 1L);

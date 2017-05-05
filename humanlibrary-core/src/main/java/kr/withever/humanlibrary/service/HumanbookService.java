@@ -11,16 +11,12 @@ public interface HumanbookService {
 
 	Long createHumanbook(Humanbook humanBook);
     
-	Humanbook retrieveHumanbookByUserId(String userId);
-
     Humanbook retrieveHumanbook(Long id);
 
     HumanbookSearch retrieveHumanbooksBySearch(HumanbookSearch search);
     
     HumanbookSearch retrieveHumanbooksByCategory(HumanbookSearch search);
     
-    HumanbookSearch retrieveHumanbooksBySubCategory(HumanbookSearch search);
-
     void modifyHumanbook(Humanbook humanbook);
 
     void modifyHumanbookState(Long id, HumanbookState state);

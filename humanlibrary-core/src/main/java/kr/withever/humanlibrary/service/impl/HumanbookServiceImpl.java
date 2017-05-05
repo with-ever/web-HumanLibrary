@@ -33,14 +33,6 @@ public class HumanbookServiceImpl implements HumanbookService {
 	}
 
 	@Override
-	public Humanbook retrieveHumanbookByUserId(String userId) {
-		Humanbook humanbook = this.humanbookRepository.retrieveHumanbookByUserId(userId);
-		// @TODO error code update
-		// if(humanbook == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(userId), "success");
-		return humanbook;
-	}
-	
-	@Override
 	public HumanbookSearch retrieveHumanbooksBySearch(HumanbookSearch search) {
 		return this.humanbookRepository.retrieveHumanbooksBySearch(search);
 	}
@@ -50,11 +42,6 @@ public class HumanbookServiceImpl implements HumanbookService {
 		return this.humanbookRepository.retrieveHumanbooksByCategory(search);
 	}
 	
-	@Override
-	public HumanbookSearch retrieveHumanbooksBySubCategory(HumanbookSearch search){
-		return this.humanbookRepository.retrieveHumanbooksByCategoryBySubCategory(search);
-	}
-
 	@Override
 	public void modifyHumanbook(Humanbook humanbook){
 		this.humanbookRepository.modifyHumanbook(humanbook);
