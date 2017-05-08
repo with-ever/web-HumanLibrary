@@ -29,6 +29,16 @@ public class HumanbookController {
 		return new HumanLibraryResponse(this.humanbookService.createHumanbook(humanbook));
 	}
 	
+	@RequestMapping(method = RequestMethod.GET)
+	public HumanbookSearch retrieveAllHumanbooks(
+			HumanbookSearch search
+			){
+		//  userId로 휴먼북 검색에는 이 api에 쿼리스트링 사용
+		//  api/humanbooks?userId=seung1107
+		//  카테고리고 휴먼북리스트 검색을 병합한다면? --> api/humanbooks?categoryId=123 
+		return this.humanbookService.retrieveHumanbooksBySearch(search);
+	}
+	
 	@RequestMapping(value = "/{hbId}", method = RequestMethod.GET)
 	public Humanbook retrieveHumanbook(
 			@PathVariable(value = "hbId") Long hbId
@@ -45,15 +55,6 @@ public class HumanbookController {
 	){
 		search.setCategoryId(categoryId);
 		return this.humanbookService.retrieveHumanbooksByCategory(search);
-	}
-	
-	@RequestMapping(value= "/subcategory/{subCategoryId}", method = RequestMethod.GET)
-	public HumanbookSearch retrieveHumanbooksBySubCategory(
-			@PathVariable(value = "subCategoryId") Long subCategoryId 
-			,HumanbookSearch search
-	){
-		search.setSubCategoryId(subCategoryId);
-		return this.humanbookService.retrieveHumanbooksBySubCategory(search);
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)

@@ -10,4 +10,23 @@
 		CATEGORY_NAME = "COURSE"
 		DESC = "코스"
 	/>
+	<CATEGORY
+		ID = "3"
+		CATEGORY_NAME = "DEVELOPER"
+		DESC = "개발자"
+		PARENT_CATEGORY_ID = "1"
+	/>
+	<CATEGORY
+		ID = "4"
+		CATEGORY_NAME = "SUB COURSE"
+		DESC = "서브코스"
+		PARENT_CATEGORY_ID = "2" 
+	/>
+	<CATEGORY
+		ID = "5"
+		CATEGORY_NAME = "SUB COURSE1"
+		DESC = "서브코스1"
+		PARENT_CATEGORY_ID = "2" 
+	/>
+	
 </dataset>

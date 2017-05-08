@@ -30,14 +30,6 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public Category retrieveCategoryByCategoryName(String categoryName) {
-		Category category = this.categoryRepository.retrieveCategoryByCategoryName(categoryName);
-		// @TODO error code update
-		// if(category == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(categoryName), "success");
-		return category;
-	}
-
-	@Override
 	public Long createCategory(Category category) {
 		return this.categoryRepository.createCategory(category);
 	}

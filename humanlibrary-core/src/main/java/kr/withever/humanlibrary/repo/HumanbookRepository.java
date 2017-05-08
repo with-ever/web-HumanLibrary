@@ -11,12 +11,10 @@ import kr.withever.humanlibrary.domain.common.humanbook.HumanbookState;
 import kr.withever.humanlibrary.domain.humanbook.Category;
 import kr.withever.humanlibrary.domain.humanbook.Humanbook;
 import kr.withever.humanlibrary.domain.humanbook.HumanbookSearch;
-import kr.withever.humanlibrary.domain.humanbook.SubCategory;
 import kr.withever.humanlibrary.exception.HumanLibraryException;
 import kr.withever.humanlibrary.repo.mapper.CategoryMapper;
 import kr.withever.humanlibrary.repo.mapper.HumanbookMapper;
 import kr.withever.humanlibrary.repo.mapper.HumanbookServiceDayMapper;
-import kr.withever.humanlibrary.repo.mapper.SubCategoryMapper;
 
 @Repository
 public class HumanbookRepository {
@@ -27,9 +25,6 @@ public class HumanbookRepository {
 	private HumanbookServiceDayMapper humanbookServiceDayMapper;
 	@Autowired
 	private CategoryMapper categoryMapper;
-	@Autowired
-	private SubCategoryMapper subCategoryMapper;
-
 	
 	/* 휴먼북 추가 */
 	public Long createHumanbook(Humanbook humanbook){
@@ -51,19 +46,6 @@ public class HumanbookRepository {
 		return humanbook;
 	}
 	
-	/* 유저 id로 휴먼북 한명 얻기 */
-	public Humanbook retrieveHumanbookByUserId(String userId){
-		Humanbook humanbook = this.humanbookMapper.selectHumanbookByUserId(userId);
-		if(humanbook != null){ //휴먼북의 서비스 데이, 카테고리, 서브카테고리 추가 부분
-			/*Set<String> dayList = this.humanbookServiceDayMapper.selectHumanbookServiceDayList(humanbook.getId());
-			humanbook.setServiceDay(dayList);*/
-		
-			setServiceDaysAndCategoriesInHumanbook(humanbook);
-			//(서브)카테고리 추가부분 없음
-		}
-		return humanbook;
-	}
-	
 	/* search로 휴먼북 리스트 얻기 */
 	public HumanbookSearch retrieveHumanbooksBySearch(HumanbookSearch search){
 		List<Humanbook> humanbooks = this.humanbookMapper.selectHumanbooksBySearch(search);
@@ -77,6 +59,12 @@ public class HumanbookRepository {
 	
 	/* 카테고리에 해당하는 휴먼북 리스트 얻기 */
 	public HumanbookSearch retrieveHumanbooksByCategory(HumanbookSearch search){
+		Category searchCategory = this.categoryMapper.selectCategory(search.getCategoryId());
+		if(searchCategory.getParentCategoryId() != null){ //검색조건의 카테고리가 서브카테고리 categorySearch객체의 (sub)categoryId 세팅
+			search.setCategoryId(null);
+			search.setSubCategoryId(searchCategory.getId());
+		}
+		
 		List<Humanbook> humanbooks = this.humanbookMapper.selectHumanbooksBySearch(search);
 		search.setResults(humanbooks);
 		if(humanbooks.size() != 0){
@@ -88,26 +76,6 @@ public class HumanbookRepository {
 				currentHumanbook = humanbooks.get(i);
 				setServiceDaysAndCategoriesInHumanbook(currentHumanbook);
 			}
-		}
-		return search;
-	}
-	
-	/* 서브 카테고리에 해당하는 휴먼북 리스트 얻기 */
-	public HumanbookSearch retrieveHumanbooksByCategoryBySubCategory(HumanbookSearch search){
-		List<Humanbook> humanbooks = this.humanbookMapper.selectHumanbooksBySearch(search);
-		search.setResults(humanbooks);
-		if(humanbooks.size() != 0){
-			int totalCount = this.humanbookMapper.selectHumanbooksTotalCountBySearch(search);
-			System.out.println("totalCount SQL ====>"+this.humanbookMapper.selectHumanbooksTotalCountBySearch(search));
-			System.out.println("totalCount ======>"+totalCount);
-			search.setTotalCount(totalCount);
-			
-			Humanbook currentHumanbook = null;
-			for (int i = 0; i < humanbooks.size(); i++) {
-				currentHumanbook = humanbooks.get(i);
-				setServiceDaysAndCategoriesInHumanbook(currentHumanbook);
-			}
-			search.setCategoryId(currentHumanbook.getParentCategory().getId());
 		}
 		return search;
 	}
@@ -148,7 +116,7 @@ public class HumanbookRepository {
 		Category parentCategory = categoryMapper.selectCategory(humanbook.getParentCategory().getId());
 		humanbook.setParentCategory(parentCategory);
 		
-		SubCategory subCategory = subCategoryMapper.selectSubCategory(humanbook.getSubCategory().getId());
+		Category subCategory = categoryMapper.selectCategory(humanbook.getSubCategory().getId());
 		humanbook.setSubCategory(subCategory);
 	}
 }

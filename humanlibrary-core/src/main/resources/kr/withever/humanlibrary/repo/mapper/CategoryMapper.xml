@@ -7,6 +7,7 @@
 		<id property="id" column="ID"/>
 		<result property="categoryName" column="CATEGORY_NAME"/>
 		<result property="desc" column="DESC"/>
+		<result property="parentCategoryId" column="PARENT_CATEGORY_ID"/>
 	</resultMap>
 	
 	<insert id="insertCategory" parameterType="Category" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
@@ -15,11 +16,13 @@
 			ID
 			,CATEGORY_NAME
 			,`DESC`
+			,PARENT_CATEGORY_ID
 		)
 		VALUES(
 			#{id}
 			,#{categoryName}
 			,#{desc}
+			,#{parentCategoryId}
 		)
 	</insert>
 	
@@ -28,21 +31,11 @@
 			ID
 			,CATEGORY_NAME
 			,`DESC`
+			,PARENT_CATEGORY_ID
 		FROM
 			CATEGORY
 		WHERE
 			ID = #{id}
-	</select>
-	
-	<select id="selectCategoryByCategoryName" parameterType="String" resultMap="categoryResultMap">
-		SELECT
-			ID
-			,CATEGORY_NAME
-			,`DESC`
-		FROM
-			CATEGORY
-		WHERE
-			CATEGORY_NAME = #{categoryName}
 	</select>
 	
 	<select id="selectCategoriesBySearch" parameterType="CategorySearch" resultMap="categoryResultMap">
@@ -50,8 +43,19 @@
 			ID
 			,CATEGORY_NAME
 			,`DESC`
+			,PARENT_CATEGORY_ID
 		FROM
 			CATEGORY
+		WHERE 1 = 1
+			<if test="categoryName != null">
+				AND CATEGORY_NAME = #{categoryName}
+			</if>
+			<if test="desc != null">
+				AND `DESC` = #{desc}
+			</if>
+			<if test="parentCategoryId != null">
+				AND PARENT_CATEGORY_ID = #{parentCategoryId}
+			</if>
 	</select>
 	
 	<select id="selectCategoriesTotalCountBySearch" parameterType="CategorySearch" resultType="int">
@@ -59,6 +63,16 @@
 			COUNT(1)
 		FROM
 			CATEGORY
+		WHERE 1 = 1
+			<if test="categoryName != null">
+				AND CATEGORY_NAME = #{categoryName}
+			</if>
+			<if test="desc != null">
+				AND `DESC` = #{desc}
+			</if>
+			<if test="parentCategoryId != null">
+				AND PARENT_CATEGORY_ID = #{parentCategoryId}
+			</if>
 	</select>
 	
 	<update id="updateCategory" parameterType="Category">
@@ -67,6 +81,7 @@
 		SET
 			CATEGORY_NAME = #{categoryName}
 			,`DESC` = #{desc}
+			,PARENT_CATEGORY_ID = #{parentCategoryId}
 		WHERE
 
 			ID = #{id}
@@ -92,6 +107,7 @@
 			ID
 			,CATEGORY_NAME
 			,`DESC`
+			,PARENT_CATEGORY_ID
 		FROM
 			CATEGORY
 	</select>

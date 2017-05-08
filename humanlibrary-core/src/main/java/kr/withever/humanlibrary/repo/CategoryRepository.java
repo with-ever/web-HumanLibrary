@@ -9,18 +9,14 @@ import org.springframework.stereotype.Repository;
 import kr.withever.humanlibrary.domain.common.exception.ExceptionType;
 import kr.withever.humanlibrary.domain.humanbook.Category;
 import kr.withever.humanlibrary.domain.humanbook.CategorySearch;
-import kr.withever.humanlibrary.domain.humanbook.SubCategory;
 import kr.withever.humanlibrary.exception.HumanLibraryException;
 import kr.withever.humanlibrary.repo.mapper.CategoryMapper;
-import kr.withever.humanlibrary.repo.mapper.SubCategoryMapper;
 
 @Repository
 public class CategoryRepository {
 	
 	@Autowired
 	private CategoryMapper categoryMapper;
-	@Autowired
-	private SubCategoryMapper subCategoryMapper;
 	
 	
 	public Long createCategory(Category category){
@@ -30,12 +26,8 @@ public class CategoryRepository {
 
 	public Category retrieveCategory(Long id){
 		Category category = this.categoryMapper.selectCategory(id);
-		if (category != null) setSubCategoryInCategory(category);
+		if (category != null) setSubCategoriesInCategory(category);
 		return category;
-	}
-	
-	public Category retrieveCategoryByCategoryName(String categoryName){
-		return this.categoryMapper.selectCategoryByCategoryName(categoryName);
 	}
 	
 	public CategorySearch retrieveCategoryBySearch(CategorySearch search){
@@ -72,17 +64,17 @@ public class CategoryRepository {
 		List<Category> categories = this.categoryMapper.selectCategories();
 		if (categories.size() != 0) {
 			for (Category category : categories) {
-				setSubCategoryInCategory(category);
+				setSubCategoriesInCategory(category);
 			}
 		}
 		return categories;
 	}
 	
-	private void setSubCategoryInCategory(Category category){
-		List<SubCategory> subCategories = this.subCategoryMapper.selectSubCategories();
-		List<SubCategory> addedSubCategories = new ArrayList<SubCategory>();
-		for (SubCategory subCategory : subCategories) {
-			if (category.getId() == subCategory.getParentCategoryId()) addedSubCategories.add(subCategory);
+	private void setSubCategoriesInCategory(Category category){
+		List<Category> allSubCategories = this.categoryMapper.selectCategories();
+		List<Category> addedSubCategories = new ArrayList<Category>();
+		for (Category currentCategory : allSubCategories) {
+			if (category.getId() == currentCategory.getParentCategoryId()) addedSubCategories.add(currentCategory);
 		}
 		category.setSubCategories(addedSubCategories);
 	}

@@ -9,8 +9,6 @@ public interface CategoryService {
 	
 	Category retrieveCategory(Long id);
 	
-	Category retrieveCategoryByCategoryName(String categoryName);
-	
 	Long createCategory(Category category);
 	
 	void modifyCategory(Category category);
