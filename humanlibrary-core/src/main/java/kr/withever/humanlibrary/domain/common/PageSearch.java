@@ -26,6 +26,12 @@ public class PageSearch<E> {
     /** 페이지 번호 */
     private int pageNo = 1;
 
+    /** 전체 페이지 번호 */
+    private int totalPageNo;
+    
+    /** 네비게이션 바에서 보여질 페이지 개수 */
+    private int navigateLimit = 10;
+
     public List<E> getResults() {
         return results;
     }
@@ -57,6 +63,7 @@ public class PageSearch<E> {
     }
 
     public void setTotalCount(int totalCount) {
+        this.totalPageNo = (totalCount / this.limit) + (totalCount % this.limit > 0 ? 1 : 0);
         this.totalCount = totalCount;
     }
 
@@ -68,5 +75,29 @@ public class PageSearch<E> {
 
     public void setPageNo(int pageNo) {
         this.pageNo = pageNo;
+    }
+
+    public int getTotalPageNo() {
+        return totalPageNo;
+    }
+
+    public void setTotalPageNo(int totalPageNo) {
+        this.totalPageNo = totalPageNo;
+    }
+
+    public int getNavigateLimit() {
+		return navigateLimit;
+	}
+
+	public void setNavigateLimit(int navigateLimit) {
+		this.navigateLimit = navigateLimit;
+	}
+
+	public int getNavigateStartPage() {
+        return ((getPageNo() - 1) / this.navigateLimit) * this.navigateLimit + 1;
+    }
+
+    public int getNavigatePageCount() {
+        return (getTotalPageNo() - getNavigateStartPage() + 1) > this.navigateLimit ? this.navigateLimit : (getTotalPageNo() - getNavigateStartPage() + 1);
     }
 }
