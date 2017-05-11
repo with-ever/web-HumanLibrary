@@ -7,6 +7,7 @@ public class Category {
 	private Long parentCategoryId;
 	private String categoryName;
 	private String desc;
+	private String imageUrl;
 	private List<Category> subCategories;
 	
 	public Category(){
@@ -36,6 +37,14 @@ public class Category {
 	}
 	public void setDesc(String desc) {
 		this.desc = desc;
+	}
+
+	public String getImageUrl() {
+		return imageUrl;
+	}
+
+	public void setImageUrl(String imageUrl) {
+		this.imageUrl = imageUrl;
 	}
 
 	public List<Category> getSubCategories() {

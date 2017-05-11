@@ -8,6 +8,7 @@
 		<result property="categoryName" column="CATEGORY_NAME"/>
 		<result property="desc" column="DESC"/>
 		<result property="parentCategoryId" column="PARENT_CATEGORY_ID"/>
+		<result property="imageUrl" column="IMAGE_URL"/>
 	</resultMap>
 	
 	<insert id="insertCategory" parameterType="Category" useGeneratedKeys="true" keyProperty="id" keyColumn="ID">
@@ -17,12 +18,14 @@
 			,CATEGORY_NAME
 			,`DESC`
 			,PARENT_CATEGORY_ID
+			,IMAGE_URL
 		)
 		VALUES(
 			#{id}
 			,#{categoryName}
 			,#{desc}
 			,#{parentCategoryId}
+			,#{imageUrl}
 		)
 	</insert>
 	
@@ -32,6 +35,7 @@
 			,CATEGORY_NAME
 			,`DESC`
 			,PARENT_CATEGORY_ID
+			,IMAGE_URL
 		FROM
 			CATEGORY
 		WHERE
@@ -44,6 +48,7 @@
 			,CATEGORY_NAME
 			,`DESC`
 			,PARENT_CATEGORY_ID
+			,IMAGE_URL
 		FROM
 			CATEGORY
 		WHERE 1 = 1
@@ -108,6 +113,7 @@
 			,CATEGORY_NAME
 			,`DESC`
 			,PARENT_CATEGORY_ID
+			,IMAGE_URL
 		FROM
 			CATEGORY
 	</select>

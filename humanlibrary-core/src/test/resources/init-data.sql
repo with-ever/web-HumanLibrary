@@ -4,32 +4,35 @@ INSERT INTO
 	('HUMAN_BOOK', '휴먼북'),
 	('SUBSCRIBER', '구독자');
 
-INSERT INTO -- Parent Category 레코드
-	`CATEGORY` (`ID`,`CATEGORY_NAME`,`DESC`) VALUES
-	('1','NEIGHBOROOD/COMMUNITY','이웃/커뮤니티'),
-	('2','ECONOMY/ADMINISTARATION','경제/경영'),
-	('3','FINANCE/INVESTMENT','금융/재테크'),
-	('4','VOLUNTARY SERVICE','봉사활동'),
-	('5','BROADCASTING/PRESS','방송/언론'),
-	('6','MEDICAL','의료인'),
-	('7','CULTURE/ARTIST/PHYSICAL','문화/예술/체육'),
-	('8','WELFARE','복지상담'),
-	('9','SOCIAL MOVEMENT','사회운동'),
-	('10','LIFE','인생동행'),
-	('11','CIVIL SERVANT','공무원'),
-	('12','POLITICIAN/POLITICAL PARTY','정치/정당'),
-	('13','JURIST','법조인'),
-	('14','RELIGIONIST','종교인'),
-	('15','EDUCATOR','교육인'),
-	('16','OVERSEAS ACTIVITY','해외활동'),
-	('17','HOBBY/HEALING/LEISURE','취미/힐링/여가활동'),
-	('18','ACADEMIC/PROFESSOR','학술인/교수'),
-	('19','POP CULTURE/ENTERTAINER','환경/동,식물'),
-	('20','IT/TECHNOLOGY','IT/기술'),
-	('21','LIBRARY','도서관'),
-	('22','HUMANLIBRARY STAFF','휴먼라이브러리 직원');
-	
-INSERT INTO --Sub Category 레코드
+-- Parent Category 레코드
+INSERT INTO `CATEGORY` (`ID`, `CATEGORY_NAME`, `DESC`, `PARENT_CATEGORY_ID`, `IMAGE_URL`)
+VALUES
+	('1', 'NEIGHBOROOD/COMMUNITY', '이웃/커뮤니티', NULL, 'https://s3.ap-northeast-2.amazonaws.com/humanlibrary/category/NEIGHBOROOD%3ACOMMUNITY.gif'),
+	('2', 'ECONOMY/ADMINISTARATION', '경제/경영', NULL, 'https://s3.ap-northeast-2.amazonaws.com/humanlibrary/category/ECONOMY%3AADMINISTARATION.gif'),
+	('3', 'FINANCE/INVESTMENT', '금융/재테크', NULL, 'https://s3.ap-northeast-2.amazonaws.com/humanlibrary/category/FINANCE%3AINVESTMENT.jpg'),
+	('4', 'VOLUNTARY SERVICE', '봉사활동', NULL, 'https://s3.ap-northeast-2.amazonaws.com/humanlibrary/category/VOLUNTARY+SERVICE.gif'),
+	('5', 'BROADCASTING/PRESS', '방송/언론', NULL, 'https://s3.ap-northeast-2.amazonaws.com/humanlibrary/category/BROADCASTING%3APRESS.gif'),
+	('6', 'MEDICAL', '의료인', NULL, 'https://s3.ap-northeast-2.amazonaws.com/humanlibrary/category/MEDICAL.gif'),
+	('7', 'CULTURE/ARTIST/PHYSICAL', '문화/예술/체육', NULL, 'https://s3.ap-northeast-2.amazonaws.com/humanlibrary/category/CULTURE%3AARTIST%3APHYSICAL.gif'),
+	('8', 'WELFARE', '복지상담', NULL, 'https://s3.ap-northeast-2.amazonaws.com/humanlibrary/category/WELFARE.gif'),
+	('9', 'SOCIAL MOVEMENT', '사회운동', NULL, 'https://s3.ap-northeast-2.amazonaws.com/humanlibrary/category/SOCIAL+MOVEMENT.gif'),
+	('10', 'LIFE', '인생동행', NULL, 'https://s3.ap-northeast-2.amazonaws.com/humanlibrary/category/LIFE.gif'),
+	('11', 'CIVIL SERVANT', '공무원', NULL, 'https://s3.ap-northeast-2.amazonaws.com/humanlibrary/category/CIVIL+SERVANT.gif'),
+	('12', 'POLITICIAN/POLITICAL PARTY', '정치/정당', NULL, 'https://s3.ap-northeast-2.amazonaws.com/humanlibrary/category/POLITICIAN%3APOLITICAL+PARTY.gif'),
+	('13', 'JURIST', '법조인', NULL, 'https://s3.ap-northeast-2.amazonaws.com/humanlibrary/category/JURIST.gif'),
+	('14', 'RELIGIONIST', '종교인', NULL, 'https://s3.ap-northeast-2.amazonaws.com/humanlibrary/category/RELIGIONIST.gif'),
+	('15', 'EDUCATOR', '교육인', NULL, 'https://s3.ap-northeast-2.amazonaws.com/humanlibrary/category/EDUCATOR.gif'),
+	('16', 'OVERSEAS ACTIVITY', '해외활동', NULL, 'https://s3.ap-northeast-2.amazonaws.com/humanlibrary/category/OVERSEAS+ACTIVITY.gif'),
+	('17', 'HOBBY/HEALING/LEISURE', '취미/힐링/여가활동', NULL, 'https://s3.ap-northeast-2.amazonaws.com/humanlibrary/category/HOBBY%3AHEALING%3ALEISURE.jpg'),
+	('18', 'ACADEMIC/PROFESSOR', '학술인/교수', NULL, 'https://s3.ap-northeast-2.amazonaws.com/humanlibrary/category/ACADEMIC%3APROFESSOR.gif'),
+	('19', 'POP CULTURE/ENTERTAINER', '환경/동,식물', NULL, 'https://s3.ap-northeast-2.amazonaws.com/humanlibrary/category/POP+CULTURE%3AENTERTAINER.jpg'),
+	('20', 'IT/TECHNOLOGY', 'IT/기술', NULL, 'https://s3.ap-northeast-2.amazonaws.com/humanlibrary/category/IT%3ATECHNOLOGY.jpg'),
+	('21', 'LIBRARY', '도서관', NULL, 'https://s3.ap-northeast-2.amazonaws.com/humanlibrary/category/LIBRARY.gif'),
+	('22', 'HUMANLIBRARY STAFF', '휴먼라이브러리 직원', NULL, NULL);
+
+
+-- Sub Category 레코드
+INSERT INTO
 	`CATEGORY` (`CATEGORY_NAME`, `DESC`, `PARENT_CATEGORY_ID`) VALUES
 	-- 이웃/커뮤니티
 	('LIFE EXPERT/TECHNICAL TALENT','생달달인/기술재능','1'),
