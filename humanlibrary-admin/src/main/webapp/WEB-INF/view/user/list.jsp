@@ -30,7 +30,11 @@
                             <tbody>
                             <c:forEach var="user" items="${searchModel.results}">
 	                            <tr>
-	                                <td>${user.userId}</td>
+	                                <td>
+                                        <a href="${ctx}/user/${user.userId}">
+                                            ${user.userId}
+                                        </a>
+                                    </td>
 	                                <td>${user.loginId}</td>
 	                                <td>${user.email}</td>
 	                                <td>${user.name}</td>
@@ -40,32 +44,37 @@
                         </table>
                     </div>
                     <!-- /.table-responsive -->
+                    <div class="text-center">
+                        <ul class="pagination">
+                            <li class="${searchModel.pageNo == 1 ? 'disabled' : '' }">
+                                <a href="user?pageNo=${(searchModel.pageNo - 1) == 0 ? 1 : searchModel.pageNo - 1}" aria-label="Previous">
+                                    Previous
+                                </a>
+                            </li>
+                            <c:forEach var="pageNo" begin="${searchModel.navigateStartPage}" end="${searchModel.navigateStartPage + searchModel.navigatePageCount - 1}" varStatus="s">
+                                <c:choose>
+                                    <c:when test="${pageNo == searchModel.pageNo}">
+                                        <li class="active"><a href="user?pageNo=${pageNo}">${pageNo}</a></li>
+                                    </c:when>
+                                    <c:otherwise>
+                                        <li><a href="user?pageNo=${pageNo}">${pageNo}</a></li>
+                                    </c:otherwise>
+                                </c:choose>
+                            </c:forEach>
+                            <li class="${searchModel.pageNo == searchModel.totalPageNo ? 'disabled' : ''}">
+                                <a href="user?pageNo=${(searchModel.pageNo + 1) > searchModel.totalPageNo ? searchModel.totalPageNo : searchModel.pageNo + 1}" aria-label="Next">
+                                    Next
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
                 <!-- /.panel-body -->
                 <!-- @TODO paging fragment로 재구성 필요.-->
                 <div class="panel-footer text-right">
-                    <ul class="pagination">
-                        <li class="${searchModel.pageNo == 1 ? 'disabled' : '' }">
-                            <a href="user?pageNo=${(searchModel.pageNo - 1) == 0 ? 1 : searchModel.pageNo - 1}" aria-label="Previous">
-                                Previous
-                            </a>
-                        </li>
-                        <c:forEach var="pageNo" begin="${searchModel.navigateStartPage}" end="${searchModel.navigateStartPage + searchModel.navigatePageCount - 1}" varStatus="s">
-                            <c:choose>
-                                <c:when test="${pageNo == searchModel.pageNo}">
-                                    <li class="active"><a href="user?pageNo=${pageNo}">${pageNo}</a></li>
-                                </c:when>
-                                <c:otherwise>
-                                    <li><a href="user?pageNo=${pageNo}">${pageNo}</a></li>
-                                </c:otherwise>
-                            </c:choose>
-                        </c:forEach>
-                        <li class="${searchModel.pageNo == searchModel.totalPageNo ? 'disabled' : ''}">
-                            <a href="user?pageNo=${(searchModel.pageNo + 1) > searchModel.totalPageNo ? searchModel.totalPageNo : searchModel.pageNo + 1}" aria-label="Next">
-                                Next
-                            </a>
-                        </li>
-                    </ul>
+                    <a href="${ctx}/user/new">
+                        <button type="button" class="btn btn-default">등록하기</button>
+                    </a>
                 </div>
             </div>
             <!-- /.panel -->

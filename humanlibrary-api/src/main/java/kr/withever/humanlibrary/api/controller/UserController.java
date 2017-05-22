@@ -88,6 +88,7 @@ public class UserController {
     public User retrieveUserByLoginId(
             @PathVariable(value = "loginId") String loginId
     ) {
+        // @TODO JSON 형태로 로그인아이디 있을 때와 없을 때 분별해서 내려주기.
         return this.userService.retrieveUserByLoginId(loginId);
     }
 

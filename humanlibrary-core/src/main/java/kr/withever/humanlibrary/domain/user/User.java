@@ -201,6 +201,7 @@ public class User implements Serializable {
         this.zipCode = user.getZipCode();
         this.address = user.getAddress();
         this.detailAddress = user.getDetailAddress();
+        this.imageUrl = user.getImageUrl();
         this.updateTime = System.currentTimeMillis() / 1000;
     }
 }

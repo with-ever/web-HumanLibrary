@@ -20,48 +20,65 @@
                         <div class="col-lg-12">
                             <form role="form">
                                 <div class="form-group">
-                                    <label>사용자 아이디</label>
-                                    <p class="form-control-static">${user.userId}</p>
-                                </div>
-                                <div class="form-group">
                                     <label>로그인 아이디</label>
-                                    <p class="form-control-static">${user.loginId}</p>
+                                    <input class="form-control" placeholder="이름" name="loginId">
+                                    <button type="button" class="btn btn-default">Default</button>
                                 </div>
                                 <div class="form-group">
                                     <label>이름</label>
-                                    <input class="form-control" placeholder="이름" value="${user.name}">
+                                    <input class="form-control" placeholder="이름" name="name">
                                 </div>
                                 <div class="form-group">
                                     <label>이메일</label>
-                                    <input class="form-control" placeholder="이메일" value="${user.email}">
+                                    <input class="form-control" placeholder="이메일" name="email">
+                                </div>
+                                <div class="form-group">
+                                    <label>전화번호</label>
+                                    <input class="form-control" placeholder="전화번호" name="phoneNo">
+                                </div>
+                                <div class="form-group">
+                                    <label>휴대폰번호</label>
+                                    <input class="form-control" placeholder="휴대폰번호" name="mPhoneNo">
+                                </div>
+                                <div class="form-group">
+                                    <label>생년월일</label>
+                                    <select class="form-control">
+                                        <option>1980</option>
+                                        <option>1980</option>
+                                        <option>1980</option>
+                                        <option>1980</option>
+                                        <option>1980</option>
+                                    </select>
+                                    <select class="form-control">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                    <select class="form-control">
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
                                 </div>
                                 <div class="form-group">
                                     <label>이메일</label>
-                                    <input class="form-control" placeholder="이메일" value="${user.email}">
+                                    <input class="form-control" placeholder="이름" name="name">
                                 </div>
                                 <div class="form-group">
                                     <label>이메일</label>
-                                    <input class="form-control" placeholder="이메일" value="${user.email}">
+                                    <input class="form-control" placeholder="이름" name="name">
                                 </div>
                                 <div class="form-group">
                                     <label>이메일</label>
-                                    <input class="form-control" placeholder="이메일" value="${user.email}">
+                                    <input class="form-control" placeholder="이름" name="name">
                                 </div>
                                 <div class="form-group">
                                     <label>이메일</label>
-                                    <input class="form-control" placeholder="이메일" value="${user.email}">
-                                </div>
-                                <div class="form-group">
-                                    <label>이메일</label>
-                                    <input class="form-control" placeholder="이메일" value="${user.email}">
-                                </div>
-                                <div class="form-group">
-                                    <label>이메일</label>
-                                    <input class="form-control" placeholder="이메일" value="${user.email}">
-                                </div>
-                                <div class="form-group">
-                                    <label>이메일</label>
-                                    <input class="form-control" placeholder="이메일" value="${user.email}">
+                                    <input class="form-control" placeholder="이름" name="name">
                                 </div>
                                 <div class="form-group text-right">
                                     <a href="${ctx}/user/${user.userId}/edit">

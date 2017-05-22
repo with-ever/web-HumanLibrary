@@ -20,6 +20,13 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @RequestMapping(value = "/new", method = RequestMethod.GET)
+    public ModelAndView showCreateUserForm() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("/user/new");
+        return mav;
+    }
+
     @RequestMapping(method = RequestMethod.GET)
     public ModelAndView retrieveUserList(
             UserSearch search
