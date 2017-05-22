@@ -8,6 +8,10 @@ import java.util.Map;
  */
 public class HumanLibraryResponse {
 
+    private static final String SUCCESS_MESSAGE = "success";
+
+    private static final String FAIL_MESSAGE =  "fail";
+
     private Object result;
 
     public HumanLibraryResponse() {
@@ -23,6 +27,14 @@ public class HumanLibraryResponse {
 
     public void setResult(Object result) {
         this.result = result;
+    }
+
+    public static HumanLibraryResponse successMessage() {
+        return new HumanLibraryResponse(SUCCESS_MESSAGE);
+    }
+
+    public static HumanLibraryResponse failMessage() {
+        return new HumanLibraryResponse(FAIL_MESSAGE);
     }
 
 }

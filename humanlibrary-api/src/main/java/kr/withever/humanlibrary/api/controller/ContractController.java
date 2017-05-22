@@ -63,28 +63,30 @@ public class ContractController {
     }
 
     @RequestMapping(value = "/{contractId}/accept/{contractTimeId}", method = RequestMethod.PUT)
-    public void acceptContract(
+    public HumanLibraryResponse acceptContract(
             @PathVariable(value = "contractId") Long contractId,
             @PathVariable(value = "contractTimeId") Long contractTimeId
     ) {
         this.contractService.acceptContract(contractId, contractTimeId);
+        return HumanLibraryResponse.successMessage();
     }
 
     @RequestMapping(value = "/{contractId}/reject", method = RequestMethod.PUT)
-    public void rejectContract(
+    public HumanLibraryResponse rejectContract(
             @PathVariable(value = "contractId") Long contractId
             ,@ApiParam(name = "rejectMsg", value = "reject message", required = true) @RequestBody Map<String, Object> requestMap
     ) {
     	String rejectMsg = (String) requestMap.get("rejectMsg");
         this.contractService.rejectContract(contractId, rejectMsg);
+        return HumanLibraryResponse.successMessage();
     }
 
     @RequestMapping(value = "/{userId}/{humanbookId}", method = RequestMethod.GET)
-    public int isExistContractBetweenUserAndHumanbook(
+    public HumanLibraryResponse isExistContractBetweenUserAndHumanbook(
     		@PathVariable(value = "userId") Long userId,
     		@PathVariable(value = "humanbookId") Long humanbookId
     		){
     	//Accept된 계약이 없으면 0이 return, 있으면 1 return
-    	return this.contractService.isExistAcceptedContractBetweenUserAndHumanbook(userId, humanbookId);
+    	return new HumanLibraryResponse(this.contractService.isExistAcceptedContractBetweenUserAndHumanbook(userId, humanbookId));
     }
 }
