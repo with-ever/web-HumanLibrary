@@ -61,13 +61,17 @@ public class CategoryRepository {
 	}
 
 	public List<Category> retrieveCategoriesWithSubCategory() {
-		List<Category> categories = this.categoryMapper.selectCategories();
-		if (categories.size() != 0) {
-			for (Category category : categories) {
-				setSubCategoriesInCategory(category);
+		List<Category> allCategories = this.categoryMapper.selectCategories();
+		List<Category> parentCategories = new ArrayList<>();
+		if (allCategories.size() != 0) {
+			for (Category category : allCategories) {
+				if(category.getParentCategoryId() == null){
+					setSubCategoriesInCategory(category);
+					parentCategories.add(category);
+				}
 			}
 		}
-		return categories;
+		return parentCategories;
 	}
 	
 	private void setSubCategoriesInCategory(Category category){

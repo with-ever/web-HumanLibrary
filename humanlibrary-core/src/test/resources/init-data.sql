@@ -28,7 +28,6 @@ VALUES
 	('19', 'POP CULTURE/ENTERTAINER', '환경/동,식물', NULL, 'https://s3.ap-northeast-2.amazonaws.com/humanlibrary/category/POP+CULTURE%3AENTERTAINER.jpg'),
 	('20', 'IT/TECHNOLOGY', 'IT/기술', NULL, 'https://s3.ap-northeast-2.amazonaws.com/humanlibrary/category/IT%3ATECHNOLOGY.jpg'),
 	('21', 'LIBRARY', '도서관', NULL, 'https://s3.ap-northeast-2.amazonaws.com/humanlibrary/category/LIBRARY.gif'),
-	('22', 'HUMANLIBRARY STAFF', '휴먼라이브러리 직원', NULL, NULL);
 
 
 -- Sub Category 레코드
@@ -209,7 +208,8 @@ INSERT INTO
 	('SCHOOL LIBRARY LIBRARIAN','학교도서관 사서','21'),
 	('CHILD/YOUTH LIBRARY LIBRARIAN','어린이/청소년 도서관 사서','21'),
 	('SMALL LIBRARY LIBRARIAN','작은 도서관 사서','21'),
-	('SPECIAL LIBRARY LIBRARIAN','특수/전문 도서관 사서','21');
+	('SPECIAL LIBRARY LIBRARIAN','특수/전문 도서관 사서','21'),
+	('HUMANLIBRARY STAFF', '휴먼라이브러리 직원', 21);
 	-- 휴먼라이브러리 직원
 
 INSERT INTO `HUMANBOOK` (`id`, `user_id`, `title`, `main_career`, `service_time`, `parent_category`, `sub_category`, `state`, `create_time`, `update_time`)
