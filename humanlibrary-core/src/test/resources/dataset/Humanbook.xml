@@ -10,6 +10,7 @@
     	PARENT_CATEGORY = "1"
     	SUB_CATEGORY = "2"
 		IMAGE_URL = "image1234"
+		DESCRIPTION = "설명글입니다"
     	CREATE_TIME = "901107"
     	UPDATE_TIME = "170224"
     />

@@ -12,6 +12,7 @@
         <result property="state" column="STATE"/>
         <result property="serviceTime" column="SERVICE_TIME"/>
 		<result property="imageUrl" column="IMAGE_URL"/>
+		<result property="description" column="DESCRIPTION"/>
         <result property="createTime" column="CREATE_TIME"/>
         <result property="updateTime" column="UPDATE_TIME"/>
         <association property="parentCategory" resultMap="categoryResultMap" />
@@ -44,6 +45,7 @@
 			,SUB_CATEGORY
 			,STATE
 			,IMAGE_URL
+			,DESCRIPTION
 			,CREATE_TIME
 			,UPDATE_TIME
     	)
@@ -57,6 +59,7 @@
     		,#{subCategory.id}
     		,#{state}
     		,#{imageUrl}
+    		,#{description}
     		,#{createTime}
     		,#{updateTime}
     	)
@@ -73,6 +76,7 @@
 			,PARENT_CATEGORY
 			,SUB_CATEGORY
 			,IMAGE_URL
+			,DESCRIPTION
 			,CREATE_TIME
 			,UPDATE_TIME
 		FROM
@@ -92,6 +96,7 @@
     		,SUB_CATEGORY
     		,STATE
 			,IMAGE_URL
+			,DESCRIPTION
     		,CREATE_TIME
     		,UPDATE_TIME
     	FROM
@@ -150,6 +155,7 @@
 			,UPDATE_TIME = #{updateTime}
 			,STATE = #{state}
 			,IMAGE_URL = #{imageUrl}
+			,DESCRIPTION = #{description}
 		WHERE
 			ID = #{id}
     </update>

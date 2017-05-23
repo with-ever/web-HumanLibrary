@@ -55,6 +55,7 @@ public class HumanbookMapperTest extends WitheverDbUnitTestConfig{
 		System.out.println(humanbook.getParentCategory().getId());
 		System.out.println(humanbook.getSubCategory().getId());
 		assertEquals("SEUNG1107", humanbook.getUserId());
+		assertEquals("설명글입니다", humanbook.getDescription());
 	}
 
 	@Test
@@ -70,6 +71,7 @@ public class HumanbookMapperTest extends WitheverDbUnitTestConfig{
 		humanbook.setServiceTime("aa");
 		humanbook.setParentCategory(category);
 		humanbook.setSubCategory(subCategory);
+		humanbook.setDescription("kkkkk");
 		humanbook.setCreateTime(123L);
 		humanbook.setUpdateTime(123L);
 		this.humanbookMapper.insertHumanbook(humanbook);
