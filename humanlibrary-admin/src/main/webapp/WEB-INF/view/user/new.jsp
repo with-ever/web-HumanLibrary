@@ -40,12 +40,12 @@
                                     <label>성별</label>
                                     <div class="input-group">
                                         <label class="radio-inline">
-                                            남자
                                             <input type="radio" name="gender" value="male" checked>
+                                            남자
                                         </label>
                                         <label class="radio-inline">
-                                            여자
                                             <input type="radio" name="gender" value="female">
+                                            여자
                                         </label>
                                     </div>
                                 </div>
@@ -71,30 +71,23 @@
                                         </div>
                                         <div class="col-lg-3">
                                             <select class="form-control">
-                                                <option>1980</option>
-                                                <option>1980</option>
-                                                <option>1980</option>
-                                                <option>1980</option>
-                                                <option>1980</option>
+                                                <option>01</option>
+                                                <option>02</option>
+                                                <option>03</option>
+                                                <option>04</option>
                                             </select>
                                         </div>
                                         <div class="col-lg-3">
                                             <select class="form-control">
-                                                <option>1980</option>
-                                                <option>1980</option>
-                                                <option>1980</option>
-                                                <option>1980</option>
-                                                <option>1980</option>
+                                                <option>01</option>
+                                                <option>02</option>
+                                                <option>03</option>
+                                                <option>04</option>
+                                                <option>05</option>
                                             </select>
                                         </div>
                                     </div>
                                 </div>
-                                <%--<div class="form-group">--%>
-                                    <%--<div class="col-lg-6">--%>
-                                        <%--<label>생년월일</label>--%>
-                                        <%--<input class="form-control" placeholder="생년월일" name="birth">--%>
-                                    <%--</div>--%>
-                                <%--</div>--%>
                                 <div class="form-group">
                                     <label>우편번호</label>
                                     <input class="form-control" placeholder="우편번호" name="zipcode">
@@ -124,16 +117,6 @@
                 <!-- /.panel-body -->
             </div>
             <!-- /.panel -->
-            <%--this.name = user.getName();--%>
-            <%--this.email = user.getEmail();--%>
-            <%--this.phoneNo = user.getPhoneNo();--%>
-            <%--this.mPhoneNo = user.getmPhoneNo();--%>
-            <%--this.birth = user.getBirth();--%>
-            <%--this.zipCode = user.getZipCode();--%>
-            <%--this.address = user.getAddress();--%>
-            <%--this.detailAddress = user.getDetailAddress();--%>
-            <%--this.imageUrl = user.getImageUrl();--%>
-
         </div>
     </div>
 </body>

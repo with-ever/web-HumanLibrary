@@ -25,43 +25,48 @@
                                 </div>
                                 <div class="form-group">
                                     <label>로그인 아이디</label>
-                                    <p class="form-control-static">${user.loginId}</p>
+                                    <p class="form-group-static">${user.loginId}</p>
+                                </div>
+                                <div class="form-group">
+                                    <label>이메일</label>
+                                    <p class="form-group-static">${user.email}</p>
                                 </div>
                                 <div class="form-group">
                                     <label>이름</label>
-                                    <input class="form-control" placeholder="이름" value="${user.name}">
+                                    <p class="form-group-static">${user.name}</p>
                                 </div>
                                 <div class="form-group">
-                                    <label>이메일</label>
-                                    <input class="form-control" placeholder="이메일" value="${user.email}">
+                                    <label>성별</label>
+                                    <%--@TODO gender to text--%>
+                                    <p class="form-group-static">${user.gender}</p>
                                 </div>
                                 <div class="form-group">
-                                    <label>이메일</label>
-                                    <input class="form-control" placeholder="이메일" value="${user.email}">
+                                    <label>전화번호</label>
+                                    <p class="form-group-static">${user.phoneNo}</p>
                                 </div>
                                 <div class="form-group">
-                                    <label>이메일</label>
-                                    <input class="form-control" placeholder="이메일" value="${user.email}">
+                                    <label>휴대폰번호</label>
+                                    <p class="form-group-static">${user.mPhoneNo}</p>
                                 </div>
                                 <div class="form-group">
-                                    <label>이메일</label>
-                                    <input class="form-control" placeholder="이메일" value="${user.email}">
+                                    <label>생년월일</label>
+                                    <p class="form-group-static">${user.birth}</p>
                                 </div>
                                 <div class="form-group">
-                                    <label>이메일</label>
-                                    <input class="form-control" placeholder="이메일" value="${user.email}">
+                                    <label>우편번호</label>
+                                    <p class="form-group-static">${user.zipCode}</p>
                                 </div>
                                 <div class="form-group">
-                                    <label>이메일</label>
-                                    <input class="form-control" placeholder="이메일" value="${user.email}">
+                                    <label>주소</label>
+                                    <p class="form-group-static">${user.address}</p>
                                 </div>
                                 <div class="form-group">
-                                    <label>이메일</label>
-                                    <input class="form-control" placeholder="이메일" value="${user.email}">
+                                    <label>상세주소</label>
+                                    <p class="form-group-static">${user.detailAddress}</p>
                                 </div>
                                 <div class="form-group">
-                                    <label>이메일</label>
-                                    <input class="form-control" placeholder="이메일" value="${user.email}">
+                                    <label>이미지</label>
+                                    <img src="${user.imageUrl}" alt="">
                                 </div>
                                 <div class="form-group text-right">
                                     <a href="${ctx}/user/${user.userId}/edit">
@@ -76,16 +81,6 @@
                 <!-- /.panel-body -->
             </div>
             <!-- /.panel -->
-            <%--this.name = user.getName();--%>
-            <%--this.email = user.getEmail();--%>
-            <%--this.phoneNo = user.getPhoneNo();--%>
-            <%--this.mPhoneNo = user.getmPhoneNo();--%>
-            <%--this.birth = user.getBirth();--%>
-            <%--this.zipCode = user.getZipCode();--%>
-            <%--this.address = user.getAddress();--%>
-            <%--this.detailAddress = user.getDetailAddress();--%>
-            <%--this.imageUrl = user.getImageUrl();--%>
-
         </div>
     </div>
 </body>

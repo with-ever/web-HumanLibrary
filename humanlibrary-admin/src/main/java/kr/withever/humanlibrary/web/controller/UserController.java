@@ -48,4 +48,14 @@ public class UserController {
         mav.addObject("user", this.userService.retrieveUser(userId));
         return mav;
     }
+
+    @RequestMapping(value = "/{userId}/edit", method = RequestMethod.GET)
+    public ModelAndView showModifyUserForm(
+            @PathVariable(value = "userId") Long userId
+    ) {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("/user/edit");
+        mav.addObject("user", this.userService.retrieveUser(userId));
+        return mav;
+    }
 }
