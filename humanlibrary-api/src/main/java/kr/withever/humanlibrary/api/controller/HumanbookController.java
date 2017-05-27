@@ -58,31 +58,35 @@ public class HumanbookController {
 	}
 	
 	@RequestMapping(method = RequestMethod.PUT)
-	public void modifyHumanbook(
+	public HumanLibraryResponse modifyHumanbook(
 			@RequestBody Humanbook humanbook
 	){
 		this.humanbookService.modifyHumanbook(humanbook);
+		return HumanLibraryResponse.successMessage();
 	}
     
     @RequestMapping(value = "/{hbId}/reject", method = RequestMethod.PUT)
-    public void rejectHumanbook(
+    public HumanLibraryResponse rejectHumanbook(
     		@PathVariable(value = "hbId") Long hbId
     ){
     	this.humanbookService.rejectHumanbookRegister(hbId);
+    	return HumanLibraryResponse.successMessage();
     }
     
     @RequestMapping(value = "/{hbId}/accept", method = RequestMethod.PUT)
-    public void acceptHumanbook(
+    public HumanLibraryResponse acceptHumanbook(
     		@PathVariable(value = "hbId") Long hbId
     ){
     	this.humanbookService.acceptHumanbookRegister(hbId);
+    	return HumanLibraryResponse.successMessage();
     }
     
     @RequestMapping(value = "/{hbId}", method = RequestMethod.DELETE)
-    public void removeHumanbook(
+    public HumanLibraryResponse removeHumanbook(
     		@PathVariable(value = "hbId") Long hbId
     ){
     	this.humanbookService.removeHumanbook(hbId);
+    	return HumanLibraryResponse.successMessage();
     }
   
 }
