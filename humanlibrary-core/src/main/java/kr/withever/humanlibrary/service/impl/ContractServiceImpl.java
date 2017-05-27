@@ -56,17 +56,6 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public ContractSearch retrieveContractBySearch(ContractSearch search) {
-        // endDate 값 없을 경우 기본 한달까지
-        // startdate 1보다 작으면 기본 1
-        // enddate 12보다 크면 기본 12
-//        if (search.getStartDate() != null && search.getEndDate() == null) {
-//            String startDate = search.getStartDate();
-//            String year = startDate.substring(0, 4);
-//            String startMonth = startDate.substring(4);
-//            int month = Integer.parseInt(startMonth) + 1;
-//            String endMonth = month < 10 ? String.format("%02d", month) : String.valueOf(month);
-//            search.setEndDate(year + endMonth);
-//        }
         return this.contractRepository.retrieveContractBySearch(search);
     }
 

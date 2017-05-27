@@ -47,19 +47,21 @@ public class ContractController {
     }
 
     @RequestMapping(value = "/{contractId}", method = RequestMethod.PUT)
-    public void modifyContract(
+    public HumanLibraryResponse modifyContract(
             @PathVariable(value = "contractId") Long contractId,
             @RequestBody Contract contract
     ) {
         if (contract.getId() == null) contract.setId(contractId);
         this.contractService.modifyContract(contract);
+        return HumanLibraryResponse.successMessage();
     }
 
     @RequestMapping(value = "/{contractId}", method = RequestMethod.DELETE)
-    public void removeContract(
+    public HumanLibraryResponse removeContract(
             @PathVariable(value = "contractId") Long contractId
     ) {
         this.contractService.removeContract(contractId);
+        return HumanLibraryResponse.successMessage();
     }
 
     @RequestMapping(value = "/{contractId}/accept/{contractTimeId}", method = RequestMethod.PUT)
@@ -87,6 +89,7 @@ public class ContractController {
     		@PathVariable(value = "humanbookId") Long humanbookId
     		){
     	//Accept된 계약이 없으면 0이 return, 있으면 1 return
-    	return new HumanLibraryResponse(this.contractService.isExistAcceptedContractBetweenUserAndHumanbook(userId, humanbookId));
+        int isExisted = this.contractService.isExistAcceptedContractBetweenUserAndHumanbook(userId, humanbookId);
+        return isExisted > 0 ? HumanLibraryResponse.isExisted() : HumanLibraryResponse.isNotExisted();
     }
 }

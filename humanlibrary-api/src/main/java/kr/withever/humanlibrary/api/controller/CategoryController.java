@@ -41,18 +41,20 @@ public class CategoryController {
 	}
 	
 	@RequestMapping(value = "/{categoryId}", method = RequestMethod.PUT)
-	public void modifyCategory(
+	public HumanLibraryResponse modifyCategory(
 			@PathVariable(value = "categoryId") Long categoryId,
 			@RequestBody Category category
 	){
 		category.setId(categoryId);
 		this.categoryService.modifyCategory(category);
+		return HumanLibraryResponse.successMessage();
 	}
 	
 	@RequestMapping(value = "/{categoryId}", method = RequestMethod.DELETE)
-	public void removeCategory(
+	public HumanLibraryResponse removeCategory(
 			@PathVariable(value = "categoryId") Long categoryId
 	){
 		this.categoryService.removeCategory(categoryId);
+		return HumanLibraryResponse.successMessage();
 	}
 }

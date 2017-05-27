@@ -45,8 +45,7 @@ public class UserRepository {
             this.userMapper.updateUser(user);
         } catch (Exception e) {
             // @TODO exception 코드 정리 필요.
-            throw new HumanLibraryRuntimeException(e, ExceptionType.US_500_001
-            );
+            throw new HumanLibraryRuntimeException(e, ExceptionType.US_500_001);
         }
 
     }

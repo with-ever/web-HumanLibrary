@@ -53,21 +53,21 @@ public class UserController {
     }
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.PUT)
-    public void modifyUser(
+    public HumanLibraryResponse modifyUser(
             @PathVariable(value = "userId") Long userId,
             @RequestBody User user
     ) {
         user.setUserId(userId);
         this.userService.modifyUser(user);
+        return HumanLibraryResponse.successMessage();
     }
 
     @RequestMapping(value="/verification/{loginId}", method = RequestMethod.GET)
     public HumanLibraryResponse verifyLoginId(
             @PathVariable(value = "loginId") String loginId
     ) {
-        Map<String, Boolean> result = new HashMap<String, Boolean>();
         User user = this.userService.retrieveUserByLoginId(loginId);
-        return user != null ? new HumanLibraryResponse(true) : new HumanLibraryResponse(false);
+        return user != null ? HumanLibraryResponse.isExisted() : HumanLibraryResponse.isNotExisted();
     }
 
     @RequestMapping(value = "/password/{userId}", method = RequestMethod.PUT)
@@ -79,17 +79,17 @@ public class UserController {
         String newPassword = (String) requestParam.get("newPassword");
 
         boolean isMatched = encoder.matches(password, this.userService.retrievePasswordByUserId(userId));
-        if (!isMatched) throw new HumanLibraryRuntimeException(ExceptionType.US_500_003);
+        if (!isMatched) return HumanLibraryResponse.failMessage();
         this.userService.modifyUserPassword(userId, encoder.encode(newPassword));
-        return new HumanLibraryResponse("success");
+        return HumanLibraryResponse.successMessage();
     }
 
     @RequestMapping(value = "/info/{loginId}", method = RequestMethod.GET)
-    public User retrieveUserByLoginId(
+    public HumanLibraryResponse retrieveUserByLoginId(
             @PathVariable(value = "loginId") String loginId
     ) {
-        // @TODO JSON 형태로 로그인아이디 있을 때와 없을 때 분별해서 내려주기.
-        return this.userService.retrieveUserByLoginId(loginId);
+        User user = this.userService.retrieveUserByLoginId(loginId);
+        return user != null ? HumanLibraryResponse.isExisted() : HumanLibraryResponse.isNotExisted();
     }
 
 }

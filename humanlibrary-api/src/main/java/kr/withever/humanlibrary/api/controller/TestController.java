@@ -19,9 +19,6 @@ public class TestController {
     @Value("${client.secret}")
     private String clientSecret;
 
-
-
-
     @RequestMapping(method = RequestMethod.GET)
     public String retrieveBasicToken () {
         String basicToken = String.join(":", clientId, clientSecret);
