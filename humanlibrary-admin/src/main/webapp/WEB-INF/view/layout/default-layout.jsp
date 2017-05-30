@@ -94,6 +94,12 @@
                             <a href="/user"><i class="fa fa-user fa-fw"></i> 사용자</a>
                         </li>
                         <li>
+                        	<a href="/humanbook"><i class="fa fa-book fa-fw"></i> 휴먼북</a>
+                        </li>
+                        <li>
+                        	<a href="/category"><i class="fa fa-th-list fa-fw"></i> 카테고리</a>
+                        </li>
+                        <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> UI 스타일<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
