@@ -33,7 +33,7 @@ public class UserMapperTest extends WitheverDbUnitTestConfig {
         user.setImageUrl("2134");
         this.userMapper.insertUser(user);
 
-        User insertedUser = this.userMapper.selectUser(3L);
+        User insertedUser = this.userMapper.selectUser(4L);
         assertEquals(user.getLoginId(), insertedUser.getLoginId());
         assertEquals(user.getName(), insertedUser.getName());
         assertEquals(user.getEmail(), insertedUser.getEmail());

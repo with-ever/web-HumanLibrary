@@ -23,8 +23,8 @@ import static org.junit.Assert.*;
  * Created by youngjinkim on 2017. 3. 6..
  */
 
-@DatabaseSetup(value = {"/dataset/Contract.xml"}, type = DatabaseOperation.INSERT)
-@DatabaseTearDown(value = {"/dataset/Contract.xml"}, type = DatabaseOperation.DELETE_ALL)
+@DatabaseSetup(value = {"/dataset/Contract.xml", "/dataset/User.xml", "/dataset/Humanbook.xml"}, type = DatabaseOperation.INSERT)
+@DatabaseTearDown(value = {"/dataset/Contract.xml", "/dataset/User.xml", "/dataset/Humanbook.xml"}, type = DatabaseOperation.DELETE_ALL)
 public class ContractMapperTest extends WitheverDbUnitTestConfig{
 
     @Autowired
@@ -91,7 +91,7 @@ public class ContractMapperTest extends WitheverDbUnitTestConfig{
         ContractSearch search = new ContractSearch();
         search.setHbId(1L);
         int count = this.contractMapper.selectContractsTotalCountBySearch(search);
-        assertEquals(5, count);
+        assertEquals(4, count);
     }
 
     @Test
@@ -126,6 +126,26 @@ public class ContractMapperTest extends WitheverDbUnitTestConfig{
 
         Contract updatedContract = this.contractMapper.selectContract(1L);
         assertEquals(updatedContract.getState(), ContractState.ACCEPT.name());
+    }
+
+    @Test
+    public void selectContractsForNotification() {
+        ContractSearch search = new ContractSearch();
+        search.setUserId(1L);
+        search.setState(Arrays.asList(ContractState.ACCEPT.name(), ContractState.WAITING.name()));
+        search.setStartDate("201702");
+        search.setEndDate("201703");
+
+        List<Contract> contracts = this.contractMapper.selectContractsForNotification(search);
+        assertEquals(2, contracts.size());
+    }
+
+    @Test
+    public void selectContractsTotalCountForNotification() {
+        ContractSearch search = new ContractSearch();
+        search.setUserId(1L);
+        int count = this.contractMapper.selectContractsTotalCountForNotification(search);
+        assertEquals(3, count);
     }
 
 }

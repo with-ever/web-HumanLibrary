@@ -47,7 +47,7 @@
     <CONTRACTS
             ID = "5"
             USER_ID = "3"
-            HB_ID = "1"
+            HB_ID = "2"
             STATE = "WAITING"
             CONTRACT_TIME_ID = "6"
             DATE = "20170404"

@@ -2,7 +2,7 @@
 <dataset>
     <HUMANBOOK
     	ID = "1"
-    	USER_ID = "SEUNG1107"
+    	USER_ID = "4"
     	TITLE = "HELLO"
     	MAIN_CAREER = 'WITH EVER'
     	STATE = "ACCEPT"
@@ -14,4 +14,19 @@
     	CREATE_TIME = "901107"
     	UPDATE_TIME = "170224"
     />
+
+	<HUMANBOOK
+			ID = "2"
+			USER_ID = "1"
+			TITLE = "HELLO123"
+			MAIN_CAREER = 'WITH EVER32131'
+			STATE = "ACCEPT"
+			SERVICE_TIME = "ALWAYS"
+			PARENT_CATEGORY = "1"
+			SUB_CATEGORY = "2"
+			IMAGE_URL = "image1234"
+			DESCRIPTION = "설명글입니다"
+			CREATE_TIME = "901107"
+			UPDATE_TIME = "170224"
+	/>
 </dataset>

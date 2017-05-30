@@ -30,7 +30,7 @@ public class HumanbookMapperTest extends WitheverDbUnitTestConfig{
 		search.setId(1L);
 		List<Humanbook> list = this.humanbookMapper.selectHumanbooksBySearch(search);
 		
-		assertEquals(1, list.size());
+		assertEquals(2, list.size());
 	}
 	
 	@Test
@@ -39,7 +39,7 @@ public class HumanbookMapperTest extends WitheverDbUnitTestConfig{
 		search.setId(1L);
 		int count = this.humanbookMapper.selectHumanbooksTotalCountBySearch(search);
 		
-		assertEquals(1, count);
+		assertEquals(2, count);
 	}
 	
 	@Test
@@ -54,7 +54,7 @@ public class HumanbookMapperTest extends WitheverDbUnitTestConfig{
 		Humanbook humanbook = this.humanbookMapper.selectHumanbook(1L);
 		System.out.println(humanbook.getParentCategory().getId());
 		System.out.println(humanbook.getSubCategory().getId());
-		assertEquals("SEUNG1107", humanbook.getUserId());
+		assertEquals("4", humanbook.getUserId());
 		assertEquals("설명글입니다", humanbook.getDescription());
 	}
 

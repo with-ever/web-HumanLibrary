@@ -28,4 +28,8 @@ public interface ContractMapper {
     int updateContractState(@Param("id") Long contractId, @Param("state") String state);
 
     int selectAcceptedContractBetweenUserAndHumanbook(@Param("userId") Long userId, @Param("humanbookId") Long humanbookId);
+
+    List<Contract> selectContractsForNotification(ContractSearch search);
+
+    int selectContractsTotalCountForNotification(ContractSearch search);
 }

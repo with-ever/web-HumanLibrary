@@ -103,4 +103,9 @@ public class ContractServiceImpl implements ContractService {
 	public int isExistAcceptedContractBetweenUserAndHumanbook(Long userId, Long humanbookId) {
 		return this.contractRepository.isExistAcceptedContractBetweenUserAndHumanbook(userId, humanbookId);
 	}
+
+	@Override
+    public ContractSearch retrieveContractsForNotification(ContractSearch search) {
+        return this.contractRepository.retrieveContractsForNotification(search);
+    }
 }

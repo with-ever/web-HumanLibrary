@@ -24,4 +24,6 @@ public interface ContractService {
     void rejectContract(Long contractId, String rejectMsg);
 
     int isExistAcceptedContractBetweenUserAndHumanbook(Long userId, Long HumanbookId);
+
+    ContractSearch retrieveContractsForNotification(ContractSearch search);
 }

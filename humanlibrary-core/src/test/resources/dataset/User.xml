@@ -34,4 +34,21 @@
             CREATE_TIME = "111111"
             UPDATE_TIME = "222222"
     />
+    <USERS
+            USER_ID = "3"
+            LOGIN_ID = "jin3"
+            NAME = "youngjinkim"
+            EMAIL = "jin@gmail.com"
+            PASSWORD = "1234"
+            GENDER = "FEMALE"
+            PHONE_NO = "1234"
+            M_PHONE_NO = "1234"
+            BIRTH = "1234"
+            ZIP_CODE = "1234"
+            ADDRESS = "1234"
+            DETAIL_ADDRESS = "aaa"
+            IMAGE_URL = "image2"
+            CREATE_TIME = "111111"
+            UPDATE_TIME = "222222"
+    />
 </dataset>

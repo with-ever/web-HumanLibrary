@@ -73,4 +73,14 @@ public class ContractRepository {
     public int isExistAcceptedContractBetweenUserAndHumanbook(Long userId, Long humanbookId){
     	return this.contractMapper.selectAcceptedContractBetweenUserAndHumanbook(userId, humanbookId);
     }
+
+    public ContractSearch retrieveContractsForNotification(ContractSearch search) {
+        List<Contract> contracts = this.contractMapper.selectContractsForNotification(search);
+        search.setResults(contracts);
+        if (contracts.size() != 0) {
+            int totalCount = this.contractMapper.selectContractsTotalCountForNotification(search);
+            search.setTotalCount(totalCount);
+        }
+        return search;
+    }
 }

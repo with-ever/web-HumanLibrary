@@ -11,17 +11,40 @@
         <result property="updateTime" column="UPDATE_TIME"/>
         <result property="applyMsg" column="APPLY_MSG" />
         <result property="rejectMsg" column="REJECT_MSG" />
-        <association property="user" resultMap="userResultMap"/>
-        <association property="humanbook" resultMap="humanbookResultMap"/>
+        <association property="user" columnPrefix="U_" resultMap="userResultMap"/>
+        <association property="humanbook" columnPrefix="HB_" resultMap="humanbookResultMap"/>
         <association property="contractTime" resultMap="contractTimeResultMap"/>
     </resultMap>
 
     <resultMap type="User" id="userResultMap">
-        <id		property="userId"		column="USER_ID"/>
+        <id property="userId" column="USER_ID"/>
+        <result property="loginId" column="LOGIN_ID"/>
+        <result property="name" column="NAME"/>
+        <result property="email" column="EMAIL"/>
+        <result property="password" column="PASSWORD"/>
+        <result property="gender" column="GENDER"/>
+        <result property="phoneNo" column="PHONE_NO"/>
+        <result property="mPhoneNo" column="M_PHONE_NO"/>
+        <result property="birth" column="BIRTH"/>
+        <result property="zipCode" column="ZIP_CODE"/>
+        <result property="address" column="ADDRESS"/>
+        <result property="detailAddress" column="DETAIL_ADDRESS"/>
+        <result property="imageUrl" column="IMAGE_URL"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
     </resultMap>
 
     <resultMap type="Humanbook" id="humanbookResultMap" >
-        <id		property="id"		column="HB_ID"/>
+        <id property="id" column="HB_ID"/>
+        <result property="userId" column="USER_ID"/>
+        <result property="title" column="TITLE"/>
+        <result property="mainCareer" column="MAIN_CAREER"/>
+        <result property="state" column="STATE"/>
+        <result property="serviceTime" column="SERVICE_TIME"/>
+        <result property="imageUrl" column="IMAGE_URL"/>
+        <result property="description" column="DESCRIPTION"/>
+        <result property="createTime" column="CREATE_TIME"/>
+        <result property="updateTime" column="UPDATE_TIME"/>
     </resultMap>
 
     <resultMap type="ContractTime" id="contractTimeResultMap" >
@@ -60,58 +83,86 @@
 
     <select id="selectContract" parameterType="Long" resultMap="contractResultMap">
         SELECT
-            ID
-            ,USER_ID
-            ,HB_ID
-            ,STATE
-            ,CONTRACT_TIME_ID
-            ,DATE
-            ,TIME
-            ,CREATE_TIME
-            ,UPDATE_TIME
-            ,APPLY_MSG
-            ,REJECT_MSG
-        FROM CONTRACTS
+            C.ID AS ID
+            ,C.USER_ID AS USER_ID
+            ,C.HB_ID AS HB_ID
+            ,C.STATE AS STATE
+            ,C.CONTRACT_TIME_ID AS CONTRACT_TIME_ID
+            ,C.DATE AS DATE
+            ,C.TIME AS TIME
+            ,C.CREATE_TIME AS CREATE_TIME
+            ,C.UPDATE_TIME AS UPDATE_TIME
+            ,C.APPLY_MSG AS APPLY_MSG
+            ,C.REJECT_MSG AS REJECT_MSG
+        FROM CONTRACTS C
         WHERE ID = #{contractId}
     </select>
 
     <select id="selectContractsBySearch" parameterType="ContractSearch" resultMap="contractResultMap">
         SELECT
-            ID
-            ,USER_ID
-            ,HB_ID
-            ,STATE
-            ,CONTRACT_TIME_ID
-            ,DATE
-            ,TIME
-            ,CREATE_TIME
-            ,UPDATE_TIME
-            ,APPLY_MSG
-            ,REJECT_MSG
-        FROM CONTRACTS
+            C.ID AS ID
+            ,C.USER_ID AS USER_ID
+            ,C.HB_ID AS HB_ID
+            ,C.STATE AS STATE
+            ,C.CONTRACT_TIME_ID AS CONTRACT_TIME_ID
+            ,C.DATE AS DATE
+            ,C.TIME AS TIME
+            ,C.CREATE_TIME AS CREATE_TIME
+            ,C.UPDATE_TIME AS UPDATE_TIME
+            ,C.APPLY_MSG AS APPLY_MSG
+            ,C.REJECT_MSG AS REJECT_MSG
+            ,U.USER_ID AS U_USER_ID
+            ,U.LOGIN_ID AS U_LOGIN_ID
+            ,U.NAME AS U_NAME
+            ,U.EMAIL AS U_EMAIL
+            ,U.GENDER AS U_GENDER
+            ,U.PHONE_NO AS U_PHONE_NO
+            ,U.M_PHONE_NO AS U_M_PHONE_NO
+            ,U.BIRTH AS U_BIRTH
+            ,U.ZIP_CODE AS U_ZIP_CODE
+            ,U.ADDRESS AS U_ADDRESS
+            ,U.DETAIL_ADDRESS AS U_DETAIL_ADDRESS
+            ,U.IMAGE_URL AS U_IMAGE_URL
+            ,U.CREATE_TIME AS U_CREATE_TIME
+            ,U.UPDATE_TIME AS U_UPDATE_TIME
+            ,HB.ID AS HB_ID
+            ,HB.USER_ID AS HB_USER_ID
+            ,HB.TITLE AS HB_TITLE
+            ,HB.MAIN_CAREER AS HB_MAIN_CAREER
+            ,HB.STATE AS HB_STATE
+            ,HB.SERVICE_TIME AS HB_SERVICE_TIME
+            ,HB.PARENT_CATEGORY AS HB_PARENT_CATEGORY
+            ,HB.SUB_CATEGORY AS HB_SUB_CATEGORY
+            ,HB.IMAGE_URL AS HB_IMAGE_URL
+            ,HB.DESCRIPTION AS HB_DESCRIPTION
+            ,HB.CREATE_TIME AS HB_CREATE_TIME
+            ,HB.UPDATE_TIME AS HB_UPDATE_TIME
+        FROM CONTRACTS C
+        INNER JOIN USERS U ON U.USER_ID = C.USER_ID
+        INNER JOIN HUMANBOOK HB ON HB.ID = C.HB_ID
         WHERE 1 = 1
         <if test="userId != null and userId != 0">
-            AND USER_ID = #{userId}
+            AND C.USER_ID = #{userId}
         </if>
         <if test="hbId != null and hbId != 0">
-            AND HB_ID = #{hbId}
+            AND C.HB_ID = #{hbId}
         </if>
         <if test="state != null">
-            AND STATE IN
+            AND C.STATE IN
             <foreach item="item" collection="state" open="(" separator="," close=")">
                 #{item}
             </foreach>
         </if>
         <if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
-            AND DATE > #{startDate} AND #{endDate} > DATE AND STATE = 'ACCEPT'
+            AND C.DATE > #{startDate} AND #{endDate} > C.DATE AND C.STATE = 'ACCEPT'
         </if>
         <if test="orderBy != null and orderBy != ''">
             <choose>
                 <when test="orderBy == 'DESC'">
-                    ORDER BY UPDATE_TIME DESC
+                    ORDER BY C.UPDATE_TIME DESC
                 </when>
                 <when test="orderBy == 'ASC'">
-                    ORDER BY UPDATE_TIME ASC
+                    ORDER BY C.UPDATE_TIME ASC
                 </when>
             </choose>
 
@@ -122,22 +173,24 @@
     <select id="selectContractsTotalCountBySearch" parameterType="ContractSearch" resultType="int">
         SELECT
           COUNT(1)
-        FROM CONTRACTS
+        FROM CONTRACTS C
+        INNER JOIN USERS U ON U.USER_ID = C.USER_ID
+        INNER JOIN HUMANBOOK HB ON HB.ID = C.HB_ID
         WHERE 1 = 1
         <if test="userId != null and userId != 0">
-            AND USER_ID = #{userId}
+            AND C.USER_ID = #{userId}
         </if>
         <if test="hbId != null and hbId != 0">
-            AND HB_ID = #{hbId}
+            AND C.HB_ID = #{hbId}
         </if>
         <if test="state != null">
-            AND STATE IN
+            AND C.STATE IN
             <foreach item="item" collection="state" open="(" separator="," close=")">
                 #{item}
             </foreach>
         </if>
         <if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
-            AND DATE > #{startDate} AND #{endDate} > DATE AND STATE = 'ACCEPT'
+            AND C.DATE > #{startDate} AND #{endDate} > C.DATE AND C.STATE = 'ACCEPT'
         </if>
     </select>
 
@@ -182,6 +235,182 @@
     		USER_ID = #{userId}
     	AND
     		HB_ID = #{humanbookId}
+    </select>
+
+    <select id="selectContractsForNotification" parameterType="ContractSearch" resultMap="contractResultMap">
+        (
+            SELECT
+                C.ID AS ID
+                ,C.USER_ID AS USER_ID
+                ,C.HB_ID AS HB_ID
+                ,C.STATE AS STATE
+                ,C.CONTRACT_TIME_ID AS CONTRACT_TIME_ID
+                ,C.DATE AS DATE
+                ,C.TIME AS TIME
+                ,C.CREATE_TIME AS CREATE_TIME
+                ,C.UPDATE_TIME AS UPDATE_TIME
+                ,C.APPLY_MSG AS APPLY_MSG
+                ,C.REJECT_MSG AS REJECT_MSG
+                ,U.USER_ID AS U_USER_ID
+                ,U.LOGIN_ID AS U_LOGIN_ID
+                ,U.NAME AS U_NAME
+                ,U.EMAIL AS U_EMAIL
+                ,U.GENDER AS U_GENDER
+                ,U.PHONE_NO AS U_PHONE_NO
+                ,U.M_PHONE_NO AS U_M_PHONE_NO
+                ,U.BIRTH AS U_BIRTH
+                ,U.ZIP_CODE AS U_ZIP_CODE
+                ,U.ADDRESS AS U_ADDRESS
+                ,U.DETAIL_ADDRESS AS U_DETAIL_ADDRESS
+                ,U.IMAGE_URL AS U_IMAGE_URL
+                ,U.CREATE_TIME AS U_CREATE_TIME
+                ,U.UPDATE_TIME AS U_UPDATE_TIME
+                ,HB.ID AS HB_ID
+                ,HB.USER_ID AS HB_USER_ID
+                ,HB.TITLE AS HB_TITLE
+                ,HB.MAIN_CAREER AS HB_MAIN_CAREER
+                ,HB.STATE AS HB_STATE
+                ,HB.SERVICE_TIME AS HB_SERVICE_TIME
+                ,HB.PARENT_CATEGORY AS HB_PARENT_CATEGORY
+                ,HB.SUB_CATEGORY AS HB_SUB_CATEGORY
+                ,HB.IMAGE_URL AS HB_IMAGE_URL
+                ,HB.DESCRIPTION AS HB_DESCRIPTION
+                ,HB.CREATE_TIME AS HB_CREATE_TIME
+                ,HB.UPDATE_TIME AS HB_UPDATE_TIME
+            FROM CONTRACTS C
+            INNER JOIN USERS U ON U.USER_ID = C.USER_ID
+            INNER JOIN HUMANBOOK HB ON HB.ID = C.HB_ID
+            WHERE
+                1 = 1
+                <if test="userId != null and userId != 0">
+                    AND C.USER_ID = #{userId}
+                </if>
+                <if test="state != null">
+                    AND C.STATE IN
+                    <foreach item="item" collection="state" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                </if>
+                <if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
+                    AND C.DATE > #{startDate} AND #{endDate} > C.DATE
+                </if>
+        )
+        UNION
+        (
+            SELECT
+                C.ID AS ID
+                ,C.USER_ID AS USER_ID
+                ,C.HB_ID AS HB_ID
+                ,C.STATE AS STATE
+                ,C.CONTRACT_TIME_ID AS CONTRACT_TIME_ID
+                ,C.DATE AS DATE
+                ,C.TIME AS TIME
+                ,C.CREATE_TIME AS CREATE_TIME
+                ,C.UPDATE_TIME AS UPDATE_TIME
+                ,C.APPLY_MSG AS APPLY_MSG
+                ,C.REJECT_MSG AS REJECT_MSG
+                ,U.USER_ID AS U_USER_ID
+                ,U.LOGIN_ID AS U_LOGIN_ID
+                ,U.NAME AS U_NAME
+                ,U.EMAIL AS U_EMAIL
+                ,U.GENDER AS U_GENDER
+                ,U.PHONE_NO AS U_PHONE_NO
+                ,U.M_PHONE_NO AS U_M_PHONE_NO
+                ,U.BIRTH AS U_BIRTH
+                ,U.ZIP_CODE AS U_ZIP_CODE
+                ,U.ADDRESS AS U_ADDRESS
+                ,U.DETAIL_ADDRESS AS U_DETAIL_ADDRESS
+                ,U.IMAGE_URL AS U_IMAGE_URL
+                ,U.CREATE_TIME AS U_CREATE_TIME
+                ,U.UPDATE_TIME AS U_UPDATE_TIME
+                ,HB.ID AS HB_ID
+                ,HB.USER_ID AS HB_USER_ID
+                ,HB.TITLE AS HB_TITLE
+                ,HB.MAIN_CAREER AS HB_MAIN_CAREER
+                ,HB.STATE AS HB_STATE
+                ,HB.SERVICE_TIME AS HB_SERVICE_TIME
+                ,HB.PARENT_CATEGORY AS HB_PARENT_CATEGORY
+                ,HB.SUB_CATEGORY AS HB_SUB_CATEGORY
+                ,HB.IMAGE_URL AS HB_IMAGE_URL
+                ,HB.DESCRIPTION AS HB_DESCRIPTION
+                ,HB.CREATE_TIME AS HB_CREATE_TIME
+                ,HB.UPDATE_TIME AS HB_UPDATE_TIME
+            FROM CONTRACTS C
+            INNER JOIN USERS U ON U.USER_ID = C.USER_ID
+            INNER JOIN HUMANBOOK HB ON HB.ID = C.HB_ID
+            WHERE
+                1 = 1
+                <if test="userId != null and userId != 0">
+                    AND HB.USER_ID = #{userId}
+                </if>
+                <if test="state != null">
+                    AND C.STATE IN
+                    <foreach item="item" collection="state" open="(" separator="," close=")">
+                        #{item}
+                    </foreach>
+                </if>
+                <if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
+                    AND C.DATE > #{startDate} AND #{endDate} > C.DATE
+                </if>
+        )
+        <if test="orderBy != null and orderBy != ''">
+            <choose>
+                <when test="orderBy == 'DESC'">
+                    ORDER BY UPDATE_TIME DESC
+                </when>
+                <when test="orderBy == 'ASC'">
+                    ORDER BY UPDATE_TIME ASC
+                </when>
+            </choose>
+        </if>
+        LIMIT #{offset}, #{limit}
+    </select>
+
+    <select id="selectContractsTotalCountForNotification" parameterType="ContractSearch" resultType="int">
+        SELECT
+          SUM(TOTAL)
+        FROM
+            (
+                SELECT
+                  COUNT(1) AS TOTAL
+                FROM CONTRACTS C
+                INNER JOIN USERS U ON U.USER_ID = C.USER_ID
+                INNER JOIN HUMANBOOK HB ON HB.ID = C.HB_ID
+                WHERE
+                    1 = 1
+                    <if test="userId != null and userId != 0">
+                        AND C.USER_ID = #{userId}
+                    </if>
+                    <if test="state != null">
+                        AND C.STATE IN
+                        <foreach item="item" collection="state" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+                    </if>
+                    <if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
+                        AND C.DATE > #{startDate} AND #{endDate} > C.DATE
+                    </if>
+                UNION
+                SELECT
+                  COUNT(1) AS TOTAL
+                FROM CONTRACTS C
+                INNER JOIN USERS U ON U.USER_ID = C.USER_ID
+                INNER JOIN HUMANBOOK HB ON HB.ID = C.HB_ID
+                WHERE
+                    1 = 1
+                    <if test="userId != null and userId != 0">
+                        AND HB.USER_ID = #{userId}
+                    </if>
+                    <if test="state != null">
+                        AND C.STATE IN
+                        <foreach item="item" collection="state" open="(" separator="," close=")">
+                            #{item}
+                        </foreach>
+                    </if>
+                    <if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
+                        AND C.DATE > #{startDate} AND #{endDate} > C.DATE
+                    </if>
+            ) CONTRACTS;
     </select>
 
 </mapper>

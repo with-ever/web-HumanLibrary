@@ -92,4 +92,14 @@ public class ContractController {
         int isExisted = this.contractService.isExistAcceptedContractBetweenUserAndHumanbook(userId, humanbookId);
         return isExisted > 0 ? HumanLibraryResponse.isExisted() : HumanLibraryResponse.isNotExisted();
     }
+
+    @RequestMapping(value = "/notification/{userId}", method = RequestMethod.GET)
+    public ContractSearch retrieveContractsForNotification(
+            @PathVariable(value = "userId") Long userId,
+            ContractSearch search
+
+    ) {
+        return this.contractService.retrieveContractsForNotification(search);
+    }
+
 }
