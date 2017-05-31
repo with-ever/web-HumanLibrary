@@ -85,11 +85,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/info/{loginId}", method = RequestMethod.GET)
-    public HumanLibraryResponse retrieveUserByLoginId(
+    public User retrieveUserByLoginId(
             @PathVariable(value = "loginId") String loginId
     ) {
-        User user = this.userService.retrieveUserByLoginId(loginId);
-        return user != null ? HumanLibraryResponse.isExisted() : HumanLibraryResponse.isNotExisted();
+        return this.userService.retrieveUserByLoginId(loginId);
     }
 
 }
