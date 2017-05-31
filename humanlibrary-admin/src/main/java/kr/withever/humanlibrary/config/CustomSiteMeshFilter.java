@@ -17,6 +17,7 @@ public class CustomSiteMeshFilter extends ConfigurableSiteMeshFilter {
                 .addExcludedPath("/css/*")
                 .addExcludedPath("/img/*")
                 .addExcludedPath("/fonts/*")
+                .addExcludedPath("/webview*")
                 .addExcludedPath("/login*");
     }
 }

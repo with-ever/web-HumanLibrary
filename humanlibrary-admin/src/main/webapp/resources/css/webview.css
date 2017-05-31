@@ -1,0 +1,32 @@
+ol, ul {
+    list-style-type: none;
+}
+
+.hb-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin: 2rem 0 1rem 0
+}
+
+.hb-title:before {
+    content: '';
+    background-image: url(/resources/img/ic_leaf.png);
+    background-repeat: no-repeat;
+    width: 38px;
+    height: 30px;
+    position: relative;
+    top: 8px;
+    display: inline-block;
+}
+.hb-title span {
+    margin-left: 5px;
+}
+
+.hb-color {
+    color: #B57330;
+}
+
+.hb-bg-gb {
+    background: url("/resources/img/gb.jpg") no-repeat;
+    background-size: 100% 50%;
+}
