@@ -1,5 +1,7 @@
 ol, ul {
     list-style-type: none;
+    padding: 0;
+    margin: 0;
 }
 
 .hb-title {
@@ -22,11 +24,62 @@ ol, ul {
     margin-left: 5px;
 }
 
+.hb-title .hb-title-desc {
+    color: #8B7554;
+    font-size: 12px;
+}
+
+.hb-circle {
+    display: inline-block;
+    width: 100px;
+    height: 100px;
+    border-radius: 100%;
+    line-height: 100px;
+    text-align: center;
+    color: #FFFFFF;
+    font-size: 20px;
+    padding: -2px;
+}
+
+.hb-circle:nth-of-type(2) {
+    margin: 0 2rem;
+}
+
+.hb-circle.share {
+    background-color: #B09E85;
+}
+
+.hb-circle.communication {
+    background-color: #BC9D72;
+}
+
+.hb-circle.sympathy {
+    background-color: #8F8472;
+}
+
+.hb-sub-title-circle {
+    display: inline-block;
+    background: #BB9B65;
+    border-radius: 20px;
+    padding: 5px 10px;
+    color: #FFFFFF;
+    margin-bottom: 1rem;
+}
+
+.hb-content {
+    padding-left: 25px;
+}
+
 .hb-color {
     color: #B57330;
 }
 
 .hb-bg-gb {
     background: url("/resources/img/gb.jpg") no-repeat;
-    background-size: 100% 50%;
+    background-size: 100%;
+}
+
+.hb-ul-dotted {
+    list-style-type: disc;
+    padding-left: 15px;
 }
