@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <head>
     <title>휴먼라이브러리 인사말</title>
 </head>
@@ -22,7 +24,7 @@
                     노원휴먼라이브러리 운영위원장<br/>
                     최수전 드림
                 </p>
-                <img class="img-responsive center-block" src="/resources/img/ic_greeting_01.jpg">
+                <img class="img-responsive center-block" src="${ctx}/resources/img/ic_greeting_01.jpg">
             </div>
         </div>
     </div>

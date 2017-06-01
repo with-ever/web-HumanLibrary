@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <head>
     <title>휴먼라이브러리 인사말</title>
 </head>
@@ -14,7 +16,7 @@
                 <%--<div class="hb-circle share"> 나눔과 보람</div>--%>
                 <%--<div class="hb-circle communication"> 소통과 친교</div>--%>
                 <%--<div class="hb-circle sympathy"> 공감과 사랑</div>--%>
-                <img class="img-responsive center-block" src="/resources/img/ic_management_01.gif">
+                <img class="img-responsive center-block" src="${ctx}/resources/img/ic_management_01.gif">
             </div>
         </div>
     </div>
@@ -40,7 +42,7 @@
             </div>
             <div class="hb-content">
                 <div class="hb-sub-title-circle"> 중장기적 목표 </div>
-                <img class="img-responsive center-block" src="/resources/img/ic_management_02.gif">
+                <img class="img-responsive center-block" src="${ctx}/resources/img/ic_management_02.gif">
                 <br/>
                 <div class="hb-sub-title-circle"> 2014년 목표 </div>
                 <ul>
@@ -57,7 +59,7 @@
                 <span>운영조직도</span>
             </div>
             <div class="hb-content">
-                <img class="img-responsive center-block" src="/resources/img/ic_management_03.jpg">
+                <img class="img-responsive center-block" src="${ctx}/resources/img/ic_management_03.jpg">
             </div>
         </div>
     </div>

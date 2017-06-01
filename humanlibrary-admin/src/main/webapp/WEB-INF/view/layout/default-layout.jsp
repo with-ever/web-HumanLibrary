@@ -1,11 +1,8 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
-
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
 
     <meta charset="utf-8">
@@ -14,16 +11,16 @@
     <title><sitemesh:write property="title" default="휴먼라이브러리 관리자 페이지" /></title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${ctx}/resources/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- MetisMenu CSS -->
-    <link href="/resources/css/metisMenu.min.css" rel="stylesheet">
+    <link href="${ctx}/resources/css/metisMenu.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="/resources/css/sb-admin-2.css" rel="stylesheet">
+    <link href="${ctx}/resources/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="/resources/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="${ctx}/resources/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -33,16 +30,16 @@
     <![endif]-->
 
     <!-- jQuery -->
-    <script src="/resources/js/jquery.min.js"></script>
+    <script src="${ctx}/resources/js/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="/resources/js/bootstrap.min.js"></script>
+    <script src="${ctx}/resources/js/bootstrap.min.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
-    <script src="/resources/js/metisMenu.min.js"></script>
+    <script src="${ctx}/resources/js/metisMenu.min.js"></script>
 
     <!-- Custom Theme JavaScript -->
-    <script src="/resources/js/sb-admin-2.js"></script>
+    <script src="${ctx}/resources/js/sb-admin-2.js"></script>
     <sitemesh:write property="head" />
 </head>
 

@@ -10,13 +10,13 @@
     <title>휴먼라이브러리 로그인 페이지</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="/resources/css/bootstrap.min.css" rel="stylesheet">
+    <link href="${ctx}/resources/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="/resources/css/sb-admin-2.css" rel="stylesheet">
+    <link href="${ctx}/resources/css/sb-admin-2.css" rel="stylesheet">
 
     <!-- Custom Fonts -->
-    <link href="/resources/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="${ctx}/resources/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -25,10 +25,10 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
     <!-- jQuery -->
-    <script src="/resources/js/jquery.min.js"></script>
+    <script src="${ctx}/resources/js/jquery.min.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="/resources/js/bootstrap.min.js"></script>
+    <script src="${ctx}/resources/js/bootstrap.min.js"></script>
     <sitemesh:write property="head" />
 </head>
 

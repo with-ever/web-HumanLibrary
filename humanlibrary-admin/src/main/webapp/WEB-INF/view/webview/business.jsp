@@ -1,4 +1,6 @@
 <%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="ctx" value="${pageContext.request.contextPath}" />
 <head>
     <title>휴먼라이브러리 주요사업</title>
 </head>
@@ -12,7 +14,7 @@
                 </div>
                 <div class="hb-content">
                     <div class="hb-sub-title-circle"> 나눔 사업 </div>
-                    <img class="img-responsive center-block" src="/resources/img/ic_business_01.gif">
+                    <img class="img-responsive center-block" src="${ctx}/resources/img/ic_business_01.gif">
                     <br/>
                     <ul class="hb-ul-dotted">
                         <li>수시 열람- 수시로 휴먼북을 열람 신청하여 휴먼라이브러리 카페에서 만남</li>
@@ -43,7 +45,7 @@
                     </ul>
                     <br/>
                     <div class="hb-sub-title-circle"> 소통 사업 </div>
-                    <img class="img-responsive center-block" src="/resources/img/ic_business_02.gif">
+                    <img class="img-responsive center-block" src="${ctx}/resources/img/ic_business_02.gif">
                     <br/>
                     <ul class="hb-ul-dotted">
                         <li>
@@ -97,7 +99,7 @@
                     </ul>
                     <br/>
                     <div class="hb-sub-title-circle"> 공감 사업 </div>
-                    <img class="img-responsive center-block" src="/resources/img/ic_business_03.gif">
+                    <img class="img-responsive center-block" src="${ctx}/resources/img/ic_business_03.gif">
                     <br/>
                     <ul class="hb-ul-dotted">
                         <li>
