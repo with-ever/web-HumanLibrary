@@ -97,6 +97,9 @@
                         	<a href="/category"><i class="fa fa-th-list fa-fw"></i> 카테고리</a>
                         </li>
                         <li>
+                        	<a href="/board"><i class="fa fa-newspaper-o fa-fw"></i> 게시판</a>
+                        </li>
+                        <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> UI 스타일<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>

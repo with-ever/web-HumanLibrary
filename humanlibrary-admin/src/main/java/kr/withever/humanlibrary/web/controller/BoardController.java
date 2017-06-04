@@ -2,6 +2,8 @@ package kr.withever.humanlibrary.web.controller;
 
 import kr.withever.humanlibrary.domain.board.Board;
 import kr.withever.humanlibrary.domain.board.BoardFile;
+import kr.withever.humanlibrary.domain.board.BoardSearch;
+import kr.withever.humanlibrary.domain.user.UserSearch;
 import kr.withever.humanlibrary.service.BoardService;
 import java.io.File;
 import java.io.IOException;
@@ -12,6 +14,7 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +23,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
- * Created by youngjinkim on 2017. 3. 20..
+ * Created by hyunseung on 2017. 3. 20..
  */
 @RestController
 @RequestMapping(value = "/board")
@@ -29,13 +32,44 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 
-	@RequestMapping(value = "/list", method = RequestMethod.GET)
-	public ModelAndView retrieveBoardList() {
-		ModelAndView mav = new ModelAndView();
-		mav.addObject("title", "board list");
-		mav.setViewName("/board/list");
-		return mav;
+	@RequestMapping(method = RequestMethod.GET)
+	public ModelAndView retrieveBoardList(BoardSearch search) {
+		BoardSearch boardSearch = this.boardService.retrieveBoardBySearch(search);
+	        ModelAndView mav = new ModelAndView();
+	        mav.setViewName("/board/list");
+	        mav.addObject("searchModel", boardSearch);
+	        return mav;
 	}
+	
+	@RequestMapping(value = "/new", method = RequestMethod.GET)
+    public ModelAndView showCreateUserForm() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("/board/new");
+        return mav;
+    }
+
+    @RequestMapping(value = "/{id}", method = RequestMethod.GET)
+    public ModelAndView retreiveUser(
+            @PathVariable(value = "id") Long id
+    ) {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("/board/detail");
+        mav.addObject("board", this.boardService.retrieveBoard(id));
+        return mav;
+    }
+    
+    @RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
+    public ModelAndView showModifyUserForm(
+            @PathVariable(value = "id") Long id
+    ) {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("/board/edit");
+        mav.addObject("board", this.boardService.retrieveBoard(id));
+        return mav;
+    }
+    
+   
+    
 
 	@RequestMapping(value = "/createForm", method = RequestMethod.GET)
 	public ModelAndView createBoardForm() {
