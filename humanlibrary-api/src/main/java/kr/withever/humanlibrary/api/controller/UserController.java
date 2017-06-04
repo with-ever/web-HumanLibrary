@@ -66,8 +66,12 @@ public class UserController {
     public HumanLibraryResponse verifyLoginId(
             @PathVariable(value = "loginId") String loginId
     ) {
-        User user = this.userService.retrieveUserByLoginId(loginId);
-        return user != null ? HumanLibraryResponse.isExisted() : HumanLibraryResponse.isNotExisted();
+    	User user = null;
+    	try {
+    		user = this.userService.retrieveUserByLoginId(loginId);
+		} finally {
+			return user != null ? HumanLibraryResponse.isExisted() : HumanLibraryResponse.isNotExisted();
+		}
     }
 
     @RequestMapping(value = "/password/{userId}", method = RequestMethod.PUT)

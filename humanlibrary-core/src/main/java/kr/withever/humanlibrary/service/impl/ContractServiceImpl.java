@@ -1,19 +1,20 @@
 package kr.withever.humanlibrary.service.impl;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
 import kr.withever.humanlibrary.domain.common.humanbook.ContractState;
 import kr.withever.humanlibrary.domain.contract.Contract;
 import kr.withever.humanlibrary.domain.contract.ContractSearch;
 import kr.withever.humanlibrary.domain.contract.ContractTime;
+import kr.withever.humanlibrary.domain.user.User;
 import kr.withever.humanlibrary.repo.ContractRepository;
 import kr.withever.humanlibrary.repo.ContractTimeRepository;
 import kr.withever.humanlibrary.repo.HumanbookRepository;
 import kr.withever.humanlibrary.repo.UserRepository;
 import kr.withever.humanlibrary.service.ContractService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-import org.springframework.util.StringUtils;
-
-import java.util.List;
 
 /**
  * Created by youngjinkim on 2017. 3. 21..
@@ -48,7 +49,10 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public Contract retrieveContract(Long contractId) {
         Contract contract = this.contractRepository.retrieveContract(contractId);
-        contract.setUser(this.userRepository.retrieveUser(contract.getUser().getUserId()));
+        System.out.println(contract.getId());
+        System.out.println(contract.getUser().getUserId());
+        User user = this.userRepository.retrieveUser(contract.getUser().getUserId());
+        contract.setUser(user);
         contract.setHumanbook(this.humanbookRepository.retrieveHumanbook(contract.getHumanbook().getId()));
         contract.setAvailableContractTimes(this.contractTimeRepository.retrieveContractTimes(contractId));
         return contract;
