@@ -15,26 +15,21 @@
 			<!-- /.panel-heading -->
 			<div class="panel-body">
 
-				<div class="row">
-					<div class="col-lg-2">
-						<select class="form-control">
+
+				<form class="form-inline">
+					<div class="form-group center-block">
+						<select style="width: 50px">
 							<option>제목</option>
 							<option>작성자</option>
 							<option>등록일</option>
-						</select>
+						</select> <input type="text" class="form-control"> <span>
+							<button class="btn btn-default" type="button">
+								<i class="fa fa-search"></i>
+							</button>
+						</span>
 					</div>
-					<div class="col-lg-3">
-						<div class="form-group input-group text-right">
-							<input type="text" class="form-control"> <span
-								class="input-group-btn">
-								<button class="btn btn-default" type="button">
-									<i class="fa fa-search"></i>
-								</button>
-							</span>
-
-						</div>
-					</div>
-				</div>
+				</form>
+				
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered table-hover">
 						<thead>
