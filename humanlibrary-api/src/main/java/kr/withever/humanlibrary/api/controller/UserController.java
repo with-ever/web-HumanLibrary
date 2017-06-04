@@ -62,12 +62,12 @@ public class UserController {
         return HumanLibraryResponse.successMessage();
     }
 
-    @RequestMapping(value="/verification/{loginId}", method = RequestMethod.GET)
+	@RequestMapping(value="/verification/{loginId}", method = RequestMethod.GET)
     public HumanLibraryResponse verifyLoginId(
             @PathVariable(value = "loginId") String loginId
     ) {
-        User user = this.userService.retrieveUserByLoginId(loginId);
-        return user != null ? HumanLibraryResponse.isExisted() : HumanLibraryResponse.isNotExisted();
+    	User user = this.userService.retrieveUserByLoginId(loginId);
+		return user != null ? HumanLibraryResponse.isExisted() : HumanLibraryResponse.isNotExisted();
     }
 
     @RequestMapping(value = "/password/{userId}", method = RequestMethod.PUT)
