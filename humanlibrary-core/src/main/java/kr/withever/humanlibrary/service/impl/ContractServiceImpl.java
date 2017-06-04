@@ -9,7 +9,6 @@ import kr.withever.humanlibrary.domain.common.humanbook.ContractState;
 import kr.withever.humanlibrary.domain.contract.Contract;
 import kr.withever.humanlibrary.domain.contract.ContractSearch;
 import kr.withever.humanlibrary.domain.contract.ContractTime;
-import kr.withever.humanlibrary.domain.user.User;
 import kr.withever.humanlibrary.repo.ContractRepository;
 import kr.withever.humanlibrary.repo.ContractTimeRepository;
 import kr.withever.humanlibrary.repo.HumanbookRepository;
