@@ -20,6 +20,7 @@ public class HumanbookServiceImpl implements HumanbookService {
 	
 	@Override
 	public Long createHumanbook(Humanbook humanbook){
+		humanbook.setState(HumanbookState.WAITING);
 		return this.humanbookRepository.createHumanbook(humanbook);
 	}
 

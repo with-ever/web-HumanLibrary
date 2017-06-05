@@ -35,7 +35,7 @@
     </resultMap>
 
     <resultMap type="Humanbook" id="humanbookResultMap" >
-        <id property="id" column="HB_ID"/>
+        <id property="id" column="ID"/>
         <result property="userId" column="USER_ID"/>
         <result property="title" column="TITLE"/>
         <result property="mainCareer" column="MAIN_CAREER"/>

@@ -1,5 +1,6 @@
 package kr.withever.humanlibrary.domain.humanbook;
 
+import kr.withever.humanlibrary.domain.common.DayOfWeek;
 import kr.withever.humanlibrary.domain.common.humanbook.HumanbookState;
 import kr.withever.humanlibrary.domain.common.humanbook.HumanbookTime;
 
@@ -15,7 +16,9 @@ public class Humanbook implements Serializable{
 	private String userId;
 	private String title;
 	private String mainCareer;
+	/** {@link DayOfWeek} **/
 	private Set<String> serviceDay;
+	/** {@link HumanbookTime} **/
 	private String serviceTime;
 	private Category parentCategory;
 	private Category subCategory;
