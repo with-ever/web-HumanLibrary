@@ -27,6 +27,6 @@ public class UserRoleRepository {
     }
 
     public void removeUserRole (Long userId, String role) {
-        this.userRoleMapper.deleteUserRole(userId, role);
+        this.userRoleMapper.deleteUserRole(userId, role.toUpperCase());
     }
 }

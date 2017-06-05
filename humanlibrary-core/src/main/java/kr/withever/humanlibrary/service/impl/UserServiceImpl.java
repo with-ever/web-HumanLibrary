@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Set;
+
 /**
  * Created by youngjinkim on 2017. 2. 7..
  */
@@ -106,4 +108,13 @@ public class UserServiceImpl implements UserService{
         return user;
     }
 
+    @Override
+    public void addUserRoles(Long userId, Set<String> roles) {
+        this.userRoleRepository.createUserRoles(userId, roles);
+    }
+
+    @Override
+    public void removeUserRole(Long userId, String role) {
+        this.userRoleRepository.removeUserRole(userId, role);
+    }
 }

@@ -45,6 +45,7 @@ public class HumanbookServiceImpl implements HumanbookService {
 	
 	@Override
 	public void modifyHumanbook(Humanbook humanbook){
+		// @TODO humanbook 수정 refactoring.
 		this.humanbookRepository.modifyHumanbook(humanbook);
 	}
 	
