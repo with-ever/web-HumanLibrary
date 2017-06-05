@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Set;
 
 /**
@@ -56,13 +57,22 @@ public class UserServiceImpl implements UserService{
     @Override
     public User retrieveUserByLoginId(String loginId) {
         User user = this.userRepository.retrieveUserByLoginId(loginId);
+        if (user != null) user = decryptUser(user);
 //        if (user == null) throw new HumanLibraryNotFoundException(ExceptionType.US_404_002, String.valueOf(loginId));
         return user;
     }
 
     @Override
     public UserSearch retrieveUserBySearch(UserSearch search) {
-        return this.userRepository.retrieveUserBySearch(search);
+        search = this.userRepository.retrieveUserBySearch(search);
+        List<User> users = search.getResults();
+        if (users.size() != 0) {
+            for (int index = 0; index < users.size(); index++) {
+                users.set(index, decryptUser(users.get(index)));
+            }
+        }
+        search.setResults(users);
+        return search;
     }
 
     @Override
@@ -86,7 +96,7 @@ public class UserServiceImpl implements UserService{
             user.setAddress(aesEncryptionUtil.encrypt(user.getAddress()));
             user.setDetailAddress(aesEncryptionUtil.encrypt(user.getDetailAddress()));
         } catch (Exception e) {
-            throw new RuntimeException("개인정보 암호화시 실패", e);
+            throw new RuntimeException("개인정보 암호화 실패", e);
         }
         return user;
     }
@@ -102,7 +112,7 @@ public class UserServiceImpl implements UserService{
             user.setAddress(aesEncryptionUtil.decrypt(user.getAddress()));
             user.setDetailAddress(aesEncryptionUtil.decrypt(user.getDetailAddress()));
         } catch (Exception e) {
-            throw new RuntimeException("개인정보 암호화시 실패", e);
+            throw new RuntimeException("개인정보 복호화 실패", e);
         }
 
         return user;
