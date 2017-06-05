@@ -1,6 +1,8 @@
 package kr.withever.humanlibrary.util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import kr.withever.humanlibrary.domain.common.client.FCMData;
+import kr.withever.humanlibrary.domain.common.client.FCMNotification;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -19,7 +21,7 @@ public class FCMUtil {
     private static final String FCM_URL = "https://fcm.googleapis.com/fcm/send";
 
     // @TODO 필요 상황에 따라 계약서 및 다른 아이디 세팅.
-    public static void sendMessage(String tokenId, String message) throws IOException {
+    public static void sendMessage(String tokenId, FCMNotification notification, FCMData data) throws IOException {
 
         URL url = new URL(FCM_URL);
 
@@ -30,14 +32,10 @@ public class FCMUtil {
         conn.setDoOutput(true);
         conn.setDoInput(true);
 
-        Map<String, Object> notification = new HashMap<>();
-        // @TODO change title message
-        notification.put("title", "title");
-        notification.put("body", message);
-
         Map<String, Object> json = new HashMap<>();
         json.put("to", tokenId);
         json.put("notification", notification);
+        json.put("data", data);
 
         ObjectMapper mapper = new ObjectMapper();
         String jsonString = mapper.writeValueAsString(json);

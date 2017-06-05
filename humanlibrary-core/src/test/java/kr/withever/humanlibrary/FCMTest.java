@@ -1,5 +1,7 @@
 package kr.withever.humanlibrary;
 
+import kr.withever.humanlibrary.domain.common.client.FCMData;
+import kr.withever.humanlibrary.domain.common.client.FCMNotification;
 import kr.withever.humanlibrary.util.FCMUtil;
 import org.junit.Test;
 
@@ -10,10 +12,10 @@ import java.io.IOException;
  */
 public class FCMTest {
 
-    private static final String TEST_TOKEN_ID = "e3LPwtoeVvw:APA91bE6coOCqhFKp4bJsGWU7Ue5hF8lMkkS1PyGmbttmD8b9bGalPG4d0-3UElwVtLiX1UX0bRWTCQFVmmzoutBy02UCci7oXhXFnJG4JovDflAv_B5As4F7XzuPVTp_thmwnAGjbbp";
+    private static final String TEST_TOKEN_ID = "fNo8l-lwtMI:APA91bF4bxMrk7moceQWDu9KSO6N4HVGYn9L6MnQjjV3hJxisnWBOTuQ1JVQADf0RZ3XxOHwQhWp9ykirYUWbEQsBlWkQvyvWlERq7jpdgZ1CZoCqZePs9DdHp6cTF59wRTe9wdLcUYY";
 
     @Test
     public void sendMessage() throws IOException {
-        FCMUtil.sendMessage(TEST_TOKEN_ID, "지완아 일해야지?");
+        FCMUtil.sendMessage(TEST_TOKEN_ID, new FCMNotification("title test","message test"), FCMData.contract("5"));
     }
 }
