@@ -84,7 +84,7 @@
     <select id="selectContract" parameterType="Long" resultMap="contractResultMap">
         SELECT
             C.ID AS ID
-            ,C.USER_ID AS USER_ID
+            ,C.USER_ID AS U_USER_ID
             ,C.HB_ID AS HB_ID
             ,C.STATE AS STATE
             ,C.CONTRACT_TIME_ID AS CONTRACT_TIME_ID
