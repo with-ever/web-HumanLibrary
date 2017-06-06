@@ -31,8 +31,10 @@ public class HumanbookRepository {
 		this.humanbookMapper.insertHumanbook(humanbook);
 		Set<String> availableServiceDay = humanbook.getServiceDay();
 		Long humanbookId = humanbook.getId();
-		for (String serviceDay : availableServiceDay) { //서비스 데이 DB 등
-			humanbookServiceDayMapper.insertHumanbookServiceDay(humanbookId, serviceDay);
+		if (availableServiceDay != null) {
+			for (String serviceDay : availableServiceDay) { //서비스 데이 DB 등
+				humanbookServiceDayMapper.insertHumanbookServiceDay(humanbookId, serviceDay);
+			}
 		}
 		return humanbook.getId();
 	}
@@ -53,6 +55,11 @@ public class HumanbookRepository {
 		if(humanbooks.size() != 0){
 			int totalCount = this.humanbookMapper.selectHumanbooksTotalCountBySearch(search);
 			search.setTotalCount(totalCount);
+			Humanbook currentHumanbook;
+			for (int i = 0; i < humanbooks.size(); i++) { //return된 휴먼북 리스트에 서비스데이, (서브)카테고리 세팅
+				currentHumanbook = humanbooks.get(i);
+				setServiceDaysAndCategoriesInHumanbook(currentHumanbook);
+			}
 		}
 		return search;
 	}
@@ -108,7 +115,8 @@ public class HumanbookRepository {
 			throw new HumanLibraryException(e, ExceptionType.HB_500_002);
 		}
 	}
-	
+
+	// @TODO 성능 이슈. refactoring.
 	private void setServiceDaysAndCategoriesInHumanbook(Humanbook humanbook){
 		Set<String> dayList = this.humanbookServiceDayMapper.selectHumanbookServiceDayList(humanbook.getId());
 		humanbook.setServiceDay(dayList);

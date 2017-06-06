@@ -35,7 +35,7 @@
     </resultMap>
 
     <resultMap type="Humanbook" id="humanbookResultMap" >
-        <id property="id" column="HB_ID"/>
+        <id property="id" column="ID"/>
         <result property="userId" column="USER_ID"/>
         <result property="title" column="TITLE"/>
         <result property="mainCareer" column="MAIN_CAREER"/>
@@ -84,7 +84,7 @@
     <select id="selectContract" parameterType="Long" resultMap="contractResultMap">
         SELECT
             C.ID AS ID
-            ,C.USER_ID AS USER_ID
+            ,C.USER_ID AS U_USER_ID
             ,C.HB_ID AS HB_ID
             ,C.STATE AS STATE
             ,C.CONTRACT_TIME_ID AS CONTRACT_TIME_ID

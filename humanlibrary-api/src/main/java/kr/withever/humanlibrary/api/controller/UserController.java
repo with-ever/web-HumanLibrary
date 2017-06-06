@@ -1,18 +1,13 @@
 package kr.withever.humanlibrary.api.controller;
 
-import kr.withever.humanlibrary.domain.common.exception.ExceptionType;
 import kr.withever.humanlibrary.domain.user.User;
 import kr.withever.humanlibrary.domain.user.UserSearch;
-import kr.withever.humanlibrary.exception.HumanLibraryRuntimeException;
 import kr.withever.humanlibrary.service.UserService;
 import kr.withever.humanlibrary.util.HumanLibraryResponse;
-import kr.withever.humanlibrary.util.JSONUtil;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.Map;
 
 /**

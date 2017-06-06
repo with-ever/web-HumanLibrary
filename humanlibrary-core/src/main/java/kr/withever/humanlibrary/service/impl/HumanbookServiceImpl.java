@@ -27,6 +27,7 @@ public class HumanbookServiceImpl implements HumanbookService {
 	
 	@Override
 	public Long createHumanbook(Humanbook humanbook){
+		humanbook.setState(HumanbookState.WAITING);
 		return this.humanbookRepository.createHumanbook(humanbook);
 	}
 
@@ -51,6 +52,7 @@ public class HumanbookServiceImpl implements HumanbookService {
 	
 	@Override
 	public void modifyHumanbook(Humanbook humanbook){
+		// @TODO humanbook 수정 refactoring.
 		this.humanbookRepository.modifyHumanbook(humanbook);
 	}
 	

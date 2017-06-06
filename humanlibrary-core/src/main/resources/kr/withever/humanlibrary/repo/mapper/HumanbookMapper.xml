@@ -57,7 +57,7 @@
     		,#{serviceTime}
     		,#{parentCategory.id}
     		,#{subCategory.id}
-    		,'WAITING'
+    		,#{state}
     		,#{imageUrl}
     		,#{description}
     		,#{createTime}
