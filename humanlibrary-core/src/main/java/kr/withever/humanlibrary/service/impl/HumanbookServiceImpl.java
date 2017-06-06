@@ -73,13 +73,11 @@ public class HumanbookServiceImpl implements HumanbookService {
 		newRole.add(humanbookRole);
 		this.humanbookRepository.modifyHumanbookState(id, HumanbookState.ACCEPT);
 		this.userRoleRepository.createUserRoles(id, newRole);
-		//User role에 humanbook 추가해주기
 	}
 	
 	@Override
 	public void removeHumanbook(Long id){
 		this.humanbookRepository.removeHumanbook(id);
 		this.userRoleRepository.removeUserRole(id, RoleType.HUMAN_BOOK.getName());
-		//User role에 humanbook 제거
 	}
 }
