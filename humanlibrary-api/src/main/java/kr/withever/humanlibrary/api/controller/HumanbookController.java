@@ -80,7 +80,7 @@ public class HumanbookController {
     public HumanLibraryResponse removeHumanbook(
     		@PathVariable(value = "hbId") Long hbId
     ){
-    	this.humanbookService.removeHumanbook(hbId);
+		this.humanbookService.cancelHumanbook(hbId);
     	return HumanLibraryResponse.successMessage();
     }
   

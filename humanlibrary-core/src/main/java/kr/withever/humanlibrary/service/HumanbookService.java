@@ -24,6 +24,8 @@ public interface HumanbookService {
     void rejectHumanbookRegister(Long id);
 
     void acceptHumanbookRegister(Long id);
+
+    void cancelHumanbook(Long id);
     
     void removeHumanbook(Long id);
     

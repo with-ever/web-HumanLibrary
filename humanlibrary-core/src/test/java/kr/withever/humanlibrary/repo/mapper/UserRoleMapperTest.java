@@ -36,6 +36,7 @@ public class UserRoleMapperTest extends WitheverDbUnitTestConfig {
     public void selectUserRoleList() throws Exception {
         Set<String> roleList = this.userRoleMapper.selectUserRoleList(1L);
         assertEquals(3, roleList.size());
+        assertTrue(roleList.contains(RoleType.HUMAN_BOOK.name()));
     }
 
     @Test

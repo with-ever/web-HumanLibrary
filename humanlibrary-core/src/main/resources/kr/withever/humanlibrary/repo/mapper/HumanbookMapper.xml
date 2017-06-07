@@ -160,12 +160,9 @@
 			ID = #{id}
     </update>
     
-    <update id="deleteHumanbook" parameterType="Long">
-    	UPDATE
-    		HUMANBOOK
-    	SET
-    		STATE = 'CANCEL'
-    	WHERE
-    		ID = #{id}
-    </update>
+	<delete id="deleteHumanbook" parameterType="Long">
+		DELETE
+		FROM HUMANBOOK
+		WHERE ID = #{id}
+	</delete>
 </mapper>

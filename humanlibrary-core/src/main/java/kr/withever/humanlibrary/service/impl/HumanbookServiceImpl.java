@@ -68,16 +68,20 @@ public class HumanbookServiceImpl implements HumanbookService {
 	
 	@Override
 	public void acceptHumanbookRegister(Long id) {
-		String humanbookRole = RoleType.HUMAN_BOOK.getName();
-		Set<String> newRole = new HashSet<>();
-		newRole.add(humanbookRole);
 		this.humanbookRepository.modifyHumanbookState(id, HumanbookState.ACCEPT);
-		this.userRoleRepository.createUserRoles(id, newRole);
+        Set<String> roles = this.userRoleRepository.retrieveUserRoles(id);
+        if (!roles.contains(RoleType.HUMAN_BOOK.getName())) {
+            this.userRoleRepository.createUserRole(id, RoleType.HUMAN_BOOK.getName());
+        }
 	}
-	
-	@Override
+
+    @Override
+    public void cancelHumanbook(Long id) {
+        this.humanbookRepository.modifyHumanbookState(id, HumanbookState.CANCEL);
+    }
+
+    @Override
 	public void removeHumanbook(Long id){
 		this.humanbookRepository.removeHumanbook(id);
-		this.userRoleRepository.removeUserRole(id, RoleType.HUMAN_BOOK.getName());
 	}
 }

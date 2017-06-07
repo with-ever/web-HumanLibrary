@@ -1,9 +1,11 @@
 package kr.withever.humanlibrary.repo.mapper;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNull;
 
 import java.util.List;
 
+import kr.withever.humanlibrary.domain.user.User;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -84,11 +86,9 @@ public class HumanbookMapperTest extends WitheverDbUnitTestConfig{
 
 	@Test
 	public void deleteHumanbook() throws Exception{
-		Humanbook humanbook = this.humanbookMapper.selectHumanbook(1L);
-		assertEquals(HumanbookState.ACCEPT,humanbook.getState());
 		this.humanbookMapper.deleteHumanbook(1L);
-		humanbook = this.humanbookMapper.selectHumanbook(1L);
-		assertEquals(HumanbookState.CANCEL,humanbook.getState());
+		Humanbook humanbook = this.humanbookMapper.selectHumanbook(1L);
+		assertNull(humanbook);
 	}
 
 	@Test

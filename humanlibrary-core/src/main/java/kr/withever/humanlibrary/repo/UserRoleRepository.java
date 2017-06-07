@@ -16,6 +16,10 @@ public class UserRoleRepository {
     @Autowired
     private UserRoleMapper userRoleMapper;
 
+    public void createUserRole (Long userId, String role) {
+        this.userRoleMapper.insertUserRole(userId, role.toUpperCase());
+    }
+
     public void createUserRoles (Long userId, Set<String> roles) {
         for (String role: roles) {
             this.userRoleMapper.insertUserRole(userId, role.toUpperCase());
