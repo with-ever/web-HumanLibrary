@@ -20,6 +20,8 @@ public interface UserService {
 
     User retrieveUserByLoginId(String loginId);
 
+    User retrieveUserByLoginIdWithoutPassword(String loginId);
+
     UserSearch retrieveUserBySearch(UserSearch search);
 
     void modifyUserPassword(Long userId, String newPassword);

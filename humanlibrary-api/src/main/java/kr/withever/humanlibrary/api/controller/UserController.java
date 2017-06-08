@@ -61,8 +61,8 @@ public class UserController {
     public HumanLibraryResponse verifyLoginId(
             @PathVariable(value = "loginId") String loginId
     ) {
-    	User user = this.userService.retrieveUserByLoginId(loginId);
-		return user != null ? HumanLibraryResponse.isExisted() : HumanLibraryResponse.isNotExisted();
+        User user = this.userService.retrieveUserByLoginIdWithoutPassword(loginId);
+        return user != null ? HumanLibraryResponse.isExisted() : HumanLibraryResponse.isNotExisted();
     }
 
     @RequestMapping(value = "/password/{userId}", method = RequestMethod.PUT)
@@ -80,10 +80,10 @@ public class UserController {
     }
 
     @RequestMapping(value = "/info/{loginId}", method = RequestMethod.GET)
-    public User retrieveUserByLoginId(
+    public User retrieveUserByLoginIdWithoutPassword(
             @PathVariable(value = "loginId") String loginId
     ) {
-        return this.userService.retrieveUserByLoginId(loginId);
+        return this.userService.retrieveUserByLoginIdWithoutPassword(loginId);
     }
 
 }

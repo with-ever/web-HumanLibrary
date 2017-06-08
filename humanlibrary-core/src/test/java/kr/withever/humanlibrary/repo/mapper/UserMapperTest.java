@@ -71,6 +71,14 @@ public class UserMapperTest extends WitheverDbUnitTestConfig {
     public void selectUserByLoginId() throws Exception {
         User user = this.userMapper.selectUserByLoginId("jin");
         assertEquals("jin", user.getLoginId());
+        assertEquals("1234", user.getPassword());
+    }
+
+    @Test
+    public void selectUserByLoginIdWithoutPassword() throws Exception {
+        User user = this.userMapper.selectUserByLoginIdWithoutPassword("jin");
+        assertEquals("jin", user.getLoginId());
+        assertNull(user.getPassword());
     }
 
     @Test

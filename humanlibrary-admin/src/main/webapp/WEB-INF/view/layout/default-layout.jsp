@@ -40,6 +40,7 @@
 
     <!-- Custom Theme JavaScript -->
     <script src="${ctx}/resources/js/sb-admin-2.js"></script>
+    <script> var $CTX_ROOT = '${ctx}';</script>
     <sitemesh:write property="head" />
 </head>
 

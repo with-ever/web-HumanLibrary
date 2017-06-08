@@ -1,6 +1,7 @@
 package kr.withever.humanlibrary.web.controller;
 
 import kr.withever.humanlibrary.domain.common.user.RoleType;
+import kr.withever.humanlibrary.domain.user.User;
 import kr.withever.humanlibrary.domain.user.UserSearch;
 import kr.withever.humanlibrary.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Created by youngjinkim on 2017. 4. 28..
@@ -59,5 +63,19 @@ public class UserController {
         mav.setViewName("/user/edit");
         mav.addObject("user", this.userService.retrieveUser(userId));
         return mav;
+    }
+
+    @RequestMapping(value="/verification/{loginId}", method = RequestMethod.GET)
+    public Map verifyLoginId(
+            @PathVariable(value = "loginId") String loginId
+    ) {
+        Map<String, Object> result = new HashMap<String, Object>();
+        User user = this.userService.retrieveUserByLoginIdWithoutPassword(loginId);
+        if (user != null) {
+            result.put("isExisted", true);
+        } else {
+            result.put("isExisted", false);
+        }
+        return result;
     }
 }

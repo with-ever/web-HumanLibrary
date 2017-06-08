@@ -69,6 +69,15 @@ public class UserRepository {
         return user;
     }
 
+    public User retrieveUserByLoginIdWithoutPassword(String loginId) {
+        User user = this.userMapper.selectUserByLoginIdWithoutPassword(loginId);
+        if (user != null) {
+            Set<String> roleList = this.userRoleMapper.selectUserRoleList(user.getUserId());
+            user.setRoles(roleList);
+        }
+        return user;
+    }
+
     public UserSearch retrieveUserBySearch(UserSearch search) {
         List<User> users = this.userMapper.selectUsersBySearch(search);
         search.setResults(users);

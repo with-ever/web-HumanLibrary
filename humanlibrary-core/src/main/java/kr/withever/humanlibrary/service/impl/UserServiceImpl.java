@@ -63,6 +63,14 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public User retrieveUserByLoginIdWithoutPassword(String loginId) {
+        User user = this.userRepository.retrieveUserByLoginIdWithoutPassword(loginId);
+        if (user != null) user = decryptUser(user);
+//        if (user == null) throw new HumanLibraryNotFoundException(ExceptionType.US_404_002, String.valueOf(loginId));
+        return user;
+    }
+
+    @Override
     public UserSearch retrieveUserBySearch(UserSearch search) {
         search = this.userRepository.retrieveUserBySearch(search);
         List<User> users = search.getResults();

@@ -1,6 +1,10 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
+<head>
+    <script src="${ctx}/resources/js/jquery.validate.js"></script>
+    <script src="${ctx}/resources/js/humanlib/user-new.js"></script>
+</head>
 <body>
     <div class="row">
         <div class="col-lg-12">
@@ -22,9 +26,9 @@
                                 <div class="form-group">
                                     <label>로그인 아이디</label>
                                     <div class="form-group input-group">
-                                        <input type="text" class="form-control" placeholder="로그인아이디" name="loginId">
+                                        <input type="text" class="form-control js-loginId" placeholder="로그인아이디" name="loginId">
                                         <span class="input-group-btn">
-                                            <button class="btn btn-default" type="button">중복체크</button>
+                                            <button class="btn btn-default" type="button" onclick="userNew.verifyLoginId();">중복체크</button>
                                         </span>
                                     </div>
                                 </div>
