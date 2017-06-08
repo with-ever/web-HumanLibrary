@@ -72,7 +72,7 @@
                         <li><a href="#"><i class="fa fa-gear fa-fw"></i> Settings</a>
                         </li>
                         <li class="divider"></li>
-                        <li><a href="/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
+                        <li><a href="${ctx}/logout"><i class="fa fa-sign-out fa-fw"></i> Logout</a>
                         </li>
                     </ul>
                     <!-- /.dropdown-user -->
@@ -88,28 +88,28 @@
                             <a href="tables.html"><i class="fa fa-table fa-fw"></i> Tables</a>
                         </li>
                         <li>
-                            <a href="/user"><i class="fa fa-user fa-fw"></i> 사용자</a>
+                            <a href="${ctx}/user"><i class="fa fa-user fa-fw"></i> 사용자</a>
                         </li>
                         <li>
-                        	<a href="/humanbook"><i class="fa fa-book fa-fw"></i> 휴먼북</a>
+                        	<a href="${ctx}/humanbook"><i class="fa fa-book fa-fw"></i> 휴먼북</a>
                         </li>
                         <li>
-                        	<a href="/category"><i class="fa fa-th-list fa-fw"></i> 카테고리</a>
+                        	<a href="${ctx}/category"><i class="fa fa-th-list fa-fw"></i> 카테고리</a>
                         </li>
                         <li>
-                        	<a href="/board"><i class="fa fa-newspaper-o fa-fw"></i> 게시판</a>
+                        	<a href="${ctx}/board"><i class="fa fa-newspaper-o fa-fw"></i> 게시판</a>
                         </li>
                         <li>
                             <a href="#"><i class="fa fa-wrench fa-fw"></i> UI 스타일<span class="fa arrow"></span></a>
                             <ul class="nav nav-second-level">
                                 <li>
-                                    <a href="/front/form">Form</a>
+                                    <a href="${ctx}/front/form">Form</a>
                                 </li>
                                 <li>
-                                    <a href="/front/button">Buttons</a>
+                                    <a href="${ctx}/front/button">Buttons</a>
                                 </li>
                                 <li>
-                                    <a href="/front/icon"> Icons</a>
+                                    <a href="${ctx}/front/icon"> Icons</a>
                                 </li>
                             </ul>
                             <!-- /.nav-second-level -->
