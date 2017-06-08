@@ -1,5 +1,6 @@
 package kr.withever.humanlibrary.web.controller;
 
+import kr.withever.humanlibrary.domain.common.user.RoleType;
 import kr.withever.humanlibrary.domain.user.UserSearch;
 import kr.withever.humanlibrary.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,6 +25,7 @@ public class UserController {
     public ModelAndView showCreateUserForm() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("/user/new");
+        mav.addObject("roles", RoleType.values());
         return mav;
     }
 

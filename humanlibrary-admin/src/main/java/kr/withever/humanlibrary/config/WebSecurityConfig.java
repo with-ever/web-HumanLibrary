@@ -1,5 +1,6 @@
 package kr.withever.humanlibrary.config;
 
+import kr.withever.humanlibrary.security.CustomSuccessHandler;
 import kr.withever.humanlibrary.security.CustomUserDetailsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -46,6 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .loginProcessingUrl("/login")
                     .usernameParameter("loginId")
                     .passwordParameter("password")
+                    .successHandler(authenticationSuccessHandler())
                     .failureForwardUrl("/login?err=1")
                     .and()
                 .logout()
@@ -73,6 +75,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         RoleVoter roleVoter = new RoleVoter();
         roleVoter.setRolePrefix("");
         return roleVoter;
+    }
+
+    @Bean
+    public AuthenticationSuccessHandler authenticationSuccessHandler() {
+        return new CustomSuccessHandler();
     }
 
 }

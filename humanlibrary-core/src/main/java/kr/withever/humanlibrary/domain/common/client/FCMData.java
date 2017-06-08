@@ -16,7 +16,6 @@ public class FCMData {
 
     private static final String IMAGE_URL = "testImage";
 
-
     private String image;
 
     private String deeplink;

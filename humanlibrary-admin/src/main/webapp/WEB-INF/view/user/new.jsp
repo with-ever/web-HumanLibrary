@@ -29,6 +29,16 @@
                                     </div>
                                 </div>
                                 <div class="form-group">
+                                    <label>역할</label>
+                                    <div class="input-group">
+                                        <c:forEach var="role" items="${roles}">
+                                            <label class="checkbox-inline">
+                                                <input type="checkbox" name="roles" value="${role.name}"> ${role.desc}
+                                            </label>
+                                        </c:forEach>
+                                    </div>
+                                </div>
+                                <div class="form-group">
                                     <label>이메일</label>
                                     <input class="form-control" placeholder="이메일" name="email">
                                 </div>
