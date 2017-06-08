@@ -15,7 +15,7 @@ public enum RoleType {
 
     RoleType(String name, String desc) {
         this.name = name;
-        this.name = desc;
+        this.desc = desc;
     }
 
     public String getName() {
