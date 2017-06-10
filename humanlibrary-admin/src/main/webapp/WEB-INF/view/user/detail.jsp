@@ -61,10 +61,6 @@
                                     <p class="form-group-static">${user.address}</p>
                                 </div>
                                 <div class="form-group">
-                                    <label>상세주소</label>
-                                    <p class="form-group-static">${user.detailAddress}</p>
-                                </div>
-                                <div class="form-group">
                                     <label>이미지</label>
                                     <img src="${user.imageUrl}" alt="">
                                 </div>

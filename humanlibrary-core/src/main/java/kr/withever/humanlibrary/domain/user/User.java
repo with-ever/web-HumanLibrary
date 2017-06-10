@@ -1,5 +1,7 @@
 package kr.withever.humanlibrary.domain.user;
 
+import org.springframework.util.StringUtils;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Set;
@@ -32,8 +34,6 @@ public class User implements Serializable {
     private String zipCode;
 
     private String address;
-
-    private String detailAddress;
 
     private String imageUrl;
 
@@ -152,14 +152,6 @@ public class User implements Serializable {
         this.address = address;
     }
 
-    public String getDetailAddress() {
-        return detailAddress;
-    }
-
-    public void setDetailAddress(String detailAddress) {
-        this.detailAddress = detailAddress;
-    }
-
     public String getImageUrl() {
         return imageUrl;
     }
@@ -193,15 +185,16 @@ public class User implements Serializable {
     }
 
     public void setUpdatedUser(User user) {
-        this.name = user.getName();
-        this.email = user.getEmail();
-        this.phoneNo = user.getPhoneNo();
-        this.mPhoneNo = user.getmPhoneNo();
-        this.birth = user.getBirth();
-        this.zipCode = user.getZipCode();
-        this.address = user.getAddress();
-        this.detailAddress = user.getDetailAddress();
-        this.imageUrl = user.getImageUrl();
+        // @TODO String utils 만들기.
+        this.name =  StringUtils.isEmpty(user.getName()) ? this.name : user.getName();
+        this.email =  StringUtils.isEmpty(user.getEmail()) ? this.email : user.getEmail();
+        this.gender = StringUtils.isEmpty(user.getGender()) ? this.gender : user.getGender();
+        this.phoneNo =  StringUtils.isEmpty(user.getPhoneNo()) ? this.phoneNo : user.getPhoneNo();
+        this.mPhoneNo =  StringUtils.isEmpty(user.getmPhoneNo()) ? this.mPhoneNo : user.getmPhoneNo();
+        this.birth =  StringUtils.isEmpty(user.getBirth()) ? this.birth : user.getBirth();
+        this.zipCode =  StringUtils.isEmpty(user.getZipCode()) ? this.zipCode : user.getZipCode();
+        this.address =  StringUtils.isEmpty(user.getAddress()) ? this.address : user.getAddress();
+        this.imageUrl =  StringUtils.isEmpty(user.getImageUrl()) ? this.imageUrl : user.getImageUrl();
         this.updateTime = System.currentTimeMillis() / 1000;
     }
 }

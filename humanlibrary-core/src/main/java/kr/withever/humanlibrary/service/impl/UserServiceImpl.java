@@ -45,7 +45,9 @@ public class UserServiceImpl implements UserService{
     @Override
     public void modifyUser(User user) {
         User previousUser = this.userRepository.retrieveUser(user.getUserId());
+        previousUser = decryptUser(previousUser);
         previousUser.setUpdatedUser(user);
+        previousUser = encryptUser(previousUser);
         this.userRepository.modifyUser(previousUser);
     }
 
@@ -93,7 +95,6 @@ public class UserServiceImpl implements UserService{
         return this.userRepository.retrievePasswordByUserId(userId);
     }
 
-    // @TODO 예외처리 어떻게 할것인지 고민.
     private User encryptUser(User user) {
         AESEncryptionUtil aesEncryptionUtil = new AESEncryptionUtil();
 
@@ -102,14 +103,12 @@ public class UserServiceImpl implements UserService{
             user.setPhoneNo(aesEncryptionUtil.encrypt(user.getPhoneNo()));
             user.setmPhoneNo(aesEncryptionUtil.encrypt(user.getmPhoneNo()));
             user.setAddress(aesEncryptionUtil.encrypt(user.getAddress()));
-            user.setDetailAddress(aesEncryptionUtil.encrypt(user.getDetailAddress()));
         } catch (Exception e) {
             throw new RuntimeException("개인정보 암호화 실패", e);
         }
         return user;
     }
 
-    // @TODO 예외처리 어떻게 할것인지 고민.
     private User decryptUser(User user) {
         AESEncryptionUtil aesEncryptionUtil = new AESEncryptionUtil();
 
@@ -118,7 +117,6 @@ public class UserServiceImpl implements UserService{
             user.setPhoneNo(aesEncryptionUtil.decrypt(user.getPhoneNo()));
             user.setmPhoneNo(aesEncryptionUtil.decrypt(user.getmPhoneNo()));
             user.setAddress(aesEncryptionUtil.decrypt(user.getAddress()));
-            user.setDetailAddress(aesEncryptionUtil.decrypt(user.getDetailAddress()));
         } catch (Exception e) {
             throw new RuntimeException("개인정보 복호화 실패", e);
         }

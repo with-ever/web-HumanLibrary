@@ -128,9 +128,9 @@
    			<if test="subCategoryId != null">
    				AND SUB_CATEGORY = #{subCategoryId}
    			</if>
-   		LIMIT
-   			#{offset}
-   			,#{limit}
+			<if test="userId != null">
+				AND USER_ID = #{userId}
+			</if>
     </select>
     
     <update id="updateHumanbookState" >

@@ -28,7 +28,6 @@
         <result property="birth" column="BIRTH"/>
         <result property="zipCode" column="ZIP_CODE"/>
         <result property="address" column="ADDRESS"/>
-        <result property="detailAddress" column="DETAIL_ADDRESS"/>
         <result property="imageUrl" column="IMAGE_URL"/>
         <result property="createTime" column="CREATE_TIME"/>
         <result property="updateTime" column="UPDATE_TIME"/>
@@ -121,7 +120,6 @@
             ,U.BIRTH AS U_BIRTH
             ,U.ZIP_CODE AS U_ZIP_CODE
             ,U.ADDRESS AS U_ADDRESS
-            ,U.DETAIL_ADDRESS AS U_DETAIL_ADDRESS
             ,U.IMAGE_URL AS U_IMAGE_URL
             ,U.CREATE_TIME AS U_CREATE_TIME
             ,U.UPDATE_TIME AS U_UPDATE_TIME
@@ -261,7 +259,6 @@
                 ,U.BIRTH AS U_BIRTH
                 ,U.ZIP_CODE AS U_ZIP_CODE
                 ,U.ADDRESS AS U_ADDRESS
-                ,U.DETAIL_ADDRESS AS U_DETAIL_ADDRESS
                 ,U.IMAGE_URL AS U_IMAGE_URL
                 ,U.CREATE_TIME AS U_CREATE_TIME
                 ,U.UPDATE_TIME AS U_UPDATE_TIME
@@ -319,7 +316,6 @@
                 ,U.BIRTH AS U_BIRTH
                 ,U.ZIP_CODE AS U_ZIP_CODE
                 ,U.ADDRESS AS U_ADDRESS
-                ,U.DETAIL_ADDRESS AS U_DETAIL_ADDRESS
                 ,U.IMAGE_URL AS U_IMAGE_URL
                 ,U.CREATE_TIME AS U_CREATE_TIME
                 ,U.UPDATE_TIME AS U_UPDATE_TIME

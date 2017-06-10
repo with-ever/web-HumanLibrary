@@ -98,10 +98,6 @@
                                 <input class="form-control" placeholder="주소" name="address">
                             </div>
                             <div class="form-group">
-                                <label>상세주소</label>
-                                <input class="form-control" placeholder="상세주소" name="detailAddress">
-                            </div>
-                            <div class="form-group">
                                 <label>이미지</label>
                                 <input type="file" name="imageUrl">
                             </div>
