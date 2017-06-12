@@ -16,7 +16,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class FCMTest {
 
-    private static final String TEST_TOKEN_ID = "fNo8l-lwtMI:APA91bF4bxMrk7moceQWDu9KSO6N4HVGYn9L6MnQjjV3hJxisnWBOTuQ1JVQADf0RZ3XxOHwQhWp9ykirYUWbEQsBlWkQvyvWlERq7jpdgZ1CZoCqZePs9DdHp6cTF59wRTe9wdLcUYY";
+    private static final String TEST_TOKEN_ID = "fETviSRZyQA:APA91bELFLYMS4MhwiHLHk_1baEN4y-lkpTLkYQ9oHJEbOAO-Lg29VhbZsZKoEebaOlJH_3PSLbddjH8napl8WEPeUlvDQPX2bq65T_kPku7fdXVWHcFxC_ULopTh5sXTsXMOyqECevV";
 
     @Test
     @Ignore
