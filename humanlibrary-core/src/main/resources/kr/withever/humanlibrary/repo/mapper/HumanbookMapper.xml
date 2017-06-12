@@ -6,7 +6,6 @@
 <mapper namespace="kr.withever.humanlibrary.repo.mapper.HumanbookMapper">
     <resultMap id="humanbookResultMap" type="Humanbook">
     	<id property="id" column="ID"/>
-        <result property="userId" column="USER_ID"/>
         <result property="title" column="TITLE"/>
         <result property="mainCareer" column="MAIN_CAREER"/>
         <result property="state" column="STATE"/>
@@ -15,9 +14,26 @@
 		<result property="description" column="DESCRIPTION"/>
         <result property="createTime" column="CREATE_TIME"/>
         <result property="updateTime" column="UPDATE_TIME"/>
-        <association property="parentCategory" resultMap="categoryResultMap" />
+		<association property="user" columnPrefix="U_" resultMap="userResultMap"/>
+        <association property="parentCategory" resultMap="categoryResultMap"/>
         <association property="subCategory" resultMap="subCategoryResultMap"/>
     </resultMap>
+
+	<resultMap id="userResultMap" type="User">
+		<id property="userId" column="USER_ID"/>
+		<result property="loginId" column="LOGIN_ID"/>
+		<result property="name" column="NAME"/>
+		<result property="email" column="EMAIL"/>
+		<result property="gender" column="GENDER"/>
+		<result property="phoneNo" column="PHONE_NO"/>
+		<result property="mPhoneNo" column="M_PHONE_NO"/>
+		<result property="birth" column="BIRTH"/>
+		<result property="zipCode" column="ZIP_CODE"/>
+		<result property="address" column="ADDRESS"/>
+		<result property="imageUrl" column="IMAGE_URL"/>
+		<result property="createTime" column="CREATE_TIME"/>
+		<result property="updateTime" column="UPDATE_TIME"/>
+	</resultMap>
     
     <resultMap id="categoryResultMap" type="Category">
     	<id property="id" column="PARENT_CATEGORY" /> <!-- COLUMN명 확인 -->
@@ -51,7 +67,7 @@
     	)
     	VALUES(
     		#{id}
-    		,#{userId}
+    		,#{user.userId}
     		,#{title}
     		,#{mainCareer}
     		,#{serviceTime}
@@ -68,7 +84,7 @@
     <select id="selectHumanbook" parameterType="Long" resultMap="humanbookResultMap">
 		SELECT
 			 ID
-			,USER_ID
+			,USER_ID AS U_USER_ID
 			,TITLE
 			,MAIN_CAREER
 			,STATE
@@ -87,29 +103,43 @@
 	
     <select id="selectHumanbooksBySearch" parameterType="HumanbookSearch" resultMap="humanbookResultMap">
     	SELECT
-    		ID
-    		,USER_ID
-    		,TITLE
-    		,MAIN_CAREER
-    		,SERVICE_TIME
-    		,PARENT_CATEGORY
-    		,SUB_CATEGORY
-    		,STATE
-			,IMAGE_URL
-			,DESCRIPTION
-    		,CREATE_TIME
-    		,UPDATE_TIME
+    		HB.ID
+    		,HB.USER_ID
+    		,HB.TITLE
+    		,HB.MAIN_CAREER
+    		,HB.SERVICE_TIME
+    		,HB.PARENT_CATEGORY
+    		,HB.SUB_CATEGORY
+    		,HB.STATE
+			,HB.IMAGE_URL
+			,HB.DESCRIPTION
+    		,HB.CREATE_TIME
+    		,HB.UPDATE_TIME
+			,U.USER_ID AS U_USER_ID
+			,U.LOGIN_ID AS U_LOGIN_ID
+			,U.NAME AS U_NAME
+			,U.EMAIL AS U_EMAIL
+			,U.GENDER AS U_GENDER
+			,U.PHONE_NO AS U_PHONE_NO
+			,U.M_PHONE_NO AS U_M_PHONE_NO
+			,U.BIRTH AS U_BIRTH
+			,U.ZIP_CODE AS U_ZIP_CODE
+			,U.ADDRESS AS U_ADDRESS
+			,U.IMAGE_URL AS U_IMAGE_URL
+			,U.CREATE_TIME AS U_CREATE_TIME
+			,U.UPDATE_TIME AS U_UPDATE_TIME
     	FROM
-    		HUMANBOOK
+    		HUMANBOOK HB
+		INNER JOIN USERS U ON U.USER_ID = HB.USER_ID
 		WHERE 1 = 1
 		<if test="categoryId != null">
-			AND PARENT_CATEGORY = #{categoryId}
+			AND HB.PARENT_CATEGORY = #{categoryId}
 		</if>
 		<if test="subCategoryId != null">
-			AND SUB_CATEGORY = #{subCategoryId}
+			AND HB.SUB_CATEGORY = #{subCategoryId}
 		</if>
 		<if test="userId != null">
-			AND USER_ID = #{userId}
+			AND HB.USER_ID = #{userId}
 		</if>
 		LIMIT
 			#{offset}
@@ -119,18 +149,19 @@
     <select id="selectHumanbooksTotalCountBySearch" parameterType="HumanbookSearch" resultType="int">
     	SELECT
     		COUNT(*)
-   		FROM
-   			HUMANBOOK
-   		WHERE 1 = 1
-   			<if test="categoryId != null">
-   				AND PARENT_CATEGORY = #{categoryId}
-   			</if>
-   			<if test="subCategoryId != null">
-   				AND SUB_CATEGORY = #{subCategoryId}
-   			</if>
-			<if test="userId != null">
-				AND USER_ID = #{userId}
-			</if>
+		FROM
+			HUMANBOOK HB
+		INNER JOIN USERS U ON U.USER_ID = HB.USER_ID
+		WHERE 1 = 1
+		<if test="categoryId != null">
+			AND HB.PARENT_CATEGORY = #{categoryId}
+		</if>
+		<if test="subCategoryId != null">
+			AND HB.SUB_CATEGORY = #{subCategoryId}
+		</if>
+		<if test="userId != null">
+			AND HB.USER_ID = #{userId}
+		</if>
     </select>
     
     <update id="updateHumanbookState" >
@@ -146,7 +177,7 @@
     	UPDATE
     		HUMANBOOK
     	SET
-    		USER_ID = #{userId}
+    		USER_ID = #{user.userId}
 			,TITLE = #{title}
 			,MAIN_CAREER = #{mainCareer}
 			,SERVICE_TIME = #{serviceTime}

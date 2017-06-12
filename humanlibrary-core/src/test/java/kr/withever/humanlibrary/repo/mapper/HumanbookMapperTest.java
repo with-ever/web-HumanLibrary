@@ -19,8 +19,8 @@ import kr.withever.humanlibrary.domain.humanbook.Category;
 import kr.withever.humanlibrary.domain.humanbook.Humanbook;
 import kr.withever.humanlibrary.domain.humanbook.HumanbookSearch;
 
-@DatabaseSetup(value={"/dataset/Humanbook.xml"}, type=DatabaseOperation.INSERT)
-@DatabaseTearDown(value={"/dataset/Humanbook.xml"}, type=DatabaseOperation.DELETE_ALL)
+@DatabaseSetup(value={"/dataset/Humanbook.xml", "/dataset/User.xml"}, type=DatabaseOperation.INSERT)
+@DatabaseTearDown(value={"/dataset/Humanbook.xml", "/dataset/User.xml"}, type=DatabaseOperation.DELETE_ALL)
 public class HumanbookMapperTest extends WitheverDbUnitTestConfig{
 
 	@Autowired
@@ -29,10 +29,10 @@ public class HumanbookMapperTest extends WitheverDbUnitTestConfig{
 	@Test
 	public void selectHumanbooksBySearch() throws Exception{
 		HumanbookSearch search = new HumanbookSearch();
-		search.setId(1L);
+		search.setUserId("1");
 		List<Humanbook> list = this.humanbookMapper.selectHumanbooksBySearch(search);
 		
-		assertEquals(2, list.size());
+		assertEquals(1, list.size());
 	}
 	
 	@Test
@@ -54,9 +54,7 @@ public class HumanbookMapperTest extends WitheverDbUnitTestConfig{
 	@Test
 	public void selectHumanbook() throws Exception{
 		Humanbook humanbook = this.humanbookMapper.selectHumanbook(1L);
-		System.out.println(humanbook.getParentCategory().getId());
-		System.out.println(humanbook.getSubCategory().getId());
-		assertEquals("4", humanbook.getUserId());
+		assertEquals(Long.valueOf(1L), humanbook.getUser().getUserId());
 		assertEquals("설명글입니다", humanbook.getDescription());
 	}
 
@@ -69,7 +67,7 @@ public class HumanbookMapperTest extends WitheverDbUnitTestConfig{
 		humanbook.setMainCareer("aa");
 		humanbook.setState(HumanbookState.ACCEPT);
 		humanbook.setTitle("aa");
-		humanbook.setUserId("aa");
+		humanbook.setUser(new User(3L));
 		humanbook.setServiceTime("aa");
 		humanbook.setParentCategory(category);
 		humanbook.setSubCategory(subCategory);
@@ -79,9 +77,8 @@ public class HumanbookMapperTest extends WitheverDbUnitTestConfig{
 		this.humanbookMapper.insertHumanbook(humanbook);
 	
 		Humanbook testHumanbook = this.humanbookMapper.selectHumanbook(3L);
-		System.out.println(testHumanbook.getParentCategory().getId());
-		System.out.println(testHumanbook.getParentCategory().getCategoryName());
-		assertEquals(new Long(3L),testHumanbook.getId());
+		assertEquals(new Long(3L), testHumanbook.getId());
+		assertEquals(new Long(3L), testHumanbook.getUser().getUserId());
 	}
 
 	@Test
@@ -100,7 +97,7 @@ public class HumanbookMapperTest extends WitheverDbUnitTestConfig{
 		humanbook.setMainCareer("aa");
 		humanbook.setState(HumanbookState.ACCEPT);
 		humanbook.setTitle("aa");
-		humanbook.setUserId("aa");
+		humanbook.setUser(new User(3L));
 		humanbook.setServiceTime("aa");
 		humanbook.setParentCategory(category);
 		humanbook.setSubCategory(subCategory);
@@ -108,6 +105,6 @@ public class HumanbookMapperTest extends WitheverDbUnitTestConfig{
 
 		this.humanbookMapper.updateHumanbook(humanbook);
 		Humanbook updatedHumanbook = this.humanbookMapper.selectHumanbook(1L);
-		assertEquals("aa",updatedHumanbook.getUserId());
+		assertEquals(new Long(3L), updatedHumanbook.getUser().getUserId());
 	}
 }

@@ -2,6 +2,9 @@ package kr.withever.humanlibrary.service.impl;
 
 import java.util.List;
 
+import kr.withever.humanlibrary.domain.humanbook.Humanbook;
+import kr.withever.humanlibrary.domain.humanbook.HumanbookSearch;
+import kr.withever.humanlibrary.domain.user.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,21 +45,23 @@ public class ContractServiceImpl implements ContractService {
             contractTime.setContractId(contractId);
             this.contractTimeRepository.createContractTime(contractTime);
         }
+
         return contractId;
     }
 
     @Override
     public Contract retrieveContract(Long contractId) {
         Contract contract = this.contractRepository.retrieveContract(contractId);
-        contract.setUser(this.userRepository.retrieveUser(contract.getUser().getUserId()));
+        contract.setUser(User.decryptUser(this.userRepository.retrieveUser(contract.getUser().getUserId())));
         contract.setHumanbook(this.humanbookRepository.retrieveHumanbook(contract.getHumanbook().getId()));
         contract.setAvailableContractTimes(this.contractTimeRepository.retrieveContractTimes(contractId));
+        if (contract.getHumanbook().getUser() != null) contract.getHumanbook().setUser(User.decryptUser(this.userRepository.retrieveUser(contract.getHumanbook().getUser().getUserId())));
         return contract;
     }
 
     @Override
     public ContractSearch retrieveContractBySearch(ContractSearch search) {
-        return this.contractRepository.retrieveContractBySearch(search);
+        return decryptContractUser(this.contractRepository.retrieveContractBySearch(search));
     }
 
     @Override
@@ -106,6 +111,18 @@ public class ContractServiceImpl implements ContractService {
 
 	@Override
     public ContractSearch retrieveContractsForNotification(ContractSearch search) {
-        return this.contractRepository.retrieveContractsForNotification(search);
+        return decryptContractUser(this.contractRepository.retrieveContractsForNotification(search));
+    }
+
+    private ContractSearch decryptContractUser(ContractSearch search) {
+        List<Contract> contracts = search.getResults();
+        // 사용자 복호화.
+        for (int index = 0; index < contracts.size(); index++) {
+            Contract currentContract = contracts.get(index);
+            if (currentContract.getUser() != null) currentContract.setUser(User.decryptUser(currentContract.getUser()));
+            if (currentContract.getHumanbook() != null && currentContract.getHumanbook().getUser() != null) currentContract.getHumanbook().setUser(User.decryptUser(currentContract.getHumanbook().getUser()));
+        }
+        search.setResults(contracts);
+        return search;
     }
 }

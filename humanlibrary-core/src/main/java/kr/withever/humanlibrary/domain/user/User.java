@@ -1,5 +1,6 @@
 package kr.withever.humanlibrary.domain.user;
 
+import kr.withever.humanlibrary.util.AESEncryptionUtil;
 import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
@@ -196,5 +197,34 @@ public class User implements Serializable {
         this.address =  StringUtils.isEmpty(user.getAddress()) ? this.address : user.getAddress();
         this.imageUrl =  StringUtils.isEmpty(user.getImageUrl()) ? this.imageUrl : user.getImageUrl();
         this.updateTime = System.currentTimeMillis() / 1000;
+    }
+
+    public static User encryptUser(User user) {
+        AESEncryptionUtil aesEncryptionUtil = new AESEncryptionUtil();
+
+        try {
+            user.setEmail(aesEncryptionUtil.encrypt(user.getEmail()));
+            user.setPhoneNo(aesEncryptionUtil.encrypt(user.getPhoneNo()));
+            user.setmPhoneNo(aesEncryptionUtil.encrypt(user.getmPhoneNo()));
+            user.setAddress(aesEncryptionUtil.encrypt(user.getAddress()));
+        } catch (Exception e) {
+            throw new RuntimeException("개인정보 암호화 실패", e);
+        }
+        return user;
+    }
+
+    public static User decryptUser(User user) {
+        AESEncryptionUtil aesEncryptionUtil = new AESEncryptionUtil();
+
+        try {
+            user.setEmail(aesEncryptionUtil.decrypt(user.getEmail()));
+            user.setPhoneNo(aesEncryptionUtil.decrypt(user.getPhoneNo()));
+            user.setmPhoneNo(aesEncryptionUtil.decrypt(user.getmPhoneNo()));
+            user.setAddress(aesEncryptionUtil.decrypt(user.getAddress()));
+        } catch (Exception e) {
+            throw new RuntimeException("개인정보 복호화 실패", e);
+        }
+
+        return user;
     }
 }

@@ -2,7 +2,7 @@
 <dataset>
     <HUMANBOOK
     	ID = "1"
-    	USER_ID = "4"
+    	USER_ID = "1"
     	TITLE = "HELLO"
     	MAIN_CAREER = 'WITH EVER'
     	STATE = "ACCEPT"
@@ -17,7 +17,7 @@
 
 	<HUMANBOOK
 			ID = "2"
-			USER_ID = "1"
+			USER_ID = "2"
 			TITLE = "HELLO123"
 			MAIN_CAREER = 'WITH EVER32131'
 			STATE = "ACCEPT"

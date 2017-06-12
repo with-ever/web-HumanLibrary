@@ -145,7 +145,7 @@ public class ContractMapperTest extends WitheverDbUnitTestConfig{
         ContractSearch search = new ContractSearch();
         search.setUserId(1L);
         int count = this.contractMapper.selectContractsTotalCountForNotification(search);
-        assertEquals(3, count);
+        assertEquals(6, count);
     }
 
 }

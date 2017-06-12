@@ -3,6 +3,7 @@ package kr.withever.humanlibrary.domain.humanbook;
 import kr.withever.humanlibrary.domain.common.DayOfWeek;
 import kr.withever.humanlibrary.domain.common.humanbook.HumanbookState;
 import kr.withever.humanlibrary.domain.common.humanbook.HumanbookTime;
+import kr.withever.humanlibrary.domain.user.User;
 
 import java.io.Serializable;
 import java.util.Set;
@@ -13,7 +14,7 @@ public class Humanbook implements Serializable{
 
 	private Long id;
 	/** 휴먼북 등록한 사용자 ID **/
-	private String userId;
+	private User user;
 	private String title;
 	private String mainCareer;
 	/** {@link DayOfWeek} **/
@@ -35,10 +36,10 @@ public class Humanbook implements Serializable{
 		this.id = id;
 	}
 
-	public Humanbook(String userId, Long id, String title){
-		this.userId = userId;
+	public Humanbook(Long userId, Long id, String title){
 		this.id = id;
 		this.title = title;
+		this.user = new User(userId);
 		this.createTime = System.currentTimeMillis() / 1000;
 		this.updateTime = System.currentTimeMillis() / 1000;
 	}
@@ -51,12 +52,12 @@ public class Humanbook implements Serializable{
 		this.id = id;
 	}
 
-	public String getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public String getTitle() {

@@ -1,8 +1,11 @@
 package kr.withever.humanlibrary.service.impl;
 
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
+import kr.withever.humanlibrary.domain.user.User;
+import kr.withever.humanlibrary.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -21,6 +24,10 @@ public class HumanbookServiceImpl implements HumanbookService {
 
 	@Autowired
 	private HumanbookRepository humanbookRepository;
+
+	@Autowired
+	private UserRepository userRepository;
+
 	@Autowired
 	private UserRoleRepository userRoleRepository;
 
@@ -34,7 +41,8 @@ public class HumanbookServiceImpl implements HumanbookService {
 	@Override
 	public Humanbook retrieveHumanbook(Long id){
 		Humanbook humanbook = this.humanbookRepository.retrieveHumanbook(id);
-		
+		if (humanbook.getUser() != null) humanbook.setUser(User.decryptUser(this.userRepository.retrieveUser(humanbook.getUser().getUserId())));
+
 		// @TODO error code update
 		// if(humanbook == null) throw new HumanLibraryNotFoundException(ExceptionType.US10002, String.valueOf(id), "success");
 		return humanbook;
@@ -42,12 +50,12 @@ public class HumanbookServiceImpl implements HumanbookService {
 
 	@Override
 	public HumanbookSearch retrieveHumanbooksBySearch(HumanbookSearch search) {
-		return this.humanbookRepository.retrieveHumanbooksBySearch(search);
+		return decryptHumanbookUser(this.humanbookRepository.retrieveHumanbooksBySearch(search));
 	}
 	
 	@Override
 	public HumanbookSearch retrieveHumanbooksByCategory(HumanbookSearch search){
-		return this.humanbookRepository.retrieveHumanbooksByCategory(search);
+		return decryptHumanbookUser(this.humanbookRepository.retrieveHumanbooksByCategory(search));
 	}
 	
 	@Override
@@ -69,7 +77,9 @@ public class HumanbookServiceImpl implements HumanbookService {
 	@Override
 	public void acceptHumanbookRegister(Long id) {
 		this.humanbookRepository.modifyHumanbookState(id, HumanbookState.ACCEPT);
-        Set<String> roles = this.userRoleRepository.retrieveUserRoles(id);
+		Humanbook humanbook = this.humanbookRepository.retrieveHumanbook(id);
+		// 휴먼북 사용자에게 권한 부여.
+		Set<String> roles = this.userRoleRepository.retrieveUserRoles(humanbook.getUser().getUserId());
         if (!roles.contains(RoleType.HUMAN_BOOK.getName())) {
             this.userRoleRepository.createUserRole(id, RoleType.HUMAN_BOOK.getName());
         }
@@ -83,5 +93,14 @@ public class HumanbookServiceImpl implements HumanbookService {
     @Override
 	public void removeHumanbook(Long id){
 		this.humanbookRepository.removeHumanbook(id);
+	}
+
+	private HumanbookSearch decryptHumanbookUser(HumanbookSearch search) {
+		List<Humanbook> humanbooks = search.getResults();
+		for (int index = 0; index < humanbooks.size(); index++) {
+			if (humanbooks.get(index).getUser() != null) humanbooks.get(index).setUser(User.decryptUser(humanbooks.get(index).getUser()));
+		}
+		search.setResults(humanbooks);
+		return search;
 	}
 }

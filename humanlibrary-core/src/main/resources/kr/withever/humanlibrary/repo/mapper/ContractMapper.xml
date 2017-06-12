@@ -21,7 +21,6 @@
         <result property="loginId" column="LOGIN_ID"/>
         <result property="name" column="NAME"/>
         <result property="email" column="EMAIL"/>
-        <result property="password" column="PASSWORD"/>
         <result property="gender" column="GENDER"/>
         <result property="phoneNo" column="PHONE_NO"/>
         <result property="mPhoneNo" column="M_PHONE_NO"/>
@@ -35,7 +34,6 @@
 
     <resultMap type="Humanbook" id="humanbookResultMap" >
         <id property="id" column="ID"/>
-        <result property="userId" column="USER_ID"/>
         <result property="title" column="TITLE"/>
         <result property="mainCareer" column="MAIN_CAREER"/>
         <result property="state" column="STATE"/>
@@ -44,6 +42,7 @@
         <result property="description" column="DESCRIPTION"/>
         <result property="createTime" column="CREATE_TIME"/>
         <result property="updateTime" column="UPDATE_TIME"/>
+        <association property="user" resultMap="userResultMap" columnPrefix="U_"/>
     </resultMap>
 
     <resultMap type="ContractTime" id="contractTimeResultMap" >
@@ -124,7 +123,7 @@
             ,U.CREATE_TIME AS U_CREATE_TIME
             ,U.UPDATE_TIME AS U_UPDATE_TIME
             ,HB.ID AS HB_ID
-            ,HB.USER_ID AS HB_USER_ID
+            ,HB.USER_ID AS HB_U_USER_ID
             ,HB.TITLE AS HB_TITLE
             ,HB.MAIN_CAREER AS HB_MAIN_CAREER
             ,HB.STATE AS HB_STATE
@@ -135,9 +134,23 @@
             ,HB.DESCRIPTION AS HB_DESCRIPTION
             ,HB.CREATE_TIME AS HB_CREATE_TIME
             ,HB.UPDATE_TIME AS HB_UPDATE_TIME
+            ,HBU.USER_ID AS HB_U_USER_ID
+            ,HBU.LOGIN_ID AS HB_U_LOGIN_ID
+            ,HBU.NAME AS HB_U_NAME
+            ,HBU.EMAIL AS HB_U_EMAIL
+            ,HBU.GENDER AS HB_U_GENDER
+            ,HBU.PHONE_NO AS HB_U_PHONE_NO
+            ,HBU.M_PHONE_NO AS HB_U_M_PHONE_NO
+            ,HBU.BIRTH AS HB_U_BIRTH
+            ,HBU.ZIP_CODE AS HB_U_ZIP_CODE
+            ,HBU.ADDRESS AS HB_U_ADDRESS
+            ,HBU.IMAGE_URL AS HB_U_IMAGE_URL
+            ,HBU.CREATE_TIME AS HB_U_CREATE_TIME
+            ,HBU.UPDATE_TIME AS HB_U_UPDATE_TIME
         FROM CONTRACTS C
         INNER JOIN USERS U ON U.USER_ID = C.USER_ID
         INNER JOIN HUMANBOOK HB ON HB.ID = C.HB_ID
+        INNER JOIN USERS HBU ON HB.USER_ID = HBU.USER_ID
         WHERE 1 = 1
         <if test="userId != null and userId != 0">
             AND C.USER_ID = #{userId}
@@ -174,6 +187,7 @@
         FROM CONTRACTS C
         INNER JOIN USERS U ON U.USER_ID = C.USER_ID
         INNER JOIN HUMANBOOK HB ON HB.ID = C.HB_ID
+        INNER JOIN USERS HBU ON HB.USER_ID = HBU.USER_ID
         WHERE 1 = 1
         <if test="userId != null and userId != 0">
             AND C.USER_ID = #{userId}
@@ -263,7 +277,7 @@
                 ,U.CREATE_TIME AS U_CREATE_TIME
                 ,U.UPDATE_TIME AS U_UPDATE_TIME
                 ,HB.ID AS HB_ID
-                ,HB.USER_ID AS HB_USER_ID
+                ,HB.USER_ID AS HB_U_USER_ID
                 ,HB.TITLE AS HB_TITLE
                 ,HB.MAIN_CAREER AS HB_MAIN_CAREER
                 ,HB.STATE AS HB_STATE
@@ -274,9 +288,23 @@
                 ,HB.DESCRIPTION AS HB_DESCRIPTION
                 ,HB.CREATE_TIME AS HB_CREATE_TIME
                 ,HB.UPDATE_TIME AS HB_UPDATE_TIME
+                ,HBU.USER_ID AS HB_U_USER_ID
+                ,HBU.LOGIN_ID AS HB_U_LOGIN_ID
+                ,HBU.NAME AS HB_U_NAME
+                ,HBU.EMAIL AS HB_U_EMAIL
+                ,HBU.GENDER AS HB_U_GENDER
+                ,HBU.PHONE_NO AS HB_U_PHONE_NO
+                ,HBU.M_PHONE_NO AS HB_U_M_PHONE_NO
+                ,HBU.BIRTH AS HB_U_BIRTH
+                ,HBU.ZIP_CODE AS HB_U_ZIP_CODE
+                ,HBU.ADDRESS AS HB_U_ADDRESS
+                ,HBU.IMAGE_URL AS HB_U_IMAGE_URL
+                ,HBU.CREATE_TIME AS HB_U_CREATE_TIME
+                ,HBU.UPDATE_TIME AS HB_U_UPDATE_TIME
             FROM CONTRACTS C
             INNER JOIN USERS U ON U.USER_ID = C.USER_ID
             INNER JOIN HUMANBOOK HB ON HB.ID = C.HB_ID
+            INNER JOIN USERS HBU ON HB.USER_ID = HBU.USER_ID
             WHERE
                 1 = 1
                 <if test="userId != null and userId != 0">
@@ -320,7 +348,7 @@
                 ,U.CREATE_TIME AS U_CREATE_TIME
                 ,U.UPDATE_TIME AS U_UPDATE_TIME
                 ,HB.ID AS HB_ID
-                ,HB.USER_ID AS HB_USER_ID
+                ,HB.USER_ID AS HB_U_USER_ID
                 ,HB.TITLE AS HB_TITLE
                 ,HB.MAIN_CAREER AS HB_MAIN_CAREER
                 ,HB.STATE AS HB_STATE
@@ -331,9 +359,23 @@
                 ,HB.DESCRIPTION AS HB_DESCRIPTION
                 ,HB.CREATE_TIME AS HB_CREATE_TIME
                 ,HB.UPDATE_TIME AS HB_UPDATE_TIME
+                ,HBU.USER_ID AS HB_U_USER_ID
+                ,HBU.LOGIN_ID AS HB_U_LOGIN_ID
+                ,HBU.NAME AS HB_U_NAME
+                ,HBU.EMAIL AS HB_U_EMAIL
+                ,HBU.GENDER AS HB_U_GENDER
+                ,HBU.PHONE_NO AS HB_U_PHONE_NO
+                ,HBU.M_PHONE_NO AS HB_U_M_PHONE_NO
+                ,HBU.BIRTH AS HB_U_BIRTH
+                ,HBU.ZIP_CODE AS HB_U_ZIP_CODE
+                ,HBU.ADDRESS AS HB_U_ADDRESS
+                ,HBU.IMAGE_URL AS HB_U_IMAGE_URL
+                ,HBU.CREATE_TIME AS HB_U_CREATE_TIME
+                ,HBU.UPDATE_TIME AS HB_U_UPDATE_TIME
             FROM CONTRACTS C
             INNER JOIN USERS U ON U.USER_ID = C.USER_ID
             INNER JOIN HUMANBOOK HB ON HB.ID = C.HB_ID
+            INNER JOIN USERS HBU ON HB.USER_ID = HBU.USER_ID
             WHERE
                 1 = 1
                 <if test="userId != null and userId != 0">
@@ -372,6 +414,7 @@
                 FROM CONTRACTS C
                 INNER JOIN USERS U ON U.USER_ID = C.USER_ID
                 INNER JOIN HUMANBOOK HB ON HB.ID = C.HB_ID
+                INNER JOIN USERS HBU ON HB.USER_ID = HBU.USER_ID
                 WHERE
                     1 = 1
                     <if test="userId != null and userId != 0">
@@ -392,6 +435,7 @@
                 FROM CONTRACTS C
                 INNER JOIN USERS U ON U.USER_ID = C.USER_ID
                 INNER JOIN HUMANBOOK HB ON HB.ID = C.HB_ID
+                INNER JOIN USERS HBU ON HB.USER_ID = HBU.USER_ID
                 WHERE
                     1 = 1
                     <if test="userId != null and userId != 0">

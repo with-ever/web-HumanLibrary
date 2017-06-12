@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public Long createUser(User user) {
-        user = encryptUser(user);
+        user = User.encryptUser(user);
         this.userRepository.createUser(user);
         this.userRoleRepository.createUserRoles(user.getUserId(), user.getRoles());
         return user.getUserId();
@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public User retrieveUser(Long userId) {
         User user = this.userRepository.retrieveUser(userId);
-        if (user != null) user = decryptUser(user);
+        if (user != null) user = User.decryptUser(user);
 //        if (user == null) throw new HumanLibraryNotFoundException(ExceptionType.US_404_001, String.valueOf(userId));
         return user;
     }
@@ -45,9 +45,9 @@ public class UserServiceImpl implements UserService{
     @Override
     public void modifyUser(User user) {
         User previousUser = this.userRepository.retrieveUser(user.getUserId());
-        previousUser = decryptUser(previousUser);
+        previousUser = User.decryptUser(previousUser);
         previousUser.setUpdatedUser(user);
-        previousUser = encryptUser(previousUser);
+        previousUser = User.encryptUser(previousUser);
         this.userRepository.modifyUser(previousUser);
     }
 
@@ -59,7 +59,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public User retrieveUserByLoginId(String loginId) {
         User user = this.userRepository.retrieveUserByLoginId(loginId);
-        if (user != null) user = decryptUser(user);
+        if (user != null) user = User.decryptUser(user);
 //        if (user == null) throw new HumanLibraryNotFoundException(ExceptionType.US_404_002, String.valueOf(loginId));
         return user;
     }
@@ -67,7 +67,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public User retrieveUserByLoginIdWithoutPassword(String loginId) {
         User user = this.userRepository.retrieveUserByLoginIdWithoutPassword(loginId);
-        if (user != null) user = decryptUser(user);
+        if (user != null) user = User.decryptUser(user);
 //        if (user == null) throw new HumanLibraryNotFoundException(ExceptionType.US_404_002, String.valueOf(loginId));
         return user;
     }
@@ -78,7 +78,7 @@ public class UserServiceImpl implements UserService{
         List<User> users = search.getResults();
         if (users.size() != 0) {
             for (int index = 0; index < users.size(); index++) {
-                users.set(index, decryptUser(users.get(index)));
+                users.set(index, User.decryptUser(users.get(index)));
             }
         }
         search.setResults(users);
@@ -95,34 +95,7 @@ public class UserServiceImpl implements UserService{
         return this.userRepository.retrievePasswordByUserId(userId);
     }
 
-    private User encryptUser(User user) {
-        AESEncryptionUtil aesEncryptionUtil = new AESEncryptionUtil();
 
-        try {
-            user.setEmail(aesEncryptionUtil.encrypt(user.getEmail()));
-            user.setPhoneNo(aesEncryptionUtil.encrypt(user.getPhoneNo()));
-            user.setmPhoneNo(aesEncryptionUtil.encrypt(user.getmPhoneNo()));
-            user.setAddress(aesEncryptionUtil.encrypt(user.getAddress()));
-        } catch (Exception e) {
-            throw new RuntimeException("개인정보 암호화 실패", e);
-        }
-        return user;
-    }
-
-    private User decryptUser(User user) {
-        AESEncryptionUtil aesEncryptionUtil = new AESEncryptionUtil();
-
-        try {
-            user.setEmail(aesEncryptionUtil.decrypt(user.getEmail()));
-            user.setPhoneNo(aesEncryptionUtil.decrypt(user.getPhoneNo()));
-            user.setmPhoneNo(aesEncryptionUtil.decrypt(user.getmPhoneNo()));
-            user.setAddress(aesEncryptionUtil.decrypt(user.getAddress()));
-        } catch (Exception e) {
-            throw new RuntimeException("개인정보 복호화 실패", e);
-        }
-
-        return user;
-    }
 
     @Override
     public void addUserRoles(Long userId, Set<String> roles) {
