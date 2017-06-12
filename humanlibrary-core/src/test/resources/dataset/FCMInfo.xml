@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataset>
+    <FCM_INFOS
+            DEVICE_ID = "1234"
+            TOKEN = "abcd"
+            PLATFORM = "ANDROID"
+            USER_ID = "1"
+            TYPE = "3"
+            VERSION = "1.0"
+            SID = "1234567890"
+    />
+    <FCM_INFOS
+            DEVICE_ID = "abcd"
+            TOKEN = "kkkkkkk"
+            PLATFORM = "IOS"
+            USER_ID = "2"
+            TYPE = "3"
+            VERSION = "1.0"
+            SID = "0987654321"
+    />
+</dataset>
