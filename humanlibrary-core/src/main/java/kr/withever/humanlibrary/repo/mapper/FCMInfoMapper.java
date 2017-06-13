@@ -19,7 +19,7 @@ public interface FCMInfoMapper {
 
     FCMInfo selectFCMInfoByDeviceId(String deviceId);
 
-    int updateFCMInfo(FCMInfo gcmInfo);
+    int updateFCMInfo(FCMInfo fcmInfo);
 
     int deleteFCMInfoByUserId(Long userId);
 
