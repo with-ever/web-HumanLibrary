@@ -10,7 +10,7 @@
     </div>
     <!-- /.row -->
     <div class="row">
-        <div class="col-lg-6">
+        <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
                 	LIST
@@ -21,9 +21,10 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>CATEGORY</th>
-                                <th>DESC</th>
+                                <th class="col-lg-5">CATEGORY</th>
+                                <th class="col-lg-4">DESC</th>
                                 <th>PARENT</th>
+                                <th>-</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -37,6 +38,10 @@
 	                                <td>${category.categoryName}</td>
 	                                <td>${category.desc}</td>
 	                                <td>${category.parentCategoryId}</td>
+	                                <td>
+	             					    <button type="button" class="btn btn-success">수정</button>
+					                    <button type="button" class="btn btn-danger">삭제</button>
+	                                </td>
 	                            </tr>
                             </c:forEach>
                             </tbody>
@@ -69,45 +74,15 @@
                     </div>
                 </div>
                 <!-- /.panel-body -->
+                <!-- @TODO paging fragment로 재구성 필요.-->
+                <div class="panel-footer text-right">
+                    <a href="${ctx}/categories/new">
+                        <button type="button" class="btn btn-default">등록하기</button>
+                    </a>
+                </div>
             </div>
             <!-- /.panel -->
         </div>
-        <!-- /.col-lg-6 -->
-        <div class="col-lg-6">
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    CATEGORY FORM
-                </div>
-                <div class="panel-body">
-	                <form role="form">
-	                    <div class="form-group">
-	                        <label>CATEGORY NAME (eng)</label>
-	                        <input class="form-control">
-	                        <p class="help-block">Example block-level help text here.</p>
-	                    </div>
-	                    <div class="form-group">
-	                        <label>CATEGORY DESC (kor)</label>
-	                        <input class="form-control" placeholder="Enter text">
-	                    </div>
-	                    <div class="form-group">
-	                        <label>Parent Category</label>
-	                        <select class="form-control">
-	                            <option>1</option>
-	                            <option>2</option>
-	                            <option>3</option>
-	                            <option>4</option>
-	                            <option>5</option>
-	                        </select>
-	                    </div>
-	                    <button type="submit" class="btn btn-default">저장</button>
-	                    <button type="reset" class="btn btn-default">초기화</button>
-	                </form>
-                </div>
-                <!-- /.panel-body -->
-            </div>
-            <!-- /.panel -->
-        </div>
-        <!-- /.col-lg-6 -->
     </div>
     <!-- /.row -->
 </body>

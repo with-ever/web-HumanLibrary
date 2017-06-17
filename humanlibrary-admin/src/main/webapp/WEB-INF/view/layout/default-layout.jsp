@@ -92,10 +92,10 @@
                             <a href="${ctx}/user"><i class="fa fa-user fa-fw"></i> 사용자</a>
                         </li>
                         <li>
-                        	<a href="${ctx}/humanbook"><i class="fa fa-book fa-fw"></i> 휴먼북</a>
+                        	<a href="${ctx}/humanbooks"><i class="fa fa-book fa-fw"></i> 휴먼북</a>
                         </li>
                         <li>
-                        	<a href="${ctx}/category"><i class="fa fa-th-list fa-fw"></i> 카테고리</a>
+                        	<a href="${ctx}/categories"><i class="fa fa-th-list fa-fw"></i> 카테고리</a>
                         </li>
                         <li>
                         	<a href="${ctx}/board"><i class="fa fa-newspaper-o fa-fw"></i> 게시판</a>
