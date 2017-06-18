@@ -5,6 +5,7 @@ import kr.withever.humanlibrary.domain.user.User;
 import kr.withever.humanlibrary.domain.user.UserSearch;
 import kr.withever.humanlibrary.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,12 +26,24 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private PasswordEncoder encoder;
+
     @RequestMapping(value = "/new", method = RequestMethod.GET)
     public ModelAndView showCreateUserForm() {
         ModelAndView mav = new ModelAndView();
         mav.setViewName("/user/new");
         mav.addObject("roles", RoleType.values());
         return mav;
+    }
+
+    @RequestMapping(method = RequestMethod.POST)
+    public ModelAndView createUser(
+            User user
+    ) {
+        user.setPassword(encoder.encode(user.getPassword()));
+        Long userId = this.userService.createUser(user);
+        return new ModelAndView("redirect:/user/" + userId);
     }
 
     @RequestMapping(method = RequestMethod.GET)

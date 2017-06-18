@@ -48,4 +48,24 @@ public class WebViewController {
         return mav;
     }
 
+    @RequestMapping(value = "/policy/privacy", method = RequestMethod.GET)
+    public ModelAndView showPrivacyPage() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("/webview/policy/privacy");
+        return mav;
+    }
+
+    @RequestMapping(value = "/policy/terms", method = RequestMethod.GET)
+    public ModelAndView showTermsPage() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("/webview/policy/terms");
+        return mav;
+    }
+
+    @RequestMapping(value = "/policy/information", method = RequestMethod.GET)
+    public ModelAndView showInformationPage() {
+        ModelAndView mav = new ModelAndView();
+        mav.setViewName("/webview/policy/information");
+        return mav;
+    }
 }
