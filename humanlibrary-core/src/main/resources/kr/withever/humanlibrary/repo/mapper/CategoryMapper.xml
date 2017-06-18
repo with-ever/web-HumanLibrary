@@ -21,7 +21,7 @@
 			,IMAGE_URL
 		)
 		VALUES(
-			#{id}
+			DEFAULT
 			,#{categoryName}
 			,#{desc}
 			,#{parentCategoryId}

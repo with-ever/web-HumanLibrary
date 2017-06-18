@@ -1,6 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
+<head>
+	<script src="${ctx}/resources/js/humanlib/category-new.js"></script>
+</head>
 <body>
     <div class="row">
         <div class="col-lg-12">
@@ -24,13 +27,13 @@
                                 <th class="col-lg-5">CATEGORY</th>
                                 <th class="col-lg-4">DESC</th>
                                 <th>PARENT</th>
-                                <th>-</th>
+                                <th>삭제</th>
                             </tr>
                             </thead>
                             <tbody>
                             <c:forEach var="category" items="${searchModel.results}">
 	                            <tr>
-	                                <td>
+	                                <td class="currentCategoryId">
                                         <a href="${ctx}/categories/${category.id}">
                                             ${category.id}
                                         </a>
@@ -39,8 +42,7 @@
 	                                <td>${category.desc}</td>
 	                                <td>${category.parentCategoryId}</td>
 	                                <td>
-	             					    <button type="button" class="btn btn-success">수정</button>
-					                    <button type="button" class="btn btn-danger">삭제</button>
+					                    <button type="button" class="btn btn-danger" id="${category.id}">삭제</button>
 	                                </td>
 	                            </tr>
                             </c:forEach>
@@ -58,7 +60,7 @@
                             <c:forEach var="pageNo" begin="${searchModel.navigateStartPage}" end="${searchModel.navigateStartPage + searchModel.navigatePageCount - 1}" varStatus="s">
                                 <c:choose>
                                     <c:when test="${pageNo == searchModel.pageNo}">
-                                        <li class="active"><a href="catgories?pageNo=${pageNo}">${pageNo}</a></li>
+                                        <li class="active"><a href="categories?pageNo=${pageNo}">${pageNo}</a></li>
                                     </c:when>
                                     <c:otherwise>
                                         <li><a href="categories?pageNo=${pageNo}">${pageNo}</a></li>
