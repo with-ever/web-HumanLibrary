@@ -3,6 +3,7 @@
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <head>
     <script src="${ctx}/resources/js/jquery.validate.js"></script>
+    <script src="${ctx}/resources/js/messages_ko.js"></script>
     <script src="${ctx}/resources/js/humanlib/user-new.js"></script>
 </head>
 <body>
@@ -22,7 +23,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <form>
+                            <form action="${ctx}/user" method="post" class="js-form">
                                 <div class="form-group">
                                     <label>로그인 아이디</label>
                                     <div class="form-group input-group">
@@ -30,6 +31,19 @@
                                         <span class="input-group-btn">
                                             <button class="btn btn-default" type="button" onclick="userNew.verifyLoginId();">중복체크</button>
                                         </span>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label>비밀번호</label>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" placeholder="비밀번호" name="password" id="password">
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label>비밀번호 확인</label>
+                                    <div class="form-group">
+                                        <input type="password" class="form-control" placeholder="비밀번호 확인" name="repassword">
                                     </div>
                                 </div>
                                 <div class="form-group">
@@ -54,11 +68,11 @@
                                     <label>성별</label>
                                     <div class="input-group">
                                         <label class="radio-inline">
-                                            <input type="radio" name="gender" value="male" checked>
+                                            <input type="radio" name="gender" value="MALE" checked>
                                             남자
                                         </label>
                                         <label class="radio-inline">
-                                            <input type="radio" name="gender" value="female">
+                                            <input type="radio" name="gender" value="FEMALE">
                                             여자
                                         </label>
                                     </div>
@@ -115,7 +129,7 @@
                                     <input type="file" name="imageUrl">
                                 </div>
                                 <div class="form-group text-right">
-                                    <button type="button" class="btn btn-default js-submit">등록하기</button>
+                                    <button type="submit" class="btn btn-default js-submit">등록하기</button>
                                     <a href="${ctx}/user">
                                         <button type="button" class="btn btn-default">취소</button>
                                     </a>
