@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <body>
 	<div class="row">
@@ -16,14 +17,13 @@
 			<div class="panel-body">
 
 
-				<form class="form-inline">
+				<form class="form-inline" method="GET">
 					<div class="form-group center-block">
-						<select style="width: 50px">
-							<option>제목</option>
-							<option>작성자</option>
-							<option>등록일</option>
-						</select> <input type="text" class="form-control"> <span>
-							<button class="btn btn-default" type="button">
+						<select style="width: 50px" name="searchOption">
+							<option value="subject">제목</option>
+							<option value="contents">내용</option>
+						</select> <input type="text" class="form-control" name="keyword"> <span>
+							<button class="btn btn-default" type="submit">
 								<i class="fa fa-search"></i>
 							</button>
 						</span>
@@ -42,13 +42,13 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="board" items="${searchModel.results}">
+							<c:forEach var="board" items="${searchModel.results}" varStatus="status">
 								<tr>
-									<td>1</td>
+									<td>${(searchModel.totalCount - status.index) - ( (searchModel.pageNo-1) * (searchModel.limit))}</td>
 									<td><a href="${ctx}/board/${board.id}">
 											${board.subject} </a></td>
-									<td>${board.userId}</td>
-									<td>${board.createTime}</td>
+									<td>${board.userLoginId}</td>
+									<td>${board.cvtCreateTime}</td>
 									<td>${board.views}</td>
 								</tr>
 							</c:forEach>

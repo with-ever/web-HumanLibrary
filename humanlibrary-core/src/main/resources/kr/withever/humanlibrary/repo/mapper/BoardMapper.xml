@@ -100,8 +100,8 @@
         ,URL
         FROM BOARD
         WHERE 1 = 1
-            <if test="type != null and type != ''">
-                AND TYPE LIKE CONCAT('%', #{type}, '%')
+            <if test="userIdList != null and userIdList != ''">
+                AND USER_ID LIKE CONCAT('%', #{userIdList}, '%')
             </if>
             <if test="subject != null and subject != ''">
                 AND SUBJECT LIKE CONCAT('%', #{subject}, '%')
@@ -117,8 +117,8 @@
             COUNT(1)
         FROM BOARD
         WHERE 1 = 1
-            <if test="type != null and type != ''">
-                AND TYPE LIKE CONCAT('%', #{type}, '%')
+            <if test="userIdList != null and userIdList != ''">
+                AND TYPE LIKE CONCAT('%', #{userIdList}, '%')
             </if>
             <if test="subject != null and subject != ''">
                 AND SUBJECT LIKE CONCAT('%', #{subject}, '%')

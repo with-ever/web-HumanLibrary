@@ -27,7 +27,7 @@
                             </div>
                             <div class="form-group">
                                 <label>제목</label>
-                                 <input class="form-control" placeholder="제목" name="subject" value="${board.subject}">
+                                 <input class="form-control" placeholder="제목" type="text" name="subject" value="${board.subject}" disabled>
                             </div>
                             <div class="form-group">
                                 <label>타입</label>

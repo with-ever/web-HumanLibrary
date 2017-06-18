@@ -18,7 +18,8 @@
             <div class="panel-body">
                 <div class="row">
                     <div class="col-lg-12">
-                        <form>                 
+                        <form action="/board/new/create" method="post" enctype="multipart/form-data">
+
                             <div class="form-group">
                                 <label>작성자</label>
                                 <p class="form-group-static">
@@ -31,13 +32,13 @@
                             <div class="form-group">
                                 <label>타입</label>
                                     <label class="checkbox-inline">
-                                        <input type="radio" name="TYPE" value="MP" checked>주요프로그램 
+                                        <input type="radio" name="type" value="MP" checked>주요프로그램 
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="radio" name="TYPE" value="PT">게시물
+                                        <input type="radio" name="type" value="PT">게시물
                                     </label>
                                     <label class="checkbox-inline">
-                                        <input type="radio" name="TYPE" value="NT">공지사항
+                                        <input type="radio" name="type" value="NT">공지사항
                                     </label>
                             </div>
                             
@@ -50,7 +51,7 @@
                                          	<input type="file" name="imageUrl">
                             </div>
 							<div class="form-group text-right">
-                                <button type="button" class="btn btn-primary js-submit">등록하기</button>
+                                <button type="submit" class="btn btn-primary js-submit">등록하기</button>
                                 <a href="${ctx}/board">
                                     <button type="button" class="btn btn-danger">취소</button>
                                 </a>

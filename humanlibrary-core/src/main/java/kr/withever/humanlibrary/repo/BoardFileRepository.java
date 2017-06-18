@@ -1,5 +1,7 @@
 package kr.withever.humanlibrary.repo;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import kr.withever.humanlibrary.domain.board.BoardFile;
@@ -15,9 +17,9 @@ public class BoardFileRepository {
 	@Autowired
 	private BoardFileMapper boardFileMapper;
 
-	public BoardFile retrieveBoardFile(Long id) {
-		BoardFile boardFile = this.boardFileMapper.selectBoardFile(id);
-		return boardFile;
+	public List<BoardFile> retrieveBoardFile(BoardFile boardFile) {
+		List<BoardFile> boardFileList = this.boardFileMapper.selectBoardFile(boardFile);
+		return boardFileList;
 
 	}
 

@@ -135,6 +135,28 @@
         FROM USERS
         WHERE LOGIN_ID = #{loginId}
     </select>
+    
+    <select id="selectUserByBoardSearch" parameterType="User" resultMap="userResultMap">
+        SELECT
+            USER_ID
+            ,LOGIN_ID
+            ,NAME
+            ,EMAIL
+            ,GENDER
+            ,PHONE_NO
+            ,M_PHONE_NO
+            ,BIRTH
+            ,ZIP_CODE
+            ,ADDRESS
+            ,IMAGE_URL
+            ,CREATE_TIME
+            ,UPDATE_TIME
+        FROM USERS
+         WHERE 1 = 1
+          <if test="loginId != null and loginId != ''">
+                AND LOGIN_ID LIKE CONCAT('%', #{loginId}, '%')
+            </if>
+    </select>
 
     <select id="selectUsersBySearch" parameterType="UserSearch" resultMap="userResultMap">
         SELECT

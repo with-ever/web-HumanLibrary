@@ -9,6 +9,8 @@ import kr.withever.humanlibrary.repo.BoardFileRepository;
 import kr.withever.humanlibrary.repo.BoardRepository;
 import kr.withever.humanlibrary.service.BoardService;
 
+import java.io.File;
+import java.io.OutputStream;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,6 +33,10 @@ public class BoardServiceImpl implements BoardService {
 	public Board retrieveBoard(Long id) {
 		return this.boardRepository.retrieveBoard(id);
 	}
+	
+	public List<BoardFile> retrieveBoardFile(BoardFile boardFile) {
+		return this.boardFileRepository.retrieveBoardFile(boardFile);
+	}	
 
 	@Override
 	public void createBoard(Board board) {

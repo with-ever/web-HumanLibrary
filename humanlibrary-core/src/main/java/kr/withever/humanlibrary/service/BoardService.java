@@ -15,6 +15,8 @@ import kr.withever.humanlibrary.domain.board.BoardSearch;
 public interface BoardService {
 
     Board retrieveBoard(Long id);
+    
+    List<BoardFile> retrieveBoardFile(BoardFile boardFile);
 
     void createBoard(Board board);
 

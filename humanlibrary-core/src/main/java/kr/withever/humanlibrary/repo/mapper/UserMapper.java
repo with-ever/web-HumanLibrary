@@ -25,6 +25,8 @@ public interface UserMapper {
     User selectUserByLoginId(String loginId);
 
     User selectUserByLoginIdWithoutPassword(String loginId);
+    
+    List<User> selectUserByBoardSearch(User user);
 
     List<User> selectUsersBySearch(UserSearch search);
 

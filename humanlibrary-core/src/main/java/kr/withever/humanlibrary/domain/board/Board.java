@@ -12,8 +12,12 @@ public class Board {
     private Long id;
 
 	private Long userId;
+	
+	private String userLoginId;
 
     private String type;
+    
+    private String cvtType;
 
     private String subject;
 
@@ -22,10 +26,12 @@ public class Board {
     private int views;
 
 	private Long createTime;
+	
+	private String cvtCreateTime;
 
 	private Long updateTime;
 			    
-    private List<BoardFile> BoardFileList;
+    private List<BoardFile> boardFileList;
     
     private String url;
     
@@ -50,6 +56,14 @@ public class Board {
 	public void setUserId(Long userId) {
 		this.userId = userId;
 	}
+	
+	public String getUserLoginId() {
+		return userLoginId;
+	}
+
+	public void setUserLoginId(String userLoginId) {
+		this.userLoginId = userLoginId;
+	}
 
 	public String getType() {
 		return type;
@@ -57,6 +71,14 @@ public class Board {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public String getCvtType() {
+		return cvtType;
+	}
+
+	public void setCvtType(String cvtType) {
+		this.cvtType = cvtType;
 	}
 
 	public String getSubject() {
@@ -91,6 +113,14 @@ public class Board {
 		this.createTime = createTime;
 	}
 
+	public String getCvtCreateTime() {
+		return cvtCreateTime;
+	}
+
+	public void setCvtCreateTime(String cvtCreateTime) {
+		this.cvtCreateTime = cvtCreateTime;
+	}
+
 	public Long getUpdateTime() {
 		return updateTime;
 	}
@@ -99,12 +129,13 @@ public class Board {
 		this.updateTime = updateTime;
 	}
 	
+
 	public List<BoardFile> getBoardFileList() {
-		return BoardFileList;
+		return boardFileList;
 	}
 
 	public void setBoardFileList(List<BoardFile> boardFileList) {
-		BoardFileList = boardFileList;
+		this.boardFileList = boardFileList;
 	}
 
 	public String getUrl() {
