@@ -35,7 +35,7 @@ public class BoardRepository {
 		Board board = this.boardMapper.selectBoard(id);
 		BoardFile boardFile = new BoardFile();
 		boardFile.setBoardId(id);
-		board.setBoardFileList(this.boardFileMapper.selectBoardFile(boardFile));
+		board.setBoardFileList(this.boardFileMapper.selectBoardFiles(boardFile));
 		String dataFormat = "yyy-MM-dd HH:mm:ss";
 		SimpleDateFormat f = new SimpleDateFormat(dataFormat);
 

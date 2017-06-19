@@ -27,8 +27,19 @@
         ,#{boardId}
         )
     </insert>
+
+    <select id="selectBoardFile" parameterType="Long" resultMap="boardFileResultMap">
+        SELECT
+        ID
+        ,FILE_NAME
+        ,RELATIVE_PATH
+        ,SUFFIX
+        ,BOARD_ID
+        FROM BOARD_FILE
+        WHERE BOARD_ID = #{boardId}
+    </select>
     
-      <select id="selectBoardFile" parameterType="BoardFile" resultMap="boardFileResultMap">
+    <select id="selectBoardFiles" parameterType="BoardFile" resultMap="boardFileResultMap">
         SELECT
          ID
         ,FILE_NAME

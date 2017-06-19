@@ -14,8 +14,10 @@ import org.apache.ibatis.annotations.Param;
 public interface BoardFileMapper {
 
     int insertBoardFile(BoardFile boardFile);
+
+    BoardFile selectBoardFile(Long boardId);
     
-    List<BoardFile> selectBoardFile(BoardFile boardFile);
+    List<BoardFile> selectBoardFiles(BoardFile boardFile);
 
     int updateBoardFile(BoardFile boardFile);
 

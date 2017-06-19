@@ -18,7 +18,7 @@ public class BoardFileRepository {
 	private BoardFileMapper boardFileMapper;
 
 	public List<BoardFile> retrieveBoardFile(BoardFile boardFile) {
-		List<BoardFile> boardFileList = this.boardFileMapper.selectBoardFile(boardFile);
+		List<BoardFile> boardFileList = this.boardFileMapper.selectBoardFiles(boardFile);
 		return boardFileList;
 
 	}
