@@ -1,5 +1,7 @@
-$(function() {	
+$(function() {
+	
 	$("#addFile").on("click", function(e) { // 파일 추가 버튼
+		alert("파일 수정시 기존 첨부파일은 삭제됩니다.");
 		e.preventDefault();
 		fn_addFile();
 	});

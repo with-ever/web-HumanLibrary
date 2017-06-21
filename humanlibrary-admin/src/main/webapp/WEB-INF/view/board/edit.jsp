@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <head>
-<script src="${ctx}/resources/js/humanlib/board-new.js"></script>
+<script src="${ctx}/resources/js/humanlib/board-edit.js"></script>
 </head>
 <body>
 	<div class="row">
@@ -48,7 +48,7 @@
 									<label>첨부파일</label>
 
 								</div>
-								<a href="#this" class="btn btn btn-info btn-xs fileEdit" id="addFile">파일 수정</a>
+								<a href="#this" class="btn btn btn-info btn-xs" id="addFile">파일 수정</a>
 								<div class="form-group text-right">
 									<button type="submit" class="btn btn-primary js-submit">수정하기</button>
 									<a href="${ctx}/board">
