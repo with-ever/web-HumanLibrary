@@ -61,6 +61,10 @@ public class BoardRepository {
 		return board;
 
 	}
+	
+	public Long retrieveBoardId(){
+	  return this.boardMapper.selectBoardId();	
+	}
 
 	public void createBoard(Board board) {
 		this.boardMapper.insertBoard(board);

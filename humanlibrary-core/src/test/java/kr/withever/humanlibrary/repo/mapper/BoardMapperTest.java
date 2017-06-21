@@ -78,4 +78,11 @@ public class BoardMapperTest extends WitheverDbUnitTestConfig {
 	        int count = this.boardMapper.selectBoardTotalCountBySearch(search);
 	        assertEquals(2, count);
 	    }
+	    
+	    @Test
+	    public void selectBoardId() throws Exception {
+	    	Board board = new Board();
+			board.setId(1L);;
+	    	this.boardMapper.selectBoard(board.getId());
+	    }
 }
