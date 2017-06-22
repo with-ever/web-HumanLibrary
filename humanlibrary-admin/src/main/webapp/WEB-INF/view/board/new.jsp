@@ -1,6 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
+<head>
+	<script src="${ctx}/resources/js/humanlib/board-new.js"></script>
+</head>
 <body>
 <div class="row">
     <div class="col-lg-12">
@@ -44,12 +47,15 @@
                             
                             <div class="form-group">
                                 <label>내용</label>
-                                <input class="form-control" placeholder="내용" name="contents" >
+                                <textarea class="form-control" cols="10" rows="10" placeholder="내용" name="contents"></textarea>
                             </div>
-                            <div class="form-group">
+                            <div id ="fileDiv" class="form-group">
                                 <label>첨부파일</label>
-                                         	<input type="file" name="imageUrl">
+                                         	<p><input type="file" name="image" style="display:inline"><a href="#this" class="btn btn-danger btn-xs" name="delete">삭제</a></p>
+                                         	
                             </div>
+                            <a href="#this" class="btn btn btn-info btn-xs" id="addFile">파일 추가</a>
+                            
 							<div class="form-group text-right">
                                 <button type="submit" class="btn btn-primary js-submit">등록하기</button>
                                 <a href="${ctx}/board">

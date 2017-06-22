@@ -44,7 +44,8 @@
 						<tbody>
 							<c:forEach var="board" items="${searchModel.results}" varStatus="status">
 								<tr>
-									<td>${(searchModel.totalCount - status.index) - ( (searchModel.pageNo-1) * (searchModel.limit))}</td>
+									<%-- <td>${(searchModel.totalCount - status.index) - ( (searchModel.pageNo-1) * (searchModel.limit))}</td> --%>
+									<td>${board.id}</td>
 									<td><a href="${ctx}/board/${board.id}">
 											${board.subject} </a></td>
 									<td>${board.userLoginId}</td>

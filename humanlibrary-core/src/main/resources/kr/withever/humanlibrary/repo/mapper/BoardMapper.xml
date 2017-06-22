@@ -55,6 +55,12 @@
         FROM BOARD
         WHERE ID = #{id}
     </select>
+    
+    <select id="selectBoardId" resultType="Long">
+        SELECT
+         MAX(id) AS ID
+        FROM BOARD
+    </select>
 
     <update id="updateBoard" parameterType="Board">
         UPDATE BOARD
@@ -76,6 +82,12 @@
         </if>
         <if test='userId != null and userId != ""'>
         USER_ID = #{userId}
+        </if>
+        <if test='createTime != null and createTime != ""'>
+        CREATE_TIME = #{createTime}
+        </if>
+        <if test='url != null and url != ""'>
+        URL = #{url}
         </if>
         </set>
         WHERE ID = #{id}
@@ -109,6 +121,7 @@
             <if test="contents != null and contents != ''">
                 AND CONTENTS LIKE CONCAT('%', #{contents}, '%')
             </if>
+        ORDER BY ID DESC
         LIMIT #{offset}, #{limit}
     </select>
 
