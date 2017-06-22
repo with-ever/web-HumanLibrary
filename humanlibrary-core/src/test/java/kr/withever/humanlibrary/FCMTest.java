@@ -21,7 +21,9 @@ public class FCMTest {
     @Test
     @Ignore
     public void sendMessage() throws IOException {
-        FCMUtil.sendMessage(TEST_TOKEN_ID, new FCMNotification("title test","message test"), FCMData.contract("5"));
+//        FCMNotification notification = new FCMNotification("title test","message test");
+        FCMNotification notification = new FCMNotification("message test");
+        FCMUtil.sendMessage(TEST_TOKEN_ID, notification, FCMData.contract("5"));
     }
 
     @Test

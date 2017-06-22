@@ -1,13 +1,19 @@
 package kr.withever.humanlibrary.api.controller;
 
 import io.swagger.annotations.ApiParam;
+import kr.withever.humanlibrary.domain.common.client.FCMData;
+import kr.withever.humanlibrary.domain.common.client.FCMInfo;
+import kr.withever.humanlibrary.domain.common.client.FCMNotification;
 import kr.withever.humanlibrary.domain.contract.Contract;
 import kr.withever.humanlibrary.domain.contract.ContractSearch;
 import kr.withever.humanlibrary.service.ContractService;
+import kr.withever.humanlibrary.service.FCMInfoService;
+import kr.withever.humanlibrary.util.FCMUtil;
 import kr.withever.humanlibrary.util.HumanLibraryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
 import java.util.Map;
 
 /**
@@ -21,11 +27,19 @@ public class ContractController {
     @Autowired
     private ContractService contractService;
 
+    @Autowired
+    private FCMInfoService fcmInfoService;
+
     @RequestMapping(method = RequestMethod.POST)
     public HumanLibraryResponse createContract(
             @RequestBody Contract contract
-    ) {
-        return new HumanLibraryResponse(this.contractService.createContract(contract));
+    ) throws IOException {
+        Long contractId = this.contractService.createContract(contract);
+        // 구독자가 구독 신청을 한 경우 휴먼북에게 푸시메시지 보내기.
+        Contract createdContract = this.contractService.retrieveContract(contractId);
+        FCMInfo fcmInfo = fcmInfoService.retrieveFCMInfoByUserId(createdContract.getHumanbook().getUser().getUserId());
+        FCMUtil.sendMessage(fcmInfo.getToken(), FCMNotification.requestHumanbook(createdContract.getUser().getName()), FCMData.contract(String.valueOf(contractId)));
+        return new HumanLibraryResponse(contractId);
     }
 
     @RequestMapping(value = "/{contractId}", method = RequestMethod.GET)
@@ -63,8 +77,12 @@ public class ContractController {
     public HumanLibraryResponse acceptContract(
             @PathVariable(value = "contractId") Long contractId,
             @PathVariable(value = "contractTimeId") Long contractTimeId
-    ) {
+    ) throws IOException {
         this.contractService.acceptContract(contractId, contractTimeId);
+        // 휴먼북이 구독 신청 수락을 한 경우 구독자에게 푸시메시지 보내기.
+        Contract contract = this.contractService.retrieveContract(contractId);
+        FCMInfo fcmInfo = fcmInfoService.retrieveFCMInfoByUserId(contract.getUser().getUserId());
+        FCMUtil.sendMessage(fcmInfo.getToken(), FCMNotification.acceptHumanbook(contract.getHumanbook().getUser().getName()), FCMData.contract(String.valueOf(contractId)));
         return HumanLibraryResponse.successMessage();
     }
 
@@ -72,9 +90,13 @@ public class ContractController {
     public HumanLibraryResponse rejectContract(
             @PathVariable(value = "contractId") Long contractId
             ,@ApiParam(name = "rejectMsg", value = "reject message", required = true) @RequestBody Map<String, Object> requestMap
-    ) {
+    ) throws IOException {
     	String rejectMsg = (String) requestMap.get("rejectMsg");
         this.contractService.rejectContract(contractId, rejectMsg);
+        // 휴먼북이 구독 신청 거절을 한 경우 구독자에게 푸시메시지 보내기.
+        Contract contract = this.contractService.retrieveContract(contractId);
+        FCMInfo fcmInfo = fcmInfoService.retrieveFCMInfoByUserId(contract.getUser().getUserId());
+        FCMUtil.sendMessage(fcmInfo.getToken(), FCMNotification.rejectHumanbook(contract.getHumanbook().getUser().getName()), FCMData.contract(String.valueOf(contractId)));
         return HumanLibraryResponse.successMessage();
     }
 
