@@ -1,11 +1,20 @@
 package kr.withever.humanlibrary.api.controller;
 
+import kr.withever.humanlibrary.domain.common.client.FCMData;
+import kr.withever.humanlibrary.domain.common.client.FCMInfo;
+import kr.withever.humanlibrary.domain.common.client.FCMNotification;
+import kr.withever.humanlibrary.domain.contract.Contract;
 import kr.withever.humanlibrary.domain.humanbook.Humanbook;
 import kr.withever.humanlibrary.domain.humanbook.HumanbookSearch;
+import kr.withever.humanlibrary.service.FCMInfoService;
 import kr.withever.humanlibrary.service.HumanbookService;
+import kr.withever.humanlibrary.util.FCMUtil;
 import kr.withever.humanlibrary.util.HumanLibraryResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import java.io.IOException;
+
 /**
  * Created by youngjinkim on 2017. 3. 6..
  */
@@ -16,6 +25,9 @@ public class HumanbookController {
 	
 	@Autowired
 	private HumanbookService humanbookService;
+
+	@Autowired
+    private FCMInfoService fcmInfoService;
 	
 	@RequestMapping(method = RequestMethod.POST)
 	public HumanLibraryResponse createHumanbook(
@@ -71,8 +83,12 @@ public class HumanbookController {
     @RequestMapping(value = "/{hbId}/accept", method = RequestMethod.PUT)
     public HumanLibraryResponse acceptHumanbook(
     		@PathVariable(value = "hbId") Long hbId
-    ){
+    ) throws IOException {
     	this.humanbookService.acceptHumanbookRegister(hbId);
+		// 휴먼북 심사 완료시 휴먼북에게 푸시메시지 보내기.
+        Humanbook humanbook = this.humanbookService.retrieveHumanbook(hbId);
+		FCMInfo fcmInfo = fcmInfoService.retrieveFCMInfoByUserId(humanbook.getUser().getUserId());
+		FCMUtil.sendMessage(fcmInfo.getToken(), FCMNotification.completeHumanbook(), FCMData.setting());
     	return HumanLibraryResponse.successMessage();
     }
     

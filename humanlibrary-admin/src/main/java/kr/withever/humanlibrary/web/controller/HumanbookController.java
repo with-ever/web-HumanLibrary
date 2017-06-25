@@ -7,6 +7,10 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import kr.withever.humanlibrary.domain.common.client.FCMData;
+import kr.withever.humanlibrary.domain.common.client.FCMInfo;
+import kr.withever.humanlibrary.domain.common.client.FCMNotification;
+import kr.withever.humanlibrary.util.FCMUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -27,6 +31,11 @@ import kr.withever.humanlibrary.service.UserService;
 @RestController
 @RequestMapping(value = "/humanbooks")
 public class HumanbookController {
+	// @TODO 휴먼북 심사 완료(휴먼북 수락) 했을 경우 푸시메시지 보내줘야함.
+	//	Humanbook humanbook = this.humanbookService.retrieveHumanbook(hbId);
+	//	FCMInfo fcmInfo = fcmInfoService.retrieveFCMInfoByUserId(humanbook.getUser().getUserId());
+	//	FCMUtil.sendMessage(fcmInfo.getToken(), FCMNotification.completeHumanbook(), FCMData.setting());
+
 
 	@Autowired
 	private CategoryService categoryService;

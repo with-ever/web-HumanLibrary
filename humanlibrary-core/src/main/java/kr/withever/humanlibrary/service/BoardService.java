@@ -25,4 +25,6 @@ public interface BoardService {
 	void removeBoard(Long id);
 
 	BoardSearch retrieveBoardBySearch(BoardSearch search);
+
+	Long retrieveBoardId();
 }

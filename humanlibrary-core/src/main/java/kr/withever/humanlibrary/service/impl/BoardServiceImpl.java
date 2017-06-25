@@ -34,6 +34,11 @@ public class BoardServiceImpl implements BoardService {
 		return this.boardRepository.retrieveBoard(id);
 	}
 	
+	@Override
+	public Long retrieveBoardId() {
+		return this.boardRepository.retrieveBoardId();
+	}
+	
 	public List<BoardFile> retrieveBoardFile(BoardFile boardFile) {
 		return this.boardFileRepository.retrieveBoardFile(boardFile);
 	}	
@@ -51,6 +56,17 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void modifyBoard(Board board) {
+		
+		if(board.getBoardFileList()!= null){
+			
+			this.boardFileRepository.removeBoardFile(board.getId());
+			
+			for (int i = 0; i < board.getBoardFileList().size(); i++) {
+				this.boardFileRepository.createBoardFile(board.getBoardFileList().get(i));
+			}
+			
+		}
+		
 		this.boardRepository.modifyBoard(board);
 	}
 

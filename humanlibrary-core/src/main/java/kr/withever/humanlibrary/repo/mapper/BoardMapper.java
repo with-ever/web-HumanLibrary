@@ -17,6 +17,8 @@ public interface BoardMapper {
     int insertBoard(Board board);
 
     Board selectBoard(Long id);
+    
+    Long selectBoardId();
 
     int updateBoard(Board board);
 

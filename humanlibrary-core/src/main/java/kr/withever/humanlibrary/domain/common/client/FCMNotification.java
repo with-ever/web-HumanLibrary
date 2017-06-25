@@ -7,6 +7,8 @@ import java.io.Serializable;
  */
 public class FCMNotification {
 
+    private static final String TITLE = "노원휴먼라이브러리";
+
     private static final String REQUEST_HUMANBOOK = "%s 구독자가 구독신청을 하였습니다. 가능한 일정을 선택해주세요.";
 
     private static final String ACCEPT_HUMANBOOK = "%s 휴먼북이 구독신청을 수락하셨습니다. 휴먼북 구독날짜를 확인해주세요.";
@@ -18,6 +20,11 @@ public class FCMNotification {
     private String title;
 
     private String body;
+
+    public FCMNotification(String body) {
+        this.title = TITLE;
+        this.body = body;
+    }
 
     public FCMNotification(String title, String body) {
         this.title = title;
@@ -41,18 +48,18 @@ public class FCMNotification {
     }
 
     public static FCMNotification requestHumanbook(String subscriberName) {
-        return new FCMNotification("휴먼라이브러리에서 알림이 왔습니다.", String.format(REQUEST_HUMANBOOK, subscriberName));
+        return new FCMNotification( String.format(REQUEST_HUMANBOOK, subscriberName));
     }
 
     public static FCMNotification acceptHumanbook(String humanbookName) {
-        return new FCMNotification("휴먼라이브러리에서 알림이 왔습니다.", String.format(ACCEPT_HUMANBOOK, humanbookName));
+        return new FCMNotification( String.format(ACCEPT_HUMANBOOK, humanbookName));
     }
 
     public static FCMNotification rejectHumanbook(String humanbookName) {
-        return new FCMNotification("휴먼라이브러리에서 알림이 왔습니다.", String.format(REJECT_HUMANBOOK, humanbookName));
+        return new FCMNotification( String.format(REJECT_HUMANBOOK, humanbookName));
     }
 
     public static FCMNotification completeHumanbook() {
-        return new FCMNotification("휴먼라이브러리에서 알림이 왔습니다.", COMPLETE_HUMANBOOK);
+        return new FCMNotification( COMPLETE_HUMANBOOK);
     }
 }

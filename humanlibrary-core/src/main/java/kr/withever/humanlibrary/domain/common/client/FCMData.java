@@ -1,7 +1,5 @@
 package kr.withever.humanlibrary.domain.common.client;
 
-import java.io.Serializable;
-
 /**
  * Created by youngjinkim on 2017. 6. 5..
  */
