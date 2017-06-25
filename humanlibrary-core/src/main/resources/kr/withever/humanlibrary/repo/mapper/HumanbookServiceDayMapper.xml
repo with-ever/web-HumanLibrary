@@ -31,7 +31,9 @@
     		HUMANBOOK_SERVICE_DAY_REL
     	WHERE
     		HUMANBOOK_ID = #{humanbookId}
-    	AND
-    		DAY = #{day}
+    	<if test="day != null">
+	    	AND 
+	    		DAY = #{day}
+    	</if>
     </delete>
 </mapper>

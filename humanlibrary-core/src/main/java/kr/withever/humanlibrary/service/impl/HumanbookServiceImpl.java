@@ -61,7 +61,9 @@ public class HumanbookServiceImpl implements HumanbookService {
 	@Override
 	public void modifyHumanbook(Humanbook humanbook){
 		// @TODO humanbook 수정 refactoring.
-		this.humanbookRepository.modifyHumanbook(humanbook);
+		Humanbook previousHumanbook = this.humanbookRepository.retrieveHumanbook(humanbook.getId());
+		previousHumanbook.setUpdatedHumanbook(humanbook);
+		this.humanbookRepository.modifyHumanbook(previousHumanbook);
 	}
 	
 	@Override

@@ -2,7 +2,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <head>
-	<script src="${ctx}/resources/js/humanlib/humanbook-new.js"></script>
+	<script src="${ctx}/resources/js/humanlib/humanbook-edit.js"></script>
 </head>
 <body>
     <div class="row">
@@ -15,17 +15,18 @@
 		<div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    등록
+                    수정
                 </div>
                 <div class="panel-body">
-	                <form role="form" action="${ctx}/humanbooks/new" method="POST">
+	                <form role="form" action="${ctx}/humanbooks/edit/${selectedHumanbook.id}" method="POST">
 	                	<div class="form-group">
 	                        <label>유저 ID</label>
-	                        <input class="form-control" name="userId">
+	                        <input class="form-control" name="userId" value="${selectedHumanbook.user.userId}">
 	                    </div>
   	                  	<div class="form-group">
-	                        <label>시간</label> <!-- 서브카테고리만 선택하도록 -->
-	                        <select class="form-control" name="serviceTime">
+	                        <label>시간</label>
+	                        <input id="originServiceTime" value="${selectedHumanbook.serviceTime}" hidden="hidden"/>
+	                        <select class="form-control" id="serviceTime" name="serviceTime">
 	                            <option>ALL</option>
 	                            <option>AM</option>
 	                            <option>PM</option>
@@ -33,59 +34,63 @@
 	                    </div>
 	                    <div class="form-group">
                             <label>날짜</label>
+                            <input id="originServiceDay" value="${selectedHumanbook.serviceDay}" hidden="hidden"/>
                             <div class="checkbox">
                                 <label>
-                                    <input type="checkbox" value="1">월
+                                    <input type="checkbox" name="serviceDay" value="MONDAY">월
                                 </label>
                                 <label>
-                                    <input type="checkbox" value="2">화
+                                    <input type="checkbox" name="serviceDay" value="TUESDAY">화
                                 </label>
                                 <label>
-                                    <input type="checkbox" value="3">수
+                                    <input type="checkbox" name="serviceDay" value="WEDNESDAY">수
                                 </label>
                                 <label>
-                                    <input type="checkbox" value="4">목
+                                    <input type="checkbox" name="serviceDay" value="THURSDAY">목
                                 </label>
                                 <label>
-                                    <input type="checkbox" value="5">금
+                                    <input type="checkbox" name="serviceDay" value="FRIDAY">금
                                 </label>
                                 <label>
-                                    <input type="checkbox" value="6">토
+                                    <input type="checkbox" name="serviceDay" value="SATURDAY">토
                                 </label>
                                 <label>
-                                    <input type="checkbox" value="7">일
+                                    <input type="checkbox" name="serviceDay" value="SUNDAY">일
                                 </label>
                             </div>
                         </div>
 	                    <div class="form-group">
                         	<label>이미지</label>
-                           	<input type="file" name="imgURL">
+                           	<input type="file" name="imageURL" value="${selectedHumanbook.imageUrl}">
                         </div>
 	                    <div class="form-group">
 	                        <label>상위 카테고리</label> 
 	                        <select class="form-control" id="parentCategory" name="parentCategory">
 	                        	<option value="0">선택</option>
 	                            <c:forEach var="category" items="${categoryList}">
-	                            		<option value="${category.id}">${category.desc}</option>
+	                            		<option value="${category.id}"
+	                            			<c:if test="${category.id eq selectedHumanbook.parentCategory.id}">selected="selected"</c:if> >
+			                            	${category.desc}</option>
 	                            </c:forEach>
 	                        </select>
 	                    </div>
 	                    <div class="form-group">
 	                        <label>하위 카테고리</label>
+	                        <input type="text" id="originSubCategoryId" value="${selectedHumanbook.subCategory.id}" hidden="hidden"/>  
 	                        <select class="form-control" id="subCategory" name="subCategory">
 	                        </select>
 	                    </div>
 	                    <div class="form-group">
 	                        <label>제목</label>
-	                        <input class="form-control" name="title">
+	                        <input class="form-control" name="title" value="${selectedHumanbook.title}">
 	                    </div>
 	                    <div class="form-group">
 	                        <label>경력</label>
-	                        <input class="form-control" name="mainCareer">
+	                        <input class="form-control" name="mainCareer" value="${selectedHumanbook.mainCareer}">
 	                    </div>
                         <div class="form-group">
                             <label>설명</label>
-                            <textarea class="form-control" rows="3" name="description"></textarea>
+                            <textarea class="form-control" rows="3" name="description">${selectedHumanbook.description}</textarea>
                         </div>
                          <div class="form-group text-right">
 	                        <button type="submit" class="btn btn-default js-submit">등록하기</button>

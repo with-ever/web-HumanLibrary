@@ -1,10 +1,13 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
+<head>
+	<script src="${ctx}/resources/js/humanlib/humanbook-list.js"></script>
+</head>
 <body>
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">HUMANBOOK</h1>
+            <h1 class="page-header">휴먼북관리</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -13,7 +16,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                	LIST
+                	목록
                 </div>
                 <div class="panel-body">
 	                <div class="table-responsive">
@@ -21,21 +24,13 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th>USER</th>
-                                <th class="col-lg-2">TITLE</th>
-                                <th class="col-lg-3">MAIN CAREER</th>
-                                <th>TIME</th>
-                                <th class="col-lg-2">CATEGORY</th>
-                                <th class="col-lg-2">DESC</th>
-                                <th>-</th>
-<!--                                 <th class="col-lg-1">ID</th>
-                                <th class="col-lg-1">USER ID</th>
-                                <th class="col-lg-2">TITLE</th>
-                                <th class="col-lg-2">MAIN CAREER</th>
-                                <th class="col-lg-1">SERVICE TIME</th>
-                                <th class="col-lg-2">CATEGORY</th>
-                                <th class="col-lg-1">DESC</th>
-                                <th class="col-lg-2">-</th> -->
+                                <th>유저ID</th>
+                                <th class="col-lg-2">제목</th>
+                                <th class="col-lg-3">경력</th>
+                                <th>시간</th>
+                                <th class="col-lg-2">카테고리</th>
+                                <th class="col-lg-2">설명</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -50,17 +45,19 @@
 	                                <td>${humanbook.title}</td>
 	                                <td>${humanbook.mainCareer}</td>
 	                                <td>${humanbook.serviceTime}</td>
-	                                <td>${(humanbook.subCategory).categoryName}</td>
+	                                <td>${(humanbook.subCategory).desc}</td>
 	                                <td>${humanbook.description}</td>
 	                                <td>
 		                                <c:choose>
 			                                <c:when test="${humanbook.state eq 'ACCEPT'}">
-				                                <button type="button" class="btn btn-success">수정</button>
-				                                <button type="button" class="btn btn-danger">삭제</button>
+				                                <button type="button" id="${humanbook.id}" class="btn btn-danger deleteHumanbook">삭제</button>
+			                                </c:when>
+			                                <c:when test="${humanbook.state eq 'REJECT'}">
+				                                <button type="button" id="${humanbook.id}" class="btn btn-success acceptHumanbook">수락</button>
 			                                </c:when>
 			                                <c:otherwise>
-				                                <button type="button" id="acceptBtn" class="btn btn-info">수락</button>
-				                                <button type="button" class="btn btn-warning">거절</button>
+				                                <button type="button" id="${humanbook.id}" class="btn btn-success acceptHumanbook">수락</button>
+				                                <button type="button" id="${humanbook.id}" class="btn btn-warning rejectHumanbook">거절</button>
 			                                </c:otherwise>
 		                                </c:choose>
 	                                </td>

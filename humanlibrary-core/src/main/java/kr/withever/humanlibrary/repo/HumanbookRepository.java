@@ -90,6 +90,14 @@ public class HumanbookRepository {
 	/* 휴먼북 수정 */
 	public void modifyHumanbook(Humanbook humanbook){
 		try {
+			Set<String> availableServiceDay = humanbook.getServiceDay();
+			Long humanbookId = humanbook.getId();
+			this.humanbookServiceDayMapper.deleteHumanbookServiceDay(humanbookId, null);
+			if (availableServiceDay != null) {
+				for (String serviceDay : availableServiceDay) { //서비스 데이 DB 등
+					this.humanbookServiceDayMapper.insertHumanbookServiceDay(humanbookId, serviceDay);
+				}
+			}
 			this.humanbookMapper.updateHumanbook(humanbook);
 		} catch (Exception e) {
 			throw new HumanLibraryException(e, ExceptionType.HB_500_001);
