@@ -65,12 +65,12 @@ public class Category {
 		this.parentCategoryId = parentCategoryId;
 	}
 	
-	public void setUpdatedCategory(Category newCategory){ 
-		this.categoryName = StringUtils.isEmpty(newCategory.getCategoryName()) ? this.categoryName : newCategory.getCategoryName();
-		this.desc = StringUtils.isEmpty(newCategory.getDesc()) ? this.desc : newCategory.getDesc();
-		this.imageUrl = StringUtils.isEmpty(newCategory.getImageUrl()) ?  this.imageUrl :  newCategory.getImageUrl();
-		if(!StringUtils.isEmpty(newCategory.getParentCategoryId())){
-			this.parentCategoryId = newCategory.getParentCategoryId();
+	public void setUpdatedCategory(Category updatedCategory){ 
+		this.categoryName = StringUtils.isEmpty(updatedCategory.getCategoryName()) ? this.categoryName : updatedCategory.getCategoryName();
+		this.desc = StringUtils.isEmpty(updatedCategory.getDesc()) ? this.desc : updatedCategory.getDesc();
+		this.imageUrl = StringUtils.isEmpty(updatedCategory.getImageUrl()) ?  this.imageUrl :  updatedCategory.getImageUrl();
+		if(!StringUtils.isEmpty(updatedCategory.getParentCategoryId())){
+			this.parentCategoryId = updatedCategory.getParentCategoryId();
 			if(this.parentCategoryId == 0) this.parentCategoryId = null;
 		}
 	}

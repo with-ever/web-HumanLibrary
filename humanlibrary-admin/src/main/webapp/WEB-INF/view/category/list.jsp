@@ -26,7 +26,7 @@
                                 <th>ID</th>
                                 <th class="col-lg-5">이름</th>
                                 <th class="col-lg-4">설명</th>
-                                <th>부모 카테고리</th>
+                                <th>상위 카테고리</th>
                                 <th></th>
                             </tr>
                             </thead>

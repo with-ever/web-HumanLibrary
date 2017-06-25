@@ -20,4 +20,7 @@ public interface CategoryService {
 	CategorySearch retrieveCategoryBySearch(CategorySearch search);
 
 	List<Category> retrieveCategoriesWithSubCategory();
+
+	int countSubCategory(CategorySearch search);
+
 }

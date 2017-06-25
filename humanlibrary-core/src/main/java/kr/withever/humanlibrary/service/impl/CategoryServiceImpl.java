@@ -61,5 +61,10 @@ public class CategoryServiceImpl implements CategoryService {
 	public List<Category> retrieveCategoriesWithSubCategory() {
 		return this.categoryRepository.retrieveCategoriesWithSubCategory();
 	}
-	
+
+	@Override
+	public int countSubCategory(CategorySearch search) {
+		return this.categoryRepository.countSubCategory(search);
+	}
+
 }

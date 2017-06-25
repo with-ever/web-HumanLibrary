@@ -32,7 +32,7 @@
 	                        <label>카테고리 구분</label>
 	                        <select class="form-control" id="categoryClass">
 	                            <option value="parent">상위 카테고리</option>
-	                            <option value="child">하위 카테고리</option>
+	                            <option value="sub">하위 카테고리</option>
 	                        </select>
 	                    </div>
 	                    <div class="form-group" id="parentCategorySelectBox">

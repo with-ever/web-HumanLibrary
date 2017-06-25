@@ -74,6 +74,10 @@ public class CategoryRepository {
 		return parentCategories;
 	}
 	
+	public int countSubCategory(CategorySearch search) {
+		return this.categoryMapper.selectCategoriesTotalCountBySearch(search);
+	}
+
 	private void setSubCategoriesInCategory(Category category){
 		List<Category> allSubCategories = this.categoryMapper.selectCategories();
 		List<Category> addedSubCategories = new ArrayList<Category>();

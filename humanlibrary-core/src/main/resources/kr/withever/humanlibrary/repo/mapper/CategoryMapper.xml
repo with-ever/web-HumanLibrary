@@ -103,13 +103,18 @@
 			ID = #{id}
 	</delete>
 	
-	<select id="countCategory" resultType="int">
+	<select id="countCategory" parameterType="Long" resultType="int">
 		SELECT
 			COUNT(*)
 		FROM
 		 	CATEGORY
+		WHERE
+			1 = 1
+		<if test="parentCategoryId != null">
+			AND PARENT_CATEGORY_ID = #{parentCategoryId}
+		</if>
 	</select>
-
+	
 	<select id="selectCategories" resultMap="categoryResultMap">
 		SELECT
 			ID

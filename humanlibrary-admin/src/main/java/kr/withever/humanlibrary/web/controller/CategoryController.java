@@ -11,6 +11,7 @@ import kr.withever.humanlibrary.domain.humanbook.Category;
 import kr.withever.humanlibrary.domain.humanbook.CategorySearch;
 import kr.withever.humanlibrary.service.CategoryService;
 
+
 @RestController
 @RequestMapping(value = "/categories")
 public class CategoryController {
@@ -89,10 +90,11 @@ public class CategoryController {
 		Category category = this.categoryService.retrieveCategory(categoryId);
 		CategorySearch categorySearch = this.categoryService.retrieveCategoryBySearch(search);
 		
-		mav.setViewName("/category/detailNedit");
+		mav.setViewName("/category/edit");
 		mav.addObject("selectedCategory", category);
 		mav.addObject("searchModel", categorySearch);
 		
 		return mav;
 	}
+	
 }

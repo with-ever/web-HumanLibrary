@@ -32,11 +32,11 @@
 	                        <label>카테고리 구분</label>
 	                        <select class="form-control" id="categoryClass">
 	                            <option value="parent">상위 카테고리</option>
-	                            <option value="child">하위 카테고리</option>
+	                            <option value="sub">하위 카테고리</option>
 	                        </select>
 	                    </div>
 	                    <div class="form-group" id="parentCategorySelectBox">
-	                        <label>부모 카테고리</label>
+	                        <label>상위 카테고리</label>
 	                        <select class="form-control" name="parentCategoryId" id="parentCategoryId">
                             	<option value="0">선택</option>
 	                        	<c:forEach var="category" items="${searchModel.results}">
