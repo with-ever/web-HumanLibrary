@@ -2,12 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <head>
-    <script src="${ctx}/resources/js/humanlib/category-new.js"></script>
+	<script src="${ctx}/resources/js/humanlib/category-newNedit.js"></script>
 </head>
 <body>
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">CATEGORY</h1>
+            <h1 class="page-header">카테고리수정</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -16,22 +16,29 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    카테고리
+                    수정
                 </div>
                 <div class="panel-body">
 	                <form role="form" action="${ctx}/categories/edit/${selectedCategory.id}" method="POST">
 	                    <div class="form-group">
-	                        <label>CATEGORY NAME (eng)</label>
+	                        <label>카테고리 이름 (eng)</label>
 	                        <input class="form-control" name="categoryName" value="${selectedCategory.categoryName}">
-	                        <p class="help-block">Example block-level help text here.</p>
 	                    </div>
 	                    <div class="form-group">
-	                        <label>CATEGORY DESC (kor)</label>
+	                        <label>카테고리 설명 (kor)</label>
 	                        <input class="form-control" name="desc" value="${selectedCategory.desc}">
 	                    </div>
-	                    <div class="form-group">
-	                        <label>Parent Category</label>
-	                        <select class="form-control" name="parentCategory">
+      	              	<div class="form-group">
+	                        <label>카테고리 구분</label>
+	                        <select class="form-control" id="categoryClass">
+	                            <option value="parent">상위 카테고리</option>
+	                            <option value="child">하위 카테고리</option>
+	                        </select>
+	                    </div>
+	                    <div class="form-group" id="parentCategorySelectBox">
+	                        <label>부모 카테고리</label>
+	                        <select class="form-control" name="parentCategoryId" id="parentCategoryId">
+                            	<option value="0">선택</option>
 	                        	<c:forEach var="category" items="${searchModel.results}">
                         			<c:if test="${category.parentCategoryId eq null}">
 			                            <option value="${category.id}" 

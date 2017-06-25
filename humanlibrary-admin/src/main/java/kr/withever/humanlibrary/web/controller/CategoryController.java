@@ -1,9 +1,6 @@
 package kr.withever.humanlibrary.web.controller;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -47,11 +44,12 @@ public class CategoryController {
 	
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	public ModelAndView createCategory(
-			HttpServletRequest req
+			Category category
 	){
-		String categoryName = req.getParameter("categoryName");
-		String desc = req.getParameter("desc");
-		Long parentCategory = Long.parseLong(req.getParameter("parentCategory"));
+		String categoryName = category.getCategoryName();
+		String desc = category.getDesc();
+		Long parentCategory = category.getParentCategoryId();
+		if(parentCategory == 0) parentCategory = null;
 		
 		Category newCategory = new Category(null, categoryName, desc, parentCategory);
 		this.categoryService.createCategory(newCategory);
@@ -70,15 +68,11 @@ public class CategoryController {
 	
 	@RequestMapping(value = "/edit/{categoryId}", method = RequestMethod.POST)
 	public ModelAndView updateCategory(
-			HttpServletRequest req,
+			Category updatedCategory,
 			@PathVariable Long categoryId
 	){
-		String categoryName = req.getParameter("categoryName");
-		String categoryDesc = req.getParameter("desc");
-		Long parentCategory = Long.parseLong(req.getParameter("parentCategory"));
-		
-		Category updateCategory = new Category(categoryId, categoryName, categoryDesc, parentCategory);
-		this.categoryService.modifyCategory(updateCategory);
+		updatedCategory.setId(categoryId);
+		this.categoryService.modifyCategory(updatedCategory);
 		
 		ModelAndView mav = new ModelAndView("redirect:/categories");
 		return mav;

@@ -35,8 +35,11 @@ public class CategoryServiceImpl implements CategoryService {
 	}
 
 	@Override
-	public void modifyCategory(Category category) {
-		this.categoryRepository.modifyCategory(category);
+	public void modifyCategory(Category updatedCategory) {
+		Category previousCategory = this.categoryRepository.retrieveCategory(updatedCategory.getId());
+		previousCategory.setUpdatedCategory(updatedCategory);
+		
+		this.categoryRepository.modifyCategory(previousCategory);
 	}
 
 	@Override

@@ -2,6 +2,8 @@ package kr.withever.humanlibrary.domain.humanbook;
 
 import java.util.List;
 
+import org.springframework.util.StringUtils;
+
 public class Category {
 	private Long id;
 	private Long parentCategoryId;
@@ -61,5 +63,15 @@ public class Category {
 
 	public void setParentCategoryId(Long parentCategoryId) {
 		this.parentCategoryId = parentCategoryId;
+	}
+	
+	public void setUpdatedCategory(Category newCategory){ 
+		this.categoryName = StringUtils.isEmpty(newCategory.getCategoryName()) ? this.categoryName : newCategory.getCategoryName();
+		this.desc = StringUtils.isEmpty(newCategory.getDesc()) ? this.desc : newCategory.getDesc();
+		this.imageUrl = StringUtils.isEmpty(newCategory.getImageUrl()) ?  this.imageUrl :  newCategory.getImageUrl();
+		if(!StringUtils.isEmpty(newCategory.getParentCategoryId())){
+			this.parentCategoryId = newCategory.getParentCategoryId();
+			if(this.parentCategoryId == 0) this.parentCategoryId = null;
+		}
 	}
 }

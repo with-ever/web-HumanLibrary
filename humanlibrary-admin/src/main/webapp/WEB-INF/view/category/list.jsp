@@ -2,12 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <head>
-	<script src="${ctx}/resources/js/humanlib/category-new.js"></script>
+	<script src="${ctx}/resources/js/humanlib/category-list.js"></script>
 </head>
 <body>
     <div class="row">
         <div class="col-lg-12">
-            <h1 class="page-header">CATEGORY</h1>
+            <h1 class="page-header">카테고리관리</h1>
         </div>
         <!-- /.col-lg-12 -->
     </div>
@@ -16,7 +16,7 @@
         <div class="col-lg-12">
             <div class="panel panel-default">
                 <div class="panel-heading">
-                	LIST
+                	목록
                 </div>
                 <div class="panel-body">
 	                <div class="table-responsive">
@@ -24,10 +24,10 @@
                             <thead>
                             <tr>
                                 <th>ID</th>
-                                <th class="col-lg-5">CATEGORY</th>
-                                <th class="col-lg-4">DESC</th>
-                                <th>PARENT</th>
-                                <th>삭제</th>
+                                <th class="col-lg-5">이름</th>
+                                <th class="col-lg-4">설명</th>
+                                <th>부모 카테고리</th>
+                                <th></th>
                             </tr>
                             </thead>
                             <tbody>
