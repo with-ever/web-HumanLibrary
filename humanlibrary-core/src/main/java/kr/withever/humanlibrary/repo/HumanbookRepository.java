@@ -114,9 +114,9 @@ public class HumanbookRepository {
 		}
 	}
 	
-	/* 휴먼북 삭제(soft delete) */
 	public void removeHumanbook(Long id){
 		try{
+			this.humanbookServiceDayMapper.deleteHumanbookServiceDay(id, null);
 			this.humanbookMapper.deleteHumanbook(id);
 		}catch(Exception e){
 			// @TODO exception 코드 정리 필요.

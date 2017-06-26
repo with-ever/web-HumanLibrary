@@ -19,11 +19,11 @@
                 </div>
                 <div class="panel-body">
 	                <form role="form" action="${ctx}/humanbooks/new" method="POST">
-	                	<div class="form-group">
+	                	<div class="form-group col-lg-6">
 	                        <label>유저 ID</label>
 	                        <input class="form-control" name="userId">
 	                    </div>
-  	                  	<div class="form-group">
+  	                  	<div class="form-group col-lg-6">
 	                        <label>시간</label> <!-- 서브카테고리만 선택하도록 -->
 	                        <select class="form-control" name="serviceTime">
 	                            <option>ALL</option>
@@ -31,37 +31,15 @@
 	                            <option>PM</option>
 	                        </select>
 	                    </div>
-	                    <div class="form-group">
-                            <label>날짜</label>
-                            <div class="checkbox">
-                                <label>
-                                    <input type="checkbox" value="1">월
-                                </label>
-                                <label>
-                                    <input type="checkbox" value="2">화
-                                </label>
-                                <label>
-                                    <input type="checkbox" value="3">수
-                                </label>
-                                <label>
-                                    <input type="checkbox" value="4">목
-                                </label>
-                                <label>
-                                    <input type="checkbox" value="5">금
-                                </label>
-                                <label>
-                                    <input type="checkbox" value="6">토
-                                </label>
-                                <label>
-                                    <input type="checkbox" value="7">일
-                                </label>
-                            </div>
-                        </div>
-	                    <div class="form-group">
-                        	<label>이미지</label>
-                           	<input type="file" name="imgURL">
-                        </div>
-	                    <div class="form-group">
+	                    <div class="form-group col-lg-6">
+	                        <label>제목</label>
+	                        <input class="form-control" name="title">
+	                    </div>
+	                    <div class="form-group col-lg-6">
+	                        <label>경력</label>
+	                        <input class="form-control" name="mainCareer">
+	                    </div>
+	                    <div class="form-group text-left col-lg-6">
 	                        <label>상위 카테고리</label> 
 	                        <select class="form-control" id="parentCategory" name="parentCategory">
 	                        	<option value="0">선택</option>
@@ -70,24 +48,46 @@
 	                            </c:forEach>
 	                        </select>
 	                    </div>
-	                    <div class="form-group">
+	                    <div class="form-group col-lg-6">
 	                        <label>하위 카테고리</label>
 	                        <select class="form-control" id="subCategory" name="subCategory">
 	                        </select>
 	                    </div>
-	                    <div class="form-group">
-	                        <label>제목</label>
-	                        <input class="form-control" name="title">
-	                    </div>
-	                    <div class="form-group">
-	                        <label>경력</label>
-	                        <input class="form-control" name="mainCareer">
-	                    </div>
-                        <div class="form-group">
+                        <div class="form-group col-lg-12">
                             <label>설명</label>
                             <textarea class="form-control" rows="3" name="description"></textarea>
                         </div>
-                         <div class="form-group text-right">
+	                    <div class="form-group col-lg-6">
+                            <label>날짜</label>
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" name="serviceDay" value="MONDAY">월
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="serviceDay" value="TUESDAY">화
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="serviceDay" value="WEDNESDAY">수
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="serviceDay" value="THURSDAY">목
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="serviceDay" value="FRIDAY">금
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="serviceDay" value="SATURDAY">토
+                                </label>
+                                <label>
+                                    <input type="checkbox" name="serviceDay" value="SUNDAY">일
+                                </label>
+                            </div>
+                        </div>
+	                    <div class="form-group col-lg-6">
+                        	<label>이미지</label>
+                           	<input type="file" name="imageURL">
+                        </div>
+                         <div class="form-group text-right col-lg-12">
 	                        <button type="submit" class="btn btn-default js-submit">등록하기</button>
 	                        <a href="${ctx}/humanbooks">
 	                            <button type="button" class="btn btn-default">취소</button>

@@ -32,10 +32,14 @@ public class Humanbook implements Serializable{
 	private Long updateTime;
 	
 	public Humanbook(){
+		this.createTime = System.currentTimeMillis() / 1000;
+		this.updateTime = System.currentTimeMillis() / 1000;
 	}
 
 	public Humanbook(Long id) {
 		this.id = id;
+		this.createTime = System.currentTimeMillis() / 1000;
+		this.updateTime = System.currentTimeMillis() / 1000;
 	}
 
 	public Humanbook(Long userId, Long id, String title){
@@ -162,5 +166,6 @@ public class Humanbook implements Serializable{
 		this.state = StringUtils.isEmpty(updatedHumanbook.getState()) ? this.state : updatedHumanbook.getState();
 		this.imageUrl = StringUtils.isEmpty(updatedHumanbook.getImageUrl()) ? this.imageUrl : updatedHumanbook.getImageUrl();
 		this.description = StringUtils.isEmpty(updatedHumanbook.getDescription()) ? this.description : updatedHumanbook.getDescription();
+		this.updateTime = System.currentTimeMillis() / 1000;
 	}
 }
