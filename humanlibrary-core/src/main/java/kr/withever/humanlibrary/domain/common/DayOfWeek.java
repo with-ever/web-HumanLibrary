@@ -5,12 +5,12 @@ package kr.withever.humanlibrary.domain.common;
  */
 public enum DayOfWeek {
 
-    SUNDAY,
+	SUNDAY,
     MONDAY,
     TUESDAY,
     WEDNESDAY,
     THURSDAY,
     FRIDAY,
     SATURDAY
-
+	
 }
