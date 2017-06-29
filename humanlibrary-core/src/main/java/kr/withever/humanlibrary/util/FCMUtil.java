@@ -20,7 +20,6 @@ public class FCMUtil {
 
     private static final String FCM_URL = "https://fcm.googleapis.com/fcm/send";
 
-    // @TODO 필요 상황에 따라 계약서 및 다른 아이디 세팅.
     public static void sendMessage(String tokenId, FCMNotification notification, FCMData data) throws IOException {
 
         URL url = new URL(FCM_URL);

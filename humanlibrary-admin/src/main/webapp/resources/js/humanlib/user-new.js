@@ -1,9 +1,17 @@
 (function (window, $) {
+    function _makeBirth() {
+        var year = $('#year').val() || '';
+        var month = $('#month').val() || '';
+        var day = $('#day').val() || '';
+        return [year, month, day].join('-');
+    }
+
     var userNew = {
         isExisted: false,
         init: function () {
             var _this = this
             var $frm = $('.js-form');
+            // @TODO error case에 따른 CSS 변경.
             $frm.validate({
                 rules: {
                     loginId: {
@@ -35,6 +43,7 @@
                     if (roles === 0) {
                         return window.alert('역할은 필수입니다.')
                     }
+                    $('#birth').val(_makeBirth());
                     return true
                 }
             });

@@ -21,7 +21,7 @@
                             <form role="form">
                                 <div class="form-group">
                                     <label>사용자 아이디</label>
-                                    <p class="form-control-static">${user.userId}</p>
+                                    <p class="form-group-static">${user.userId}</p>
                                 </div>
                                 <div class="form-group">
                                     <label>로그인 아이디</label>
@@ -68,7 +68,9 @@
                                     <a href="${ctx}/user/${user.userId}/edit">
                                         <button type="button" class="btn btn-default">수정하기</button>
                                     </a>
-                                    <button type="button" class="btn btn-default">취소</button>
+                                    <a href="${ctx}/user">
+                                        <button type="button" class="btn btn-default">취소</button>
+                                    </a>
                                 </div>
                             </form>
                         </div>
