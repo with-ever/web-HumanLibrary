@@ -12,7 +12,7 @@ $(function(){
                 });
 
 				$(result).each(function( index ) {
-					var subCategoryId = $('#originSubCategoryId').val();
+					var subCategoryId = $('#selectedSubCategoryId').val();
 					if(subCategoryId == result[index].id){
 						$('#subCategory').append("<option value='"+result[index].id+"' selected='selected'>" + result[index].desc + "</option>"); 
 					} else {
@@ -24,17 +24,24 @@ $(function(){
 		});
 		
 		(function setServiceTime(){
-			var selectedTime = $('#originServiceTime').val();
+			var selectedTime = $('#selectedServiceTime').val();
 			$('#serviceTime').val(selectedTime).attr("selected","selected");
 		})();
 		
-		//수정시 serviceDay check설정 부분 추가 필요 
-//		(function setServiceDay(){
-//			var selectedDay = $('#originServiceDay');
-//			$(selectedDay).each(function(index){
-//				alert(selectedDay[index]);
-//			});
-//		})();
+		
+		(function setServiceDay(){
+			var serviceDays = $('.selectedServiceDay');
+			var serviceDaysCheckBox = $(".serviceDayCheckBox").find('input');
+			
+			for(var i=0 ; i<serviceDays.length ; i++){
+				for (var j=0 ; j<serviceDaysCheckBox.length ; j++) {
+					if(serviceDays[i].value == serviceDaysCheckBox[j].value){
+						serviceDaysCheckBox[j].setAttribute("checked","checked");
+					}
+				}
+			}
+		})();
+		
 	});
 	
 	$('#parentCategory').on('change', function(){

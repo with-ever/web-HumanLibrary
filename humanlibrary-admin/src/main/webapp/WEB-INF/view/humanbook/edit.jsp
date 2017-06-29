@@ -19,23 +19,54 @@
                 </div>
                 <div class="panel-body">
 	                <form role="form" action="${ctx}/humanbooks/edit/${selectedHumanbook.id}" method="POST">
-	                	<div class="form-group">
+	                	<div class="form-group col-lg-6">
 	                        <label>유저 ID</label>
 	                        <input class="form-control" name="userId" value="${selectedHumanbook.user.userId}">
 	                    </div>
-  	                  	<div class="form-group">
+  	                  	<div class="form-group col-lg-6">
 	                        <label>시간</label>
-	                        <input id="originServiceTime" value="${selectedHumanbook.serviceTime}" hidden="hidden"/>
+	                        <input id="selectedServiceTime" value="${selectedHumanbook.serviceTime}" hidden="hidden"/>
 	                        <select class="form-control" id="serviceTime" name="serviceTime">
 	                            <option>ALL</option>
 	                            <option>AM</option>
 	                            <option>PM</option>
 	                        </select>
 	                    </div>
-	                    <div class="form-group">
+	                    <div class="form-group col-lg-6">
+	                        <label>상위 카테고리</label> 
+	                        <select class="form-control" id="parentCategory" name="parentCategory">
+	                        	<option value="0">선택</option>
+	                            <c:forEach var="category" items="${categoryList}">
+	                            		<option value="${category.id}"
+	                            			<c:if test="${category.id eq selectedHumanbook.parentCategory.id}">selected="selected"</c:if> >
+			                            	${category.desc}</option>
+	                            </c:forEach>
+	                        </select>
+	                    </div>
+	                    <div class="form-group col-lg-6">
+	                        <label>하위 카테고리</label>
+	                        <input type="text" id="selectedSubCategoryId" value="${selectedHumanbook.subCategory.id}" hidden="hidden"/>  
+	                        <select class="form-control" id="subCategory" name="subCategory">
+	                        </select>
+	                    </div>
+	                    <div class="form-group col-lg-6">
+	                        <label>제목</label>
+	                        <input class="form-control" name="title" value="${selectedHumanbook.title}">
+	                    </div>
+	                    <div class="form-group col-lg-6">
+	                        <label>경력</label>
+	                        <input class="form-control" name="mainCareer" value="${selectedHumanbook.mainCareer}">
+	                    </div>
+                        <div class="form-group col-lg-12">
+                            <label>설명</label>
+                            <textarea class="form-control" rows="3" name="description">${selectedHumanbook.description}</textarea>
+                        </div>
+	                    <div class="form-group col-lg-6">
                             <label>날짜</label>
-                            <input id="originServiceDay" value="${selectedHumanbook.serviceDay}" hidden="hidden"/>
-                            <div class="checkbox">
+                            <c:forEach var="serviceDay" items="${serviceDayList}">
+                            	<input class="selectedServiceDay" value="${serviceDay}" hidden="hidden"/>
+                            </c:forEach>
+                            <div class="serviceDayCheckBox">
                                 <label>
                                     <input type="checkbox" name="serviceDay" value="MONDAY">월
                                 </label>
@@ -59,45 +90,16 @@
                                 </label>
                             </div>
                         </div>
-	                    <div class="form-group">
+	                    <div class="form-group col-lg-6">
                         	<label>이미지</label>
-                           	<input type="file" name="imageURL" value="${selectedHumanbook.imageUrl}">
+                           	<input type="file" name="imageURL" value="${selectedHumanbook.imageUrl}">${selectedHumanbook.imageUrl}
                         </div>
-	                    <div class="form-group">
-	                        <label>상위 카테고리</label> 
-	                        <select class="form-control" id="parentCategory" name="parentCategory">
-	                        	<option value="0">선택</option>
-	                            <c:forEach var="category" items="${categoryList}">
-	                            		<option value="${category.id}"
-	                            			<c:if test="${category.id eq selectedHumanbook.parentCategory.id}">selected="selected"</c:if> >
-			                            	${category.desc}</option>
-	                            </c:forEach>
-	                        </select>
-	                    </div>
-	                    <div class="form-group">
-	                        <label>하위 카테고리</label>
-	                        <input type="text" id="originSubCategoryId" value="${selectedHumanbook.subCategory.id}" hidden="hidden"/>  
-	                        <select class="form-control" id="subCategory" name="subCategory">
-	                        </select>
-	                    </div>
-	                    <div class="form-group">
-	                        <label>제목</label>
-	                        <input class="form-control" name="title" value="${selectedHumanbook.title}">
-	                    </div>
-	                    <div class="form-group">
-	                        <label>경력</label>
-	                        <input class="form-control" name="mainCareer" value="${selectedHumanbook.mainCareer}">
-	                    </div>
-                        <div class="form-group">
-                            <label>설명</label>
-                            <textarea class="form-control" rows="3" name="description">${selectedHumanbook.description}</textarea>
-                        </div>
-                         <div class="form-group text-right">
-	                        <button type="submit" class="btn btn-default js-submit">등록하기</button>
+                        <div class="form-group text-right col-lg-12">
+                        	<button type="submit" class="btn btn-default js-submit">등록하기</button>
 	                        <a href="${ctx}/humanbooks">
 	                            <button type="button" class="btn btn-default">취소</button>
 	                        </a>
-                    	</div>
+                	   	</div>
 	                </form>
                 </div>
                 <!-- /.panel-body -->

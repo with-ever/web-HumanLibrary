@@ -1,5 +1,6 @@
 package kr.withever.humanlibrary.web.controller;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
@@ -7,10 +8,6 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
-import kr.withever.humanlibrary.domain.common.client.FCMData;
-import kr.withever.humanlibrary.domain.common.client.FCMInfo;
-import kr.withever.humanlibrary.domain.common.client.FCMNotification;
-import kr.withever.humanlibrary.util.FCMUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -91,6 +88,10 @@ public class HumanbookController {
 		humanbook.setMainCareer(req.getParameter("mainCareer"));
 		humanbook.setDescription(req.getParameter("description"));
 		
+		String[] serviceDays = req.getParameterValues("serviceDay");
+		Set<String> serviceDayList = new HashSet<String>(Arrays.asList(serviceDays));
+		humanbook.setServiceDay(serviceDayList);
+		
 		this.humanbookService.createHumanbook(humanbook);
 
 		ModelAndView mav = new ModelAndView("redirect:/humanbooks");
@@ -138,10 +139,14 @@ public class HumanbookController {
 		List<Category> categoryList = this.categoryService.retrieveCategoriesWithSubCategory();
 		Humanbook humanbook = this.humanbookService.retrieveHumanbook(humanbookId);
 		
+		List<String> serviceDayList = new ArrayList<>();
+		serviceDayList.addAll(humanbook.getServiceDay());
+		
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/humanbook/edit");
 		mav.addObject("selectedHumanbook", humanbook);
 		mav.addObject("categoryList", categoryList);
+		mav.addObject("serviceDayList", serviceDayList);
 		
 		return mav;
 	}
