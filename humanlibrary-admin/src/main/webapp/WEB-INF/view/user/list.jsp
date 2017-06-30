@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <body>
     <div class="row">
@@ -25,6 +26,7 @@
                                 <th>로그인ID</th>
                                 <th>EMAIL</th>
                                 <th>이름</th>
+                                <th>생성날짜</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -38,6 +40,7 @@
 	                                <td>${user.loginId}</td>
 	                                <td>${user.email}</td>
 	                                <td>${user.name}</td>
+                                    <td><fmt:formatDate value="${user.createDate}" pattern="MM/dd/yyyy HH:mm"/></td>
 	                            </tr>
                             </c:forEach>
                             </tbody>

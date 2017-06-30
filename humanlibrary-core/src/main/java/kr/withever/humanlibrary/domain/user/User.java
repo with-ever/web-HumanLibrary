@@ -4,6 +4,7 @@ import kr.withever.humanlibrary.util.AESEncryptionUtil;
 import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import java.util.Set;
 
@@ -185,6 +186,14 @@ public class User implements Serializable {
         this.updateTime = updateTime;
     }
 
+    public Date getCreateDate() {
+        return new Date(this.createTime * 1000);
+    }
+
+    public Date getUpdateDate() {
+        return new Date(this.updateTime * 1000);
+    }
+
     public void setUpdatedUser(User user) {
         // @TODO String utils 만들기.
         this.name =  StringUtils.isEmpty(user.getName()) ? this.name : user.getName();
@@ -227,4 +236,5 @@ public class User implements Serializable {
 
         return user;
     }
+
 }

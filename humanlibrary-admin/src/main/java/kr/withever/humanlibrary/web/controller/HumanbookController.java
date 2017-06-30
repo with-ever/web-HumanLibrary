@@ -186,4 +186,5 @@ public class HumanbookController {
 		ModelAndView mav = new ModelAndView("redirect:/humanbooks");
 		return mav;
 	}
+
 }
