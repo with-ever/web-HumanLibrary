@@ -6,6 +6,7 @@
 
 <mapper namespace="kr.withever.humanlibrary.repo.mapper.UserRoleMapper">
     <resultMap id="roleResultMap" type="Role">
+        <result property="userId" column="USER_ID"/>
         <result property="roleId" column="ROLE"/>
     </resultMap>
 
@@ -31,5 +32,16 @@
         FROM USERS_ROLES_REL
         WHERE USER_ID = #{userId} AND ROLE = #{roleId}
     </delete>
+
+    <select id="selectUserRoleListByUserIds" parameterType="list" resultMap="roleResultMap">
+        SELECT
+          USER_ID
+          ,ROLE
+        FROM USERS_ROLES_REL
+        WHERE USER_ID IN
+            <foreach item="userId" collection="userIds" open="(" separator="," close=")">
+                #{userId}
+            </foreach>
+    </select>
 
 </mapper>

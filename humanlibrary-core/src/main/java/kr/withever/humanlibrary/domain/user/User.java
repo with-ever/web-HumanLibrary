@@ -1,11 +1,13 @@
 package kr.withever.humanlibrary.domain.user;
 
+import kr.withever.humanlibrary.domain.common.user.Gender;
+import kr.withever.humanlibrary.domain.common.user.RoleType;
 import kr.withever.humanlibrary.util.AESEncryptionUtil;
 import org.springframework.util.StringUtils;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -186,14 +188,6 @@ public class User implements Serializable {
         this.updateTime = updateTime;
     }
 
-    public Date getCreateDate() {
-        return new Date(this.createTime * 1000);
-    }
-
-    public Date getUpdateDate() {
-        return new Date(this.updateTime * 1000);
-    }
-
     public void setUpdatedUser(User user) {
         // @TODO String utils 만들기.
         this.name =  StringUtils.isEmpty(user.getName()) ? this.name : user.getName();
@@ -235,6 +229,32 @@ public class User implements Serializable {
         }
 
         return user;
+    }
+
+    // DTO
+    public String getGenderText() {
+        return this.gender.equals(Gender.MALE.name()) ? "남자" : "여자";
+    }
+
+    public Set<String> getRoleTextList() {
+        Set<String> roleText = new HashSet<String>();
+        for (String role : this.roles) {
+            if (RoleType.ADMIN.name().equals(role)) {
+                roleText.add(RoleType.ADMIN.getDesc());
+            } else if (RoleType.SUBSCRIBER.name().equals(role)) {
+                roleText.add(RoleType.SUBSCRIBER.getDesc());
+            } else if (RoleType.HUMAN_BOOK.name().equals(role)) {
+                roleText.add(RoleType.HUMAN_BOOK.getDesc());
+            }
+        }
+        return roleText;
+    }
+    public Date getCreateDate() {
+        return new Date(this.createTime * 1000);
+    }
+
+    public Date getUpdateDate() {
+        return new Date(this.updateTime * 1000);
     }
 
 }

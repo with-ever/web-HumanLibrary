@@ -26,22 +26,43 @@
                                 <th>로그인ID</th>
                                 <th>EMAIL</th>
                                 <th>이름</th>
+                                <th>역할</th>
+                                <th>성별</th>
+                                <th>전화번호</th>
+                                <th>휴대폰번호</th>
+                                <th>주소</th>
                                 <th>생성날짜</th>
                             </tr>
                             </thead>
                             <tbody>
                             <c:forEach var="user" items="${searchModel.results}">
-	                            <tr>
-	                                <td>
-                                        <a href="${ctx}/user/${user.userId}">
-                                            ${user.userId}
-                                        </a>
-                                    </td>
-	                                <td>${user.loginId}</td>
-	                                <td>${user.email}</td>
-	                                <td>${user.name}</td>
-                                    <td><fmt:formatDate value="${user.createDate}" pattern="MM/dd/yyyy HH:mm"/></td>
-	                            </tr>
+                                <tr>
+                                        <td>
+                                            <a href="${ctx}/user/${user.userId}">
+                                                ${user.userId}
+                                            </a>
+                                        </td>
+                                        <td>${user.loginId}</td>
+                                        <td>${user.email}</td>
+                                        <td>${user.name}</td>
+                                        <td>
+                                            <c:forEach var="role" items="${user.roleTextList}" varStatus="status">
+                                                <c:choose>
+                                                    <c:when test="${!status.last}">
+                                                        ${role},
+                                                    </c:when>
+                                                    <c:otherwise>
+                                                        ${role}
+                                                    </c:otherwise>
+                                                </c:choose>
+                                            </c:forEach>
+                                        </td>
+                                        <td>${user.genderText}</td>
+                                        <td>${user.phoneNo}</td>
+                                        <td>${user.mPhoneNo}</td>
+                                        <td>${user.address}</td>
+                                        <td><fmt:formatDate value="${user.createDate}" pattern="MM/dd/yyyy HH:mm"/></td>
+                                    </tr>
                             </c:forEach>
                             </tbody>
                         </table>

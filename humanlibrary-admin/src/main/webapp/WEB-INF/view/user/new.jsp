@@ -25,7 +25,7 @@
                 <div class="panel-body">
                     <div class="row">
                         <div class="col-lg-12">
-                            <form action="${ctx}/user" method="post" class="js-form">
+                            <form action="${ctx}/user" method="post" class="js-form" enctype="multipart/form-data">
                                 <div class="form-group">
                                     <label class="control-label">로그인 아이디</label>
                                     <div class="input-group">
@@ -49,7 +49,7 @@
                                     <div class="input-group">
                                         <c:forEach var="role" items="${roles}">
                                             <label class="checkbox-inline">
-                                                <input type="checkbox" name="roles" value="${role.name}"> ${role.desc}
+                                                <input type="checkbox" name="roles" value="${role.name}" <c:if test="${role.name == 'SUBSCRIBER'}" >checked</c:if> > ${role.desc}
                                             </label>
                                         </c:forEach>
                                     </div>
@@ -116,13 +116,11 @@
                                 </div>
                                 <div class="form-group">
                                     <label>이미지</label>
-                                    <input type="file" name="imageUrl">
+                                    <input type="file" name="image">
                                 </div>
                                 <div class="form-group text-right">
                                     <button type="submit" class="btn btn-default js-submit">등록하기</button>
-                                    <a href="${ctx}/user">
-                                        <button type="button" class="btn btn-default">취소</button>
-                                    </a>
+                                    <a class="btn btn-default" href="${ctx}/user">취소</a>
                                 </div>
                             </form>
                         </div>

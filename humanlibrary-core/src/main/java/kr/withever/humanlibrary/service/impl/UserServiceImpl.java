@@ -106,4 +106,9 @@ public class UserServiceImpl implements UserService{
     public void removeUserRole(Long userId, String role) {
         this.userRoleRepository.removeUserRole(userId, role);
     }
+
+    @Override
+    public void modifyUserImageUrl(Long userId, String imageUrl) {
+        this.userRepository.modifyUserImageUrl(userId, imageUrl);
+    }
 }

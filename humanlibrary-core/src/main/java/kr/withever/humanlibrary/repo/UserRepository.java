@@ -1,6 +1,7 @@
 package kr.withever.humanlibrary.repo;
 
 import kr.withever.humanlibrary.domain.common.exception.ExceptionType;
+import kr.withever.humanlibrary.domain.user.Role;
 import kr.withever.humanlibrary.domain.user.User;
 import kr.withever.humanlibrary.domain.user.UserSearch;
 import kr.withever.humanlibrary.exception.HumanLibraryException;
@@ -10,6 +11,8 @@ import kr.withever.humanlibrary.repo.mapper.UserRoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -80,12 +83,30 @@ public class UserRepository {
 
     public UserSearch retrieveUserBySearch(UserSearch search) {
         List<User> users = this.userMapper.selectUsersBySearch(search);
+        setUserRole(users);
         search.setResults(users);
         if (users.size() != 0) {
             int totalCount = this.userMapper.selectUsersTotalCountBySearch(search);
             search.setTotalCount(totalCount);
         }
         return search;
+    }
+
+    private void setUserRole(List<User> users) {
+        List<Long> userIds = new ArrayList<Long>();
+        for (User user : users) {
+            userIds.add(user.getUserId());
+        }
+        List<Role> roles = this.userRoleMapper.selectUserRoleListByUserIds(userIds);
+        for (User user : users) {
+            Set<String> roleList = new HashSet<String>();
+            for (Role role : roles) {
+                if (user.getUserId() == role.getUserId()) {
+                    roleList.add(role.getRoleId());
+                }
+            }
+            user.setRoles(roleList);
+        }
     }
 
     public boolean verifyUserByIdWithPassword(Long userId, String password) {
@@ -99,5 +120,9 @@ public class UserRepository {
 
     public String retrievePasswordByUserId(Long userId) {
         return this.userMapper.selectPasswordByUserId(userId);
+    }
+
+    public void modifyUserImageUrl(Long userId, String imageUrl) {
+        this.userMapper.updateUserImageUrl(userId, imageUrl);
     }
 }

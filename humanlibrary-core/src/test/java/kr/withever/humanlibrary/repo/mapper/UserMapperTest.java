@@ -120,4 +120,11 @@ public class UserMapperTest extends WitheverDbUnitTestConfig {
         assertEquals(password, "1234");
     }
 
+    @Test
+    public void updateUserImageUrl() throws Exception {
+        this.userMapper.updateUserImageUrl(1L, "kkkkkkk");
+        User user = this.userMapper.selectUser(1L);
+        assertEquals("kkkkkkk", user.getImageUrl());
+    }
+
 }
