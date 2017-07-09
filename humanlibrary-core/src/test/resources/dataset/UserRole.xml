@@ -12,4 +12,12 @@
         USER_ID = "1"
         ROLE = "SUBSCRIBER"
     />
+    <USERS_ROLES_REL
+            USER_ID = "2"
+            ROLE = "ADMIN"
+    />
+    <USERS_ROLES_REL
+            USER_ID = "2"
+            ROLE = "HUMAN_BOOK"
+    />
 </dataset>

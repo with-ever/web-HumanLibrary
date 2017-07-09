@@ -20,7 +20,13 @@
         <result property="imageUrl" column="IMAGE_URL"/>
         <result property="createTime" column="CREATE_TIME"/>
         <result property="updateTime" column="UPDATE_TIME"/>
+        <association property="roles" columnPrefix="UR_" resultMap="roleResultMap"/>
     </resultMap>
+
+    <resultMap id="roleResultMap" type="Role">
+        <result property="roleId" column="ROLE"/>
+    </resultMap>
+
 
     <insert id="insertUser" parameterType="User" useGeneratedKeys="true" keyProperty="userId" keyColumn="USER_ID">
         INSERT INTO USERS (
@@ -216,5 +222,12 @@
         FROM USERS
         WHERE USER_ID = #{userId}
     </select>
+
+    <update id="updateUserImageUrl">
+        UPDATE USERS
+        SET
+        IMAGE_URL = #{imageUrl}
+        WHERE USER_ID = #{userId}
+    </update>
 
 </mapper>

@@ -37,4 +37,6 @@ public interface UserMapper {
     int updateUserPassword(@Param("userId") Long userId, @Param("password") String password);
 
     String selectPasswordByUserId(Long userId);
+
+    void updateUserImageUrl(@Param("userId") Long userId, @Param("imageUrl") String imageUrl);
 }

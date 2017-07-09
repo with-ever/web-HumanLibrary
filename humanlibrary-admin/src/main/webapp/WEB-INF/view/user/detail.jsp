@@ -24,6 +24,21 @@
                                     <p class="form-group-static">${user.userId}</p>
                                 </div>
                                 <div class="form-group">
+                                    <label class="control-label">역할</label>
+                                    <p class="form-group-static">
+                                        <c:forEach var="role" items="${user.roleTextList}" varStatus="status">
+                                            <c:choose>
+                                                <c:when test="${!status.last}">
+                                                    ${role},
+                                                </c:when>
+                                                <c:otherwise>
+                                                    ${role}
+                                                </c:otherwise>
+                                            </c:choose>
+                                        </c:forEach>
+                                    </p>
+                                </div>
+                                <div class="form-group">
                                     <label>로그인 아이디</label>
                                     <p class="form-group-static">${user.loginId}</p>
                                 </div>
@@ -37,8 +52,7 @@
                                 </div>
                                 <div class="form-group">
                                     <label>성별</label>
-                                    <%--@TODO gender to text--%>
-                                    <p class="form-group-static">${user.gender}</p>
+                                    <p class="form-group-static">${user.genderText}</p>
                                 </div>
                                 <div class="form-group">
                                     <label>전화번호</label>
@@ -61,15 +75,15 @@
                                     <p class="form-group-static">${user.address}</p>
                                 </div>
                                 <div class="form-group">
-                                    <label>이미지</label>
+                                    <label class="block">이미지</label>
                                     <img src="${user.imageUrl}" alt="">
                                 </div>
                                 <div class="form-group text-right">
-                                    <a href="${ctx}/user/${user.userId}/edit">
-                                        <button type="button" class="btn btn-default">수정하기</button>
+                                    <a class="btn btn-default" href="${ctx}/user/${user.userId}/edit">
+                                        수정하기
                                     </a>
-                                    <a href="${ctx}/user">
-                                        <button type="button" class="btn btn-default">취소</button>
+                                    <a class="btn btn-default" href="${ctx}/user">
+                                        취소
                                     </a>
                                 </div>
                             </form>

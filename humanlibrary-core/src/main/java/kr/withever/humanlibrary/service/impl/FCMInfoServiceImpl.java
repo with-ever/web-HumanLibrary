@@ -20,8 +20,12 @@ public class FCMInfoServiceImpl implements FCMInfoService {
 
     @Override
     public void createFCMInfo(FCMInfo fcmInfo) {
-        if (fcmInfo.getPlatform() == null) fcmInfo.setPlatform(ClientPlatform.ANDROID.name());
-        this.fcmInfoRepository.createFCMInfo(fcmInfo);
+        FCMInfo isExistedFcmInfo = this.fcmInfoRepository.retrieveFCMInfoByDeviceId(fcmInfo.getDeviceId());
+        if (isExistedFcmInfo == null) {
+            this.fcmInfoRepository.createFCMInfo(fcmInfo);
+        } else {
+            this.fcmInfoRepository.modifyFCMInfo(fcmInfo);
+        }
     }
 
     @Override

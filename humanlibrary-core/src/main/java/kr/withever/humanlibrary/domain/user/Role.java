@@ -7,6 +7,8 @@ import kr.withever.humanlibrary.domain.common.user.RoleType;
  */
 public class Role {
 
+    private Long userId;
+
     private String roleId;
 
     public Role() {
@@ -14,6 +16,14 @@ public class Role {
 
     public Role(RoleType roleType) {
         this.roleId = roleType.getName();
+    }
+
+    public Long getUserId() {
+        return userId;
+    }
+
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
     public String getRoleId() {

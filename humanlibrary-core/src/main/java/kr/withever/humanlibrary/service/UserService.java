@@ -32,4 +32,5 @@ public interface UserService {
 
     void removeUserRole(Long userId, String role);
 
+    void modifyUserImageUrl(Long userId, String imageUrl);
 }

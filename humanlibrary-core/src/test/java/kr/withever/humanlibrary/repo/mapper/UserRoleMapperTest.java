@@ -5,9 +5,12 @@ import com.github.springtestdbunit.annotation.DatabaseSetup;
 import com.github.springtestdbunit.annotation.DatabaseTearDown;
 import kr.withever.humanlibrary.config.WitheverDbUnitTestConfig;
 import kr.withever.humanlibrary.domain.common.user.RoleType;
+import kr.withever.humanlibrary.domain.user.Role;
 import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.util.Arrays;
+import java.util.List;
 import java.util.Set;
 
 import static org.junit.Assert.*;
@@ -25,8 +28,8 @@ public class UserRoleMapperTest extends WitheverDbUnitTestConfig {
 
     @Test
     public void insertUserRole() throws Exception {
-        this.userRoleMapper.insertUserRole(2L, RoleType.ADMIN.getName());
-        Set<String> roleList = this.userRoleMapper.selectUserRoleList(2L);
+        this.userRoleMapper.insertUserRole(3L, RoleType.ADMIN.getName());
+        Set<String> roleList = this.userRoleMapper.selectUserRoleList(3L);
         String role = roleList.iterator().next().toString();
         assertEquals(role, RoleType.ADMIN.getName());
         assertEquals(1, roleList.size());
@@ -43,6 +46,13 @@ public class UserRoleMapperTest extends WitheverDbUnitTestConfig {
     public void deleteUserRole() throws Exception {
         this.userRoleMapper.deleteUserRole(1L, RoleType.ADMIN.getName());
         Set<String> roleList = this.userRoleMapper.selectUserRoleList(1L);
+        assertEquals(2, roleList.size());
+
+    }
+
+    @Test
+    public void selectUserRoleListByUserIds() throws Exception {
+        List<Role> roleList = this.userRoleMapper.selectUserRoleListByUserIds(Arrays.asList(2L));
         assertEquals(2, roleList.size());
 
     }

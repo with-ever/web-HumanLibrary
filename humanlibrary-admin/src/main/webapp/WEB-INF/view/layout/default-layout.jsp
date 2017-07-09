@@ -18,6 +18,7 @@
 
     <!-- Custom CSS -->
     <link href="${ctx}/resources/css/sb-admin-2.css" rel="stylesheet">
+    <link href="${ctx}/resources/css/humanlibrary.css" rel="stylesheet" type="text/css">
 
     <!-- Custom Fonts -->
     <link href="${ctx}/resources/css/font-awesome.min.css" rel="stylesheet" type="text/css">

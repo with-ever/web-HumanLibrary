@@ -4,14 +4,16 @@ import kr.withever.humanlibrary.domain.common.user.RoleType;
 import kr.withever.humanlibrary.domain.user.User;
 import kr.withever.humanlibrary.domain.user.UserSearch;
 import kr.withever.humanlibrary.service.UserService;
+import kr.withever.humanlibrary.util.AWSS3Util;
+import kr.withever.humanlibrary.util.FileUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,6 +24,8 @@ import java.util.Map;
 @RestController
 @RequestMapping(value = "/user")
 public class UserController {
+
+    private static final String IMAGE_TYPE = "user";
 
     @Autowired
     private UserService userService;
@@ -39,11 +43,25 @@ public class UserController {
 
     @RequestMapping(method = RequestMethod.POST)
     public ModelAndView createUser(
-            User user
-    ) {
+            User user,
+            @RequestParam(value = "image") MultipartFile multipartFile
+    ) throws IOException {
+
         user.setPassword(encoder.encode(user.getPassword()));
         Long userId = this.userService.createUser(user);
+        setImageUrlAndUpdate(userId, multipartFile);
         return new ModelAndView("redirect:/user/" + userId);
+    }
+
+    private void setImageUrlAndUpdate(Long userId, MultipartFile multipartFile) throws IOException {
+        AWSS3Util s3Util = new AWSS3Util();
+        String bucketName = s3Util.createBuckectName(IMAGE_TYPE);
+        String fileName = s3Util.createFileName(userId.toString(), multipartFile.getOriginalFilename());
+        s3Util.fileUpload(bucketName, fileName, FileUtil.convertMultipartFileToFile(multipartFile));
+
+        String url = s3Util.getFileURL(bucketName, fileName);
+        userService.modifyUserImageUrl(userId, url.split("\\?")[0]);
+
     }
 
     @RequestMapping(method = RequestMethod.GET)
