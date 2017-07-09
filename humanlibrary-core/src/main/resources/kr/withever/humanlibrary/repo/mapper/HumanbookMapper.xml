@@ -168,7 +168,8 @@
     	UPDATE
     		HUMANBOOK
     	SET
-    		STATE = #{state}	
+    		STATE = #{state}
+    		,UPDATE_TIME = UNIX_TIMESTAMP()
     	WHERE
     		ID = #{id}
     </update>

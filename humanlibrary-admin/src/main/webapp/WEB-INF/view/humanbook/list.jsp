@@ -26,10 +26,11 @@
                                 <th>ID</th>
                                 <th>유저ID</th>
                                 <th class="col-lg-2">제목</th>
-                                <th class="col-lg-3">경력</th>
+                                <th class="col-lg-2">경력</th>
                                 <th>시간</th>
                                 <th class="col-lg-2">카테고리</th>
                                 <th class="col-lg-2">설명</th>
+                                <th>상태</th>
                                 <th></th>
                             </tr>
                             </thead>
@@ -47,6 +48,17 @@
 	                                <td>${humanbook.serviceTime}</td>
 	                                <td>${(humanbook.subCategory).desc}</td>
 	                                <td>${humanbook.description}</td>
+	                                <c:choose>
+		                                <c:when test="${humanbook.state eq 'ACCEPT'}">
+		                                	<td>수락</td>
+		                                </c:when>
+		                                <c:when test="${humanbook.state eq 'WAITING'}">
+		                                	<td>대기중</td>
+		                                </c:when>
+		                                <c:when test="${humanbook.state eq 'REJECT'}">
+		                                	<td>거절</td>
+		                                </c:when>
+	                                </c:choose>
 	                                <td>
 		                                <c:choose>
 			                                <c:when test="${humanbook.state eq 'ACCEPT'}">

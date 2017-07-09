@@ -21,7 +21,7 @@
 	                <form role="form" action="${ctx}/humanbooks/edit/${selectedHumanbook.id}" method="POST">
 	                	<div class="form-group col-lg-6">
 	                        <label>유저 ID</label>
-	                        <input class="form-control" name="userId" value="${selectedHumanbook.user.userId}">
+	                        <input class="form-control" name="user.userId" value="${selectedHumanbook.user.userId}" readonly>
 	                    </div>
   	                  	<div class="form-group col-lg-6">
 	                        <label>시간</label>
@@ -34,7 +34,7 @@
 	                    </div>
 	                    <div class="form-group col-lg-6">
 	                        <label>상위 카테고리</label> 
-	                        <select class="form-control" id="parentCategory" name="parentCategory">
+	                        <select class="form-control" id="parentCategory" name="parentCategory.id">
 	                        	<option value="0">선택</option>
 	                            <c:forEach var="category" items="${categoryList}">
 	                            		<option value="${category.id}"
@@ -46,7 +46,7 @@
 	                    <div class="form-group col-lg-6">
 	                        <label>하위 카테고리</label>
 	                        <input type="text" id="selectedSubCategoryId" value="${selectedHumanbook.subCategory.id}" hidden="hidden"/>  
-	                        <select class="form-control" id="subCategory" name="subCategory">
+	                        <select class="form-control" id="subCategory" name="subCategory.id">
 	                        </select>
 	                    </div>
 	                    <div class="form-group col-lg-6">
@@ -91,8 +91,8 @@
                             </div>
                         </div>
 	                    <div class="form-group col-lg-6">
-                        	<label>이미지</label>
-                           	<input type="file" name="imageURL" value="${selectedHumanbook.imageUrl}">${selectedHumanbook.imageUrl}
+                        	<label>이미지 (기존 이미지는 선택된 이미지로 대체됩니다)</label>
+                           	<input type="file" name="imageUrl" value="${selectedHumanbook.imageUrl}">${selectedHumanbook.imageUrl}
                         </div>
                         <div class="form-group text-right col-lg-12">
                         	<button type="submit" class="btn btn-default js-submit">등록하기</button>

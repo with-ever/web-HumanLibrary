@@ -155,15 +155,12 @@ public class Humanbook implements Serializable{
 	}
 
 	public void setUpdatedHumanbook(Humanbook updatedHumanbook) {
-		this.id = StringUtils.isEmpty(updatedHumanbook.getId()) ? this.id : updatedHumanbook.getId();
-		this.user = StringUtils.isEmpty(updatedHumanbook.getUser()) ? this.user : updatedHumanbook.getUser();
 		this.title = StringUtils.isEmpty(updatedHumanbook.getTitle()) ? this.title : updatedHumanbook.getTitle();
 		this.mainCareer = StringUtils.isEmpty(updatedHumanbook.getMainCareer()) ? this.mainCareer : updatedHumanbook.getMainCareer();
 		this.serviceDay = StringUtils.isEmpty(updatedHumanbook.getServiceDay()) ? this.serviceDay : updatedHumanbook.getServiceDay();
 		this.serviceTime = StringUtils.isEmpty(updatedHumanbook.getServiceTime()) ? this.serviceTime : updatedHumanbook.getServiceTime();
 		this.parentCategory = StringUtils.isEmpty(updatedHumanbook.getParentCategory()) ? this.parentCategory : updatedHumanbook.getParentCategory();
 		this.subCategory = StringUtils.isEmpty(updatedHumanbook.getSubCategory()) ? this.subCategory : updatedHumanbook.getSubCategory();
-		this.state = StringUtils.isEmpty(updatedHumanbook.getState()) ? this.state : updatedHumanbook.getState();
 		this.imageUrl = StringUtils.isEmpty(updatedHumanbook.getImageUrl()) ? this.imageUrl : updatedHumanbook.getImageUrl();
 		this.description = StringUtils.isEmpty(updatedHumanbook.getDescription()) ? this.description : updatedHumanbook.getDescription();
 		this.updateTime = System.currentTimeMillis() / 1000;

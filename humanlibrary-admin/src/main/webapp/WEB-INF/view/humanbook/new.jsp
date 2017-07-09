@@ -2,7 +2,11 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <head>
+	<link rel="stylesheet" href="//code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+	<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+	<script src="//code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
 	<script src="${ctx}/resources/js/humanlib/humanbook-new.js"></script>
+	
 </head>
 <body>
     <div class="row">
@@ -21,7 +25,8 @@
 	                <form role="form" action="${ctx}/humanbooks/new" method="POST">
 	                	<div class="form-group col-lg-6">
 	                        <label>유저 ID</label>
-	                        <input class="form-control" name="userId">
+	                        <input id="autoTest" placeholder="test">
+	                        <input class="form-control" name="user.userId" id="userId">
 	                    </div>
   	                  	<div class="form-group col-lg-6">
 	                        <label>시간</label> <!-- 서브카테고리만 선택하도록 -->
@@ -41,7 +46,7 @@
 	                    </div>
 	                    <div class="form-group text-left col-lg-6">
 	                        <label>상위 카테고리</label> 
-	                        <select class="form-control" id="parentCategory" name="parentCategory">
+	                        <select class="form-control" id="parentCategory" name="parentCategory.id">
 	                        	<option value="0">선택</option>
 	                            <c:forEach var="category" items="${categoryList}">
 	                            		<option value="${category.id}">${category.desc}</option>
@@ -50,7 +55,7 @@
 	                    </div>
 	                    <div class="form-group col-lg-6">
 	                        <label>하위 카테고리</label>
-	                        <select class="form-control" id="subCategory" name="subCategory">
+	                        <select class="form-control" id="subCategory" name="subCategory.id">
 	                        </select>
 	                    </div>
                         <div class="form-group col-lg-12">
@@ -85,7 +90,7 @@
                         </div>
 	                    <div class="form-group col-lg-6">
                         	<label>이미지</label>
-                           	<input type="file" name="imageURL">
+                           	<input type="file" name="imageUrl">
                         </div>
                          <div class="form-group text-right col-lg-12">
 	                        <button type="submit" class="btn btn-default js-submit">등록하기</button>

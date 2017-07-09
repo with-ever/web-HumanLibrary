@@ -1,14 +1,12 @@
 package kr.withever.humanlibrary.web.controller;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -21,6 +19,7 @@ import kr.withever.humanlibrary.domain.humanbook.CategorySearch;
 import kr.withever.humanlibrary.domain.humanbook.Humanbook;
 import kr.withever.humanlibrary.domain.humanbook.HumanbookSearch;
 import kr.withever.humanlibrary.domain.user.User;
+import kr.withever.humanlibrary.domain.user.UserSearch;
 import kr.withever.humanlibrary.service.CategoryService;
 import kr.withever.humanlibrary.service.HumanbookService;
 import kr.withever.humanlibrary.service.UserService;
@@ -41,6 +40,14 @@ public class HumanbookController {
 	@Autowired
 	private HumanbookService humanbookService;
 	
+//	@RequestMapping(value = "/auto", method = RequestMethod.GET)
+//	public @ResponseBody List<User> retrieveUserListForAutoComplete(
+//			UserSearch search
+//	){
+//		System.out.println("here");
+//		UserSearch userList = this.userService.retrieveUserBySearch(search);
+//		return userList.getResults();
+//	}
 	
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView retrieveHumanbookList(
@@ -55,7 +62,6 @@ public class HumanbookController {
 	
 	@RequestMapping(value = "/new", method = RequestMethod.GET)
 	public ModelAndView showCreateHumanbookForm(
-			
 	) {
 		List<Category> categoryList = this.categoryService.retrieveCategoriesWithSubCategory();
 		ModelAndView mav = new ModelAndView();
@@ -66,33 +72,10 @@ public class HumanbookController {
 	
 	@RequestMapping(value = "/new", method = RequestMethod.POST)
 	public ModelAndView createHumanbook(
-			HttpServletRequest req
+			@ModelAttribute Humanbook humanbook
 	){
-		Humanbook humanbook = new Humanbook();
-		
-		Long userId = Long.parseLong(req.getParameter("userId"));
-		User user = this.userService.retrieveUser(userId);
-		humanbook.setUser(user);
-		
-		Long parentCategoryId = Long.parseLong(req.getParameter("parentCategory"));
-		Category parentCategory = this.categoryService.retrieveCategory(parentCategoryId);
-		humanbook.setParentCategory(parentCategory);
-		
-		Long subCategoryId = Long.parseLong(req.getParameter("subCategory"));
-		Category subCategory = this.categoryService.retrieveCategory(subCategoryId);
-		humanbook.setSubCategory(subCategory);
-		
-		humanbook.setServiceTime(req.getParameter("serviceTime"));
-		humanbook.setImageUrl(req.getParameter("imageURL"));
-		humanbook.setTitle(req.getParameter("title"));
-		humanbook.setMainCareer(req.getParameter("mainCareer"));
-		humanbook.setDescription(req.getParameter("description"));
-		
-		String[] serviceDays = req.getParameterValues("serviceDay");
-		Set<String> serviceDayList = new HashSet<String>(Arrays.asList(serviceDays));
-		humanbook.setServiceDay(serviceDayList);
-		
-		this.humanbookService.createHumanbook(humanbook);
+		Humanbook newHumanbook = updateToHumanbookDAO(humanbook);
+		this.humanbookService.createHumanbook(newHumanbook);
 
 		ModelAndView mav = new ModelAndView("redirect:/humanbooks");
 		return mav;
@@ -102,7 +85,6 @@ public class HumanbookController {
 	public void deleteHumanbook(
 			@PathVariable Long humanbookId
 	){
-		System.out.println(humanbookId);
 		this.humanbookService.removeHumanbook(humanbookId);
 	}
 	
@@ -153,37 +135,31 @@ public class HumanbookController {
 
 	@RequestMapping(value = "/edit/{humanbookId}", method = RequestMethod.POST)
 	public ModelAndView updateHumanbook(
-			HttpServletRequest req,
+			@ModelAttribute Humanbook humanbook,
 			@PathVariable Long humanbookId
 	){
-		Humanbook updatedHumanbook = new Humanbook();
-		updatedHumanbook.setId(humanbookId);
-		
-		Long userId = Long.parseLong(req.getParameter("userId"));
-		User user = this.userService.retrieveUser(userId);
-		updatedHumanbook.setUser(user);
+		humanbook.setId(humanbookId);
+		Humanbook updatedHumanbook = updateToHumanbookDAO(humanbook);
 
-		Long parentCategoryId = Long.parseLong(req.getParameter("parentCategory"));
-		Category parentCategory = this.categoryService.retrieveCategory(parentCategoryId);
-		updatedHumanbook.setParentCategory(parentCategory);
-		
-		Long subCategoryId = Long.parseLong(req.getParameter("subCategory"));
-		Category subCategory = this.categoryService.retrieveCategory(subCategoryId);
-		updatedHumanbook.setSubCategory(subCategory);
-
-		updatedHumanbook.setServiceTime(req.getParameter("serviceTime"));
-		updatedHumanbook.setImageUrl(req.getParameter("imageURL"));
-		updatedHumanbook.setTitle(req.getParameter("title"));
-		updatedHumanbook.setMainCareer(req.getParameter("mainCareer"));
-		updatedHumanbook.setDescription(req.getParameter("description"));
-		
-		String[] serviceDays = req.getParameterValues("serviceDay");
-		Set<String> serviceDayList = new HashSet<String>(Arrays.asList(serviceDays));
-		updatedHumanbook.setServiceDay(serviceDayList);
-		
 		this.humanbookService.modifyHumanbook(updatedHumanbook);
 		
 		ModelAndView mav = new ModelAndView("redirect:/humanbooks");
 		return mav;
+	}
+	
+	private Humanbook updateToHumanbookDAO(Humanbook humanbook){
+		User user = this.userService.retrieveUser(humanbook.getUser().getUserId());
+		humanbook.setUser(user);
+		
+		Category category = this.categoryService.retrieveCategory(humanbook.getParentCategory().getId());
+		humanbook.setParentCategory(category);
+		
+		category = this.categoryService.retrieveCategory(humanbook.getSubCategory().getId());
+		humanbook.setSubCategory(category);
+				
+		Set<String> serviceDayList = new HashSet<String>(humanbook.getServiceDay());
+		humanbook.setServiceDay(serviceDayList);
+		
+		return humanbook;
 	}
 }
