@@ -3,7 +3,13 @@ package kr.withever.humanlibrary.web.controller;
 import kr.withever.humanlibrary.domain.board.Board;
 import kr.withever.humanlibrary.domain.board.BoardFile;
 import kr.withever.humanlibrary.domain.board.BoardSearch;
+import kr.withever.humanlibrary.domain.user.User;
+import kr.withever.humanlibrary.security.LoginUser;
+import kr.withever.humanlibrary.service.BoardFileService;
 import kr.withever.humanlibrary.service.BoardService;
+import kr.withever.humanlibrary.service.UserService;
+import kr.withever.humanlibrary.util.AWSS3Util;
+import kr.withever.humanlibrary.util.FileUtil;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -18,6 +24,7 @@ import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
@@ -33,10 +40,17 @@ public class BoardController {
 	@Autowired
 	private BoardService boardService;
 
+	@Autowired
+	private BoardFileService boardFileService;
+
+	@Autowired
+	private UserService userService;
+
 	@RequestMapping(method = RequestMethod.GET)
 	public ModelAndView retrieveBoardList(BoardSearch search) {
 
 		String searchOption = search.getSearchOption();
+		String searchOptionType = search.getSearchOptionType();
 		String Keyword = search.getKeyword();
 
 		if (searchOption != null || Keyword != null) {
@@ -48,7 +62,31 @@ public class BoardController {
 			}
 		}
 
+		if (searchOptionType != null) {
+			if (searchOptionType.equals("MP")) {
+				search.setType("MP");
+			} else if (searchOptionType.equals("PT")) {
+				search.setType("PT");
+			} else if (searchOptionType.equals("NT")) {
+				search.setType("NT");
+			}
+		}
+
 		BoardSearch boardSearch = this.boardService.retrieveBoardBySearch(search);
+
+		List<Board> boardList = boardSearch.getResults();
+
+		for (int i = 0; i < boardList.size(); i++) {
+
+			Board board = boardList.get(i);
+
+			User user = this.userService.retrieveUser(board.getUserId());
+
+			boardList.get(i).setUser(user);
+		}
+
+		search.setResults(boardList);
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/board/list");
 		mav.addObject("searchModel", boardSearch);
@@ -57,9 +95,27 @@ public class BoardController {
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public ModelAndView retreiveBoard(@PathVariable(value = "id") Long id) {
+
+		Board board = this.boardService.retrieveBoard(id);
+		BoardFile boardFile = new BoardFile();
+		boardFile.setBoardId(board.getId());
+		List<BoardFile> boardFileList = this.boardFileService.retrieveBoardFile(boardFile);
+		board.setBoardFileList(boardFileList);
+
+		userService.retrieveUser(board.getId());
+		board.setUser(userService.retrieveUser(board.getId()));
+
+		if (board.getType().equals("MP")) {
+			board.setCvtType("주요프로그램");
+		} else if (board.getType().equals("PT")) {
+			board.setCvtType("게시물");
+		} else if (board.getType().equals("NT")) {
+			board.setCvtType("공지사항");
+		}
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/board/detail");
-		mav.addObject("board", this.boardService.retrieveBoard(id));
+		mav.addObject("board", board);
 		return mav;
 	}
 
@@ -74,32 +130,18 @@ public class BoardController {
 	public void createBoard(HttpServletResponse response, MultipartHttpServletRequest mhsq, Board board)
 			throws IllegalStateException, IOException {
 
-		List<BoardFile> boardFileList = new ArrayList<BoardFile>();
-
-		String filePath = mhsq.getSession().getServletContext().getRealPath("/WEB-INF/file/");
-
-		System.out.println("filePath:" + filePath);
-
-		File dir = new File(filePath);
-
-		if (!dir.isDirectory()) { // 폴더가 없을시 만듬
-
-			dir.mkdirs();
-
-		}
-
-		Long userId = 2L; // loginUser사용
-
-		board.setUserId(userId);
-
 		Long boardId = this.boardService.retrieveBoardId();
+		String loginId = LoginUser.getLoginUser().getUsername();
+		User user = userService.retrieveUserByLoginId(loginId);
+		Long userId = user.getUserId();
+		board.setUserId(userId);
 
 		// 넘어온 파일을 리스트로 저장
 		List<MultipartFile> mf = mhsq.getFiles("image");
 
 		if (mf.size() == 1 && mf.get(0).getOriginalFilename().equals("")) {
 
-			this.boardService.createBoard(board);
+			boardService.createBoard(board);
 
 		} else {
 			for (int i = 0; i < mf.size(); i++) {
@@ -109,36 +151,23 @@ public class BoardController {
 
 				if (!originalfileName.equals("")) {
 
-					String suffix = originalfileName.substring(originalfileName.lastIndexOf(".") + 1, originalfileName.length());
-					
-					String fileName = originalfileName.substring(0, originalfileName.lastIndexOf("."));
-
-					String saveFileName = boardId + 1L+"_"+i + "_" + fileName;
-					// 저장되는 파일 이름
-
-					String savePath = filePath + saveFileName+"."+suffix; // 저장 될 파일 경로
-
-					long fileSize = mf.get(i).getSize(); // 파일 사이즈
-
-
-					String relativePath = filePath;
+					String suffix = originalfileName.substring(originalfileName.lastIndexOf(".") + 1,
+							originalfileName.length());
+					AWSS3Util s3Util = new AWSS3Util();
+					String bucketName = s3Util.createBuckectName("boardImage");
+					String fileName = s3Util.createFileName(String.valueOf(boardId + 1L) + '_' + (i + 1), originalfileName);
+					s3Util.fileUpload(bucketName, fileName, FileUtil.convertMultipartFileToFile(mf.get(i)));
+					String url = s3Util.getFileURL(bucketName, fileName);
 
 					BoardFile boardFile = new BoardFile();
-					boardFile.setFileName(saveFileName);
+					boardFile.setFileName(fileName.substring(0, fileName.lastIndexOf(".") - 1));
 					boardFile.setSuffix(suffix);
-					boardFile.setRelativePath(relativePath);
+					boardFile.setRelativePath(url.split("\\?")[0]);
 					boardFile.setBoardId(boardId + 1L);
-
-					boardFileList.add(boardFile);
-
-					board.setBoardFileList(boardFileList);
-					mf.get(i).transferTo(new File(savePath)); // 파일 저장
+					boardFileService.createBoardFile(boardFile);
 				}
-
 			}
-
-			this.boardService.createBoard(board);
-
+			boardService.createBoard(board);
 		}
 
 		response.sendRedirect("/board");
@@ -147,34 +176,56 @@ public class BoardController {
 
 	@RequestMapping(value = "/{id}/edit", method = RequestMethod.GET)
 	public ModelAndView showModifyBoardForm(@PathVariable(value = "id") Long id) {
+		Board board = this.boardService.retrieveBoard(id);
+		BoardFile boardFile = new BoardFile();
+		boardFile.setBoardId(board.getId());
+		;
+		List<BoardFile> boardFileList = this.boardFileService.retrieveBoardFile(boardFile);
+		board.setBoardFileList(boardFileList);
+
 		ModelAndView mav = new ModelAndView();
 		mav.setViewName("/board/edit");
-		mav.addObject("board", this.boardService.retrieveBoard(id));
+		mav.addObject("board", board);
 		return mav;
 	}
-	
+
 	@RequestMapping(value = "/edit", method = RequestMethod.POST)
-	public ModelAndView modifyBoard(HttpServletResponse response, MultipartHttpServletRequest mhsq, Board board) throws IllegalStateException, IOException {
-		ModelAndView mav = new ModelAndView();
-		
-		Long boardid = board.getId();
-		boardService.modifyBoard(board);
-		
-		List<BoardFile> boardFileList = new ArrayList<BoardFile>();
+	public ModelAndView modifyBoard(HttpServletResponse response, MultipartHttpServletRequest mhsq, Board board)
+			throws IllegalStateException, IOException {
 
-		String filePath = mhsq.getSession().getServletContext().getRealPath("/WEB-INF/file/");
-
-		System.out.println("filePath:" + filePath);
-
-		File dir = new File(filePath);
-
-		if (!dir.isDirectory()) { // 폴더가 없을시 만듬
-
-			dir.mkdirs();
-
-		}
+		String[] originalImageArray = mhsq.getParameterValues("originalImage");
 
 		Long boardId = board.getId();
+		BoardFile boardFile = new BoardFile();
+		boardFile.setBoardId(boardId);
+
+		List<BoardFile> boardFileList = boardFileService.retrieveBoardFile(boardFile);
+		for (int i = 0; i < boardFileList.size(); i++) {
+
+			String fileName = boardFileList.get(i).getFileName();
+
+			String fileCheck = null;
+
+			if (originalImageArray != null) {
+				for (int a = 0; a < originalImageArray.length; a++) {
+					String originalFileName = originalImageArray[a].substring(0, originalImageArray[a].lastIndexOf("."));
+					if (fileName.equals(originalFileName)) {
+
+						fileCheck = "ok";
+
+					}else{
+						fileCheck = "delete";
+					}
+
+				}
+			}
+
+			if (fileCheck.equals("delete")) {
+
+				boardFileService.removeBoardFileEdit(fileName);
+			}
+
+		}
 
 		// 넘어온 파일을 리스트로 저장
 		List<MultipartFile> mf = mhsq.getFiles("image");
@@ -189,105 +240,103 @@ public class BoardController {
 				// 본래 파일명
 				String originalfileName = mf.get(i).getOriginalFilename();
 
+				int count = boardFileService.retrieveBoardFileCount(boardFile);
+				
 				if (!originalfileName.equals("")) {
 
-					String suffix = originalfileName.substring(originalfileName.lastIndexOf(".") + 1, originalfileName.length());
+					String suffix = originalfileName.substring(originalfileName.lastIndexOf(".") + 1,
+							originalfileName.length());
+					AWSS3Util s3Util = new AWSS3Util();
+					String bucketName = s3Util.createBuckectName("boardImage");
 					
-					String fileName = originalfileName.substring(0, originalfileName.lastIndexOf("."));
+					
+					String fileName = s3Util.createFileName(String.valueOf(boardId) + '_' + (count + 1), originalfileName);
+					s3Util.fileUpload(bucketName, fileName, FileUtil.convertMultipartFileToFile(mf.get(i)));
+					String url = s3Util.getFileURL(bucketName, fileName);
 
-					String saveFileName = boardId + 1L+"_"+i + "_" + fileName;
-					// 저장되는 파일 이름
-
-					String savePath = filePath + saveFileName+"."+suffix; // 저장 될 파일 경로
-
-					long fileSize = mf.get(i).getSize(); // 파일 사이즈
-
-
-					String relativePath = filePath;
-
-					BoardFile boardFile = new BoardFile();
-					boardFile.setFileName(saveFileName);
+					boardFile.setFileName(fileName.substring(0, fileName.lastIndexOf(".") - 1));
 					boardFile.setSuffix(suffix);
-					boardFile.setRelativePath(relativePath);
+					boardFile.setRelativePath(url.split("\\?")[0]);
 					boardFile.setBoardId(boardId);
-
-					boardFileList.add(boardFile);
-
-					board.setBoardFileList(boardFileList);
-					mf.get(i).transferTo(new File(savePath)); // 파일 저장
+					boardFileService.createBoardFile(boardFile);
 				}
-
 			}
-
 			boardService.modifyBoard(board);
-
 		}
 
-		mav.setViewName("/board/detail");
-		mav.addObject("board", this.boardService.retrieveBoard(boardid));
-		return mav;
-		
+		return (ModelAndView)new ModelAndView("redirect:/board/" + boardId );
+
+
 	}
 
-	@RequestMapping(value = "/boardFileDown.do/{id}/{fileName}", method = RequestMethod.GET)
-	public void boardFileDown(@PathVariable(value = "id") Long id, @PathVariable(value = "fileName") String fileName,
-			HttpServletRequest req, HttpServletResponse resp) {
+	// @RequestMapping(value = "/boardFileDown.do/{id}/{fileName}", method =
+	// RequestMethod.GET)
+	// public void boardFileDown(@PathVariable(value = "id") Long id,
+	// @PathVariable(value = "fileName") String fileName,
+	// HttpServletRequest req, HttpServletResponse resp) {
+	//
+	// BoardFile boardFile = new BoardFile();
+	// boardFile.setBoardId(id);
+	// boardFile.setFileName(fileName);
+	//
+	// List<BoardFile> boardFileList =
+	// boardService.retrieveBoardFile(boardFile);
+	// boardFile = boardFileList.get(0);
+	//
+	// OutputStream outputStream = null;
+	// String relativePath = boardFile.getRelativePath();
+	// fileName = boardFile.getFileName();
+	// String suffix = boardFile.getSuffix();
+	//
+	// String uploadPath = relativePath + fileName + "." + suffix;
+	//
+	// try {
+	// File file = new File(uploadPath);
+	//
+	// if (suffix.trim().equalsIgnoreCase("txt")) {
+	// resp.setContentType("text/plain");
+	// } else {
+	// resp.setContentType("application/octet-stream");
+	// }
+	//
+	// resp.setContentLength((int) file.length());
+	//
+	// boolean ie = req.getHeader("User-Agent").indexOf("MSIE") != -1;
+	// if (ie) {
+	// fileName = URLEncoder.encode(fileName, "UTF-8").replaceAll("\\+", " ");
+	// } else {
+	// fileName = new String(fileName.getBytes("UTF-8"), "8859_1");
+	// }
+	//
+	// resp.setHeader("Content-Disposition", "attachment; filename=\"" +
+	// fileName + "." + suffix + "\"");
+	//
+	// outputStream = resp.getOutputStream();
+	// FileInputStream fis = null;
+	//
+	// try {
+	// fis = new FileInputStream(file);
+	// FileCopyUtils.copy(fis, outputStream);
+	// } finally {
+	// if (fis != null) {
+	// fis.close();
+	// }
+	// }
+	// } catch (IOException e) {
+	// throw new RuntimeException(e);
+	// } finally {
+	// try {
+	// outputStream.close();
+	// resp.flushBuffer();
+	// } catch (IOException e) {
+	// e.printStackTrace();
+	// }
+	// }
+	// }
 
-		BoardFile boardFile = new BoardFile();
-		boardFile.setBoardId(id);
-		boardFile.setFileName(fileName);
-
-		List<BoardFile> boardFileList = boardService.retrieveBoardFile(boardFile);
-		boardFile = boardFileList.get(0);
-
-		OutputStream outputStream = null;
-		String relativePath = boardFile.getRelativePath();
-		fileName = boardFile.getFileName();
-		String suffix = boardFile.getSuffix();
-
-		String uploadPath = relativePath + fileName + "." + suffix;
-
-		try {
-			File file = new File(uploadPath);
-
-			if (suffix.trim().equalsIgnoreCase("txt")) {
-				resp.setContentType("text/plain");
-			} else {
-				resp.setContentType("application/octet-stream");
-			}
-
-			resp.setContentLength((int) file.length());
-
-			boolean ie = req.getHeader("User-Agent").indexOf("MSIE") != -1;
-			if (ie) {
-				fileName = URLEncoder.encode(fileName, "UTF-8").replaceAll("\\+", " ");
-			} else {
-				fileName = new String(fileName.getBytes("UTF-8"), "8859_1");
-			}
-
-			resp.setHeader("Content-Disposition", "attachment; filename=\"" + fileName + "." + suffix + "\"");
-
-			outputStream = resp.getOutputStream();
-			FileInputStream fis = null;
-
-			try {
-				fis = new FileInputStream(file);
-				FileCopyUtils.copy(fis, outputStream);
-			} finally {
-				if (fis != null) {
-					fis.close();
-				}
-			}
-		} catch (IOException e) {
-			throw new RuntimeException(e);
-		} finally {
-			try {
-				outputStream.close();
-				resp.flushBuffer();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
+	@RequestMapping(value = "/{id}/delete", method = RequestMethod.GET)
+	public void removeBoard(@PathVariable(value = "id") Long id) {
+		this.boardService.removeBoard(id);
 	}
 
 }

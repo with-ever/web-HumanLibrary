@@ -112,14 +112,14 @@
         ,URL
         FROM BOARD
         WHERE 1 = 1
-            <if test="userIdList != null and userIdList != ''">
-                AND USER_ID LIKE CONCAT('%', #{userIdList}, '%')
-            </if>
             <if test="subject != null and subject != ''">
                 AND SUBJECT LIKE CONCAT('%', #{subject}, '%')
             </if>
             <if test="contents != null and contents != ''">
                 AND CONTENTS LIKE CONCAT('%', #{contents}, '%')
+            </if>
+            <if test="type != null and type != ''">
+                AND TYPE LIKE CONCAT('%', #{type}, '%')
             </if>
         ORDER BY ID DESC
         LIMIT #{offset}, #{limit}
@@ -138,6 +138,9 @@
             </if>
             <if test="contents != null and contents != ''">
                 AND CONTENTS LIKE CONCAT('%', #{contents}, '%')
+            </if>
+            <if test="type != null and type != ''">
+                AND TYPE LIKE CONCAT('%', #{type}, '%')
             </if>
     </select>
 

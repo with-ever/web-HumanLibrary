@@ -22,6 +22,10 @@ public class BoardFileRepository {
 		return boardFileList;
 
 	}
+	public int retrieveBoardFileCount(BoardFile boardFile) {
+		return this.boardFileMapper.selectBoardFilesCount(boardFile);
+		
+	}
 
 	public void createBoardFile(BoardFile boardFile) {
 		this.boardFileMapper.insertBoardFile(boardFile);
@@ -38,6 +42,11 @@ public class BoardFileRepository {
 			// @TODO error code update
 			// throw new HumanLibraryRuntimeException(e, ExceptionType.US10000);
 		}
+	}
+	
+	
+	public void removeBoardFileEdit(String fileName) {
+			this.boardFileMapper.deleteBoardFileEdit(fileName);
 	}
 
 }

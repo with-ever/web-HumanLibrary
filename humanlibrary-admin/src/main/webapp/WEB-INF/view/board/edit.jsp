@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <head>
 <script src="${ctx}/resources/js/humanlib/board-edit.js"></script>
@@ -25,7 +26,7 @@
 							<input type="hidden" name="id" value="${board.id}">
 								<div class="form-group">
 									<label>작성자</label>
-									<p class="form-group-static">${board.userLoginId}</p>
+									<p class="form-group-static">${board.user.loginId}</p>
 								</div>
 								<div class="form-group">
 									<label>제목</label> <input class="form-control" placeholder="제목"
@@ -46,13 +47,15 @@
 								</div>
 								<div id ="fileDiv" class="form-group">
 									<label>첨부파일</label>
-
+									<c:forEach var="boardFile" items="${board.boardFileList}" varStatus="status">
+									<p><input type='text' name='originalImage' style='display:inline' value="${boardFile.fileName}.${boardFile.suffix}" readonly ><a href='#this' class='btn btn-danger btn-xs' name='delete' ><i class='fa fa-times fa-fw'></i>삭제</a></p>
+											</c:forEach>
+								<a href="#this" class="btn btn btn-info btn-xs" id="addFile"><i class="fa fa-photo fa-fw"></i> 파일 추가</a>
 								</div>
-								<a href="#this" class="btn btn btn-info btn-xs" id="addFile">파일 수정</a>
 								<div class="form-group text-right">
-									<button type="submit" class="btn btn-primary js-submit">수정하기</button>
-									<a href="${ctx}/board">
-										<button type="button" class="btn btn-danger">취소</button>
+									<button type="submit" class="btn js-submit btn-primary"> <i class="fa fa-save fa-fw"></i>수정하기</button>
+									<a href="${ctx}/board/${board.id}">
+										<button type="button" class="btn btn-default"><i class="fa fa-reply fa-fw"> </i>이전으로</button>
 									</a>
 								</div>
 							</form>

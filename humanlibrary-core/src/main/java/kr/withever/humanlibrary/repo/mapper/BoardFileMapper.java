@@ -17,10 +17,14 @@ public interface BoardFileMapper {
 
     BoardFile selectBoardFile(Long boardId);
     
+    int selectBoardFilesCount(BoardFile boardFile);
+    
     List<BoardFile> selectBoardFiles(BoardFile boardFile);
 
     int updateBoardFile(BoardFile boardFile);
 
     int deleteBoardFile(Long boardId);
+    
+    int deleteBoardFileEdit(String fileName);
 
 }

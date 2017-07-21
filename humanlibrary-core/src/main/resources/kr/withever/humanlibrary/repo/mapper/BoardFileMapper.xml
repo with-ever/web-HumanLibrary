@@ -52,6 +52,13 @@
         AND FILE_NAME = #{fileName}
         </if>
     </select>
+    
+        <select id="selectBoardFilesCount" parameterType="BoardFile" resultType="int">
+        SELECT
+         count(*)
+        FROM BOARD_FILE 
+        WHERE BOARD_ID = #{boardId}
+    </select>
 
     <update id="updateBoardFile" parameterType="BoardFile">
         UPDATE BOARD_FILE
@@ -77,7 +84,11 @@
         FROM BOARD_FILE
         WHERE BOARD_ID = #{boardId}
     </delete>
-
+<delete id="deleteBoardFileEdit" parameterType="String">
+        DELETE
+        FROM BOARD_FILE
+        WHERE FILE_NAME = #{fileName}
+    </delete>
 
 
 </mapper>

@@ -51,15 +51,14 @@
                             </div>
                             <div id ="fileDiv" class="form-group">
                                 <label>첨부파일</label>
-                                         	<p><input type="file" name="image" style="display:inline"><a href="#this" class="btn btn-danger btn-xs" name="delete">삭제</a></p>
                                          	
                             </div>
-                            <a href="#this" class="btn btn btn-info btn-xs" id="addFile">파일 추가</a>
+                            <a href="#this" class="btn btn btn-info btn-xs" id="addFile"> <i class="fa fa-photo fa-fw"></i>파일 추가</a>
                             
 							<div class="form-group text-right">
-                                <button type="submit" class="btn btn-primary js-submit">등록하기</button>
+                                <button type="submit" class="btn js-submit btn-primary"> <i class="fa fa-save fa-fw"></i> 등록하기 </button>
                                 <a href="${ctx}/board">
-                                    <button type="button" class="btn btn-danger">취소</button>
+                                    <button  class="btn btn-default "><i class="fa fa-reply fa-fw"> </i>이전으로</button>
                                 </a>
                             </div>
                         </form>

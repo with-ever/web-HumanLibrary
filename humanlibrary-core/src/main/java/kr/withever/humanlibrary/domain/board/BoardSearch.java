@@ -11,11 +11,15 @@ public class BoardSearch extends PageSearch<Board> {
 	
 	private String searchOption;
 	
-	private String keyword;
+	private String searchOptionType;
 	
+	private String keyword;
+		
     private String subject;
 
     private String contents;
+    
+    private String type;
         
     private List<Long> userIdList;
     
@@ -68,7 +72,21 @@ public class BoardSearch extends PageSearch<Board> {
 		this.userIdList = userIdList;
 	}
 
+	public String getType() {
+		return type;
+	}
 
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getSearchOptionType() {
+		return searchOptionType;
+	}
+
+	public void setSearchOptionType(String searchOptionType) {
+		this.searchOptionType = searchOptionType;
+	}
 	
 	
   

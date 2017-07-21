@@ -54,4 +54,17 @@ public class BoardFileMapperTest extends WitheverDbUnitTestConfig {
 		noticeFile = this.boardFileMapper.selectBoardFile(2L);
 		assertEquals("2test_name", noticeFile.getFileName());
 	}
+	@Test
+	public void selectBoardFilesCount() throws Exception {
+		BoardFile BoardFile = new BoardFile();
+		BoardFile.setBoardId(1L);;
+		int count = this.boardFileMapper.selectBoardFilesCount(BoardFile);
+	}
+	
+	@Test
+	public void deleteBoardFileEdit() throws Exception {
+		String fileName  = "fileNameTest";
+		int delete = this.boardFileMapper.deleteBoardFileEdit(fileName);
+	}
+	
 }

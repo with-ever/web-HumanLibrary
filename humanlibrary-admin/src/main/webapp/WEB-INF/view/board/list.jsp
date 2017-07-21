@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/functions" prefix="fn"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <c:set var="ctx" value="${pageContext.request.contextPath}" />
 <body>
 	<div class="row">
@@ -12,14 +13,26 @@
 	<!-- /.row -->
 	<div class="row">
 		<div class="panel panel-default">
-			<div class="panel-heading">게시판 목록</div>
+			<div class="panel-heading ">게시판 목록</div>
 			<!-- /.panel-heading -->
 			<div class="panel-body">
 
 
 				<form class="form-inline" method="GET">
 					<div class="form-group center-block">
-						<select style="width: 50px" name="searchOption">
+						<div class="form-group">
+							<label class="radio-inline"> <input type="radio"
+								name="searchOptionType" id="optionsRadiosInline1" value=""
+								checked> 전체
+							</label> <label class="radio-inline"> <input type="radio"
+								name="searchOptionType" id="optionsRadiosInline1" value="MP">주요프로그램
+							</label> <label class="radio-inline"> <input type="radio"
+								name="searchOptionType" id="optionsRadiosInline2" value="PT">게시물
+							</label> <label class="radio-inline"> <input type="radio"
+								name="searchOptionType" id="optionsRadiosInline3" value="NT">공지사항
+							</label>
+						</div>
+						&emsp; <select style="width: 50px" name="searchOption">
 							<option value="subject">제목</option>
 							<option value="contents">내용</option>
 						</select> <input type="text" class="form-control" name="keyword"> <span>
@@ -29,12 +42,13 @@
 						</span>
 					</div>
 				</form>
-				
+
 				<div class="table-responsive">
 					<table class="table table-striped table-bordered table-hover">
 						<thead>
 							<tr>
 								<th>번호</th>
+								<th>타입</th>
 								<th>제목</th>
 								<th>작성자</th>
 								<th>등록일</th>
@@ -42,14 +56,29 @@
 							</tr>
 						</thead>
 						<tbody>
-							<c:forEach var="board" items="${searchModel.results}" varStatus="status">
+							<fmt:formatDate value="${user.createDate}"
+								pattern="MM/dd/yyyy HH:mm" />
+							<c:forEach var="board" items="${searchModel.results}"
+								varStatus="status">
+								<%-- <td>${(searchModel.totalCount - status.index) - ( (searchModel.pageNo-1) * (searchModel.limit))}</td> --%>
 								<tr>
-									<%-- <td>${(searchModel.totalCount - status.index) - ( (searchModel.pageNo-1) * (searchModel.limit))}</td> --%>
 									<td>${board.id}</td>
+									<c:choose>
+										<c:when test="${board.type eq 'MP'}">
+											<td>주요프로그램</td>
+										</c:when>
+										<c:when test="${board.type eq 'PT'}">
+											<td>게시물</td>
+										</c:when>
+										<c:when test="${board.type eq 'NT'}">
+											<td>공지사항</td>
+										</c:when>
+									</c:choose>
 									<td><a href="${ctx}/board/${board.id}">
 											${board.subject} </a></td>
-									<td>${board.userLoginId}</td>
-									<td>${board.cvtCreateTime}</td>
+									<td>${board.user.loginId}</td>
+									<td><fmt:formatDate value="${board.createDate}"
+											pattern="MM/dd/yyyy HH:mm" /></td>
 									<td>${board.views}</td>
 								</tr>
 							</c:forEach>
@@ -87,7 +116,9 @@
 			<!-- @TODO paging fragment로 재구성 필요.-->
 			<div class="panel-footer text-right">
 				<a href="${ctx}/board/new">
-					<button type="button" class="btn btn-primary">등록하기</button>
+					<button type="button" class="btn btn-primary">
+						<i class="fa fa-edit fa-fw"></i> 등록
+					</button>
 				</a>
 			</div>
 		</div>

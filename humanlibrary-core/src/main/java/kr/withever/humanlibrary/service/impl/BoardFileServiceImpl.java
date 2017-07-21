@@ -7,6 +7,7 @@ import kr.withever.humanlibrary.domain.common.exception.ExceptionType;
 import kr.withever.humanlibrary.exception.HumanLibraryException;
 import kr.withever.humanlibrary.repo.BoardFileRepository;
 import kr.withever.humanlibrary.repo.BoardRepository;
+import kr.withever.humanlibrary.service.BoardFileService;
 import kr.withever.humanlibrary.service.BoardService;
 
 import java.io.File;
@@ -21,47 +22,42 @@ import org.springframework.transaction.annotation.Transactional;
  */
 @Service
 @Transactional
-public class BoardServiceImpl implements BoardService {
-
-	@Autowired
-	private BoardRepository boardRepository;
+public class BoardFileServiceImpl implements BoardFileService {
 
 	@Autowired
 	private BoardFileRepository boardFileRepository;
 
 	@Override
-	public Board retrieveBoard(Long id) {
-		return this.boardRepository.retrieveBoard(id);
-	}
-	
-	@Override
-	public Long retrieveBoardId() {
-		return this.boardRepository.retrieveBoardId();
-	}
-	
 	public List<BoardFile> retrieveBoardFile(BoardFile boardFile) {
 		return this.boardFileRepository.retrieveBoardFile(boardFile);
-	}	
+	}
+	
+	@Override
+	public int retrieveBoardFileCount(BoardFile boardFile) {
+		return this.boardFileRepository.retrieveBoardFileCount(boardFile);
+	}
+	
 
 	@Override
-	public void createBoard(Board board) {
-		this.boardRepository.createBoard(board);
+	public void createBoardFile(BoardFile boardFile) {
+		this.boardFileRepository.createBoardFile(boardFile);
 
 	}
 
 	@Override
-	public void modifyBoard(Board board) {	
-		this.boardRepository.modifyBoard(board);
+	public void modifyBoardFile(BoardFile boardFile) {
+		
+		this.boardFileRepository.modifyBoardFile(boardFile);;
+		
 	}
 
 	@Override
-	public void removeBoard(Long id) {
-		this.boardRepository.removeBoard(id);
+	public void removeBoardFile(Long id) {
+		this.boardFileRepository.removeBoardFile(id);
 	}
-
 	@Override
-	public BoardSearch retrieveBoardBySearch(BoardSearch search) {
-		return this.boardRepository.retrieveBoardBySearch(search);
+	public void removeBoardFileEdit(String fileName) {
+		this.boardFileRepository.removeBoardFileEdit(fileName);
 	}
 
 }

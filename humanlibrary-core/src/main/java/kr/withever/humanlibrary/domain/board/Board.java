@@ -1,7 +1,10 @@
 package kr.withever.humanlibrary.domain.board;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.web.multipart.MultipartFile;
+
+import kr.withever.humanlibrary.domain.user.User;
 
 
 /**
@@ -13,8 +16,6 @@ public class Board {
 
 	private Long userId;
 	
-	private String userLoginId;
-
     private String type;
     
     private String cvtType;
@@ -27,14 +28,16 @@ public class Board {
 
 	private Long createTime;
 	
-	private String cvtCreateTime;
-
 	private Long updateTime;
 			    
     private List<BoardFile> boardFileList;
     
     private String url;
     
+    private User user;
+    
+    private List<String> originalImage;
+        
  
     public Board() {
     	this.createTime = System.currentTimeMillis() / 1000;
@@ -57,13 +60,6 @@ public class Board {
 		this.userId = userId;
 	}
 	
-	public String getUserLoginId() {
-		return userLoginId;
-	}
-
-	public void setUserLoginId(String userLoginId) {
-		this.userLoginId = userLoginId;
-	}
 
 	public String getType() {
 		return type;
@@ -113,14 +109,6 @@ public class Board {
 		this.createTime = createTime;
 	}
 
-	public String getCvtCreateTime() {
-		return cvtCreateTime;
-	}
-
-	public void setCvtCreateTime(String cvtCreateTime) {
-		this.cvtCreateTime = cvtCreateTime;
-	}
-
 	public Long getUpdateTime() {
 		return updateTime;
 	}
@@ -145,7 +133,30 @@ public class Board {
 	public void setUrl(String url) {
 		this.url = url;
 	}
+
+	public User getUser() {
+		return user;
+	}
+
+	public void setUser(User user) {
+		this.user = user;
+	}
 	
+    public Date getCreateDate() {
+        return new Date(this.createTime * 1000);
+    }
+
+    public Date getUpdateDate() {
+        return new Date(this.updateTime * 1000);
+    }
+
+	public List<String> getOriginalImage() {
+		return originalImage;
+	}
+
+	public void setOriginalImage(List<String> originalImage) {
+		this.originalImage = originalImage;
+	}
 	
 	
 }
